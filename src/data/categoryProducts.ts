@@ -539,6 +539,30 @@ export const BOUQUET_PRODUCTS: CategoryProduct[] = [
     tag: "Bestseller",
     description: "A radiant symphony of vibrant hot pink, tender blush pink, sunny yellow, and pure white roses speckled with delicate gypsophila, wrapped in chic black-outlined origami paper with a glossy white ribbon bow.",
   },
+  {
+    id: "bouquet-peach-serenity",
+    title: "Peach Serenity Bouquet",
+    image: "/images/flower-bouquet/peach-serenity.jpg",
+    price: "₹1,200",
+    tag: "Pastel Elegance",
+    description: "A tranquil and dreamy bouquet of soft peach, creamy ivory, and warm champagne roses nestled in a cloud of delicate gypsophila, wrapped in romantic heart-patterned origami wrap tied with a radiant gold satin ribbon.",
+  },
+  {
+    id: "bouquet-brown-non-woven-pink-ribbon",
+    title: "Brown Non-Woven Wrapping with Pink Ribbon",
+    image: "/images/flower-bouquet/brown-non-woven-pink-ribbon.jpg",
+    price: "₹1,600",
+    tag: "Artisanal Luxury",
+    description: "An extravagant, vibrant arrangement of velvety red, sunny yellow, crisp white, and baby pink roses framed with lush salal greens, encased in rustic textured brown non-woven paper with soft blush lining and a delicate pink satin ribbon bow.",
+  },
+  {
+    id: "bouquet-pink-roses-purple-orchids",
+    title: "Pink Roses & Purple Orchids Bouquet",
+    image: "/images/flower-bouquet/pink-roses-purple-orchids.jpg",
+    price: "₹1,600",
+    tag: "Exotic Grandeur",
+    description: "An enchanting, opulent presentation of royal purple dendrobium orchids seamlessly paired with tender blush-pink roses, delicate gypsophila, and fresh emerald fern foliage, swathed in sky-blue scalloped paper with a cascading pink satin ribbon bow.",
+  },
 ];
 
 export const CAKE_PRODUCTS: CategoryProduct[] = [

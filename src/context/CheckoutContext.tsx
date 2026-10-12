@@ -81,7 +81,7 @@ interface CheckoutContextType {
   startCartCheckout: (items: CheckoutItem[]) => void;
   setMobile: (mobile: string) => void;
   updateQuantity: (id: string, quantity: number) => void;
-  completeOrder: (paymentMethod: string) => CompletedOrder | null;
+  completeOrder: (paymentMethod: string, customOrderId?: string) => CompletedOrder | null;
   viewOrder: (order: CompletedOrder) => void;
   resetCheckout: () => void;
 }
@@ -235,12 +235,12 @@ export function CheckoutProvider({ children }: { children: React.ReactNode }) {
     0
   );
 
-  const completeOrder = (paymentMethod: string): CompletedOrder | null => {
+  const completeOrder = (paymentMethod: string, customOrderId?: string): CompletedOrder | null => {
     if (checkoutItems.length === 0) return null;
 
     const primaryItem = checkoutItems[0];
     const randomSuffix = Math.floor(100000 + Math.random() * 900000);
-    const orderId = `${randomSuffix}`;
+    const orderId = customOrderId || `${randomSuffix}`;
 
     const newOrder: CompletedOrder = {
       orderId,

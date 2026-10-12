@@ -346,7 +346,7 @@ export default function SinglePageCheckoutPayment() {
         return;
       }
 
-      // Trigger Context completion
+      // Trigger Context completion with real orderId
       const paymentMethodTitle =
         activeTab === "upi"
           ? "UPI"
@@ -354,14 +354,14 @@ export default function SinglePageCheckoutPayment() {
           ? "Credit / Debit Card"
           : `Net Banking (${selectedBank})`;
 
-      completeOrder(paymentMethodTitle);
+      completeOrder(paymentMethodTitle, data.orderId);
       clearCart();
 
       // Simulated Razorpay Gateway Handoff (0.8s)
       setTimeout(() => {
         setIsSubmitting(false);
         const orderIdParam = data.orderId ? `?orderId=${data.orderId}` : "";
-        router.push(`/order-success${orderIdParam}`);
+        router.push(`/thank-you${orderIdParam}`);
       }, 800);
     } catch (err) {
       console.error("Order submission error:", err);
@@ -369,7 +369,7 @@ export default function SinglePageCheckoutPayment() {
       completeOrder("Online Payment");
       clearCart();
       setIsSubmitting(false);
-      router.push("/order-success");
+      router.push("/thank-you");
     }
   };
 

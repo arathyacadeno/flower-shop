@@ -52,9 +52,40 @@ export default function ThankYouPage() {
 
     setMounted(true);
     clearCart();
+    const params = new URLSearchParams(window.location.search);
+    const qOrderId = params.get("orderId");
+
+    if (qOrderId) {
+      fetch(`/api/orders?id=${encodeURIComponent(qOrderId)}`)
+        .then((res) => (res.ok ? res.json() : null))
+        .then((data) => {
+          if (data && data.success && data.order) {
+            const o = data.order;
+            const firstItem = o.items?.[0];
+            setOrder({
+              orderId: o.id,
+              productId: firstItem?.product_id || "flower-item",
+              productName: firstItem?.product_name || "Celebration Flower Arrangement",
+              productImage: firstItem?.product_image || fallbackOrder.productImage,
+              productCategory: "Fresh Flowers",
+              quantity: firstItem?.quantity || 1,
+              price: o.final_amount,
+              unitPrice: firstItem?.product_price || o.final_amount,
+              mobileNumber: o.customer_phone || "+91 8606464700",
+              paymentMethod: o.paymentMethod?.type || "Online Payment",
+              paymentStatus: "success",
+              orderStatus: "confirmed",
+              createdAt: o.created_at,
+              estimatedDelivery: "Today in 2–4 hours (Same-Day Express Delivery)",
+            });
+          }
+        })
+        .catch((e) => console.warn("Could not fetch order by query param", e));
+    }
+
     try {
       localStorage.removeItem("occassions_cart");
-      if (!completedOrder) {
+      if (!completedOrder && !qOrderId) {
         const stored = localStorage.getItem("occassions_latest_order");
         if (stored) {
           setOrder(JSON.parse(stored));
@@ -65,7 +96,7 @@ export default function ThankYouPage() {
     }
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const activeOrder = completedOrder || order || fallbackOrder;
+  const activeOrder = order.orderId !== fallbackOrder.orderId ? order : (completedOrder || order || fallbackOrder);
 
   // Format creation date
   const orderDate = new Date(activeOrder.createdAt).toLocaleDateString("en-IN", {

@@ -507,6 +507,30 @@ export const BOUQUET_PRODUCTS: CategoryProduct[] = [
     tag: "Birthday Special",
     description: "A timeless bouquet of pristine white carnations and delicate baby's breath nestled in lush greenery, wrapped in golden-kraft origami paper with a white ribbon bow and birthday card.",
   },
+  {
+    id: "bouquet-forever-love-rose",
+    title: "Forever Love Rose Bouquet",
+    image: "/images/flower-bouquet/forever-love-rose.jpg",
+    price: "₹900",
+    tag: "Romantic Special",
+    description: "A captivating tricolor bouquet of scarlet red roses, sunny yellow blooms, and creamy white rose buds with fresh greenery, wrapped in soft sky-blue origami paper with a white satin ribbon bow and 'MY FOREVER Love' keepsake card.",
+  },
+  {
+    id: "bouquet-red-rose-birthday-bliss",
+    title: "Red Rose Birthday Bliss Bouquet",
+    image: "/images/flower-bouquet/red-rose-birthday-bliss.jpg",
+    price: "₹600",
+    tag: "Birthday Special",
+    description: "A charming arrangement of 8 vibrant red roses with rich green leaves, wrapped in dual-tone pink and red craft paper with a white satin ribbon bow and a colorful Happy Birthday keepsake card.",
+  },
+  {
+    id: "bouquet-velvet-scarlet",
+    title: "Velvet Scarlet Bouquet",
+    image: "/images/flower-bouquet/velvet-scarlet.jpg",
+    price: "₹500",
+    tag: "Classic Romance",
+    description: "A timeless half-dozen arrangement of velvety scarlet red roses paired with crisp green foliage, wrapped in rich burgundy-wine craft wrap with white textured lining and a silken white bow.",
+  },
 ];
 
 export const CAKE_PRODUCTS: CategoryProduct[] = [

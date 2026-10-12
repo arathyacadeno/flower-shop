@@ -32,6 +32,8 @@
   position: relative;
   min-height: 520px;
   display: flex;
+  box-shadow: 4px 0 20px rgba(0, 0, 0, 0.03);
+  z-index: 1;
 }
 
 .imageWrapper {
@@ -258,23 +260,33 @@
 .metaCard {
   display: flex;
   align-items: flex-start;
-  gap: 10px;
+  gap: 12px;
   background: #ffffff;
-  border: 1px solid #f1f5f9;
-  border-radius: 12px;
-  padding: 10px 12px;
+  border: 1px solid rgba(226, 232, 240, 0.7);
+  border-radius: 14px;
+  padding: 12px 14px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.03);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.metaCard:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.08);
+  border-color: #cbd5e1;
 }
 
 .metaIconCircle {
-  width: 32px;
-  height: 32px;
-  border-radius: 8px;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
   background-color: #f7f8f2;
   color: #686b2e;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  box-shadow: 0 2px 6px rgba(104, 107, 46, 0.12);
+  border: 1px solid rgba(104, 107, 46, 0.08);
 }
 
 .metaLabel {

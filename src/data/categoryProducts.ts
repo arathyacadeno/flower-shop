@@ -531,6 +531,14 @@ export const BOUQUET_PRODUCTS: CategoryProduct[] = [
     tag: "Classic Romance",
     description: "A timeless half-dozen arrangement of velvety scarlet red roses paired with crisp green foliage, wrapped in rich burgundy-wine craft wrap with white textured lining and a silken white bow.",
   },
+  {
+    id: "bouquet-blush-sunshine-rose",
+    title: "Blush & Sunshine Rose Bouquet",
+    image: "/images/flower-bouquet/blush-sunshine-rose.jpg",
+    price: "₹900",
+    tag: "Bestseller",
+    description: "A radiant symphony of vibrant hot pink, tender blush pink, sunny yellow, and pure white roses speckled with delicate gypsophila, wrapped in chic black-outlined origami paper with a glossy white ribbon bow.",
+  },
 ];
 
 export const CAKE_PRODUCTS: CategoryProduct[] = [

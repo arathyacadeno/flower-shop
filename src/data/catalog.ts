@@ -1422,6 +1422,34 @@ export const CATALOG_PRODUCTS: Product[] = [
     ],
     badge: "Classic Romance",
   },
+  {
+    id: "bouquet-blush-sunshine-rose",
+    slug: "blush-sunshine-rose-bouquet",
+    name: "Blush & Sunshine Rose Bouquet",
+    price: 900,
+    category: "flower",
+    categoryLabel: "Flowers",
+    image: "/images/flower-bouquet/blush-sunshine-rose.jpg",
+    images: [
+      "/images/flower-bouquet/blush-sunshine-rose.jpg",
+    ],
+    rating: 4.9,
+    reviewsCount: 26,
+    description:
+      "A radiant symphony of vibrant hot pink, tender blush pink, sunny yellow, and pure white roses speckled with delicate gypsophila, wrapped in chic black-outlined origami paper with a glossy white ribbon bow.",
+    deliveryInfo: "Fresh morning delivery within 3 hours across Calicut.",
+    offers: ["Flat 10% off with code OCCASIONS10", "Complimentary heartfelt note card"],
+    includes: [
+      "Hot Pink & Soft Blush Roses",
+      "Sunny Yellow Roses",
+      "Pristine White Roses",
+      "Delicate White Gypsophila (Baby's Breath)",
+      "Fresh Green Leaves",
+      "Korean-Style Black-Edged White Wrap",
+      "Glossy White Ribbon Bow",
+    ],
+    badge: "Bestseller",
+  },
 
   // ==================== CAKES PRODUCTS (/cakes) ====================
 

@@ -165,7 +165,7 @@ export default function ThankYouPage() {
                 <div className={styles.infoRowItem}>
                   <span className={styles.infoRowLabel}>Payment</span>
                   <span className={styles.infoRowValue}>
-                    {activeOrder.paymentMethod}
+                    {activeOrder.paymentMethod ? activeOrder.paymentMethod.toUpperCase() : "UPI"}
                   </span>
                 </div>
               </div>
@@ -176,36 +176,12 @@ export default function ThankYouPage() {
               <div className={styles.metaGrid}>
                 <div className={styles.metaCard}>
                   <div className={styles.metaIconCircle}>
-                    <CreditCard size={16} />
-                  </div>
-                  <div>
-                    <span className={styles.metaLabel}>Payment Method</span>
-                    <span className={styles.metaValue}>
-                      {activeOrder.paymentMethod}
-                    </span>
-                  </div>
-                </div>
-
-                <div className={styles.metaCard}>
-                  <div className={styles.metaIconCircle}>
                     <Phone size={16} />
                   </div>
                   <div>
                     <span className={styles.metaLabel}>Contact Mobile</span>
                     <span className={styles.metaValue}>
                       {activeOrder.mobileNumber}
-                    </span>
-                  </div>
-                </div>
-
-                <div className={styles.metaCard}>
-                  <div className={styles.metaIconCircle}>
-                    <Truck size={16} />
-                  </div>
-                  <div>
-                    <span className={styles.metaLabel}>Estimated Delivery</span>
-                    <span className={styles.metaValue}>
-                      {activeOrder.estimatedDelivery}
                     </span>
                   </div>
                 </div>

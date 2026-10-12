@@ -850,3 +850,24 @@
 .dateInput:focus {
   outline: none;
 }
+
+.requiredStar {
+  color: #e4004b;
+  font-weight: 700;
+  margin-left: 2px;
+}
+
+.dropdownPillError {
+  border: 1.5px solid #e4004b !important;
+  background-color: #fff5f7 !important;
+}
+
+.fieldErrorText {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.76rem;
+  color: #e4004b;
+  margin-top: 4px;
+  font-weight: 500;
+}

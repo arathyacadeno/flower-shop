@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { getDb } from "@/lib/db";
+import { sql } from "@/lib/db/neon";
 import { getAuthenticatedUser } from "@/lib/auth/jwt";
 import { checkDelivery } from "@/lib/delivery/service";
 
@@ -11,8 +12,33 @@ export async function GET(request: Request) {
 
     const db = getDb();
 
-    // If query by orderId directly (for tracking / order-success)
+    // If query by orderId directly (for tracking / thank-you)
     if (orderId) {
+      if (process.env.DATABASE_URL) {
+        try {
+          const neonOrders = await sql`SELECT * FROM orders WHERE id = ${orderId}`;
+          if (neonOrders && neonOrders.length > 0) {
+            const nOrder = neonOrders[0];
+            if (auth && auth.role !== "admin" && nOrder.user_id && nOrder.user_id !== auth.userId) {
+              return NextResponse.json({ success: false, error: "Unauthorized access to order" }, { status: 403 });
+            }
+            const nItems = await sql`SELECT * FROM order_items WHERE order_id = ${nOrder.id}`;
+            return NextResponse.json({
+              success: true,
+              order: {
+                ...nOrder,
+                deliveryAddress: typeof nOrder.delivery_address === 'string' ? JSON.parse(nOrder.delivery_address || "{}") : nOrder.delivery_address,
+                paymentMethod: typeof nOrder.payment_method === 'string' ? JSON.parse(nOrder.payment_method || "{}") : nOrder.payment_method,
+                trackingTimeline: typeof nOrder.tracking_timeline === 'string' ? JSON.parse(nOrder.tracking_timeline || "[]") : nOrder.tracking_timeline,
+                items: nItems,
+              },
+            });
+          }
+        } catch (neonErr) {
+          console.warn("Neon order lookup fallback:", neonErr);
+        }
+      }
+
       const order = db.prepare("SELECT * FROM orders WHERE id = ?").get(orderId);
       if (!order) {
         return NextResponse.json({ success: false, error: "Order not found" }, { status: 404 });
@@ -233,7 +259,61 @@ export async function POST(request: Request) {
       },
     ];
 
-    // 7. Insert Order
+    // 7. Insert Order into Neon PostgreSQL
+    if (process.env.DATABASE_URL) {
+      try {
+        await sql`
+          INSERT INTO orders (
+            id, user_id, customer_name, customer_email, customer_phone,
+            subtotal, delivery_charge, discount, final_amount, coupon_code,
+            delivery_address, payment_method, payment_status, order_status,
+            tracking_timeline, notes
+          ) VALUES (
+            ${orderId},
+            ${auth?.userId || null},
+            ${customerName},
+            ${customerEmail},
+            ${customerPhone},
+            ${verifiedSubtotal},
+            ${verifiedDeliveryCharge},
+            ${verifiedDiscount},
+            ${finalAmount},
+            ${appliedCouponCode},
+            ${JSON.stringify(delivery || {})},
+            ${JSON.stringify(paymentMethod || { type: "COD", label: "Cash on Delivery" })},
+            ${paymentMethod?.type === "COD" ? "pending" : "paid"},
+            'confirmed',
+            ${JSON.stringify(trackingTimeline)},
+            ${notes || ""}
+          )
+        `;
+
+        for (let i = 0; i < validatedOrderItems.length; i++) {
+          const it = validatedOrderItems[i];
+          const orderItemId = `oi-${orderId}-${i + 1}`;
+          await sql`
+            INSERT INTO order_items (
+              id, order_id, product_id, product_name, product_price,
+              quantity, product_image, subtotal
+            ) VALUES (
+              ${orderItemId},
+              ${orderId},
+              ${it.productId},
+              ${it.productName},
+              ${it.productPrice},
+              ${it.quantity},
+              ${it.productImage || null},
+              ${it.subtotal}
+            )
+          `;
+          await sql`UPDATE products SET stock = GREATEST(0, stock - ${it.quantity}) WHERE id = ${it.productId}`;
+        }
+      } catch (neonInsertErr) {
+        console.error("Neon order insert error:", neonInsertErr);
+      }
+    }
+
+    // Insert Order into SQLite (backup / local cache)
     db.prepare(`
       INSERT INTO orders (
         id, user_id, customer_name, customer_email, customer_phone,

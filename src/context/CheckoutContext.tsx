@@ -81,7 +81,7 @@ interface CheckoutContextType {
   startCartCheckout: (items: CheckoutItem[]) => void;
   setMobile: (mobile: string) => void;
   updateQuantity: (id: string, quantity: number) => void;
-  completeOrder: (paymentMethod: string, customOrderId?: string) => CompletedOrder | null;
+  completeOrder: (paymentMethod: string, customOrderId?: string, estimatedDelivery?: string) => CompletedOrder | null;
   viewOrder: (order: CompletedOrder) => void;
   resetCheckout: () => void;
 }
@@ -235,7 +235,11 @@ export function CheckoutProvider({ children }: { children: React.ReactNode }) {
     0
   );
 
-  const completeOrder = (paymentMethod: string, customOrderId?: string): CompletedOrder | null => {
+  const completeOrder = (
+    paymentMethod: string,
+    customOrderId?: string,
+    estimatedDelivery?: string
+  ): CompletedOrder | null => {
     if (checkoutItems.length === 0) return null;
 
     const primaryItem = checkoutItems[0];
@@ -261,7 +265,8 @@ export function CheckoutProvider({ children }: { children: React.ReactNode }) {
       paymentStatus: "success",
       orderStatus: "confirmed",
       createdAt: new Date().toISOString(),
-      estimatedDelivery: "Today in 2–4 hours (Same-Day Express Delivery)",
+      estimatedDelivery:
+        estimatedDelivery || "Today in 2–4 hours (Same-Day Express Delivery)",
       items: checkoutItems,
     };
 

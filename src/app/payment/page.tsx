@@ -87,6 +87,7 @@ export default function SinglePageCheckoutPayment() {
   const [deliveryTime, setDeliveryTime] = useState("");
   const [showTimeSlotModal, setShowTimeSlotModal] = useState(false);
   const [showDateModal, setShowDateModal] = useState(false);
+  const [deliveryPrefError, setDeliveryPrefError] = useState<{ date?: string; time?: string } | null>(null);
 
   // Payment Method State
   const [activeTab, setActiveTab] = useState<PaymentTabType>("card");
@@ -286,6 +287,24 @@ export default function SinglePageCheckoutPayment() {
       return;
     }
 
+    // Delivery Preference validations (Mandatory Date & Time Slot)
+    const prefErrors: { date?: string; time?: string } = {};
+    if (!deliveryDate) {
+      prefErrors.date = "Delivery date is mandatory. Please select a date.";
+    }
+    if (!deliveryTime) {
+      prefErrors.time = "Delivery time slot is mandatory. Please select a time slot.";
+    }
+
+    if (prefErrors.date || prefErrors.time) {
+      setDeliveryPrefError(prefErrors);
+      const prefSection = document.getElementById("delivery-preference-section");
+      if (prefSection) {
+        prefSection.scrollIntoView({ behavior: "smooth", block: "center" });
+      }
+      return;
+    }
+
     setIsSubmitting(true);
 
     const deliveryPayload = {
@@ -300,6 +319,8 @@ export default function SinglePageCheckoutPayment() {
       city,
       state,
       pinCode,
+      deliveryDate,
+      deliveryTime,
     };
 
     const paymentPayload = {
@@ -346,7 +367,7 @@ export default function SinglePageCheckoutPayment() {
         return;
       }
 
-      // Trigger Context completion with real orderId
+      // Trigger Context completion with real orderId & formatted delivery slot
       const paymentMethodTitle =
         activeTab === "upi"
           ? "UPI"
@@ -354,7 +375,16 @@ export default function SinglePageCheckoutPayment() {
           ? "Credit / Debit Card"
           : `Net Banking (${selectedBank})`;
 
-      completeOrder(paymentMethodTitle, data.orderId);
+      const formattedDelivery =
+        deliveryDate && deliveryTime
+          ? `${new Date(deliveryDate).toLocaleDateString("en-GB", {
+              day: "numeric",
+              month: "short",
+              year: "numeric",
+            })} (${deliveryTime})`
+          : undefined;
+
+      completeOrder(paymentMethodTitle, data.orderId, formattedDelivery);
       clearCart();
 
       // Simulated Razorpay Gateway Handoff (0.8s)
@@ -769,15 +799,26 @@ export default function SinglePageCheckoutPayment() {
               </div>
             </div>
 
-            {/* Delivery Date & Time */}
-            <div className={styles.deliveryTimeSection}>
-              <h2 className={styles.deliveryTimeHeading}>Delivery Preference</h2>
+            {/* Delivery Date & Time (Mandatory) */}
+            <div id="delivery-preference-section" className={styles.deliveryTimeSection}>
+              <h2 className={styles.deliveryTimeHeading}>
+                Delivery Preference <span className={styles.requiredStar}>*</span>
+              </h2>
               <div className={styles.deliveryDropdownsRow}>
                 <div className={styles.deliveryDropdownCol}>
-                  <label className={styles.dropdownLabel}>Delivery Date</label>
+                  <label className={styles.dropdownLabel}>
+                    Delivery Date <span className={styles.requiredStar}>*</span>
+                  </label>
                   <div
-                    className={styles.dropdownPill}
-                    onClick={() => setShowDateModal(true)}
+                    className={`${styles.dropdownPill} ${
+                      deliveryPrefError?.date ? styles.dropdownPillError : ""
+                    }`}
+                    onClick={() => {
+                      setShowDateModal(true);
+                      if (deliveryPrefError?.date) {
+                        setDeliveryPrefError((prev) => (prev ? { ...prev, date: undefined } : null));
+                      }
+                    }}
                     style={{ cursor: "pointer" }}
                   >
                     <div className={styles.dropdownSelect} style={{ display: "flex", alignItems: "center" }}>
@@ -791,13 +832,28 @@ export default function SinglePageCheckoutPayment() {
                     </div>
                     <Calendar size={14} className={styles.dropdownChevron} />
                   </div>
+                  {deliveryPrefError?.date && (
+                    <span className={styles.fieldErrorText}>
+                      <AlertCircle size={13} />
+                      {deliveryPrefError.date}
+                    </span>
+                  )}
                 </div>
 
                 <div className={styles.deliveryDropdownCol}>
-                  <label className={styles.dropdownLabel}>Delivery Time Slot</label>
+                  <label className={styles.dropdownLabel}>
+                    Delivery Time Slot <span className={styles.requiredStar}>*</span>
+                  </label>
                   <div
-                    className={styles.dropdownPill}
-                    onClick={() => setShowTimeSlotModal(true)}
+                    className={`${styles.dropdownPill} ${
+                      deliveryPrefError?.time ? styles.dropdownPillError : ""
+                    }`}
+                    onClick={() => {
+                      setShowTimeSlotModal(true);
+                      if (deliveryPrefError?.time) {
+                        setDeliveryPrefError((prev) => (prev ? { ...prev, time: undefined } : null));
+                      }
+                    }}
                     style={{ cursor: "pointer" }}
                   >
                     <div className={styles.dropdownSelect} style={{ display: "flex", alignItems: "center" }}>
@@ -805,6 +861,12 @@ export default function SinglePageCheckoutPayment() {
                     </div>
                     <Clock size={14} className={styles.dropdownChevron} />
                   </div>
+                  {deliveryPrefError?.time && (
+                    <span className={styles.fieldErrorText}>
+                      <AlertCircle size={13} />
+                      {deliveryPrefError.time}
+                    </span>
+                  )}
                 </div>
               </div>
             </div>
@@ -816,6 +878,7 @@ export default function SinglePageCheckoutPayment() {
               selectedDate={deliveryDate}
               onConfirm={(deliveryType, slot, price) => {
                 setDeliveryTime(slot);
+                setDeliveryPrefError((prev) => (prev ? { ...prev, time: undefined } : null));
                 setShowTimeSlotModal(false);
               }}
             />
@@ -827,6 +890,7 @@ export default function SinglePageCheckoutPayment() {
               selectedDate={deliveryDate}
               onConfirm={(date) => {
                 setDeliveryDate(date);
+                setDeliveryPrefError((prev) => (prev ? { ...prev, date: undefined } : null));
                 setShowDateModal(false);
               }}
             />

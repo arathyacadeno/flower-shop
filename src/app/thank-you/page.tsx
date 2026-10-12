@@ -122,14 +122,6 @@ export default function ThankYouPage() {
                 alt={activeOrder.productName}
                 className={styles.heroFloralImg}
               />
-              <div className={styles.imageOverlayGradient} />
-
-              <div className={styles.productPill}>
-                <span className={styles.pillCategory}>
-                  {(activeOrder.productCategory || "Flower").toUpperCase()}
-                </span>
-                <h4 className={styles.pillName}>{activeOrder.productName}</h4>
-              </div>
             </div>
           </div>
 

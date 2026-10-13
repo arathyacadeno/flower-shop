@@ -3,7 +3,6 @@
 import React, { useState } from "react";
 import { ShoppingBag, Check, Minus, Plus } from "lucide-react";
 import { useCart } from "@/context/CartContext";
-import { useAuth } from "@/context/AuthContext";
 import { Product } from "@/data/catalog";
 import styles from "./Buttons.module.css";
 
@@ -21,7 +20,6 @@ export function AddToCartButton({
   variant = "default",
 }: AddToCartButtonProps) {
   const { addItem, items, updateQty } = useCart();
-  const { isAuthenticated } = useAuth();
   const [added, setAdded] = useState(false);
 
   const cartItemIndex = items.findIndex((i) => i.bouquet.id === product.id);
@@ -30,13 +28,6 @@ export function AddToCartButton({
   const handleClick = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-
-    if (!isAuthenticated) {
-      if (typeof window !== "undefined") {
-        window.dispatchEvent(new CustomEvent("show-signin-modal"));
-      }
-      return;
-    }
 
     // Map Product into Bouquet format expected by CartContext
     addItem(

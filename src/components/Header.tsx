@@ -143,10 +143,21 @@ export default function Header({
     }
     setPhoneError(null);
     setPhoneLoading(true);
-    // Simulate OTP verify (replace with real API call)
-    await new Promise((r) => setTimeout(r, 1200));
+    // Simulate OTP verify
+    await new Promise((r) => setTimeout(r, 800));
     setPhoneLoading(false);
-    // For demo: any 4+ digit OTP succeeds
+    
+    // Authenticate user into session
+    const cleaned = phoneNumber.replace(/\D/g, "");
+    try {
+      await loginWithGoogle({
+        email: `${cleaned}@phone.occasions.in`,
+        name: `Customer (+91 ${cleaned})`,
+      });
+    } catch (err) {
+      console.warn("Could not set phone session:", err);
+    }
+
     setActiveModal(null);
     setPhoneFlow("idle");
     setPhoneNumber("");
@@ -226,7 +237,9 @@ export default function Header({
             const res = await loginWithGoogle({ credential: response.credential });
             if (res.success) {
               setActiveModal(null);
-              router.push("/");
+              if (pathname === "/signin" || pathname === "/signup") {
+                router.push("/");
+              }
             } else {
               setAuthError(res.error || "Google authentication failed.");
             }
@@ -966,14 +979,8 @@ export default function Header({
                     className={styles.primaryBtn}
                     style={{ flex: 1, margin: 0, padding: "10px", fontSize: "0.85rem" }}
                     onClick={() => {
-                      if (!isAuthenticated) {
-                        setAuthTab("signin");
-                        setAuthError(null);
-                        setActiveModal("signin");
-                      } else {
-                        setActiveModal(null);
-                        router.push("/cart");
-                      }
+                      setActiveModal(null);
+                      router.push("/cart");
                     }}
                   >
                     Checkout

@@ -647,15 +647,32 @@
 }
 
 .emptyImageWrap {
-  margin-bottom: 20px;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.emptyLogoImg {
+  width: auto;
+  max-width: 190px;
+  height: auto;
+  max-height: 80px;
+  object-fit: contain;
+  filter: drop-shadow(0 3px 10px rgba(0, 0, 0, 0.05));
+  transition: transform 0.25s ease;
+}
+
+.emptyLogoImg:hover {
+  transform: scale(1.04);
 }
 
 .emptyFlowerImg {
-  width: 120px;
-  height: 120px;
-  object-fit: cover;
-  border-radius: 50%;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+  width: auto;
+  max-width: 190px;
+  height: auto;
+  max-height: 80px;
+  object-fit: contain;
 }
 
 .emptyHeading {

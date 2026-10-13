@@ -402,13 +402,6 @@ export default function ProductInfo({
   const handleAddToCart = () => {
     if (!validateForm()) return;
 
-    if (!isAuthenticated) {
-      if (typeof window !== "undefined") {
-        window.dispatchEvent(new CustomEvent("show-signin-modal"));
-      }
-      return;
-    }
-
     if (isCustomMode && isBouquet) {
       addItem(
         {
@@ -511,13 +504,6 @@ export default function ProductInfo({
 
   const handleBuyNow = () => {
     if (!validateForm()) return;
-
-    if (!isAuthenticated) {
-      if (typeof window !== "undefined") {
-        window.dispatchEvent(new CustomEvent("show-signin-modal"));
-      }
-      return;
-    }
 
     const mainItem: CheckoutItem = {
       id: isCustomMode && isBouquet ? `${product.id}-custom-${customFlowerQty}` : product.id,

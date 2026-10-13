@@ -871,3 +871,88 @@
   margin-top: 4px;
   font-weight: 500;
 }
+
+/* Guest Checkout Auth Notice Banner */
+.authNoticeBanner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  background: #fff8f9;
+  border: 1px solid #fecdd3;
+  border-radius: 12px;
+  padding: 14px 18px;
+  margin-bottom: 24px;
+}
+
+.authNoticeLeft {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.authNoticeIconWrap {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #ffe4e6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.authNoticeIcon {
+  color: #e4004b;
+}
+
+.authNoticeTitle {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #111827;
+  margin: 0;
+}
+
+.authNoticeSub {
+  font-size: 0.8rem;
+  color: #6b7280;
+  margin: 2px 0 0 0;
+}
+
+.authNoticeBtn {
+  background: #e4004b;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 18px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.15s ease;
+}
+
+.authNoticeBtn:hover {
+  background: #c7003f;
+}
+
+.authNoticeFooterNote {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 10px;
+  font-size: 0.82rem;
+  color: #64748b;
+  text-align: center;
+}
+
+@media (max-width: 640px) {
+  .authNoticeBanner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .authNoticeBtn {
+    align-self: flex-start;
+  }
+}

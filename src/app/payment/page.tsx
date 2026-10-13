@@ -9,6 +9,7 @@ import TimeSlotModal from "@/components/TimeSlotModal";
 import DateModal from "@/components/DateModal";
 import { useCheckout } from "@/context/CheckoutContext";
 import { useCart } from "@/context/CartContext";
+import { useAuth } from "@/context/AuthContext";
 import {
   Smartphone,
   CreditCard,
@@ -54,6 +55,7 @@ const POPULAR_BANKS = [
 export default function SinglePageCheckoutPayment() {
   const router = useRouter();
   const { clearCart } = useCart();
+  const { user, isAuthenticated } = useAuth();
   const {
     checkoutItem,
     checkoutItems,
@@ -206,6 +208,21 @@ export default function SinglePageCheckoutPayment() {
     }
   }, [checkDeliveryPin]);
 
+  // Auto-populate sender details from authenticated user profile
+  useEffect(() => {
+    if (user) {
+      if (!senderName && user.name) {
+        setSenderName(user.name);
+      }
+      if (!senderEmail && user.email && !user.email.endsWith("@phone.occasions.in")) {
+        setSenderEmail(user.email);
+      }
+      if (!senderMobile && user.phone) {
+        setSenderMobile(user.phone.replace(/^\+91\s*/, ""));
+      }
+    }
+  }, [user]);
+
   // Compute discount and final total with verified delivery charge
   const discountAmount = couponApplied ? 100 : 0;
   const deliveryCharge =
@@ -261,6 +278,14 @@ export default function SinglePageCheckoutPayment() {
   // Master Form Submission (Delivery + Payment)
   const handleSubmitOrder = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    // Request login details if not authenticated at the final checkout stage
+    if (!isAuthenticated) {
+      if (typeof window !== "undefined") {
+        window.dispatchEvent(new CustomEvent("show-signin-modal"));
+      }
+      return;
+    }
 
     // Specific payment validations
     if (activeTab === "card") {
@@ -432,6 +457,33 @@ export default function SinglePageCheckoutPayment() {
         <form onSubmit={handleSubmitOrder} className={styles.checkoutGrid}>
           {/* ================= LEFT COLUMN ================= */}
           <div className={styles.leftColumn}>
+            {!isAuthenticated && (
+              <div className={styles.authNoticeBanner}>
+                <div className={styles.authNoticeLeft}>
+                  <div className={styles.authNoticeIconWrap}>
+                    <Lock size={18} className={styles.authNoticeIcon} />
+                  </div>
+                  <div>
+                    <h3 className={styles.authNoticeTitle}>Checkout as Member or Guest</h3>
+                    <p className={styles.authNoticeSub}>
+                      Sign in to auto-fill your details, track real-time delivery, and earn rewards.
+                    </p>
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => {
+                    if (typeof window !== "undefined") {
+                      window.dispatchEvent(new CustomEvent("show-signin-modal"));
+                    }
+                  }}
+                  className={styles.authNoticeBtn}
+                >
+                  Sign In
+                </button>
+              </div>
+            )}
+
             {/* Sender Details */}
             <div className={styles.sectionHeader} style={{ marginTop: 0 }}>
               <h2 className={styles.sectionTitle}>Sender Details</h2>
@@ -1133,35 +1185,46 @@ export default function SinglePageCheckoutPayment() {
             </div>
 
 
-            {/* Master Place Order Button */}
-            <button
-              type="submit"
-              disabled={
-                isSubmitting ||
-                deliveryStatus.serviceable === false ||
-                deliveryStatus.loading
-              }
-              className={styles.placeOrderBtn}
-              title={
-                deliveryStatus.serviceable === false
-                  ? "Sorry, delivery is not available to this location. Please enter another delivery location."
-                  : undefined
-              }
-            >
-              {isSubmitting ? (
-                <>
-                  <div className={styles.spinner} />
-                  <span>Processing Payment...</span>
-                </>
-              ) : deliveryStatus.serviceable === false ? (
-                <span>Location Not Serviceable</span>
-              ) : (
-                <>
-                  <Lock size={16} />
-                  <span>Place Order</span>
-                </>
+              {/* Master Place Order Button */}
+              <button
+                type="submit"
+                disabled={
+                  isSubmitting ||
+                  deliveryStatus.serviceable === false ||
+                  deliveryStatus.loading
+                }
+                className={styles.placeOrderBtn}
+                title={
+                  deliveryStatus.serviceable === false
+                    ? "Sorry, delivery is not available to this location. Please enter another delivery location."
+                    : undefined
+                }
+              >
+                {isSubmitting ? (
+                  <>
+                    <div className={styles.spinner} />
+                    <span>Processing Payment...</span>
+                  </>
+                ) : deliveryStatus.serviceable === false ? (
+                  <span>Location Not Serviceable</span>
+                ) : !isAuthenticated ? (
+                  <>
+                    <Lock size={16} />
+                    <span>Sign In & Place Order</span>
+                  </>
+                ) : (
+                  <>
+                    <Lock size={16} />
+                    <span>Place Order</span>
+                  </>
+                )}
+              </button>
+              {!isAuthenticated && (
+                <div className={styles.authNoticeFooterNote}>
+                  <Lock size={13} color="#94a3b8" />
+                  <span>Login details requested at checkout</span>
+                </div>
               )}
-            </button>
           </aside>
         </form>
       </main>

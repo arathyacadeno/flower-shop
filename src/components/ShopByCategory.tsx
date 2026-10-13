@@ -101,7 +101,9 @@ export default function ShopByCategory() {
       className={styles.sectionWrapper}
       id="categories"
       aria-label="Shop by Category"
+      style={{ scrollMarginTop: "80px" }}
     >
+      <div id="shop-by-category" style={{ position: "absolute", top: "-80px" }} />
       <div className={styles.container}>
         {/* Section heading */}
         <div

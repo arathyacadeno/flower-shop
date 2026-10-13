@@ -19,6 +19,7 @@ import {
   ArrowRight,
   Minus,
   Plus,
+  Lock,
 } from "lucide-react";
 import styles from "./cart.module.css";
 
@@ -291,9 +292,12 @@ export default function CartPage() {
   const totalDiscount = Math.max(0, totalMRP - totalCurrentPrice);
   const finalTotal = totalCurrentPrice;
 
+  const [pendingCheckoutAfterLogin, setPendingCheckoutAfterLogin] = useState(false);
+
   // Proceed to Checkout
   const handleProceedToCheckout = () => {
     if (!isAuthenticated) {
+      setPendingCheckoutAfterLogin(true);
       if (typeof window !== "undefined") {
         window.dispatchEvent(new CustomEvent("show-signin-modal"));
       }
@@ -315,6 +319,14 @@ export default function CartPage() {
     startCartCheckout(checkoutPayload);
     router.push("/payment");
   };
+
+  // If user signed in after clicking checkout, automatically proceed
+  useEffect(() => {
+    if (isAuthenticated && pendingCheckoutAfterLogin) {
+      setPendingCheckoutAfterLogin(false);
+      handleProceedToCheckout();
+    }
+  }, [isAuthenticated, pendingCheckoutAfterLogin]);
 
   if (!mounted) return null;
 
@@ -344,9 +356,9 @@ export default function CartPage() {
           <div className={styles.emptyCartCard}>
             <div className={styles.emptyImageWrap}>
               <img
-                src="/images/basket-gerberas.jpg"
-                alt="Empty Flower Cart"
-                className={styles.emptyFlowerImg}
+                src="/images/occasions-logo.png"
+                alt="Occasions - Do it with flowers"
+                className={styles.emptyLogoImg}
               />
             </div>
             <h2 className={styles.emptyHeading}>Your Cart is Empty</h2>
@@ -697,6 +709,22 @@ export default function CartPage() {
               >
                 Checkout
               </button>
+              {!isAuthenticated && (
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    gap: "6px",
+                    marginTop: "10px",
+                    fontSize: "0.82rem",
+                    color: "#64748b",
+                  }}
+                >
+                  <Lock size={13} color="#94a3b8" />
+                  <span>Login details requested at checkout</span>
+                </div>
+              )}
             </aside>
           </div>
         )}

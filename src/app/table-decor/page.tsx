@@ -12,8 +12,8 @@ const TABLE_DECOR_TABS = [
   { id: "all", label: "All Items" },
   { id: "centerpiece", label: "Centerpieces" },
   { id: "runner", label: "Runners & Banquets" },
+  { id: "heart", label: "Heart Arrangements" },
   { id: "wedding", label: "Wedding & Ceremonies" },
-  { id: "rustic", label: "Rustic & Casual" },
 ];
 
 export default function TableDecorCategoryPage() {

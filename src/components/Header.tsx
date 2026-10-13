@@ -355,7 +355,6 @@ export default function Header({
         const timer = setTimeout(() => {
           targetEl.scrollIntoView({ behavior: "smooth" });
           if (hashId === "shop-by-flowers" || hashId === "flower") setActiveSection("flower");
-          else if (hashId === "cakes" || hashId === "categories") setActiveSection("cakes");
           else if (hashId === "occasions") setActiveSection("occasions");
           else if (hashId === "highlights") setActiveSection("highlights");
         }, 120);
@@ -372,7 +371,6 @@ export default function Header({
     }
 
     const sections = [
-      { id: "cakes", key: "cakes", fallbackId: "categories" },
       { id: "occasions", key: "occasions" },
       { id: "shop-by-flowers", key: "flower" },
       { id: "highlights", key: "highlights" },
@@ -389,7 +387,7 @@ export default function Header({
       let matchedSection: string | null = null;
 
       for (const section of sections) {
-        const el = document.getElementById(section.id) || (section.fallbackId ? document.getElementById(section.fallbackId) : null);
+        const el = document.getElementById(section.id);
         if (el) {
           const rect = el.getBoundingClientRect();
           const top = rect.top + window.scrollY;
@@ -415,7 +413,7 @@ export default function Header({
   // Active flags: ONLY true when on the home page ('/') and corresponding section is active
   const isHomePage = pathname === "/";
   const isFlowerActive = isHomePage && activeSection === "flower";
-  const isCakesActive = isHomePage && activeSection === "cakes";
+  const isCakesActive = pathname === "/cakes" || (pathname ? pathname.startsWith("/cakes/") : false);
   const isSpecialOccasionsActive = isHomePage && activeSection === "occasions";
   const isHighlightsActive = isHomePage && activeSection === "highlights";
 
@@ -485,11 +483,7 @@ export default function Header({
     } else if (q.includes("garland") || q.includes("basket") || q.includes("varmala")) {
       handleNavCategory("Flower baskets & garlands", 1);
     } else if (q.includes("cake")) {
-      window.open(
-        "https://wa.me/918606464700?text=Hello%20Occassions,%20I%20would%20like%20to%20order%20a%20fresh%20celebration%20cake.",
-        "_blank",
-        "noopener,noreferrer"
-      );
+      router.push("/cakes");
     } else if (
       q.includes("contact") ||
       q.includes("phone") ||
@@ -558,8 +552,7 @@ export default function Header({
             </Link>
 
             <Link
-              href="/#cakes"
-              onClick={(e) => handleSectionNav(e, "cakes", "cakes")}
+              href="/cakes"
               className={`${styles.centerNavLink} ${isCakesActive ? styles.activeNavLink : ""
                 }`}
             >
@@ -1311,12 +1304,9 @@ export default function Header({
             </li>
             <li>
               <Link
-                href="/#cakes"
+                href="/cakes"
                 className={`${styles.drawerNavLink} ${isCakesActive ? styles.activeNavLink : ""}`}
-                onClick={(e) => {
-                  handleSectionNav(e, "cakes", "cakes");
-                  setDrawerOpen(false);
-                }}
+                onClick={() => setDrawerOpen(false)}
               >
                 Cakes
               </Link>
@@ -1396,7 +1386,13 @@ export default function Header({
             }}
           >
             <div>▶ Bouquet</div>
-            <div>▶ Cakes</div>
+            <Link
+              href="/cakes"
+              onClick={() => setDrawerOpen(false)}
+              style={{ color: "inherit", textDecoration: "none" }}
+            >
+              ▶ Cakes
+            </Link>
             <div>▶ Flower baskets &amp; garlands</div>
             <div>▶ Church arrangements</div>
             <div>▶ Table arrangements</div>

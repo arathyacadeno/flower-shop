@@ -181,16 +181,32 @@ export default function CartPage() {
   const router = useRouter();
   const { items, updateQty, removeItem } = useCart();
   const { startCartCheckout } = useCheckout();
-  const { isAuthenticated } = useAuth();
+  const { user, isAuthenticated } = useAuth();
   const [mounted, setMounted] = useState(false);
   const [couponCode, setCouponCode] = useState("");
 
   // Demo list state so fallback items can be removed interactively
   const [demoList, setDemoList] = useState(INITIAL_DEMO_ITEMS);
 
-  // Address state (matching reference mockup)
-  const [recipientName, setRecipientName] = useState("Sameesha");
-  const [addressLine, setAddressLine] = useState("Kozhikode , Pantheeramkav");
+  // Authenticated user address state (no dummy placeholder for guests)
+  const [savedAddress, setSavedAddress] = useState<any | null>(null);
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      fetch("/api/addresses", { credentials: "include" })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.success && Array.isArray(data.addresses) && data.addresses.length > 0) {
+            setSavedAddress(data.addresses[0]);
+          } else {
+            setSavedAddress(null);
+          }
+        })
+        .catch(() => setSavedAddress(null));
+    } else {
+      setSavedAddress(null);
+    }
+  }, [isAuthenticated]);
 
   const [hasLoadedRealCart, setHasLoadedRealCart] = useState(false);
 
@@ -365,8 +381,8 @@ export default function CartPage() {
             <p className={styles.emptyDescription}>
               Looks like your floral collection is waiting for something beautiful.
             </p>
-            <Link href="/flower" className={styles.exploreFlowersBtn}>
-              <span>Explore Flowers</span>
+            <Link href="/#categories" className={styles.exploreFlowersBtn}>
+              <span>Explore Collection</span>
               <ArrowRight size={16} />
             </Link>
           </div>
@@ -375,30 +391,42 @@ export default function CartPage() {
           <div className={styles.cartGrid}>
             {/* ================= LEFT COLUMN ================= */}
             <div className={styles.leftColumn}>
-              {/* Deliver to Card */}
-              <div className={styles.addressCard}>
-                <div className={styles.addressInfo}>
-                  <div className={styles.addressTopRow}>
-                    <span className={styles.deliverToLabel}>Deliver to:</span>
-                    <span className={styles.recipientName}>{recipientName}</span>
-                    <span className={styles.homeBadge}>HOME</span>
+              {/* Deliver to Card: Only shown for authenticated customers with their real account/saved address */}
+              {isAuthenticated && (
+                <div className={styles.addressCard}>
+                  <div className={styles.addressInfo}>
+                    <div className={styles.addressTopRow}>
+                      <span className={styles.deliverToLabel}>Deliver to:</span>
+                      <span className={styles.recipientName}>
+                        {savedAddress?.fullName || user?.name || "Your Account"}
+                      </span>
+                      {savedAddress?.type && (
+                        <span className={styles.homeBadge}>{savedAddress.type}</span>
+                      )}
+                    </div>
+                    <div className={styles.addressSubtext}>
+                      {savedAddress
+                        ? [
+                            savedAddress.house,
+                            savedAddress.street,
+                            savedAddress.city,
+                            savedAddress.pinCode,
+                          ]
+                            .filter(Boolean)
+                            .join(", ")
+                        : "Delivery address will be confirmed at checkout"}
+                    </div>
                   </div>
-                  <div className={styles.addressSubtext}>{addressLine}</div>
-                </div>
 
-                <button
-                  type="button"
-                  onClick={() => {
-                    const newName = prompt("Enter recipient name:", recipientName);
-                    if (newName) setRecipientName(newName);
-                    const newAddr = prompt("Enter delivery address:", addressLine);
-                    if (newAddr) setAddressLine(newAddr);
-                  }}
-                  className={styles.changeAddressBtn}
-                >
-                  Change
-                </button>
-              </div>
+                  <button
+                    type="button"
+                    onClick={handleProceedToCheckout}
+                    className={styles.changeAddressBtn}
+                  >
+                    {savedAddress ? "Change" : "Add Address"}
+                  </button>
+                </div>
+              )}
 
               {/* Cart Items List: Groups Main Product and its Add-ons */}
               {groupedCartItems.map((group) => {

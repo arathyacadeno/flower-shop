@@ -143,40 +143,6 @@ interface GroupedCartItem {
   }[];
 }
 
-// Fallback demo items with valid high-res image paths & detail page links
-const INITIAL_DEMO_ITEMS = [
-  {
-    bouquet: {
-      id: "celebration-hamper",
-      slug: "celebration-cake-flower-hamper-luxe",
-      category: "our-highlights",
-      name: "Celebration Floral & Cake Hamper",
-      subtitle: "Fresh flower arrangement",
-      price: 158,
-      originalPrice: 249,
-      image: "/images/cat-flower-bouquet-luxe.jpg",
-      rating: 4.4,
-      deliveryDate: "Delivery by Oct 7, Wed",
-    },
-    quantity: 1,
-  },
-  {
-    bouquet: {
-      id: "classic-calicut-bridal",
-      slug: "classic-calicut-bridal-bouquet",
-      category: "flower",
-      name: "Classic Calicut Bridal Bouquet",
-      subtitle: "Fresh flower arrangement",
-      price: 2809,
-      originalPrice: 4990,
-      image: "/images/farm-hand-bouquet-large.jpg",
-      rating: 4.4,
-      deliveryDate: "Delivery by Oct 8, Thu",
-    },
-    quantity: 1,
-  },
-];
-
 export default function CartPage() {
   const router = useRouter();
   const { items, updateQty, removeItem } = useCart();
@@ -184,9 +150,6 @@ export default function CartPage() {
   const { user, isAuthenticated } = useAuth();
   const [mounted, setMounted] = useState(false);
   const [couponCode, setCouponCode] = useState("");
-
-  // Demo list state so fallback items can be removed interactively
-  const [demoList, setDemoList] = useState(INITIAL_DEMO_ITEMS);
 
   // Authenticated user address state (no dummy placeholder for guests)
   const [savedAddress, setSavedAddress] = useState<any | null>(null);
@@ -208,21 +171,12 @@ export default function CartPage() {
     }
   }, [isAuthenticated]);
 
-  const [hasLoadedRealCart, setHasLoadedRealCart] = useState(false);
-
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  useEffect(() => {
-    if (items.length > 0) {
-      setHasLoadedRealCart(true);
-    }
-  }, [items]);
-
-  // Use actual cart items if available or if user loaded real cart; otherwise show demo list
-  const isUsingRealCart = hasLoadedRealCart || items.length > 0;
-  const displayItems = isUsingRealCart ? items : demoList;
+  // Display only real cart items added by the customer
+  const displayItems = items;
 
   // Group add-on items inside their preceding main product card
   const groupedCartItems = useMemo(() => {
@@ -260,11 +214,7 @@ export default function CartPage() {
 
   // Handle Remove Item
   const handleRemoveItem = (idx: number) => {
-    if (isUsingRealCart) {
-      removeItem(idx);
-    } else {
-      setDemoList((prev) => prev.filter((_, i) => i !== idx));
-    }
+    removeItem(idx);
   };
 
   // Handle Remove Entire Group (Main item + attached add-ons)
@@ -272,27 +222,12 @@ export default function CartPage() {
     const indicesToRemove = [group.mainIndex, ...group.addons.map((a) => a.originalIndex)].sort(
       (a, b) => b - a
     );
-
-    if (isUsingRealCart) {
-      indicesToRemove.forEach((idx) => removeItem(idx));
-    } else {
-      setDemoList((prev) => prev.filter((_, i) => !indicesToRemove.includes(i)));
-    }
+    indicesToRemove.forEach((idx) => removeItem(idx));
   };
 
   // Handle Quantity Change
   const handleQuantityChange = (idx: number, val: number) => {
-    if (isUsingRealCart) {
-      updateQty(idx, val);
-    } else {
-      setDemoList((prev) => {
-        const next = [...prev];
-        if (next[idx]) {
-          next[idx] = { ...next[idx], quantity: val };
-        }
-        return next;
-      });
-    }
+    updateQty(idx, val);
   };
 
   // Compute pricing totals

@@ -35,6 +35,8 @@ interface AuthContextType {
     phoneNumber: string;
     idToken?: string;
   }) => Promise<{ success: boolean; error?: string; user?: User }>;
+  sendPhoneOtp: (phoneNumber: string) => Promise<{ success: boolean; error?: string; devOtp?: string; message?: string }>;
+  verifyPhoneOtp: (phoneNumber: string, otp: string) => Promise<{ success: boolean; error?: string; user?: User }>;
   logout: () => Promise<void>;
   updateProfile: (data: {
     name?: string;
@@ -173,6 +175,42 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
+  const sendPhoneOtp = async (phoneNumber: string) => {
+    try {
+      const res = await fetch("/api/auth/otp/send", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ phoneNumber }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        return { success: true, message: data.message, devOtp: data.devOtp };
+      }
+      return { success: false, error: data.error || "Failed to send OTP" };
+    } catch {
+      return { success: false, error: "Network error sending OTP. Please try again." };
+    }
+  };
+
+  const verifyPhoneOtp = async (phoneNumber: string, otp: string) => {
+    try {
+      const res = await fetch("/api/auth/otp/verify", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ phoneNumber, otp }),
+        credentials: "include",
+      });
+      const data = await res.json();
+      if (data.success && data.user) {
+        setUser(data.user);
+        return { success: true, user: data.user };
+      }
+      return { success: false, error: data.error || "Invalid OTP code" };
+    } catch {
+      return { success: false, error: "Network error verifying OTP. Please try again." };
+    }
+  };
+
   const logout = async () => {
     try {
       await fetch("/api/auth/logout", { method: "POST", credentials: "include" });
@@ -228,6 +266,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         signup,
         loginWithGoogle,
         loginWithPhone,
+        sendPhoneOtp,
+        verifyPhoneOtp,
         logout,
         updateProfile,
         refreshUser,

@@ -219,6 +219,13 @@ function initSchema(db: any) {
       key TEXT PRIMARY KEY,
       value TEXT NOT NULL
     );
+
+    CREATE TABLE IF NOT EXISTS phone_otps (
+      phone TEXT PRIMARY KEY,
+      otp TEXT NOT NULL,
+      expires_at INTEGER NOT NULL,
+      created_at TEXT NOT NULL
+    );
   `);
 }
 

@@ -84,7 +84,7 @@ export default function Header({
   const router = useRouter();
   const { items: cartItems, cartCount, subtotal: cartSubtotal } = useCart();
   const { wishlistCount } = useWishlist();
-  const { user, isAuthenticated, isAdmin, login, signup, loginWithGoogle, loginWithPhone, logout } = useAuth();
+  const { user, isAuthenticated, isAdmin, login, signup, loginWithGoogle, loginWithPhone, sendPhoneOtp, verifyPhoneOtp, logout } = useAuth();
   const [internalDrawerOpen, setInternalDrawerOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [activeModal, setActiveModal] = useState<"cart" | "signin" | null>(null);
@@ -107,6 +107,7 @@ export default function Header({
   const [otpValue, setOtpValue] = useState("");
   const [phoneLoading, setPhoneLoading] = useState(false);
   const [phoneError, setPhoneError] = useState<string | null>(null);
+  const [phoneInfo, setPhoneInfo] = useState<string | null>(null);
   const [otpResendTimer, setOtpResendTimer] = useState(0);
   const otpTimerRef = useRef<NodeJS.Timeout | null>(null);
   const confirmationResultRef = useRef<ConfirmationResult | null>(null);
@@ -154,7 +155,7 @@ export default function Header({
   };
 
   const handleSendOtp = async () => {
-    const cleaned = phoneNumber.replace(/\D/g, "");
+    const cleaned = phoneNumber.replace(/\D/g, "").slice(-10);
     if (cleaned.length < 10) {
       setPhoneError("Please enter a valid 10-digit mobile number.");
       return;
@@ -163,32 +164,21 @@ export default function Header({
     setPhoneLoading(true);
 
     try {
-      const fullPhoneNumber = formatPhoneNumber(cleaned, countryCode);
-
-      // Clean up previous reCAPTCHA if exists
-      cleanupRecaptchaVerifier(recaptchaVerifierRef.current);
-      recaptchaVerifierRef.current = null;
-
-      // Initialize reCAPTCHA on the dedicated container
-      const verifier = initRecaptchaVerifier("recaptcha-phone-container", {
-        size: "invisible",
-        "expired-callback": () => {
-          setPhoneError("reCAPTCHA expired. Please try sending OTP again.");
-        },
-      });
-      recaptchaVerifierRef.current = verifier;
-
-      // Send OTP via Firebase Phone Auth
-      const confirmationResult = await signInWithPhoneNumber(auth, fullPhoneNumber, verifier);
-      confirmationResultRef.current = confirmationResult;
-
-      setPhoneFlow("otp");
-      startOtpTimer(45);
+      const res = await sendPhoneOtp(cleaned);
+      if (res.success) {
+        setPhoneFlow("otp");
+        startOtpTimer(45);
+        if (res.devOtp) {
+          setPhoneInfo(`Verification Code: ${res.devOtp}`);
+        } else {
+          setPhoneInfo(null);
+        }
+      } else {
+        setPhoneError(res.error || "Failed to send OTP. Please try again.");
+      }
     } catch (err: any) {
-      console.error("Firebase sendOtp error:", err);
-      cleanupRecaptchaVerifier(recaptchaVerifierRef.current);
-      recaptchaVerifierRef.current = null;
-      setPhoneError(getFirebaseErrorMessage(err));
+      console.error("sendPhoneOtp error:", err);
+      setPhoneError("Network error. Please try sending OTP again.");
     } finally {
       setPhoneLoading(false);
     }
@@ -201,28 +191,12 @@ export default function Header({
       return;
     }
 
-    if (!confirmationResultRef.current) {
-      setPhoneError("Verification session expired. Please request a new OTP.");
-      return;
-    }
-
     setPhoneError(null);
     setPhoneLoading(true);
 
     try {
-      // 1. Confirm OTP code with Firebase
-      const userCredential = await confirmationResultRef.current.confirm(cleanOtp);
-      const firebaseUser = userCredential.user;
-
-      // 2. Obtain Firebase ID token
-      const idToken = await firebaseUser.getIdToken();
-      const verifiedPhone = firebaseUser.phoneNumber || formatPhoneNumber(phoneNumber, countryCode);
-
-      // 3. Authenticate with backend and create/sync session
-      const res = await loginWithPhone({
-        phoneNumber: verifiedPhone,
-        idToken,
-      });
+      const cleaned = phoneNumber.replace(/\D/g, "").slice(-10);
+      const res = await verifyPhoneOtp(cleaned, cleanOtp);
 
       if (res.success) {
         setActiveModal(null);
@@ -231,11 +205,11 @@ export default function Header({
           router.push("/");
         }
       } else {
-        setPhoneError(res.error || "Authentication failed on server.");
+        setPhoneError(res.error || "Incorrect OTP code. Please try again.");
       }
     } catch (err: any) {
-      console.error("Firebase verifyOtp error:", err);
-      setPhoneError(getFirebaseErrorMessage(err));
+      console.error("verifyOtp error:", err);
+      setPhoneError("Network error verifying OTP. Please try again.");
     } finally {
       setPhoneLoading(false);
     }
@@ -246,6 +220,7 @@ export default function Header({
     setPhoneNumber("");
     setOtpValue("");
     setPhoneError(null);
+    setPhoneInfo(null);
     setOtpResendTimer(0);
     if (otpTimerRef.current) clearInterval(otpTimerRef.current);
     cleanupRecaptchaVerifier(recaptchaVerifierRef.current);
@@ -1284,6 +1259,11 @@ export default function Header({
                     />
                   ))}
                 </div>
+                {phoneInfo && (
+                  <p style={{ fontSize: "0.82rem", color: "#047857", background: "#ecfdf5", border: "1px solid #a7f3d0", padding: "6px 12px", borderRadius: 8, margin: "8px 0 0", textAlign: "center", fontWeight: 600 }}>
+                    {phoneInfo}
+                  </p>
+                )}
                 {phoneError && <p className={styles.phoneError}>{phoneError}</p>}
                 <button
                   type="button"

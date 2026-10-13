@@ -48,9 +48,14 @@ const getItemHref = (bouquet: any): string => {
   // Direct category and slug match
   if (bouquet.category && bouquet.slug) {
     if (
-      ["flower", "cakes", "special-occasions", "our-highlights"].includes(
-        bouquet.category
-      )
+      [
+        "flower",
+        "cakes",
+        "special-occasions",
+        "our-highlights",
+        "table-decor",
+        "wreaths",
+      ].includes(bouquet.category)
     ) {
       return `/${bouquet.category}/${bouquet.slug}`;
     }
@@ -104,8 +109,14 @@ const getItemHref = (bouquet: any): string => {
   ) {
     return "/cakes";
   }
+  if (
+    bId.includes("wreath") ||
+    bName.includes("wreath")
+  ) {
+    return "/wreaths";
+  }
   if (bId.includes("table") || bName.includes("table")) {
-    return "/table-arrangements";
+    return "/table-decor";
   }
   if (
     bId.includes("garland") ||

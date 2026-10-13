@@ -51,7 +51,7 @@ const CATEGORY_CARDS: CategoryCardItem[] = [
     id: "table-decor",
     name: "Table Decor",
     image: "/images/cat-table-arrangements-luxe.jpg",
-    link: "/table-arrangements",
+    link: "/table-decor",
     delay: "0.36s",
     initTx: "0px",
     initTy: "16px",

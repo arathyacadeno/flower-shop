@@ -80,6 +80,22 @@ export default function CategoryPage({
         );
       if (f === "handcrafted-baskets" || f === "handcrafted baskets")
         return text.includes("basket");
+      if (f === "centerpiece")
+        return text.includes("centerpiece") || text.includes("candelabra");
+      if (f === "runner")
+        return text.includes("runner") || text.includes("banquet");
+      if (f === "wedding")
+        return text.includes("wedding") || text.includes("ceremony") || text.includes("arch");
+      if (f === "rustic")
+        return text.includes("rustic") || text.includes("burlap") || text.includes("woven");
+      if (f === "heart")
+        return text.includes("heart");
+      if (f === "cross")
+        return text.includes("cross");
+      if (f === "circular")
+        return text.includes("circular") || text.includes("ring") || text.includes("laurel");
+      if (f === "easel")
+        return text.includes("easel") || text.includes("standing");
       return text.includes(f);
     });
   }, [activeFilterId, products]);

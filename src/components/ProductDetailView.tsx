@@ -111,6 +111,10 @@ export default function ProductDetailView({ product }: ProductDetailViewProps) {
   const categoryLabel =
     product.category === "cakes"
       ? "Cakes"
+      : product.category === "table-decor"
+      ? "Table Decor"
+      : product.category === "wreaths"
+      ? "Wreaths"
       : product.category === "special-occasions"
       ? "Special Occasions"
       : product.category === "our-highlights"
@@ -120,6 +124,10 @@ export default function ProductDetailView({ product }: ProductDetailViewProps) {
   const categoryHref =
     product.category === "cakes"
       ? "/cakes"
+      : product.category === "table-decor"
+      ? "/table-decor"
+      : product.category === "wreaths"
+      ? "/wreaths"
       : product.category === "special-occasions"
       ? "/special-occasions"
       : product.category === "our-highlights"

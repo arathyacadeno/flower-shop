@@ -448,7 +448,7 @@ export default function Header({
         window.scrollTo({ top: 0, behavior: "smooth" });
       }
     } else if (categoryName === "Table arrangements") {
-      scrollToHighlightsOr("/table-arrangements");
+      scrollToHighlightsOr("/table-decor");
     } else if (categoryName === "Car decorations") {
       scrollToHighlightsOr("/car-decorations");
     } else if (categoryName === "Church arrangements") {
@@ -479,7 +479,9 @@ export default function Header({
     } else if (q.includes("church") || q.includes("altar")) {
       handleNavCategory("Church arrangements", 1);
     } else if (q.includes("table") || q.includes("centerpiece")) {
-      handleNavCategory("Table arrangements", 1);
+      router.push("/table-decor");
+    } else if (q.includes("wreath")) {
+      router.push("/wreaths");
     } else if (q.includes("garland") || q.includes("basket") || q.includes("varmala")) {
       handleNavCategory("Flower baskets & garlands", 1);
     } else if (q.includes("cake")) {
@@ -1395,7 +1397,20 @@ export default function Header({
             </Link>
             <div>▶ Flower baskets &amp; garlands</div>
             <div>▶ Church arrangements</div>
-            <div>▶ Table arrangements</div>
+            <Link
+              href="/table-decor"
+              onClick={() => setDrawerOpen(false)}
+              style={{ color: "inherit", textDecoration: "none" }}
+            >
+              ▶ Table arrangements
+            </Link>
+            <Link
+              href="/wreaths"
+              onClick={() => setDrawerOpen(false)}
+              style={{ color: "inherit", textDecoration: "none" }}
+            >
+              ▶ Wreaths
+            </Link>
             <div>▶ Car decorations</div>
           </div>
 

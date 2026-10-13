@@ -31,6 +31,8 @@ import {
 import { useCart } from "@/context/CartContext";
 import { useWishlist } from "@/context/WishlistContext";
 import { useAuth } from "@/context/AuthContext";
+import { auth, initRecaptchaVerifier, cleanupRecaptchaVerifier, formatPhoneNumber } from "@/lib/firebase";
+import { signInWithPhoneNumber, ConfirmationResult, RecaptchaVerifier } from "firebase/auth";
 
 interface HeaderProps {
   isDrawerOpen?: boolean;
@@ -82,7 +84,7 @@ export default function Header({
   const router = useRouter();
   const { items: cartItems, cartCount, subtotal: cartSubtotal } = useCart();
   const { wishlistCount } = useWishlist();
-  const { user, isAuthenticated, isAdmin, login, signup, loginWithGoogle, logout } = useAuth();
+  const { user, isAuthenticated, isAdmin, login, signup, loginWithGoogle, loginWithPhone, logout } = useAuth();
   const [internalDrawerOpen, setInternalDrawerOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [activeModal, setActiveModal] = useState<"cart" | "signin" | null>(null);
@@ -98,17 +100,47 @@ export default function Header({
   const [authLoading, setAuthLoading] = useState(false);
   const [authError, setAuthError] = useState<string | null>(null);
 
-  // Phone OTP flow
+  // Phone OTP flow (Firebase Phone Authentication)
   const [phoneFlow, setPhoneFlow] = useState<"idle" | "enter" | "otp">("idle");
+  const [countryCode, setCountryCode] = useState("+91");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [otpValue, setOtpValue] = useState("");
   const [phoneLoading, setPhoneLoading] = useState(false);
   const [phoneError, setPhoneError] = useState<string | null>(null);
   const [otpResendTimer, setOtpResendTimer] = useState(0);
   const otpTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const confirmationResultRef = useRef<ConfirmationResult | null>(null);
+  const recaptchaVerifierRef = useRef<RecaptchaVerifier | null>(null);
 
-  const startOtpTimer = () => {
-    setOtpResendTimer(30);
+  const getFirebaseErrorMessage = (err: any): string => {
+    const code = err?.code || "";
+    switch (code) {
+      case "auth/invalid-phone-number":
+        return "Please enter a valid phone number.";
+      case "auth/missing-phone-number":
+        return "Phone number is required.";
+      case "auth/too-many-requests":
+        return "Too many requests. Please wait a few minutes before requesting another OTP.";
+      case "auth/quota-exceeded":
+        return "Daily SMS quota reached. Please try again later or test using test phone numbers.";
+      case "auth/invalid-verification-code":
+        return "Incorrect verification code. Please check your SMS and enter the 6-digit OTP.";
+      case "auth/code-expired":
+        return "The OTP code has expired. Please click 'Resend OTP'.";
+      case "auth/captcha-check-failed":
+        return "reCAPTCHA verification failed. Please try again.";
+      case "auth/network-request-failed":
+        return "Network connection error. Please check your internet connection.";
+      case "auth/invalid-app-credential":
+      case "auth/app-not-authorized":
+        return "Firebase domain authorization required. Please add this domain to Authorized Domains in Firebase Console.";
+      default:
+        return err?.message || "Failed to process mobile login. Please try again.";
+    }
+  };
+
+  const startOtpTimer = (seconds = 45) => {
+    setOtpResendTimer(seconds);
     if (otpTimerRef.current) clearInterval(otpTimerRef.current);
     otpTimerRef.current = setInterval(() => {
       setOtpResendTimer((t) => {
@@ -129,39 +161,84 @@ export default function Header({
     }
     setPhoneError(null);
     setPhoneLoading(true);
-    // Simulate OTP send (replace with real API call)
-    await new Promise((r) => setTimeout(r, 1200));
-    setPhoneLoading(false);
-    setPhoneFlow("otp");
-    startOtpTimer();
+
+    try {
+      const fullPhoneNumber = formatPhoneNumber(cleaned, countryCode);
+
+      // Clean up previous reCAPTCHA if exists
+      cleanupRecaptchaVerifier(recaptchaVerifierRef.current);
+      recaptchaVerifierRef.current = null;
+
+      // Initialize reCAPTCHA on the dedicated container
+      const verifier = initRecaptchaVerifier("recaptcha-phone-container", {
+        size: "invisible",
+        "expired-callback": () => {
+          setPhoneError("reCAPTCHA expired. Please try sending OTP again.");
+        },
+      });
+      recaptchaVerifierRef.current = verifier;
+
+      // Send OTP via Firebase Phone Auth
+      const confirmationResult = await signInWithPhoneNumber(auth, fullPhoneNumber, verifier);
+      confirmationResultRef.current = confirmationResult;
+
+      setPhoneFlow("otp");
+      startOtpTimer(45);
+    } catch (err: any) {
+      console.error("Firebase sendOtp error:", err);
+      cleanupRecaptchaVerifier(recaptchaVerifierRef.current);
+      recaptchaVerifierRef.current = null;
+      setPhoneError(getFirebaseErrorMessage(err));
+    } finally {
+      setPhoneLoading(false);
+    }
   };
 
   const handleVerifyOtp = async () => {
-    if (otpValue.length < 4) {
-      setPhoneError("Please enter the OTP sent to your number.");
+    const cleanOtp = otpValue.replace(/\D/g, "");
+    if (cleanOtp.length < 6) {
+      setPhoneError("Please enter the complete 6-digit OTP code.");
       return;
     }
-    setPhoneError(null);
-    setPhoneLoading(true);
-    // Simulate OTP verify
-    await new Promise((r) => setTimeout(r, 800));
-    setPhoneLoading(false);
-    
-    // Authenticate user into session
-    const cleaned = phoneNumber.replace(/\D/g, "");
-    try {
-      await loginWithGoogle({
-        email: `${cleaned}@phone.occasions.in`,
-        name: `Customer (+91 ${cleaned})`,
-      });
-    } catch (err) {
-      console.warn("Could not set phone session:", err);
+
+    if (!confirmationResultRef.current) {
+      setPhoneError("Verification session expired. Please request a new OTP.");
+      return;
     }
 
-    setActiveModal(null);
-    setPhoneFlow("idle");
-    setPhoneNumber("");
-    setOtpValue("");
+    setPhoneError(null);
+    setPhoneLoading(true);
+
+    try {
+      // 1. Confirm OTP code with Firebase
+      const userCredential = await confirmationResultRef.current.confirm(cleanOtp);
+      const firebaseUser = userCredential.user;
+
+      // 2. Obtain Firebase ID token
+      const idToken = await firebaseUser.getIdToken();
+      const verifiedPhone = firebaseUser.phoneNumber || formatPhoneNumber(phoneNumber, countryCode);
+
+      // 3. Authenticate with backend and create/sync session
+      const res = await loginWithPhone({
+        phoneNumber: verifiedPhone,
+        idToken,
+      });
+
+      if (res.success) {
+        setActiveModal(null);
+        resetPhoneFlow();
+        if (pathname === "/signin" || pathname === "/signup") {
+          router.push("/");
+        }
+      } else {
+        setPhoneError(res.error || "Authentication failed on server.");
+      }
+    } catch (err: any) {
+      console.error("Firebase verifyOtp error:", err);
+      setPhoneError(getFirebaseErrorMessage(err));
+    } finally {
+      setPhoneLoading(false);
+    }
   };
 
   const resetPhoneFlow = () => {
@@ -171,6 +248,9 @@ export default function Header({
     setPhoneError(null);
     setOtpResendTimer(0);
     if (otpTimerRef.current) clearInterval(otpTimerRef.current);
+    cleanupRecaptchaVerifier(recaptchaVerifierRef.current);
+    recaptchaVerifierRef.current = null;
+    confirmationResultRef.current = null;
   };
 
   const handleAuthSubmit = async (e: React.FormEvent) => {
@@ -1119,7 +1199,19 @@ export default function Header({
               <div className={styles.phoneFlowBox}>
                 <p className={styles.phoneFlowLabel}>Enter your mobile number</p>
                 <div className={styles.phoneInputRow}>
-                  <span className={styles.phoneFlag}>🇮🇳 +91</span>
+                  <select
+                    className={styles.countrySelect}
+                    value={countryCode}
+                    onChange={(e) => setCountryCode(e.target.value)}
+                    aria-label="Country Code"
+                  >
+                    <option value="+91">🇮🇳 +91</option>
+                    <option value="+1">🇺🇸 +1</option>
+                    <option value="+44">🇬🇧 +44</option>
+                    <option value="+971">🇦🇪 +971</option>
+                    <option value="+966">🇸🇦 +966</option>
+                    <option value="+65">🇸🇬 +65</option>
+                  </select>
                   <input
                     type="tel"
                     className={styles.phoneInput}
@@ -1130,13 +1222,15 @@ export default function Header({
                     autoFocus
                   />
                 </div>
+                {/* Firebase reCAPTCHA container */}
+                <div id="recaptcha-phone-container"></div>
                 {phoneError && <p className={styles.phoneError}>{phoneError}</p>}
                 <button
                   type="button"
                   className={styles.primaryBtn}
                   style={{ marginTop: 12 }}
                   onClick={handleSendOtp}
-                  disabled={phoneLoading}
+                  disabled={phoneLoading || phoneNumber.replace(/\D/g, "").length < 10}
                 >
                   {phoneLoading ? "Sending OTP…" : "Send OTP"}
                 </button>
@@ -1149,10 +1243,22 @@ export default function Header({
             {phoneFlow === "otp" && (
               <div className={styles.phoneFlowBox}>
                 <p className={styles.phoneFlowLabel}>
-                  OTP sent to <strong>+91 {phoneNumber}</strong>
+                  OTP sent to <strong>{countryCode} {phoneNumber}</strong>
                 </p>
-                <div className={styles.otpInputRow}>
-                  {[0,1,2,3,4,5].map((i) => (
+                <div
+                  className={styles.otpInputRow}
+                  onPaste={(e) => {
+                    e.preventDefault();
+                    const pasted = e.clipboardData.getData("text").replace(/\D/g, "").slice(0, 6);
+                    if (pasted) {
+                      setOtpValue(pasted);
+                      const inputs = (e.currentTarget as HTMLElement).querySelectorAll("input");
+                      const nextIdx = Math.min(pasted.length, 5);
+                      (inputs[nextIdx] as HTMLInputElement)?.focus();
+                    }
+                  }}
+                >
+                  {[0, 1, 2, 3, 4, 5].map((i) => (
                     <input
                       key={i}
                       type="text"
@@ -1163,8 +1269,9 @@ export default function Header({
                       onChange={(e) => {
                         const val = e.target.value.replace(/\D/g, "");
                         const arr = otpValue.split("");
-                        arr[i] = val;
-                        setOtpValue(arr.join("").slice(0, 6));
+                        arr[i] = val.slice(-1);
+                        const nextOtp = arr.join("").slice(0, 6);
+                        setOtpValue(nextOtp);
                         if (val && e.target.nextElementSibling) {
                           (e.target.nextElementSibling as HTMLInputElement).focus();
                         }
@@ -1183,7 +1290,7 @@ export default function Header({
                   className={styles.primaryBtn}
                   style={{ marginTop: 14 }}
                   onClick={handleVerifyOtp}
-                  disabled={phoneLoading || otpValue.length < 4}
+                  disabled={phoneLoading || otpValue.replace(/\D/g, "").length < 6}
                 >
                   {phoneLoading ? "Verifying…" : "Verify OTP"}
                 </button>

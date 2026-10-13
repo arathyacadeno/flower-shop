@@ -31,6 +31,10 @@ interface AuthContextType {
     credential?: string;
     image?: string;
   }) => Promise<{ success: boolean; error?: string }>;
+  loginWithPhone: (data: {
+    phoneNumber: string;
+    idToken?: string;
+  }) => Promise<{ success: boolean; error?: string; user?: User }>;
   logout: () => Promise<void>;
   updateProfile: (data: {
     name?: string;
@@ -147,9 +151,40 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
+  const loginWithPhone = async (phoneData: {
+    phoneNumber: string;
+    idToken?: string;
+  }) => {
+    try {
+      const res = await fetch("/api/auth/phone", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(phoneData),
+        credentials: "include",
+      });
+      const data = await res.json();
+      if (data.success && data.user) {
+        setUser(data.user);
+        return { success: true, user: data.user };
+      }
+      return { success: false, error: data.error || "Phone verification failed" };
+    } catch {
+      return { success: false, error: "Network error during phone authentication." };
+    }
+  };
+
   const logout = async () => {
     try {
       await fetch("/api/auth/logout", { method: "POST", credentials: "include" });
+      if (typeof window !== "undefined") {
+        try {
+          const { auth } = await import("@/lib/firebase");
+          const { signOut } = await import("firebase/auth");
+          await signOut(auth);
+        } catch {
+          // ignore firebase logout errors if not initialized
+        }
+      }
     } catch {
       // ignore network errors – still clear local state
     } finally {
@@ -192,6 +227,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         login,
         signup,
         loginWithGoogle,
+        loginWithPhone,
         logout,
         updateProfile,
         refreshUser,

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
 import styles from "./SplitHero.module.css";
 
 interface SplitHeroProps {
@@ -14,9 +14,19 @@ export default function SplitHero({
 }: SplitHeroProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
 
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.muted = true;
+      videoRef.current.play().catch(() => {
+        // Autoplay policy fallback
+      });
+    }
+  }, []);
+
   const handleHeroClick = () => {
     const nextEl =
-      document.getElementById("category-section") ||
+      document.getElementById("categories") ||
+      document.getElementById("shop-by-category") ||
       document.getElementById("highlights");
     if (nextEl) {
       nextEl.scrollIntoView({ behavior: "smooth" });
@@ -36,13 +46,16 @@ export default function SplitHero({
         <video
           ref={videoRef}
           className={styles.heroVideo}
-          src="/videos/OCCASIONS.mp4"
+          src="/videos/Header%20Expanded.mp4"
           autoPlay
           muted
           loop
           playsInline
           preload="auto"
-        />
+        >
+          <source src="/videos/Header%20Expanded.mp4" type="video/mp4" />
+          <source src="/videos/Header Expanded.mp4" type="video/mp4" />
+        </video>
       </div>
     </section>
   );

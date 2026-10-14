@@ -1,7 +1,8 @@
-﻿.heroSection {
+.heroSection {
   position: relative;
   width: 100%;
-  height: calc(100svh - 72px);
+  height: calc(100vh - 78px);
+  height: calc(100svh - 78px);
   min-height: 520px;
   background-color: #FAD9E3;
   overflow: hidden;
@@ -30,16 +31,15 @@
   display: block;
 }
 
-@media (max-aspect-ratio: 16/9) and (min-width: 769px) {
-  .heroVideo {
-    object-fit: contain;
-  }
-}
-
 @media (max-width: 768px) {
   .heroSection {
+    /* On mobile portrait, maintain 16:9 proportion so text and bouquet remain perfectly readable */
     height: auto;
     min-height: unset;
+    aspect-ratio: 16 / 9;
+  }
+
+  .videoContainer {
     aspect-ratio: 16 / 9;
   }
 
@@ -47,3 +47,5 @@
     object-fit: cover;
   }
 }
+
+

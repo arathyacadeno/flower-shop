@@ -27,6 +27,7 @@ import {
   MapPin,
   LogOut,
   ShieldCheck,
+  ChevronDown,
 } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 import { useWishlist } from "@/context/WishlistContext";
@@ -625,14 +626,158 @@ export default function Header({
 
           {/* Center: navigation */}
           <nav className={styles.centerNav} aria-label="Main Navigation">
-            <Link
-              href="/#shop-by-flowers"
-              onClick={(e) => handleSectionNav(e, "shop-by-flowers", "flower")}
-              className={`${styles.centerNavLink} ${isFlowerActive ? styles.activeNavLink : ""
-                }`}
+            <div
+              className={styles.flowersNavWrapper}
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
             >
-              Flowers
-            </Link>
+              <Link
+                href="/#shop-by-flowers"
+                onClick={(e) => handleSectionNav(e, "shop-by-flowers", "flower")}
+                className={`${styles.centerNavLink} ${
+                  isFlowerActive || flowersHovered ? styles.activeNavLink : ""
+                }`}
+                aria-expanded={flowersHovered}
+              >
+                <span>Flowers</span>
+                <ChevronDown
+                  size={14}
+                  style={{
+                    transition: "transform 0.2s ease",
+                    transform: flowersHovered ? "rotate(180deg)" : "rotate(0deg)",
+                  }}
+                />
+              </Link>
+
+              {flowersHovered && (
+                <div
+                  className={styles.flowersDropdown}
+                  role="menu"
+                  aria-label="Flowers navigation menu"
+                >
+                  <div className={styles.flowersDropdownGrid}>
+                    {/* Clean Column: In Focus */}
+                    <div className={styles.dropdownCol}>
+                      <h3 className={styles.dropdownColHeading}>In Focus</h3>
+                      <ul className={styles.dropdownList}>
+                        <li>
+                          <Link
+                            href="/flower-baskets"
+                            className={styles.dropdownItemLink}
+                            onClick={() => setFlowersHovered(false)}
+                          >
+                            Flowers in basket
+                          </Link>
+                        </li>
+                        <li>
+                          <Link
+                            href="/flower-bouquets"
+                            className={styles.dropdownItemLink}
+                            onClick={() => setFlowersHovered(false)}
+                          >
+                            Flower Bouquets
+                          </Link>
+                        </li>
+                        <li>
+                          <Link
+                            href="/#shop-by-flowers"
+                            className={styles.dropdownItemLink}
+                            onClick={(e) => {
+                              handleSectionNav(e, "shop-by-flowers", "flower");
+                              setFlowersHovered(false);
+                            }}
+                          >
+                            Shop by flowers
+                          </Link>
+                        </li>
+                        <li>
+                          <Link
+                            href="/flower"
+                            className={styles.dropdownItemLink}
+                            onClick={() => setFlowersHovered(false)}
+                          >
+                            All Flowers
+                          </Link>
+                        </li>
+                        <li>
+                          <Link
+                            href="/flower"
+                            className={styles.dropdownItemLink}
+                            onClick={() => setFlowersHovered(false)}
+                          >
+                            Best Sellers
+                          </Link>
+                        </li>
+                        <li>
+                          <Link
+                            href="/flower"
+                            className={styles.dropdownItemLink}
+                            onClick={() => setFlowersHovered(false)}
+                          >
+                            Same Day Delivery
+                          </Link>
+                        </li>
+                        <li>
+                          <Link
+                            href="/flower"
+                            className={styles.dropdownItemLink}
+                            onClick={() => setFlowersHovered(false)}
+                          >
+                            New Arrivals
+                          </Link>
+                        </li>
+                        <li>
+                          <Link
+                            href="/table-decor"
+                            className={styles.dropdownItemLink}
+                            onClick={() => setFlowersHovered(false)}
+                          >
+                            Centerpiece Flowers
+                          </Link>
+                        </li>
+                        <li>
+                          <Link
+                            href="/special-occasions"
+                            className={styles.dropdownItemLink}
+                            onClick={() => setFlowersHovered(false)}
+                          >
+                            Personalised Flowers
+                          </Link>
+                        </li>
+                        <li>
+                          <Link
+                            href="/flower-bouquets"
+                            className={styles.dropdownItemLink}
+                            onClick={() => setFlowersHovered(false)}
+                          >
+                            Crochet Flowers
+                            <span className={styles.badgeNew}>New</span>
+                          </Link>
+                        </li>
+                        <li>
+                          <Link
+                            href="/flowers/roses"
+                            className={styles.dropdownItemLink}
+                            onClick={() => setFlowersHovered(false)}
+                          >
+                            Premium Flowers
+                          </Link>
+                        </li>
+                        <li>
+                          <Link
+                            href="/flowers/roses"
+                            className={styles.dropdownItemLink}
+                            onClick={() => setFlowersHovered(false)}
+                          >
+                            Forever Flowers
+                          </Link>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
 
             <Link
               href="/cakes"

@@ -546,28 +546,45 @@ export default function Header({
     const q = term.toLowerCase().trim();
     if (!q) return;
 
-    if (q.includes("rose")) {
+    if (q.includes("basket")) {
+      window.location.href = "/flower-baskets";
+      return;
+    } else if (q.includes("rose")) {
       window.location.href = "/flowers/roses";
+      return;
     } else if (q.includes("tulip")) {
       window.location.href = "/flowers/tulips";
+      return;
     } else if (q.includes("sunflower")) {
       window.location.href = "/flowers/sunflowers";
+      return;
     } else if (q.includes("lilies") || q.includes("lily")) {
       window.location.href = "/flowers/lilies";
-    } else if (q.includes("bouquet") || q.includes("flower")) {
-      window.location.href = "/flowers/bouquets";
+      return;
+    } else if (q.includes("bouquet")) {
+      window.location.href = "/flower-bouquets";
+      return;
     } else if (q.includes("car")) {
       handleNavCategory("Car decorations", 1);
+      return;
     } else if (q.includes("church") || q.includes("altar")) {
       handleNavCategory("Church arrangements", 1);
+      return;
     } else if (q.includes("table") || q.includes("centerpiece")) {
       router.push("/table-decor");
+      return;
     } else if (q.includes("wreath")) {
       router.push("/wreaths");
-    } else if (q.includes("garland") || q.includes("basket") || q.includes("varmala")) {
+      return;
+    } else if (q.includes("garland") || q.includes("varmala")) {
       handleNavCategory("Flower baskets & garlands", 1);
+      return;
     } else if (q.includes("cake")) {
       router.push("/cakes");
+      return;
+    } else if (q.includes("flower")) {
+      window.location.href = "/flower";
+      return;
     } else if (
       q.includes("contact") ||
       q.includes("phone") ||
@@ -575,8 +592,10 @@ export default function Header({
       q.includes("address")
     ) {
       setDrawerOpen(true);
+      return;
     } else {
-      window.location.href = "/flowers/all";
+      window.location.href = "/flower";
+      return;
     }
   };
 

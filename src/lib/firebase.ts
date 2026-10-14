@@ -8,25 +8,89 @@ import {
 } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY || "",
-  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN || "",
-  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID || "",
-  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET || "",
-  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID || "",
-  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID || "",
+  apiKey: (process.env.NEXT_PUBLIC_FIREBASE_API_KEY || "").trim(),
+  authDomain: (process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN || "").trim(),
+  projectId: (process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID || "").trim(),
+  storageBucket: (process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET || "").trim(),
+  messagingSenderId: (process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID || "").trim(),
+  appId: (process.env.NEXT_PUBLIC_FIREBASE_APP_ID || "").trim(),
 };
 
-let app: FirebaseApp;
+let _app: FirebaseApp | null = null;
+let _auth: Auth | null = null;
 
-if (typeof window !== "undefined") {
-  app = getApps().length > 0 ? getApp() : initializeApp(firebaseConfig);
-} else {
-  // Provide safe fallback on server during SSR / build time
-  app = getApps().length > 0 ? getApp() : initializeApp(firebaseConfig, "server-app");
+export function getFirebaseApp(): FirebaseApp | null {
+  if (typeof window === "undefined") {
+    return null;
+  }
+  if (!_app) {
+    const existingApps = getApps();
+    if (existingApps.length > 0) {
+      _app = existingApps[0];
+    } else if (firebaseConfig.apiKey) {
+      _app = initializeApp(firebaseConfig);
+    }
+  }
+  return _app;
 }
 
-export const auth: Auth = getAuth(app);
-export { app };
+export function getFirebaseAuth(): Auth | null {
+  if (typeof window === "undefined") {
+    return null;
+  }
+  if (!_auth) {
+    const appInstance = getFirebaseApp();
+    if (appInstance) {
+      _auth = getAuth(appInstance);
+    }
+  }
+  return _auth;
+}
+
+// Safe proxy for 'auth' that defers initialization to client-side runtime
+// and prevents build/SSR crashes when API key is missing or during static generation
+export const auth: Auth = new Proxy({} as Auth, {
+  get(_target, prop, receiver) {
+    const authInstance = getFirebaseAuth();
+    if (!authInstance) {
+      if (typeof window === "undefined") {
+        return undefined;
+      }
+      throw new Error(
+        "Firebase Auth is not configured. Please ensure NEXT_PUBLIC_FIREBASE_API_KEY is set in your environment variables."
+      );
+    }
+    const value = Reflect.get(authInstance, prop, receiver);
+    if (typeof value === "function") {
+      return value.bind(authInstance);
+    }
+    return value;
+  },
+  has(_target, prop) {
+    const authInstance = getFirebaseAuth();
+    return authInstance ? Reflect.has(authInstance, prop) : false;
+  },
+});
+
+// Safe proxy for 'app'
+export const app: FirebaseApp = new Proxy({} as FirebaseApp, {
+  get(_target, prop, receiver) {
+    const appInstance = getFirebaseApp();
+    if (!appInstance) {
+      if (typeof window === "undefined") {
+        return undefined;
+      }
+      throw new Error(
+        "Firebase App is not configured. Please ensure Firebase environment variables are set."
+      );
+    }
+    const value = Reflect.get(appInstance, prop, receiver);
+    if (typeof value === "function") {
+      return value.bind(appInstance);
+    }
+    return value;
+  },
+});
 
 /**
  * Validates and formats mobile numbers to E.164 (+91XXXXXXXXXX)
@@ -74,7 +138,14 @@ export function initRecaptchaVerifier(
     (window as any).recaptchaVerifier = null;
   }
 
-  const verifier = new RecaptchaVerifier(auth, containerId, {
+  const authInstance = getFirebaseAuth();
+  if (!authInstance) {
+    throw new Error(
+      "Firebase Auth is not configured. Please ensure NEXT_PUBLIC_FIREBASE_API_KEY is configured."
+    );
+  }
+
+  const verifier = new RecaptchaVerifier(authInstance, containerId, {
     size: options.size || "invisible",
     callback: options.callback,
     "expired-callback": options["expired-callback"],
@@ -113,5 +184,11 @@ export async function sendOtpToPhoneNumber(
   phoneNumber: string,
   verifier: RecaptchaVerifier
 ): Promise<ConfirmationResult> {
-  return await signInWithPhoneNumber(auth, phoneNumber, verifier);
+  const authInstance = getFirebaseAuth();
+  if (!authInstance) {
+    throw new Error(
+      "Firebase Auth is not configured. Please ensure NEXT_PUBLIC_FIREBASE_API_KEY is configured."
+    );
+  }
+  return await signInWithPhoneNumber(authInstance, phoneNumber, verifier);
 }

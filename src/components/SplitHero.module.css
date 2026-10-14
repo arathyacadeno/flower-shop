@@ -29,7 +29,17 @@
   object-fit: cover;
   object-position: center;
   display: block;
+  pointer-events: none;
 }
+
+.heroVideo::-webkit-media-controls,
+.heroVideo::-webkit-media-controls-overlay-cast-button,
+.heroVideo::-webkit-media-controls-picture-in-picture-button {
+  display: none !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
 
 @media (max-width: 768px) {
   .heroSection {

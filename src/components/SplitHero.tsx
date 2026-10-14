@@ -46,15 +46,18 @@ export default function SplitHero({
         <video
           ref={videoRef}
           className={styles.heroVideo}
-          src="/videos/Header%20Expanded.mp4"
+          src="/videos/OCCASIONS%20(1).mp4"
           autoPlay
           muted
           loop
           playsInline
           preload="auto"
+          disablePictureInPicture
+          disableRemotePlayback
+          controlsList="nodownload noplaybackrate nofullscreen noremoteplayback"
         >
-          <source src="/videos/Header%20Expanded.mp4" type="video/mp4" />
-          <source src="/videos/Header Expanded.mp4" type="video/mp4" />
+          <source src="/videos/OCCASIONS%20(1).mp4" type="video/mp4" />
+          <source src="/videos/OCCASIONS (1).mp4" type="video/mp4" />
         </video>
       </div>
     </section>

@@ -107,7 +107,6 @@ export default function Header({
   const [otpValue, setOtpValue] = useState("");
   const [phoneLoading, setPhoneLoading] = useState(false);
   const [phoneError, setPhoneError] = useState<string | null>(null);
-  const [phoneInfo, setPhoneInfo] = useState<string | null>(null);
   const [otpResendTimer, setOtpResendTimer] = useState(0);
   const otpTimerRef = useRef<NodeJS.Timeout | null>(null);
   const confirmationResultRef = useRef<ConfirmationResult | null>(null);
@@ -164,21 +163,23 @@ export default function Header({
     setPhoneLoading(true);
 
     try {
-      const res = await sendPhoneOtp(cleaned);
-      if (res.success) {
-        setPhoneFlow("otp");
-        startOtpTimer(45);
-        if (res.devOtp) {
-          setPhoneInfo(`Verification Code: ${res.devOtp}`);
-        } else {
-          setPhoneInfo(null);
-        }
-      } else {
-        setPhoneError(res.error || "Failed to send OTP. Please try again.");
-      }
+      const fullPhone = formatPhoneNumber(cleaned, countryCode);
+
+      // Ensure recaptcha verifier is ready
+      const verifier = initRecaptchaVerifier("recaptcha-phone-container", {
+        size: "invisible",
+      });
+      recaptchaVerifierRef.current = verifier;
+
+      const confirmation = await signInWithPhoneNumber(auth, fullPhone, verifier);
+      confirmationResultRef.current = confirmation;
+      setPhoneFlow("otp");
+      startOtpTimer(60);
     } catch (err: any) {
-      console.error("sendPhoneOtp error:", err);
-      setPhoneError("Network error. Please try sending OTP again.");
+      console.error("Firebase sendOtp error:", err);
+      cleanupRecaptchaVerifier(recaptchaVerifierRef.current);
+      recaptchaVerifierRef.current = null;
+      setPhoneError(getFirebaseErrorMessage(err));
     } finally {
       setPhoneLoading(false);
     }
@@ -191,12 +192,25 @@ export default function Header({
       return;
     }
 
+    if (!confirmationResultRef.current) {
+      setPhoneError("Verification session expired. Please request a new OTP.");
+      return;
+    }
+
     setPhoneError(null);
     setPhoneLoading(true);
 
     try {
+      const userCredential = await confirmationResultRef.current.confirm(cleanOtp);
+      const idToken = await userCredential.user.getIdToken();
       const cleaned = phoneNumber.replace(/\D/g, "").slice(-10);
-      const res = await verifyPhoneOtp(cleaned, cleanOtp);
+      const fullPhone = formatPhoneNumber(cleaned, countryCode);
+
+      // Complete login with backend session cookie
+      const res = await loginWithPhone({
+        phoneNumber: fullPhone,
+        idToken,
+      });
 
       if (res.success) {
         setActiveModal(null);
@@ -205,11 +219,11 @@ export default function Header({
           router.push("/");
         }
       } else {
-        setPhoneError(res.error || "Incorrect OTP code. Please try again.");
+        setPhoneError(res.error || "Login failed. Please try again.");
       }
     } catch (err: any) {
-      console.error("verifyOtp error:", err);
-      setPhoneError("Network error verifying OTP. Please try again.");
+      console.error("Firebase verifyOtp error:", err);
+      setPhoneError(getFirebaseErrorMessage(err));
     } finally {
       setPhoneLoading(false);
     }
@@ -220,7 +234,6 @@ export default function Header({
     setPhoneNumber("");
     setOtpValue("");
     setPhoneError(null);
-    setPhoneInfo(null);
     setOtpResendTimer(0);
     if (otpTimerRef.current) clearInterval(otpTimerRef.current);
     cleanupRecaptchaVerifier(recaptchaVerifierRef.current);
@@ -618,7 +631,7 @@ export default function Header({
               className={`${styles.centerNavLink} ${isFlowerActive ? styles.activeNavLink : ""
                 }`}
             >
-              Flower
+              Flowers
             </Link>
 
             <Link
@@ -1155,6 +1168,9 @@ export default function Header({
               <span>or</span>
             </div>
 
+            {/* Firebase reCAPTCHA container (kept in DOM for both initial Send & Resend OTP) */}
+            <div id="recaptcha-phone-container"></div>
+
             {/* Phone OTP flow */}
             {phoneFlow === "idle" && (
               <button
@@ -1197,8 +1213,6 @@ export default function Header({
                     autoFocus
                   />
                 </div>
-                {/* Firebase reCAPTCHA container */}
-                <div id="recaptcha-phone-container"></div>
                 {phoneError && <p className={styles.phoneError}>{phoneError}</p>}
                 <button
                   type="button"
@@ -1259,11 +1273,6 @@ export default function Header({
                     />
                   ))}
                 </div>
-                {phoneInfo && (
-                  <p style={{ fontSize: "0.82rem", color: "#047857", background: "#ecfdf5", border: "1px solid #a7f3d0", padding: "6px 12px", borderRadius: 8, margin: "8px 0 0", textAlign: "center", fontWeight: 600 }}>
-                    {phoneInfo}
-                  </p>
-                )}
                 {phoneError && <p className={styles.phoneError}>{phoneError}</p>}
                 <button
                   type="button"
@@ -1395,7 +1404,7 @@ export default function Header({
                   setDrawerOpen(false);
                 }}
               >
-                Flower
+                Flowers
               </Link>
             </li>
             <li>
@@ -1440,31 +1449,6 @@ export default function Header({
                 📦 Track Order
               </Link>
             </li>
-          </ul>
-
-          <div className={styles.drawerDivider} />
-
-          <h4 style={drawerHeadingStyle}>Floral Showcase Navigation</h4>
-
-          <ul className={styles.drawerNavList}>
-            {[
-              "01. Everything You Need (Bridal)",
-              "02. Perfect Choice (Hydrangea)",
-              "03. For Every Occasion (Roses)",
-            ].map((label, i) => (
-              <li key={label}>
-                <button
-                  className={styles.drawerNavLink}
-                  onClick={() => {
-                    if (onSelectSlide) onSelectSlide(i);
-                    setDrawerOpen(false);
-                  }}
-                  style={drawerSlideBtnStyle}
-                >
-                  {label}
-                </button>
-              </li>
-            ))}
           </ul>
 
           <div className={styles.drawerDivider} />

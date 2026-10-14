@@ -59,8 +59,6 @@ export async function POST(request: Request) {
       success: true,
       message: smsResult.message,
       phoneNumber: `+91 ${cleanPhone}`,
-      devMode: smsResult.devMode,
-      devOtp: smsResult.devMode ? otp : undefined,
     });
   } catch (error: any) {
     console.error("OTP send error:", error);

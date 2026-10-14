@@ -58,15 +58,19 @@ export async function sendFast2SmsOtp(
     if (data.return === true) {
       return {
         success: true,
-        message: Array.isArray(data.message) ? data.message[0] : "SMS sent successfully.",
+        message: Array.isArray(data.message) ? data.message[0] : "SMS sent successfully to your mobile phone.",
       };
     } else {
       console.warn("Fast2SMS API response:", data);
-      // Fast2SMS requires minimum 100 INR wallet recharge before dispatching real carrier SMS
+      let errorMsg = data.message || "Failed to send SMS to your phone.";
+      if (data.status_code === 996) {
+        errorMsg = "Fast2SMS requires completing website/KYC verification in your fast2sms.com dashboard before sending SMS.";
+      } else if (data.status_code === 999) {
+        errorMsg = "Fast2SMS requires completing wallet recharge in fast2sms.com before sending SMS.";
+      }
       return {
-        success: true,
-        message: data.message || "OTP generated.",
-        devMode: true,
+        success: false,
+        message: errorMsg,
       };
     }
   } catch (error: any) {

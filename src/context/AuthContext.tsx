@@ -35,7 +35,7 @@ interface AuthContextType {
     phoneNumber: string;
     idToken?: string;
   }) => Promise<{ success: boolean; error?: string; user?: User }>;
-  sendPhoneOtp: (phoneNumber: string) => Promise<{ success: boolean; error?: string; devOtp?: string; message?: string }>;
+  sendPhoneOtp: (phoneNumber: string) => Promise<{ success: boolean; error?: string; message?: string }>;
   verifyPhoneOtp: (phoneNumber: string, otp: string) => Promise<{ success: boolean; error?: string; user?: User }>;
   logout: () => Promise<void>;
   updateProfile: (data: {
@@ -184,7 +184,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       });
       const data = await res.json();
       if (data.success) {
-        return { success: true, message: data.message, devOtp: data.devOtp };
+        return { success: true, message: data.message };
       }
       return { success: false, error: data.error || "Failed to send OTP" };
     } catch {

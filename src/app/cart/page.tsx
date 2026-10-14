@@ -43,7 +43,7 @@ const isAddonProduct = (item: any) => {
 
 // Helper to resolve the product details page URL for any cart item
 const getItemHref = (bouquet: any): string => {
-  if (!bouquet) return "/flower";
+  if (!bouquet) return "/flower-bouquets";
   if (bouquet.href) return bouquet.href;
 
   // Direct category and slug match
@@ -125,13 +125,10 @@ const getItemHref = (bouquet: any): string => {
     bId.includes("basket") ||
     bName.includes("basket")
   ) {
-    return "/garlands-and-baskets";
-  }
-  if (bId.includes("car") || bName.includes("car")) {
-    return "/car-decorations";
+    return "/flower-baskets";
   }
 
-  return "/flower";
+  return "/flower-bouquets";
 };
 
 interface GroupedCartItem {
@@ -289,7 +286,7 @@ export default function CartPage() {
         {/* Breadcrumb Navigation: Home > Flowers > Shopping Cart */}
         <Breadcrumb
           items={[
-            { label: "Flowers", href: "/flower" },
+            { label: "Flowers", href: "/flower-bouquets" },
             { label: "Shopping Cart" },
           ]}
         />

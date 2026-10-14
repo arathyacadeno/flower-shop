@@ -6,21 +6,21 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://occassionscalicut.com"),
   title: "Occassions - Do it with flowers | Premier Florist & Event Decor, Calicut",
   description:
-    "Occassions Florist Calicut by Sreejesh K.V. Handcrafted bridal bouquets, stage decoration, car decoration, church decoration, and fresh flower & cake delivery across Calicut (Kozhikode).",
+    "Occassions Florist Calicut by Sreejesh K.V. Handcrafted floral bouquets, artisanal flower baskets, stage decoration, floral wreaths, and fresh flower & cake delivery across Calicut (Kozhikode).",
   keywords: [
     "Occassions florist",
     "Occassions do it with flowers",
     "florist in Calicut",
     "flower delivery Calicut",
     "wedding stage decoration Calicut",
-    "car decoration Calicut",
+    "flower baskets Calicut",
     "bridal bouquets Kozhikode",
     "Sreejesh KV florist",
     "YMCA junction flower shop",
   ],
   openGraph: {
     title: "Occassions - Do it with flowers | Calicut",
-    description: "Stage Decoration, Bridal Bouquets, Car Decoration, and Fresh Flower Delivery in Calicut.",
+    description: "Stage Decoration, Floral Bouquets, Flower Baskets, and Fresh Flower Delivery in Calicut.",
     images: ["/images/slide1-flower.jpg"],
   },
 };

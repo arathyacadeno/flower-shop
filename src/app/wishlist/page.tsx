@@ -50,7 +50,7 @@ export default function WishlistPage() {
               and order them anytime.
             </p>
             <div className={styles.emptyActions}>
-              <Link href="/flower" className={styles.exploreBtn}>
+              <Link href="/flower-bouquets" className={styles.exploreBtn}>
                 Explore Flowers <ArrowRight size={16} />
               </Link>
               <Link href="/cakes" className={styles.secondaryExploreBtn}>

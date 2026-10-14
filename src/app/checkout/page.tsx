@@ -63,7 +63,7 @@ export default function CheckoutPage() {
               Please select a flower arrangement, cake, or gift and click &quot;Buy Now&quot;
               or proceed from your cart.
             </p>
-            <Link href="/flower" className={styles.browseBtn}>
+            <Link href="/flower-bouquets" className={styles.browseBtn}>
               Browse Flowers <ArrowRight size={16} />
             </Link>
           </div>
@@ -89,7 +89,7 @@ export default function CheckoutPage() {
         {/* Breadcrumb Navigation: Home > Flowers > Checkout */}
         <Breadcrumb
           items={[
-            { label: "Flowers", href: "/flower" },
+            { label: "Flowers", href: "/flower-bouquets" },
             { label: "Checkout" },
           ]}
         />

@@ -179,10 +179,9 @@ export default function OrdersPage() {
                               if (id.includes("cake")) return "/cakes";
                               if (id.includes("basket")) return "/flower-baskets";
                               if (id.includes("bouquet")) return "/flower-bouquets";
-                              if (id.includes("church")) return "/church-arrangements";
                               if (id.includes("wreath")) return "/wreaths";
                               if (id.includes("table")) return "/table-decor";
-                              return "/flower";
+                              return "/flower-bouquets";
                             })()
                           } 
                           className={styles.reorderBtn}
@@ -209,7 +208,7 @@ export default function OrdersPage() {
               Looks like your flower journey hasn&apos;t started yet. Brighten someone&apos;s
               day with our handcrafted bouquets.
             </p>
-            <Link href="/flower" className={styles.startShoppingBtn}>
+            <Link href="/flower-bouquets" className={styles.startShoppingBtn}>
               <Sparkles size={16} />
               <span>Explore Flowers</span>
             </Link>

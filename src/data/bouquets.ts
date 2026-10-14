@@ -48,25 +48,25 @@ export const BOUQUETS_DATA: Bouquet[] = [
   },
   {
     id: "bouquet-4",
-    name: "Royal Car Decoration Package",
-    subtitle: "Floral Bonnet Arch, Door Handles & Ribbons",
-    price: 2999,
-    originalPrice: 3499,
+    name: "Royal Rose & Orchid Cascade",
+    subtitle: "Grand Hand-Tied Bridal & Celebration Bouquet",
+    price: 2499,
+    originalPrice: 2999,
     image: "/images/slide3-flower.jpg",
     occasion: "wedding",
     rating: 5.0,
     reviewsCount: 68,
     stems: [
-      "Red & White Premium Roses",
-      "Orchid Sprays",
-      "Weather-Resistant Foam Mounts",
-      "Satin Ribbons & Tulle Draping"
+      "Red & White Premium Dutch Roses",
+      "Fresh Orchid Sprays",
+      "Eucalyptus & Gypsophila",
+      "Luxury Satin Silk Ribbons"
     ],
-    description: "Complete wedding car floral decoration service at your doorstep or venue in Calicut. Scratch-proof, securely mounted fresh rose & orchid arrangements.",
-    flowerCount: "Full Vehicle Floral Styling",
+    description: "Exquisite hand-tied cascade arrangement crafted with velvety Dutch roses and vibrant orchid sprays, tied in signature Occasions luxury wrapping.",
+    flowerCount: "35+ Premium Stems",
     scent: "Heirloom Rose",
-    badge: "Car Decoration",
-    dimensions: "Custom Vehicle Fitting"
+    badge: "Signature Floral",
+    dimensions: "55cm H × 45cm W"
   },
   {
     id: "bouquet-5",
@@ -122,11 +122,11 @@ export const OCCASIONS_LIST = [
     count: "Over 500+ Stages Styled"
   },
   {
-    id: "car-decor",
-    name: "Car Decoration",
-    tagline: "Bridal Car Styling with Fresh Roses & Orchids",
-    image: "/images/slide3-flower.jpg",
-    count: "Scratch-Free On-Site Setup"
+    id: "flower-baskets",
+    name: "Artisanal Flower Baskets",
+    tagline: "Handwoven Cane Baskets Brimmed with Fresh Blooms",
+    image: "/images/artisanal-flower-basket.jpg",
+    count: "Handcrafted Daily in Calicut"
   },
   {
     id: "bridal-bouquets",

@@ -120,11 +120,11 @@ const ALL_GARLAND_PRODUCTS: GarlandProductItem[] = [
 ];
 
 const CATEGORIES_NAV = [
-  { name: "Car Decorations", href: "/car-decorations", count: 8, active: false },
-  { name: "Table Arrangements", href: "/table-arrangements", count: 6, active: false },
-  { name: "Church Arrangements", href: "/church-arrangements", count: 6, active: false },
+  { name: "Flower Baskets", href: "/flower-baskets", count: 8, active: false },
+  { name: "Flower Bouquets", href: "/flower-bouquets", count: 12, active: false },
   { name: "Garlands & Baskets", href: "/garlands-and-baskets", count: 6, active: true },
-  { name: "Signature Bouquets", href: "/#shop", count: 12, active: false },
+  { name: "Table Decor", href: "/table-decor", count: 6, active: false },
+  { name: "Wreaths", href: "/wreaths", count: 6, active: false },
 ];
 
 export default function GarlandsAndBasketsPage() {

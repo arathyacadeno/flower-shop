@@ -440,7 +440,7 @@ export default function SinglePageCheckoutPayment() {
         {/* Breadcrumb Navigation: Home > Flowers > Delivery Information */}
         <Breadcrumb
           items={[
-            { label: "Flowers", href: "/flower" },
+            { label: "Flowers", href: "/flower-bouquets" },
             { label: "Delivery Information" },
           ]}
         />

@@ -13,16 +13,6 @@ import {
   X,
   Phone,
   ArrowRight,
-  Sparkles,
-  Flower2,
-  Flower,
-  Sun,
-  Feather,
-  Cake,
-  Gem,
-  Gift,
-  PartyPopper,
-  Circle,
   Package,
   MapPin,
   LogOut,
@@ -41,40 +31,6 @@ interface HeaderProps {
   onSelectSlide?: (index: number) => void;
   currentSlide?: number;
 }
-
-/* Mega dropdown content, kept as data so the JSX stays short */
-const FLOWER_COLUMNS = [
-  {
-    title: "By Type",
-    items: [
-      { href: "/flowers/roses", label: "Roses", Icon: Flower2 },
-      { href: "/flowers/bouquets", label: "Bouquets", Icon: Sparkles },
-      { href: "/flowers/tulips", label: "Tulips", Icon: Flower },
-      { href: "/flowers/sunflowers", label: "Sunflowers", Icon: Sun },
-      { href: "/flowers/lilies", label: "Lilies", Icon: Feather },
-    ],
-  },
-  {
-    title: "By Occasion",
-    items: [
-      { href: "/flowers/anniversary", label: "Anniversary", Icon: Heart },
-      { href: "/flowers/birthday", label: "Birthday", Icon: Cake },
-      { href: "/flowers/wedding", label: "Wedding", Icon: Gem },
-      { href: "/flowers/mothers-day", label: "Mother's Day", Icon: Gift },
-      { href: "/flowers/congratulations", label: "Congratulations", Icon: PartyPopper },
-    ],
-  },
-  {
-    title: "By Color",
-    items: [
-      { href: "/flowers/pink-flowers", label: "Pink Flowers", Icon: Circle, color: "colorIconPink" },
-      { href: "/flowers/white-flowers", label: "White Flowers", Icon: Circle, color: "colorIconWhite" },
-      { href: "/flowers/red-flowers", label: "Red Flowers", Icon: Circle, color: "colorIconRed" },
-      { href: "/flowers/purple-flowers", label: "Purple Flowers", Icon: Circle, color: "colorIconPurple" },
-      { href: "/flowers/yellow-flowers", label: "Yellow Flowers", Icon: Circle, color: "colorIconYellow" },
-    ],
-  },
-] as const;
 
 export default function Header({
   isDrawerOpen: controlledDrawerOpen,
@@ -531,10 +487,6 @@ export default function Header({
       }
     } else if (categoryName === "Table arrangements") {
       scrollToHighlightsOr("/table-decor");
-    } else if (categoryName === "Car decorations") {
-      scrollToHighlightsOr("/car-decorations");
-    } else if (categoryName === "Church arrangements") {
-      scrollToHighlightsOr("/church-arrangements");
     } else if (categoryName === "Flower baskets & garlands") {
       scrollToHighlightsOr("/garlands-and-baskets");
     } else if (categoryName === "Contact & Location") {
@@ -564,12 +516,6 @@ export default function Header({
     } else if (q.includes("bouquet")) {
       window.location.href = "/flower-bouquets";
       return;
-    } else if (q.includes("car")) {
-      handleNavCategory("Car decorations", 1);
-      return;
-    } else if (q.includes("church") || q.includes("altar")) {
-      handleNavCategory("Church arrangements", 1);
-      return;
     } else if (q.includes("table") || q.includes("centerpiece")) {
       router.push("/table-decor");
       return;
@@ -583,7 +529,7 @@ export default function Header({
       router.push("/cakes");
       return;
     } else if (q.includes("flower")) {
-      window.location.href = "/flower";
+      window.location.href = "/flower-bouquets";
       return;
     } else if (
       q.includes("contact") ||
@@ -594,7 +540,7 @@ export default function Header({
       setDrawerOpen(true);
       return;
     } else {
-      window.location.href = "/flower";
+      window.location.href = "/flower-bouquets";
       return;
     }
   };
@@ -1547,7 +1493,20 @@ export default function Header({
               marginBottom: 24,
             }}
           >
-            <div>▶ Bouquet</div>
+            <Link
+              href="/flower-bouquets"
+              onClick={() => setDrawerOpen(false)}
+              style={{ color: "inherit", textDecoration: "none" }}
+            >
+              ▶ Flower Bouquets
+            </Link>
+            <Link
+              href="/flower-baskets"
+              onClick={() => setDrawerOpen(false)}
+              style={{ color: "inherit", textDecoration: "none" }}
+            >
+              ▶ Flower Baskets
+            </Link>
             <Link
               href="/cakes"
               onClick={() => setDrawerOpen(false)}
@@ -1555,14 +1514,19 @@ export default function Header({
             >
               ▶ Cakes
             </Link>
-            <div>▶ Flower baskets &amp; garlands</div>
-            <div>▶ Church arrangements</div>
+            <Link
+              href="/garlands-and-baskets"
+              onClick={() => setDrawerOpen(false)}
+              style={{ color: "inherit", textDecoration: "none" }}
+            >
+              ▶ Garlands &amp; Baskets
+            </Link>
             <Link
               href="/table-decor"
               onClick={() => setDrawerOpen(false)}
               style={{ color: "inherit", textDecoration: "none" }}
             >
-              ▶ Table arrangements
+              ▶ Table Decor
             </Link>
             <Link
               href="/wreaths"
@@ -1571,7 +1535,6 @@ export default function Header({
             >
               ▶ Wreaths
             </Link>
-            <div>▶ Car decorations</div>
           </div>
 
           <div className={styles.drawerDivider} />

@@ -132,7 +132,9 @@ export default function ProductDetailView({ product }: ProductDetailViewProps) {
       ? "/special-occasions"
       : product.category === "our-highlights"
       ? "/our-highlights"
-      : "/flower";
+      : product.slug?.includes("basket") || product.name?.toLowerCase().includes("basket")
+      ? "/flower-baskets"
+      : "/flower-bouquets";
 
   return (
     <div className={styles.pageWrapper}>

@@ -103,29 +103,29 @@ export default function ShopByFlowers() {
             <span className={styles.dividerLine} />
             <span className={styles.dividerIcon}>
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-                <circle cx="12" cy="12" r="2.2" fill="#db2777" />
+                <circle cx="12" cy="12" r="2.2" fill="#FF5A9A" />
                 <path
                   d="M12 4.5C12 4.5 10 7.5 10 9.5C10 10.6 10.9 11.5 12 11.5C13.1 11.5 14 10.6 14 9.5C14 7.5 12 4.5 12 4.5Z"
-                  fill="#fbcfe8"
-                  stroke="#db2777"
+                  fill="#FF5A9A"
+                  stroke="#FF5A9A"
                   strokeWidth="0.8"
                 />
                 <path
                   d="M12 19.5C12 19.5 10 16.5 10 14.5C10 13.4 10.9 12.5 12 12.5C13.1 12.5 14 13.4 14 14.5C14 16.5 12 19.5 12 19.5Z"
-                  fill="#fbcfe8"
-                  stroke="#db2777"
+                  fill="#FCE4F3"
+                  stroke="#FF5A9A"
                   strokeWidth="0.8"
                 />
                 <path
                   d="M4.5 12C4.5 12 7.5 10 9.5 10C10.6 10 11.5 10.9 11.5 12C11.5 13.1 10.6 14 9.5 14C7.5 14 4.5 12 4.5 12Z"
-                  fill="#fbcfe8"
-                  stroke="#db2777"
+                  fill="#FCE4F3"
+                  stroke="#FF5A9A"
                   strokeWidth="0.8"
                 />
                 <path
                   d="M19.5 12C19.5 12 16.5 10 14.5 10C13.4 10 12.5 10.9 12.5 12C12.5 13.1 13.4 14 14.5 14C16.5 14 19.5 12 19.5 12Z"
-                  fill="#fbcfe8"
-                  stroke="#db2777"
+                  fill="#FF5A9A"
+                  stroke="#FCE4F3"
                   strokeWidth="0.8"
                 />
               </svg>
@@ -143,7 +143,7 @@ export default function ShopByFlowers() {
             onClick={() => handleNudge("left")}
             aria-label="Previous flower categories"
           >
-            <ChevronLeft size={22} strokeWidth={2} />
+            <ChevronLeft size={22} strokeWidth={2.2} />
           </button>
 
           {/* Slider Viewport with Edge Fade Mask & Continuous Auto-Slide to Right */}
@@ -168,29 +168,21 @@ export default function ShopByFlowers() {
                     className={styles.itemInner}
                     aria-label={`Shop ${cat.title} bouquets`}
                   >
-                    {/* Subtle light-pink circular/oval background behind bouquet */}
-                    <div className={styles.backdropWrapper}>
-                      <div className={styles.pinkOvalGlow} />
-
-                      {/* Floating Bouquet Wrapper */}
-                      <div className={styles.floatContainer}>
-                        <img
-                          src={cat.image}
-                          alt={`${cat.title} bouquet`}
-                          className={styles.bouquetImg}
-                          loading={idx < 6 ? "eager" : "lazy"}
-                        />
-                      </div>
+                    {/* Pastel Pink Circular Container with Bright Soft Pink Border */}
+                    <div className={styles.circleContainer}>
+                      <img
+                        src={cat.image}
+                        alt={`${cat.title} bouquet`}
+                        className={styles.bouquetImg}
+                        loading={idx < 6 ? "eager" : "lazy"}
+                      />
                     </div>
 
-                    {/* Flower Title Only */}
+                    {/* Flower Title */}
                     <div className={styles.infoArea}>
                       <h3 className={styles.flowerTitle}>{cat.title}</h3>
                     </div>
                   </Link>
-
-                  {/* Thin vertical dotted separator between categories */}
-                  <div className={styles.dottedSeparator} aria-hidden="true" />
                 </div>
               ))}
             </div>
@@ -203,7 +195,7 @@ export default function ShopByFlowers() {
             onClick={() => handleNudge("right")}
             aria-label="Next flower categories"
           >
-            <ChevronRight size={22} strokeWidth={2} />
+            <ChevronRight size={22} strokeWidth={2.2} />
           </button>
         </div>
       </div>

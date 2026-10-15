@@ -1,6 +1,6 @@
 .sectionWrapper {
   width: 100%;
-  background-color: #FAD9E3;
+  background-color: #fad9e3;
   padding: 68px 0 84px 0;
   position: relative;
   overflow: hidden;
@@ -30,17 +30,14 @@
 }
 
 .subtitle {
-  font-family: var(--font-sans, -apple-system, sans-serif);
+  font-family: var(--font-sans, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
   font-size: 13px;
   font-weight: 600;
   letter-spacing: 0.12em;
-  text-transform: capitalize;
-  color: #db2777;
-  margin-bottom: 8px;
 }
 
 .mainTitle {
-  font-family: var(--font-sans, sans-serif);
+  font-family: var(--font-sans, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
   font-size: 40px;
   font-weight: 600;
   letter-spacing: -0.025em;
@@ -63,26 +60,22 @@
 .dividerLine {
   flex: 1;
   height: 1px;
-  background: linear-gradient(
-    90deg,
-    rgba(219, 39, 119, 0.05),
-    rgba(219, 39, 119, 0.35)
-  );
+  background: linear-gradient(90deg,
+      rgba(255, 90, 154, 0.05),
+      rgba(255, 90, 154, 0.4));
 }
 
 .dividerLine:last-child {
-  background: linear-gradient(
-    90deg,
-    rgba(219, 39, 119, 0.35),
-    rgba(219, 39, 119, 0.05)
-  );
+  background: linear-gradient(90deg,
+      rgba(255, 90, 154, 0.4),
+      rgba(255, 90, 154, 0.05));
 }
 
 .dividerIcon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  color: #db2777;
+  color: #FF5A9A;
 }
 
 /* ================= CAROUSEL OUTER WRAPPER ================= */
@@ -93,65 +86,62 @@
   align-items: center;
 }
 
-/* Circular Navigation Arrows */
+/* Circular Navigation Arrows: White background with pink chevron icon */
 .navBtn {
   position: absolute;
-  top: 45%;
+  top: 42%;
   transform: translateY(-50%);
-  width: 44px;
-  height: 44px;
+  width: 46px;
+  height: 46px;
   border-radius: 50%;
-  border: 1px solid #fce7f3;
-  background: #ffffff;
-  color: #db2777;
+  border: 1.5px solid #FCE4F3;
+  background: #FFFFFF;
+  color: #FF5A9A;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   z-index: 10;
-  box-shadow: 0 4px 16px rgba(219, 39, 119, 0.1);
+  box-shadow: 0 4px 14px rgba(255, 90, 154, 0.15);
   transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .prevBtn {
-  left: 4px;
+  left: 6px;
 }
 
 .nextBtn {
-  right: 4px;
+  right: 6px;
 }
 
 .navBtn:hover {
-  background: #fff5f8;
-  border-color: #f472b6;
+  background: #FFFFFF;
+  border-color: #FF5A9A;
+  color: #FF5A9A;
   transform: translateY(-50%) scale(1.08);
-  box-shadow: 0 8px 24px rgba(219, 39, 119, 0.18);
+  box-shadow: 0 6px 20px rgba(255, 90, 154, 0.25);
 }
 
 .navBtn:active {
   transform: translateY(-50%) scale(0.96);
 }
 
-/* Slider Viewport with Edge Fade Mask */
+/* Slider Viewport with Edge Fade Mask showing partial neighboring categories */
 .sliderViewport {
   position: relative;
   width: 100%;
   overflow: hidden;
   padding: 16px 0 28px 0;
-  mask-image: linear-gradient(
-    to right,
-    transparent 0%,
-    black 3%,
-    black 97%,
-    transparent 100%
-  );
-  -webkit-mask-image: linear-gradient(
-    to right,
-    transparent 0%,
-    black 3%,
-    black 97%,
-    transparent 100%
-  );
+  mask-image: linear-gradient(to right,
+      transparent 0%,
+      black 3%,
+      black 97%,
+      transparent 100%);
+  -webkit-mask-image: linear-gradient(to right,
+      transparent 0%,
+      black 3%,
+      black 97%,
+      transparent 100%);
 }
 
 /* Continuous Auto-Slide Track to the RIGHT */
@@ -162,7 +152,7 @@
   will-change: transform;
 }
 
-/* Pause sliding on hover so user can easily examine and click any bouquet */
+/* Pause sliding on hover so user can easily examine and click any category */
 .sliderViewport:hover .sliderTrack {
   animation-play-state: paused;
 }
@@ -172,6 +162,7 @@
   0% {
     transform: translate3d(-50%, 0, 0);
   }
+
   100% {
     transform: translate3d(0%, 0, 0);
   }
@@ -180,8 +171,8 @@
 /* ================= FLOWER CATEGORY ITEM ================= */
 .flowerItem {
   position: relative;
-  flex: 0 0 280px;
-  width: 280px;
+  flex: 0 0 270px;
+  width: 270px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -199,112 +190,74 @@
   color: inherit;
 }
 
-/* ================= BOUQUET IMAGE & CIRCULAR GLOW ================= */
-.backdropWrapper {
+/* ================= PERFECTLY ROUND PASTEL-PINK CONTAINER ================= */
+.circleContainer {
   position: relative;
-  width: 100%;
-  max-width: 230px;
-  height: 255px;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* Subtle light-pink circular/oval background behind bouquet */
-.pinkOvalGlow {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 195px;
-  height: 195px;
+  width: 216px;
+  height: 216px;
   border-radius: 50%;
-  background: radial-gradient(
-    circle,
-    rgba(252, 231, 243, 0.85) 0%,
-    rgba(253, 242, 248, 0.5) 55%,
-    rgba(255, 255, 255, 0) 72%
-  );
-  pointer-events: none;
-  z-index: 1;
-  transition: transform 0.45s ease, background 0.45s ease;
-}
-
-.itemInner:hover .pinkOvalGlow {
-  transform: translate(-50%, -50%) scale(1.12);
-  background: radial-gradient(
-    circle,
-    rgba(251, 207, 232, 0.95) 0%,
-    rgba(253, 242, 248, 0.6) 60%,
-    rgba(255, 255, 255, 0) 75%
-  );
-}
-
-/* Floating Container */
-.floatContainer {
-  position: relative;
-  z-index: 2;
-  width: 100%;
-  height: 100%;
+  background-color: #FFFFFF;
+  border: 1.5px solid #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  padding: 18px;
+  box-sizing: border-box;
+  margin: 0 auto;
+  box-shadow: 0 8px 24px rgba(255, 90, 154, 0.12);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.35s ease;
 }
 
-.itemInner:hover .floatContainer {
-  transform: translateY(-4px) scale(1.05);
+.itemInner:hover .circleContainer {
+  transform: translateY(-6px) scale(1.03);
+  box-shadow: 0 14px 30px rgba(255, 90, 154, 0.22);
+  border-color: #ffffff;
 }
 
+/* Full bouquet preserved with original stems, ribbon, wrapping, and proportions */
 .bouquetImg {
   width: 100%;
   height: 100%;
   object-fit: contain;
   display: block;
-  filter: drop-shadow(0 10px 20px rgba(15, 23, 42, 0.08));
-  transition: filter 0.4s ease;
+  filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.08));
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 0.35s ease;
 }
 
 .itemInner:hover .bouquetImg {
-  filter: drop-shadow(0 16px 28px rgba(219, 39, 119, 0.18));
+  transform: scale(1.05);
+  filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.12));
 }
 
-/* ================= FLOWER INFORMATION ================= */
+/* ================= FLOWER LABELS (BOLD DARK CHARCOAL) ================= */
 .infoArea {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  margin-top: 14px;
+  margin-top: 16px;
   width: 100%;
+  overflow: visible;
 }
 
 .flowerTitle {
-  font-family: var(--font-sans);
-  font-size: clamp(1.15rem, 1.35vw, 1.4rem);
-  font-weight: 400;
+  font-family: var(--font-sans, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
+  font-size: 1.25rem;
+  font-weight: 700;
   letter-spacing: -0.01em;
-  color: #111827;
+  color: #1f2937;
   margin: 0;
-  line-height: 1.25;
-  transition: color 0.25s ease, transform 0.25s ease;
+  line-height: 1.3;
+  text-align: center;
+  white-space: nowrap;
+  transition: color 0.25s ease;
 }
 
 .itemInner:hover .flowerTitle {
-  color: #db2777;
-  transform: translateY(-2px);
-}
-
-/* ================= THIN VERTICAL DOTTED SEPARATORS ================= */
-.dottedSeparator {
-  position: absolute;
-  top: 12%;
-  bottom: 12%;
-  right: 0;
-  width: 1px;
-  border-right: 1.5px dotted #e2e8f0;
-  pointer-events: none;
+  color: #FF5A9A;
 }
 
 /* ================= ACCESSIBILITY & PREFERS-REDUCED-MOTION ================= */
@@ -319,33 +272,37 @@
   .sectionWrapper {
     padding: 50px 0 62px 0;
   }
+
   .container {
     padding-inline: 20px;
   }
+
   .sectionHeader {
     margin-bottom: 32px;
   }
+
   .mainTitle {
     font-size: 30px;
   }
+
   .flowerItem {
-    flex: 0 0 230px;
-    width: 230px;
+    flex: 0 0 210px;
+    width: 210px;
     padding: 0 12px;
   }
-  .backdropWrapper {
-    max-width: 195px;
-    height: 220px;
+
+  .circleContainer {
+    width: 172px;
+    height: 172px;
+    padding: 14px;
   }
-  .pinkOvalGlow {
-    width: 160px;
-    height: 160px;
-  }
+
   .flowerTitle {
-    font-size: 1.25rem;
+    font-size: 1.15rem;
   }
+
   .navBtn {
-    width: 36px;
-    height: 36px;
+    width: 38px;
+    height: 38px;
   }
 }

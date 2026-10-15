@@ -355,6 +355,9 @@ export default function Header({
   const [flowersHovered, setFlowersHovered] = useState(false);
   const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
+  const [occasionsHovered, setOccasionsHovered] = useState(false);
+  const occasionsTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
   const [profileHovered, setProfileHovered] = useState(false);
   const profileTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -369,6 +372,20 @@ export default function Header({
   const handleMouseLeave = () => {
     hoverTimeoutRef.current = setTimeout(() => {
       setFlowersHovered(false);
+    }, 180);
+  };
+
+  const handleOccasionsEnter = () => {
+    if (occasionsTimeoutRef.current) {
+      clearTimeout(occasionsTimeoutRef.current);
+      occasionsTimeoutRef.current = null;
+    }
+    setOccasionsHovered(true);
+  };
+
+  const handleOccasionsLeave = () => {
+    occasionsTimeoutRef.current = setTimeout(() => {
+      setOccasionsHovered(false);
     }, 180);
   };
 
@@ -728,14 +745,129 @@ export default function Header({
               Cakes
             </Link>
 
-            <Link
-              href="/#occasions"
-              onClick={(e) => handleSectionNav(e, "occasions", "occasions")}
-              className={`${styles.centerNavLink} ${isSpecialOccasionsActive ? styles.activeNavLink : ""
-                }`}
+            <div
+              className={styles.occasionsNavWrapper}
+              onMouseEnter={handleOccasionsEnter}
+              onMouseLeave={handleOccasionsLeave}
             >
-              Special Occasions
-            </Link>
+              <Link
+                href="/#occasions"
+                onClick={(e) => handleSectionNav(e, "occasions", "occasions")}
+                className={`${styles.centerNavLink} ${
+                  isSpecialOccasionsActive || occasionsHovered ? styles.activeNavLink : ""
+                }`}
+                aria-expanded={occasionsHovered}
+              >
+                <span>Special Occasions</span>
+                <span
+                  className={styles.flowersChevron}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    setOccasionsHovered((prev) => !prev);
+                  }}
+                  role="button"
+                  tabIndex={0}
+                  aria-label="Toggle special occasions dropdown"
+                >
+                  <ChevronDown
+                    size={14}
+                    strokeWidth={2.2}
+                    style={{
+                      transition: "transform 0.25s cubic-bezier(0.16, 1, 0.3, 1)",
+                      transform: occasionsHovered ? "rotate(180deg)" : "rotate(0deg)",
+                    }}
+                  />
+                </span>
+              </Link>
+
+              {occasionsHovered && (
+                <div
+                  className={styles.occasionsDropdown}
+                  role="menu"
+                  aria-label="Special occasions navigation menu"
+                >
+                  <div className={styles.occasionsDropdownGrid}>
+                    <ul className={styles.dropdownList}>
+                      <li>
+                        <Link
+                          href="/flower-bouquets?occasion=birthday"
+                          className={styles.dropdownItemLink}
+                          onClick={() => setOccasionsHovered(false)}
+                        >
+                          Birthday
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          href="/flower-bouquets?occasion=anniversary"
+                          className={styles.dropdownItemLink}
+                          onClick={() => setOccasionsHovered(false)}
+                        >
+                          Anniversary
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          href="/flower-bouquets?occasion=get-well-soon"
+                          className={styles.dropdownItemLink}
+                          onClick={() => setOccasionsHovered(false)}
+                        >
+                          Get Well Soon
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          href="/flower-bouquets?occasion=condolences"
+                          className={styles.dropdownItemLink}
+                          onClick={() => setOccasionsHovered(false)}
+                        >
+                          Condolence
+                        </Link>
+                      </li>
+                    </ul>
+                    <ul className={styles.dropdownList}>
+                      <li>
+                        <Link
+                          href="/flower-bouquets?occasion=best-wishes"
+                          className={styles.dropdownItemLink}
+                          onClick={() => setOccasionsHovered(false)}
+                        >
+                          Best Wishes
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          href="/flower-bouquets?occasion=thank-you"
+                          className={styles.dropdownItemLink}
+                          onClick={() => setOccasionsHovered(false)}
+                        >
+                          Thank You
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          href="/flower-bouquets?occasion=wedding"
+                          className={styles.dropdownItemLink}
+                          onClick={() => setOccasionsHovered(false)}
+                        >
+                          Wedding
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          href="/flower-bouquets?occasion=congratulations"
+                          className={styles.dropdownItemLink}
+                          onClick={() => setOccasionsHovered(false)}
+                        >
+                          Congratulation
+                        </Link>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              )}
+            </div>
 
             <Link
               href="/#highlights"

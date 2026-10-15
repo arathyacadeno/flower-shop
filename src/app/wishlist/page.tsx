@@ -5,7 +5,7 @@ import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { useWishlist } from "@/context/WishlistContext";
-import { Heart, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import ProductCard from "@/components/ProductCard";
 import styles from "./wishlist.module.css";
 
@@ -41,8 +41,12 @@ export default function WishlistPage() {
         {/* Content */}
         {items.length === 0 ? (
           <div className={styles.emptyState}>
-            <div className={styles.emptyIconCircle}>
-              <Heart size={44} strokeWidth={1.5} className={styles.emptyHeartIcon} />
+            <div className={styles.emptyImageWrap}>
+              <img
+                src="/images/empty-wishlist-bag.png"
+                alt="Empty Wishlist"
+                className={styles.emptyWishlistImg}
+              />
             </div>
             <h2 className={styles.emptyTitle}>Your Wishlist is Empty</h2>
             <p className={styles.emptyDesc}>

@@ -8,7 +8,7 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background-color: #ffeaee;
+  background-color: #FDE9EF;
   color: #1f2937;
   font-family: inherit;
 }
@@ -638,71 +638,117 @@
 /* Empty State */
 .emptyCartCard {
   background: #ffffff;
-  border-radius: 20px;
-  padding: 60px 24px;
+  border-radius: 24px;
+  padding: 56px 40px 48px 40px;
   text-align: center;
-  max-width: 500px;
-  margin: 0 auto;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+  max-width: 520px;
+  width: 100%;
+  margin: 32px auto 60px auto;
+  box-shadow:
+    0 20px 48px -12px rgba(233, 0, 70, 0.08),
+    0 2px 10px rgba(0, 0, 0, 0.03);
+  border: 1px solid rgba(253, 233, 239, 0.9);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.emptyImageWrap {
-  margin-bottom: 24px;
+.emptyIconCircle {
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #fff5f8 0%, #fde9ef 100%);
+  border: 1px solid rgba(233, 0, 70, 0.16);
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-bottom: 22px;
+  box-shadow: 0 6px 18px rgba(233, 0, 70, 0.07);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.emptyLogoImg {
-  width: auto;
-  max-width: 190px;
-  height: auto;
-  max-height: 80px;
-  object-fit: contain;
-  filter: drop-shadow(0 3px 10px rgba(0, 0, 0, 0.05));
-  transition: transform 0.25s ease;
+.emptyCartCard:hover .emptyIconCircle {
+  transform: scale(1.05);
 }
 
-.emptyLogoImg:hover {
-  transform: scale(1.04);
-}
-
-.emptyFlowerImg {
-  width: auto;
-  max-width: 190px;
-  height: auto;
-  max-height: 80px;
-  object-fit: contain;
+.emptyFlowerSvg {
+  display: block;
 }
 
 .emptyHeading {
-  font-size: 1.5rem;
+  font-size: clamp(1.5rem, 3vw, 1.8rem);
   font-weight: 700;
   color: #111827;
-  margin: 0 0 8px 0;
+  margin: 0 0 12px 0;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
 }
 
 .emptyDescription {
-  font-size: 0.95rem;
+  font-size: 0.98rem;
   color: #64748b;
-  margin: 0 0 24px 0;
+  line-height: 1.6;
+  max-width: 400px;
+  margin: 0 auto 28px auto;
 }
 
 .exploreFlowersBtn {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  background-color: #E40345;
+  justify-content: center;
+  gap: 10px;
+  background-color: #E90046;
   color: #ffffff;
-  padding: 12px 28px;
-  border-radius: 10px;
+  padding: 13px 32px;
+  border-radius: 9999px;
+  font-size: 0.98rem;
   font-weight: 600;
   text-decoration: none;
-  transition: background-color 0.2s ease;
+  box-shadow: 0 4px 16px rgba(233, 0, 70, 0.28);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .exploreFlowersBtn:hover {
-  background-color: #c7023c;
+  background-color: #d1003f;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(233, 0, 70, 0.36);
+}
+
+.exploreFlowersBtn:active {
+  transform: translateY(0);
+}
+
+.emptyNote {
+  font-size: 0.86rem;
+  color: #94a3b8;
+  margin: 20px 0 0 0;
+  font-weight: 400;
+  font-style: italic;
+  letter-spacing: 0.01em;
+}
+
+@media (max-width: 640px) {
+  .emptyCartCard {
+    padding: 38px 20px 32px 20px;
+    border-radius: 20px;
+    margin: 16px auto 36px auto;
+  }
+
+  .emptyHeading {
+    font-size: 1.4rem;
+  }
+
+  .emptyDescription {
+    font-size: 0.92rem;
+    margin-bottom: 24px;
+  }
+
+  .exploreFlowersBtn {
+    width: 100%;
+    padding: 13px 20px;
+    box-sizing: border-box;
+  }
 }
 
 /* Responsive */

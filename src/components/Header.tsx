@@ -679,9 +679,9 @@ export default function Header({
                   aria-label="Flowers navigation menu"
                 >
                   <div className={styles.flowersDropdownGrid}>
-                    {/* Clean Column: In Focus */}
+                    {/* Clean Column: Special Touches */}
                     <div className={styles.dropdownCol}>
-                      <h3 className={styles.dropdownColHeading}>In Focus</h3>
+                      <h3 className={styles.dropdownColHeading}>Special Touches</h3>
                       <ul className={styles.dropdownList}>
                         <li>
                           <Link

@@ -9,6 +9,21 @@ const nextConfig: NextConfig = {
         destination: "/flower-bouquets",
         permanent: true,
       },
+      {
+        source: "/car-decorations",
+        destination: "/our-highlights",
+        permanent: true,
+      },
+      {
+        source: "/table-arrangements",
+        destination: "/table-decor",
+        permanent: true,
+      },
+      {
+        source: "/church-arrangements",
+        destination: "/our-highlights",
+        permanent: true,
+      },
     ];
   },
 };

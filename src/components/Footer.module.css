@@ -121,6 +121,7 @@
 
 .servicesList {
   padding-left: 7px;
+  gap: 10px;
 }
 
 .navLink {

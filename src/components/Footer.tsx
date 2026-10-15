@@ -45,13 +45,25 @@ export default function Footer() {
                 <Link href="/#flowers" className={styles.navLink}>Flowers</Link>
               </li>
               <li>
-                <Link href="/occasions" className={styles.navLink}>Cakes</Link>
+                <Link href="/cakes" className={styles.navLink}>Cakes</Link>
               </li>
               <li>
-                <Link href="/occasions" className={styles.navLink}>Special occasions</Link>
+                <Link href="/#occasions" className={styles.navLink}>Special Occasions</Link>
               </li>
               <li>
-                <Link href="/#highlights" className={styles.navLink}>Our highlights</Link>
+                <Link href="/#highlights" className={styles.navLink}>Our Highlights</Link>
+              </li>
+              <li>
+                <Link href="/car-decorations" className={styles.navLink}>Car Decor</Link>
+              </li>
+              <li>
+                <Link href="/table-arrangements" className={styles.navLink}>Stage Decor</Link>
+              </li>
+              <li>
+                <Link href="/church-arrangements" className={styles.navLink}>Church Decor</Link>
+              </li>
+              <li>
+                <Link href="/garlands-and-baskets" className={styles.navLink}>Garlands</Link>
               </li>
             </ul>
           </div>

@@ -358,6 +358,9 @@ export default function Header({
   const [occasionsHovered, setOccasionsHovered] = useState(false);
   const occasionsTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
+  const [highlightsHovered, setHighlightsHovered] = useState(false);
+  const highlightsTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
   const [profileHovered, setProfileHovered] = useState(false);
   const profileTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -389,6 +392,20 @@ export default function Header({
     }, 180);
   };
 
+  const handleHighlightsEnter = () => {
+    if (highlightsTimeoutRef.current) {
+      clearTimeout(highlightsTimeoutRef.current);
+      highlightsTimeoutRef.current = null;
+    }
+    setHighlightsHovered(true);
+  };
+
+  const handleHighlightsLeave = () => {
+    highlightsTimeoutRef.current = setTimeout(() => {
+      setHighlightsHovered(false);
+    }, 180);
+  };
+
   const handleProfileEnter = () => {
     if (profileTimeoutRef.current) {
       clearTimeout(profileTimeoutRef.current);
@@ -406,6 +423,8 @@ export default function Header({
   // Close menus on page change
   useEffect(() => {
     setFlowersHovered(false);
+    setOccasionsHovered(false);
+    setHighlightsHovered(false);
     setProfileHovered(false);
   }, [pathname]);
 
@@ -420,6 +439,8 @@ export default function Header({
     return () => {
       window.removeEventListener("show-signin-modal", handleShowSignin);
       if (hoverTimeoutRef.current) clearTimeout(hoverTimeoutRef.current);
+      if (occasionsTimeoutRef.current) clearTimeout(occasionsTimeoutRef.current);
+      if (highlightsTimeoutRef.current) clearTimeout(highlightsTimeoutRef.current);
       if (profileTimeoutRef.current) clearTimeout(profileTimeoutRef.current);
     };
   }, []);
@@ -869,14 +890,105 @@ export default function Header({
               )}
             </div>
 
-            <Link
-              href="/#highlights"
-              onClick={(e) => handleSectionNav(e, "highlights", "highlights")}
-              className={`${styles.centerNavLink} ${isHighlightsActive ? styles.activeNavLink : ""
-                }`}
+            <div
+              className={styles.highlightsNavWrapper}
+              onMouseEnter={handleHighlightsEnter}
+              onMouseLeave={handleHighlightsLeave}
             >
-              Our highlights
-            </Link>
+              <Link
+                href="/#highlights"
+                onClick={(e) => handleSectionNav(e, "highlights", "highlights")}
+                className={`${styles.centerNavLink} ${
+                  isHighlightsActive || highlightsHovered ? styles.activeNavLink : ""
+                }`}
+                aria-expanded={highlightsHovered}
+              >
+                <span>Our highlights</span>
+                <span
+                  className={styles.flowersChevron}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    setHighlightsHovered((prev) => !prev);
+                  }}
+                  role="button"
+                  tabIndex={0}
+                  aria-label="Toggle highlights dropdown"
+                >
+                  <ChevronDown
+                    size={14}
+                    strokeWidth={2.2}
+                    style={{
+                      transition: "transform 0.25s cubic-bezier(0.16, 1, 0.3, 1)",
+                      transform: highlightsHovered ? "rotate(180deg)" : "rotate(0deg)",
+                    }}
+                  />
+                </span>
+              </Link>
+
+              {highlightsHovered && (
+                <div
+                  className={styles.highlightsDropdown}
+                  role="menu"
+                  aria-label="Our highlights navigation menu"
+                >
+                  <ul className={styles.highlightsDropdownList}>
+                    <li>
+                      <Link
+                        href="/car-decorations"
+                        className={styles.highlightsDropdownItem}
+                        onClick={() => setHighlightsHovered(false)}
+                      >
+                        <span className={styles.highlightsItemTitle}>Car Decor</span>
+                        <span className={styles.highlightsItemSubtitle}>VIP Bonnet Florals &amp; Satin Posies</span>
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        href="/table-arrangements"
+                        className={styles.highlightsDropdownItem}
+                        onClick={() => setHighlightsHovered(false)}
+                      >
+                        <span className={styles.highlightsItemTitle}>Stage Decor</span>
+                        <span className={styles.highlightsItemSubtitle}>Opulent Banquet &amp; Centerpieces</span>
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        href="/church-arrangements"
+                        className={styles.highlightsDropdownItem}
+                        onClick={() => setHighlightsHovered(false)}
+                      >
+                        <span className={styles.highlightsItemTitle}>Church Decor</span>
+                        <span className={styles.highlightsItemSubtitle}>Grand Altar Arches &amp; Aisle Florals</span>
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        href="/garlands-and-baskets"
+                        className={styles.highlightsDropdownItem}
+                        onClick={() => setHighlightsHovered(false)}
+                      >
+                        <span className={styles.highlightsItemTitle}>Garlands</span>
+                        <span className={styles.highlightsItemSubtitle}>Fresh Jasmine Varmala &amp; Gift Baskets</span>
+                      </Link>
+                    </li>
+                  </ul>
+                  <div className={styles.highlightsDropdownFooter}>
+                    <Link
+                      href="/#highlights"
+                      className={styles.highlightsFooterLink}
+                      onClick={(e) => {
+                        handleSectionNav(e, "highlights", "highlights");
+                        setHighlightsHovered(false);
+                      }}
+                    >
+                      View All Highlights &rarr;
+                    </Link>
+                  </div>
+                </div>
+              )}
+            </div>
           </nav>
 
           {/* Right: search + action icons */}

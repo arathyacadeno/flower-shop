@@ -80,7 +80,7 @@ const highlightCards: HighlightCard[] = [
       "Traditional Uruli and Gift Baskets",
     ],
     whatsAppText: "Hello Occassions Florist Calicut, I would like to inquire about fresh floral Garlands and wedding varmalas.",
-    href: "/garlands-and-baskets",
+    href: "/#highlights",
   },
 ];
 

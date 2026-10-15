@@ -10,8 +10,18 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
+        source: "/our-highlights",
+        destination: "/#highlights",
+        permanent: true,
+      },
+      {
+        source: "/garlands-and-baskets",
+        destination: "/#highlights",
+        permanent: true,
+      },
+      {
         source: "/car-decorations",
-        destination: "/our-highlights",
+        destination: "/#highlights",
         permanent: true,
       },
       {
@@ -21,7 +31,7 @@ const nextConfig: NextConfig = {
       },
       {
         source: "/church-arrangements",
-        destination: "/our-highlights",
+        destination: "/#highlights",
         permanent: true,
       },
     ];

@@ -571,7 +571,7 @@ export default function Header({
     } else if (categoryName === "Table arrangements") {
       scrollToHighlightsOr("/table-decor");
     } else if (categoryName === "Flower baskets & garlands") {
-      scrollToHighlightsOr("/garlands-and-baskets");
+      scrollToHighlightsOr("/#highlights");
     } else if (categoryName === "Contact & Location") {
       setDrawerOpen(true);
     }
@@ -955,7 +955,7 @@ export default function Header({
                         setHighlightsHovered(false);
                       }}
                     >
-                      <h3 className={styles.highlightsHeaderTitle}>Our Highlights</h3>
+                      <h3 className={styles.highlightsHeaderTitle}>Featured Services</h3>
                     </Link>
                   </div>
 
@@ -963,16 +963,19 @@ export default function Header({
                     <ul className={styles.dropdownList}>
                       <li>
                         <Link
-                          href="/car-decorations"
+                          href="/#highlights"
                           className={styles.dropdownItemLink}
-                          onClick={() => setHighlightsHovered(false)}
+                          onClick={(e) => {
+                            handleSectionNav(e, "highlights", "highlights");
+                            setHighlightsHovered(false);
+                          }}
                         >
                           Car Decor
                         </Link>
                       </li>
                       <li>
                         <Link
-                          href="/table-arrangements"
+                          href="/table-decor"
                           className={styles.dropdownItemLink}
                           onClick={() => setHighlightsHovered(false)}
                         >
@@ -983,18 +986,24 @@ export default function Header({
                     <ul className={styles.dropdownList}>
                       <li>
                         <Link
-                          href="/church-arrangements"
+                          href="/#highlights"
                           className={styles.dropdownItemLink}
-                          onClick={() => setHighlightsHovered(false)}
+                          onClick={(e) => {
+                            handleSectionNav(e, "highlights", "highlights");
+                            setHighlightsHovered(false);
+                          }}
                         >
                           Church Decor
                         </Link>
                       </li>
                       <li>
                         <Link
-                          href="/garlands-and-baskets"
+                          href="/#highlights"
                           className={styles.dropdownItemLink}
-                          onClick={() => setHighlightsHovered(false)}
+                          onClick={(e) => {
+                            handleSectionNav(e, "highlights", "highlights");
+                            setHighlightsHovered(false);
+                          }}
                         >
                           Garlands
                         </Link>
@@ -1849,8 +1858,11 @@ export default function Header({
               ▶ Cakes
             </Link>
             <Link
-              href="/garlands-and-baskets"
-              onClick={() => setDrawerOpen(false)}
+              href="/#highlights"
+              onClick={(e) => {
+                handleSectionNav(e, "highlights", "highlights");
+                setDrawerOpen(false);
+              }}
               style={{ color: "inherit", textDecoration: "none" }}
             >
               ▶ Garlands &amp; Baskets

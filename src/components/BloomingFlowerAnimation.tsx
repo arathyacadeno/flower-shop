@@ -7,21 +7,24 @@ interface BloomingFlowerProps {
 }
 
 export default function BloomingFlowerAnimation({ className }: BloomingFlowerProps) {
+  const containerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
+    const container = containerRef.current;
     const video = videoRef.current;
     const canvas = canvasRef.current;
-    if (!video || !canvas) return;
+    if (!video || !canvas || !container) return;
 
     const ctx = canvas.getContext("2d", { willReadFrequently: true });
     if (!ctx) return;
 
-    let animId: number;
+    let animId: number | null = null;
+    let isIntersecting = false;
 
     const processFrame = () => {
-      if (video.readyState >= 2 && !video.paused && !video.ended) {
+      if (isIntersecting && video.readyState >= 2 && !video.paused && !video.ended) {
         if (canvas.width !== video.videoWidth || canvas.height !== video.videoHeight) {
           canvas.width = video.videoWidth || 360;
           canvas.height = video.videoHeight || 480;
@@ -56,28 +59,60 @@ export default function BloomingFlowerAnimation({ className }: BloomingFlowerPro
       animId = requestAnimationFrame(processFrame);
     };
 
-    const tryPlay = () => {
-      video.play().catch(() => {});
+    const startLoop = () => {
+      if (animId === null) {
+        animId = requestAnimationFrame(processFrame);
+      }
     };
 
-    video.addEventListener("loadeddata", tryPlay);
-    video.addEventListener("canplay", tryPlay);
-    tryPlay();
+    const stopLoop = () => {
+      if (animId !== null) {
+        cancelAnimationFrame(animId);
+        animId = null;
+      }
+    };
 
-    animId = requestAnimationFrame(processFrame);
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          isIntersecting = entry.isIntersecting;
+          if (entry.isIntersecting) {
+            video.play().catch(() => {});
+            startLoop();
+          } else {
+            video.pause();
+            stopLoop();
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+
+    observer.observe(container);
+
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        video.pause();
+        stopLoop();
+      } else if (isIntersecting) {
+        video.play().catch(() => {});
+        startLoop();
+      }
+    };
+
+    document.addEventListener("visibilitychange", handleVisibilityChange);
 
     return () => {
-      cancelAnimationFrame(animId);
-      video.removeEventListener("loadeddata", tryPlay);
-      video.removeEventListener("canplay", tryPlay);
+      observer.disconnect();
+      stopLoop();
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
     };
   }, []);
 
   return (
-    <div className={className} aria-hidden="true">
+    <div ref={containerRef} className={className} aria-hidden="true">
       <video
         ref={videoRef}
-        autoPlay
         muted
         loop
         playsInline

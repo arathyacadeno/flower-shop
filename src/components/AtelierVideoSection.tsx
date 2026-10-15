@@ -5,23 +5,71 @@ import styles from "./AtelierVideoSection.module.css";
 import { Play, Pause, Volume2, VolumeX, Maximize2 } from "lucide-react";
 
 export default function AtelierVideoSection() {
+  const sectionRef = useRef<HTMLElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(true);
   const [isMuted, setIsMuted] = useState(true);
   const [progress, setProgress] = useState(0);
+  const userManuallyPausedRef = useRef(false);
 
   useEffect(() => {
-    // Attempt auto-play when component mounts
-    if (videoRef.current) {
-      videoRef.current.play().catch(() => {
-        // Fallback if browser requires user interaction for unmuted
-        if (videoRef.current) {
-          videoRef.current.muted = true;
-          setIsMuted(true);
-          videoRef.current.play().catch(() => {});
+    const section = sectionRef.current;
+    const video = videoRef.current;
+    if (!section || !video) return;
+
+    video.muted = true;
+    setIsMuted(true);
+
+    let isIntersecting = false;
+
+    const playVideo = () => {
+      if (video.paused && !userManuallyPausedRef.current) {
+        const promise = video.play();
+        if (promise !== undefined) {
+          promise.then(() => setIsPlaying(true)).catch(() => {});
         }
-      });
-    }
+      }
+    };
+
+    const pauseVideo = () => {
+      if (!video.paused) {
+        video.pause();
+        setIsPlaying(false);
+      }
+    };
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          isIntersecting = entry.isIntersecting;
+          if (entry.isIntersecting) {
+            if (!document.hidden) {
+              playVideo();
+            }
+          } else {
+            pauseVideo();
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
+
+    observer.observe(section);
+
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        pauseVideo();
+      } else if (isIntersecting) {
+        playVideo();
+      }
+    };
+
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
+    return () => {
+      observer.disconnect();
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+    };
   }, []);
 
   const togglePlay = () => {
@@ -29,9 +77,11 @@ export default function AtelierVideoSection() {
     if (isPlaying) {
       videoRef.current.pause();
       setIsPlaying(false);
+      userManuallyPausedRef.current = true;
     } else {
       videoRef.current.play();
       setIsPlaying(true);
+      userManuallyPausedRef.current = false;
     }
   };
 
@@ -65,6 +115,7 @@ export default function AtelierVideoSection() {
 
   return (
     <section
+      ref={sectionRef}
       className={`${styles.sectionWrapper || ""} atelier-section-wrapper`}
       id="atelier-film-showcase"
       aria-label="Occassions Atelier Film"

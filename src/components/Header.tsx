@@ -808,93 +808,129 @@ export default function Header({
                   aria-label="Special occasions navigation menu"
                 >
                   <div className={styles.occasionsDropdownHeader}>
-                    <Link
-                      href="/#occasions"
+                    <a
+                      href="#"
+                      role="button"
                       className={styles.occasionsHeaderLink}
                       onClick={(e) => {
-                        handleSectionNav(e, "occasions", "occasions");
+                        e.preventDefault();
+                        if (pathname === "/") {
+                          handleSectionNav(e as any, "occasions", "occasions");
+                        }
                         setOccasionsHovered(false);
                       }}
                     >
                       <h3 className={styles.occasionsHeaderTitle}>Shop by occasion</h3>
-                    </Link>
+                    </a>
                   </div>
 
                   <div className={styles.occasionsDropdownGrid}>
                     <ul className={styles.dropdownList}>
                       <li>
-                        <Link
-                          href="/flower-bouquets?occasion=birthday"
+                        <a
+                          href="#"
+                          role="button"
                           className={styles.dropdownItemLink}
-                          onClick={() => setOccasionsHovered(false)}
+                          onClick={(e) => {
+                            e.preventDefault();
+                            setOccasionsHovered(false);
+                          }}
                         >
                           Birthday
-                        </Link>
+                        </a>
                       </li>
                       <li>
-                        <Link
-                          href="/flower-bouquets?occasion=anniversary"
+                        <a
+                          href="#"
+                          role="button"
                           className={styles.dropdownItemLink}
-                          onClick={() => setOccasionsHovered(false)}
+                          onClick={(e) => {
+                            e.preventDefault();
+                            setOccasionsHovered(false);
+                          }}
                         >
                           Anniversary
-                        </Link>
+                        </a>
                       </li>
                       <li>
-                        <Link
-                          href="/flower-bouquets?occasion=get-well-soon"
+                        <a
+                          href="#"
+                          role="button"
                           className={styles.dropdownItemLink}
-                          onClick={() => setOccasionsHovered(false)}
+                          onClick={(e) => {
+                            e.preventDefault();
+                            setOccasionsHovered(false);
+                          }}
                         >
                           Get Well Soon
-                        </Link>
+                        </a>
                       </li>
                       <li>
-                        <Link
-                          href="/flower-bouquets?occasion=condolences"
+                        <a
+                          href="#"
+                          role="button"
                           className={styles.dropdownItemLink}
-                          onClick={() => setOccasionsHovered(false)}
+                          onClick={(e) => {
+                            e.preventDefault();
+                            setOccasionsHovered(false);
+                          }}
                         >
                           Condolence
-                        </Link>
+                        </a>
                       </li>
                     </ul>
                     <ul className={styles.dropdownList}>
                       <li>
-                        <Link
-                          href="/flower-bouquets?occasion=best-wishes"
+                        <a
+                          href="#"
+                          role="button"
                           className={styles.dropdownItemLink}
-                          onClick={() => setOccasionsHovered(false)}
+                          onClick={(e) => {
+                            e.preventDefault();
+                            setOccasionsHovered(false);
+                          }}
                         >
                           Best Wishes
-                        </Link>
+                        </a>
                       </li>
                       <li>
-                        <Link
-                          href="/flower-bouquets?occasion=thank-you"
+                        <a
+                          href="#"
+                          role="button"
                           className={styles.dropdownItemLink}
-                          onClick={() => setOccasionsHovered(false)}
+                          onClick={(e) => {
+                            e.preventDefault();
+                            setOccasionsHovered(false);
+                          }}
                         >
                           Thank You
-                        </Link>
+                        </a>
                       </li>
                       <li>
-                        <Link
-                          href="/flower-bouquets?occasion=wedding"
+                        <a
+                          href="#"
+                          role="button"
                           className={styles.dropdownItemLink}
-                          onClick={() => setOccasionsHovered(false)}
+                          onClick={(e) => {
+                            e.preventDefault();
+                            setOccasionsHovered(false);
+                          }}
                         >
                           Wedding
-                        </Link>
+                        </a>
                       </li>
                       <li>
-                        <Link
-                          href="/flower-bouquets?occasion=congratulations"
+                        <a
+                          href="#"
+                          role="button"
                           className={styles.dropdownItemLink}
-                          onClick={() => setOccasionsHovered(false)}
+                          onClick={(e) => {
+                            e.preventDefault();
+                            setOccasionsHovered(false);
+                          }}
                         >
                           Congratulation
-                        </Link>
+                        </a>
                       </li>
                     </ul>
                   </div>

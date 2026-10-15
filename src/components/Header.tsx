@@ -44,6 +44,51 @@ export default function Header({
   const { user, isAuthenticated, isAdmin, login, signup, loginWithGoogle, loginWithPhone, sendPhoneOtp, verifyPhoneOtp, logout } = useAuth();
   const [internalDrawerOpen, setInternalDrawerOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const searchInputRef = useRef<HTMLInputElement>(null);
+  const [animatedPlaceholder, setAnimatedPlaceholder] = useState("Search flowers, cakes...");
+
+  // Dynamic typing format for search bar placeholder
+  useEffect(() => {
+    const phrases = [
+      "Search flowers, cakes...",
+      "Search fresh red roses...",
+      "Search flower baskets...",
+      "Search luxury bouquets...",
+      "Search wedding decor...",
+    ];
+    let phraseIndex = 0;
+    let charIndex = phrases[0].length;
+    let isDeleting = true;
+    let timer: NodeJS.Timeout;
+
+    const typeLoop = () => {
+      const current = phrases[phraseIndex];
+      if (isDeleting) {
+        charIndex--;
+        setAnimatedPlaceholder(current.substring(0, charIndex));
+        if (charIndex <= 0) {
+          isDeleting = false;
+          phraseIndex = (phraseIndex + 1) % phrases.length;
+          timer = setTimeout(typeLoop, 350);
+          return;
+        }
+        timer = setTimeout(typeLoop, 30);
+      } else {
+        charIndex++;
+        setAnimatedPlaceholder(current.substring(0, charIndex));
+        if (charIndex >= current.length) {
+          isDeleting = true;
+          timer = setTimeout(typeLoop, 2200);
+          return;
+        }
+        timer = setTimeout(typeLoop, 65);
+      }
+    };
+
+    // Start typing rotation after a brief initial pause
+    timer = setTimeout(typeLoop, 2500);
+    return () => clearTimeout(timer);
+  }, []);
   const [activeModal, setActiveModal] = useState<"cart" | "signin" | null>(null);
 
   const [authTab, setAuthTab] = useState<"signin" | "signup">("signin");
@@ -693,6 +738,7 @@ export default function Header({
           <div className={styles.rightSection}>
             <form
               className={styles.searchBar}
+              onClick={() => searchInputRef.current?.focus()}
               onSubmit={(e) => {
                 e.preventDefault();
                 if (searchQuery.trim()) {
@@ -702,11 +748,23 @@ export default function Header({
               role="search"
               suppressHydrationWarning
             >
-              <Search size={18} strokeWidth={1.8} className={styles.searchIcon} />
+              <label
+                htmlFor="header-search-input"
+                className={styles.searchIconLabel}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  searchInputRef.current?.focus();
+                }}
+                title="Search"
+              >
+                <Search size={18} strokeWidth={1.8} className={styles.searchIcon} />
+              </label>
               <input
+                id="header-search-input"
+                ref={searchInputRef}
                 type="text"
                 className={styles.searchInput}
-                placeholder="Search flowers, cakes..."
+                placeholder={animatedPlaceholder}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 aria-label="Search for flowers, cakes and gifts"
@@ -719,7 +777,11 @@ export default function Header({
                 <button
                   type="button"
                   className={styles.searchClearBtn}
-                  onClick={() => setSearchQuery("")}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setSearchQuery("");
+                    searchInputRef.current?.focus();
+                  }}
                   aria-label="Clear search"
                 >
                   <X size={14} />

@@ -77,9 +77,10 @@ export default function SearchModal({
             marginBottom: 36,
             display: "flex",
             alignItems: "center",
+            cursor: "text",
           }}
         >
-          <Search size={28} color="#ffffff" style={{ marginRight: 16 }} />
+          <Search size={28} color="#ffffff" style={{ marginRight: 16, cursor: "text" }} />
           <input
             type="text"
             placeholder="Search by bouquet name, rose, peony, orchid..."

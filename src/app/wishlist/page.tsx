@@ -50,8 +50,8 @@ export default function WishlistPage() {
             </div>
             <h2 className={styles.emptyTitle}>Your Wishlist is Empty</h2>
             <p className={styles.emptyDesc}>
-              Save your favorite flower bouquets, cakes, and event decor to view
-              and order them anytime.
+              Save your favorite flowers, cakes, and event decor to view and order
+              them anytime.
             </p>
             <div className={styles.emptyActions}>
               <Link href="/flower-bouquets" className={styles.exploreBtn}>

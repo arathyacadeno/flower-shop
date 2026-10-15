@@ -651,15 +651,21 @@ export default function Header({
               >
                 <span>Flowers</span>
                 <span
-                  className={`${styles.flowersChevron} ${
-                    flowersHovered ? styles.flowersChevronVisible : ""
-                  }`}
-                  aria-hidden="true"
+                  className={styles.flowersChevron}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    setFlowersHovered((prev) => !prev);
+                  }}
+                  role="button"
+                  tabIndex={0}
+                  aria-label="Toggle flowers dropdown"
                 >
                   <ChevronDown
                     size={14}
+                    strokeWidth={2.2}
                     style={{
-                      transition: "transform 0.2s ease",
+                      transition: "transform 0.25s cubic-bezier(0.16, 1, 0.3, 1)",
                       transform: flowersHovered ? "rotate(180deg)" : "rotate(0deg)",
                     }}
                   />

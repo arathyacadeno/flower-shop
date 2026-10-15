@@ -105,27 +105,14 @@
 }
 
 .flowersChevron {
-  display: none;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   line-height: 1;
-}
-
-.flowersNavWrapper:hover .flowersChevron,
-.flowersChevronVisible {
-  display: inline-flex;
-  animation: flowersChevronFadeIn 0.18s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-@keyframes flowersChevronFadeIn {
-  from {
-    opacity: 0;
-    transform: translateX(-3px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
+  color: inherit;
+  margin-left: 2px;
+  cursor: pointer;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), color 0.2s ease;
 }
 
 /* ---------- Flowers Mega Menu (Matching User Reference) ---------- */

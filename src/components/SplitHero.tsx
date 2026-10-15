@@ -125,7 +125,7 @@ export default function SplitHero({
         <video
           ref={videoRef}
           className={styles.heroVideo}
-          src="/videos/OCCASIONS%20(1).mp4"
+          src="/videos/heder-%20HSL%20Corrected.mp4"
           autoPlay
           muted
           loop
@@ -135,8 +135,8 @@ export default function SplitHero({
           disableRemotePlayback
           controlsList="nodownload noplaybackrate nofullscreen noremoteplayback"
         >
-          <source src="/videos/OCCASIONS%20(1).mp4" type="video/mp4" />
-          <source src="/videos/OCCASIONS (1).mp4" type="video/mp4" />
+          <source src="/videos/heder-%20HSL%20Corrected.mp4" type="video/mp4" />
+          <source src="/videos/heder- HSL Corrected.mp4" type="video/mp4" />
         </video>
       </div>
     </section>

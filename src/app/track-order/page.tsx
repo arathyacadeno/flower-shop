@@ -412,7 +412,7 @@ export default function TrackOrderPage() {
         <section className={styles.helpBanner}>
           <div className={styles.helpContent}>
             <h3 className={styles.helpTitle}>Need help with your order?</h3>
-            <p className={styles.helpDesc}>Our floral team is available 8 AM – 8 PM every day</p>
+            <p className={styles.helpDesc}>Our Occasions team is available 8 AM – 8 PM every day</p>
           </div>
           <div className={styles.helpActions}>
             <a href="https://wa.me/918606464700" target="_blank" rel="noopener noreferrer" className={styles.helpBtnPrimary}>

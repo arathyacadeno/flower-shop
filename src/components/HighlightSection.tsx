@@ -19,20 +19,20 @@ export interface HighlightCard {
 
 const highlightCards: HighlightCard[] = [
   {
-    id: "flower-baskets",
-    tag: "Artisanal Floristry",
-    title: "Flower Baskets",
-    subtitle: "Handwoven Baskets Brimmed with Fresh Blooms",
-    image: "/images/cat-flower-bouquet-yellow.jpg",
-    desc: "Artisanal woven baskets brimming with farm-fresh Dutch roses, delicate baby's breath, and aromatic greenery, styled for festive celebrations and gifts.",
+    id: "car-decor",
+    tag: "Celebration",
+    title: "Car Decor",
+    subtitle: "Luxury Wedding & Event Floral Styling",
+    image: "/images/highlight-car-decorations.jpg",
+    desc: "Bespoke bridal car decor featuring premium imported roses, exotic lilies, delicate carnations, and elegant cascading satin ribbons customized for weddings and grand arrivals.",
     features: [
-      "Handwoven Natural Cane Baskets",
-      "Premium Fresh Cut Blossoms",
-      "Custom Satin Ribbon & Card",
-      "Same-Day Delivery in Calicut",
+      "Custom Bonnet & Door Floral Styling",
+      "Premium Imported Fresh Blooms",
+      "Scratch-Safe Suction Mounting",
+      "On-Site Service Across Calicut",
     ],
-    whatsAppText: "Hello Occassions Florist Calicut, I would like to inquire about fresh Flower Baskets.",
-    href: "/flower-baskets",
+    whatsAppText: "Hello Occassions Florist Calicut, I would like to inquire about wedding Car Decor services.",
+    href: "/flower-bouquets?occasion=wedding",
   },
   {
     id: "stage-decor",

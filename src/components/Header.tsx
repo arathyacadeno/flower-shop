@@ -650,13 +650,20 @@ export default function Header({
                 aria-expanded={flowersHovered}
               >
                 <span>Flowers</span>
-                <ChevronDown
-                  size={14}
-                  style={{
-                    transition: "transform 0.2s ease",
-                    transform: flowersHovered ? "rotate(180deg)" : "rotate(0deg)",
-                  }}
-                />
+                <span
+                  className={`${styles.flowersChevron} ${
+                    flowersHovered ? styles.flowersChevronVisible : ""
+                  }`}
+                  aria-hidden="true"
+                >
+                  <ChevronDown
+                    size={14}
+                    style={{
+                      transition: "transform 0.2s ease",
+                      transform: flowersHovered ? "rotate(180deg)" : "rotate(0deg)",
+                    }}
+                  />
+                </span>
               </Link>
 
               {flowersHovered && (

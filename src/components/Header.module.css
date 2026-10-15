@@ -104,14 +104,31 @@
   color: #be185d;
 }
 
-/* ---------- Flowers Mega Menu (Matching User Reference) ---------- */
-.flowersNavWrapper {
-  position: relative;
-  display: inline-flex;
+.flowersChevron {
+  display: none;
   align-items: center;
-  height: 78px;
+  justify-content: center;
+  line-height: 1;
 }
 
+.flowersNavWrapper:hover .flowersChevron,
+.flowersChevronVisible {
+  display: inline-flex;
+  animation: flowersChevronFadeIn 0.18s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes flowersChevronFadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(-3px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* ---------- Flowers Mega Menu (Matching User Reference) ---------- */
 .flowersDropdown {
   position: absolute;
   top: calc(100% - 6px);

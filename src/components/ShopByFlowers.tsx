@@ -103,29 +103,29 @@ export default function ShopByFlowers() {
             <span className={styles.dividerLine} />
             <span className={styles.dividerIcon}>
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-                <circle cx="12" cy="12" r="2.2" fill="#FF5A9A" />
+                <circle cx="12" cy="12" r="2.2" fill="#db2777" />
                 <path
                   d="M12 4.5C12 4.5 10 7.5 10 9.5C10 10.6 10.9 11.5 12 11.5C13.1 11.5 14 10.6 14 9.5C14 7.5 12 4.5 12 4.5Z"
-                  fill="#FF5A9A"
-                  stroke="#FF5A9A"
+                  fill="#fbcfe8"
+                  stroke="#db2777"
                   strokeWidth="0.8"
                 />
                 <path
                   d="M12 19.5C12 19.5 10 16.5 10 14.5C10 13.4 10.9 12.5 12 12.5C13.1 12.5 14 13.4 14 14.5C14 16.5 12 19.5 12 19.5Z"
-                  fill="#FCE4F3"
-                  stroke="#FF5A9A"
+                  fill="#fbcfe8"
+                  stroke="#db2777"
                   strokeWidth="0.8"
                 />
                 <path
                   d="M4.5 12C4.5 12 7.5 10 9.5 10C10.6 10 11.5 10.9 11.5 12C11.5 13.1 10.6 14 9.5 14C7.5 14 4.5 12 4.5 12Z"
-                  fill="#FCE4F3"
-                  stroke="#FF5A9A"
+                  fill="#fbcfe8"
+                  stroke="#db2777"
                   strokeWidth="0.8"
                 />
                 <path
                   d="M19.5 12C19.5 12 16.5 10 14.5 10C13.4 10 12.5 10.9 12.5 12C12.5 13.1 13.4 14 14.5 14C16.5 14 19.5 12 19.5 12Z"
-                  fill="#FF5A9A"
-                  stroke="#FCE4F3"
+                  fill="#fbcfe8"
+                  stroke="#db2777"
                   strokeWidth="0.8"
                 />
               </svg>

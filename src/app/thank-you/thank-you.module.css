@@ -98,7 +98,7 @@
 .pillCategory {
   font-size: 0.72rem;
   font-weight: 700;
-  color: #686b2e;
+  color: #E90046;
   letter-spacing: 0.06em;
   display: block;
   margin-bottom: 2px;
@@ -155,7 +155,7 @@
 .pageSubtitle {
   font-size: 1.05rem;
   font-weight: 600;
-  color: #686b2e;
+  color: #E90046;
   margin: 0 0 4px 0;
 }
 
@@ -279,14 +279,14 @@
   width: 36px;
   height: 36px;
   border-radius: 10px;
-  background-color: #f7f8f2;
-  color: #686b2e;
+  background-color: #fdf2f8;
+  color: #E90046;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  box-shadow: 0 2px 6px rgba(104, 107, 46, 0.12);
-  border: 1px solid rgba(104, 107, 46, 0.08);
+  box-shadow: 0 2px 6px rgba(233, 0, 70, 0.12);
+  border: 1px solid rgba(233, 0, 70, 0.08);
 }
 
 .metaLabel {
@@ -326,7 +326,7 @@
   align-items: center;
   justify-content: center;
   gap: 10px;
-  background-color: #686b2e;
+  background-color: #E90046;
   color: #ffffff;
   border: none;
   border-radius: 12px;
@@ -336,15 +336,15 @@
   font-weight: 600;
   text-decoration: none;
   transition: all 0.2s ease;
-  box-shadow: 0 4px 14px rgba(104, 107, 46, 0.25);
+  box-shadow: 0 4px 14px rgba(233, 0, 70, 0.28);
   width: 100%;
   cursor: pointer;
 }
 
 .continueShoppingBtn:hover {
-  background-color: #555823;
+  background-color: #d1003f;
   transform: translateY(-1px);
-  box-shadow: 0 6px 18px rgba(104, 107, 46, 0.35);
+  box-shadow: 0 6px 18px rgba(233, 0, 70, 0.36);
 }
 
 @media (max-width: 920px) {

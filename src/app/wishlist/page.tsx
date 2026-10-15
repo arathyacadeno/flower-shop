@@ -54,8 +54,8 @@ export default function WishlistPage() {
               them anytime.
             </p>
             <div className={styles.emptyActions}>
-              <Link href="/flower-bouquets" className={styles.exploreBtn}>
-                Explore Flowers <ArrowRight size={16} />
+              <Link href="/#categories" className={styles.exploreBtn}>
+                Explore Collections <ArrowRight size={16} />
               </Link>
               <Link href="/cakes" className={styles.secondaryExploreBtn}>
                 Browse Cakes

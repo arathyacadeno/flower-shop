@@ -53,18 +53,6 @@ export default function Footer() {
               <li>
                 <Link href="/#highlights" className={styles.navLink}>Our Highlights</Link>
               </li>
-              <li>
-                <Link href="/car-decorations" className={styles.navLink}>Car Decor</Link>
-              </li>
-              <li>
-                <Link href="/table-arrangements" className={styles.navLink}>Stage Decor</Link>
-              </li>
-              <li>
-                <Link href="/church-arrangements" className={styles.navLink}>Church Decor</Link>
-              </li>
-              <li>
-                <Link href="/garlands-and-baskets" className={styles.navLink}>Garlands</Link>
-              </li>
             </ul>
           </div>
 

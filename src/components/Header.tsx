@@ -720,6 +720,7 @@ export default function Header({
                     {/* Clean Column: Special Touches */}
                     <div className={styles.dropdownCol}>
                       <h3 className={styles.dropdownColHeading}>Special Touches</h3>
+                      <hr className={styles.dropdownDivider} />
                       <ul className={styles.dropdownList}>
                         <li>
                           <Link
@@ -808,6 +809,19 @@ export default function Header({
                   role="menu"
                   aria-label="Special occasions navigation menu"
                 >
+                  <div className={styles.occasionsDropdownHeader}>
+                    <Link
+                      href="/#occasions"
+                      className={styles.occasionsHeaderLink}
+                      onClick={(e) => {
+                        handleSectionNav(e, "occasions", "occasions");
+                        setOccasionsHovered(false);
+                      }}
+                    >
+                      <h3 className={styles.occasionsHeaderTitle}>Shop by occasion</h3>
+                    </Link>
+                  </div>
+
                   <div className={styles.occasionsDropdownGrid}>
                     <ul className={styles.dropdownList}>
                       <li>
@@ -903,7 +917,7 @@ export default function Header({
                 }`}
                 aria-expanded={highlightsHovered}
               >
-                <span>Our highlights</span>
+                <span>Our Highlights</span>
                 <span
                   className={styles.flowersChevron}
                   onClick={(e) => {
@@ -932,59 +946,60 @@ export default function Header({
                   role="menu"
                   aria-label="Our highlights navigation menu"
                 >
-                  <ul className={styles.highlightsDropdownList}>
-                    <li>
-                      <Link
-                        href="/car-decorations"
-                        className={styles.highlightsDropdownItem}
-                        onClick={() => setHighlightsHovered(false)}
-                      >
-                        <span className={styles.highlightsItemTitle}>Car Decor</span>
-                        <span className={styles.highlightsItemSubtitle}>VIP Bonnet Florals &amp; Satin Posies</span>
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
-                        href="/table-arrangements"
-                        className={styles.highlightsDropdownItem}
-                        onClick={() => setHighlightsHovered(false)}
-                      >
-                        <span className={styles.highlightsItemTitle}>Stage Decor</span>
-                        <span className={styles.highlightsItemSubtitle}>Opulent Banquet &amp; Centerpieces</span>
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
-                        href="/church-arrangements"
-                        className={styles.highlightsDropdownItem}
-                        onClick={() => setHighlightsHovered(false)}
-                      >
-                        <span className={styles.highlightsItemTitle}>Church Decor</span>
-                        <span className={styles.highlightsItemSubtitle}>Grand Altar Arches &amp; Aisle Florals</span>
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
-                        href="/garlands-and-baskets"
-                        className={styles.highlightsDropdownItem}
-                        onClick={() => setHighlightsHovered(false)}
-                      >
-                        <span className={styles.highlightsItemTitle}>Garlands</span>
-                        <span className={styles.highlightsItemSubtitle}>Fresh Jasmine Varmala &amp; Gift Baskets</span>
-                      </Link>
-                    </li>
-                  </ul>
-                  <div className={styles.highlightsDropdownFooter}>
+                  <div className={styles.highlightsDropdownHeader}>
                     <Link
                       href="/#highlights"
-                      className={styles.highlightsFooterLink}
+                      className={styles.highlightsHeaderLink}
                       onClick={(e) => {
                         handleSectionNav(e, "highlights", "highlights");
                         setHighlightsHovered(false);
                       }}
                     >
-                      View All Highlights &rarr;
+                      <h3 className={styles.highlightsHeaderTitle}>Our Highlights</h3>
                     </Link>
+                  </div>
+
+                  <div className={styles.highlightsDropdownGrid}>
+                    <ul className={styles.dropdownList}>
+                      <li>
+                        <Link
+                          href="/car-decorations"
+                          className={styles.dropdownItemLink}
+                          onClick={() => setHighlightsHovered(false)}
+                        >
+                          Car Decor
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          href="/table-arrangements"
+                          className={styles.dropdownItemLink}
+                          onClick={() => setHighlightsHovered(false)}
+                        >
+                          Stage Decor
+                        </Link>
+                      </li>
+                    </ul>
+                    <ul className={styles.dropdownList}>
+                      <li>
+                        <Link
+                          href="/church-arrangements"
+                          className={styles.dropdownItemLink}
+                          onClick={() => setHighlightsHovered(false)}
+                        >
+                          Church Decor
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          href="/garlands-and-baskets"
+                          className={styles.dropdownItemLink}
+                          onClick={() => setHighlightsHovered(false)}
+                        >
+                          Garlands
+                        </Link>
+                      </li>
+                    </ul>
                   </div>
                 </div>
               )}

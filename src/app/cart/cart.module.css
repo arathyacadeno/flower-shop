@@ -654,26 +654,25 @@
   align-items: center;
 }
 
-.emptyIconCircle {
-  width: 76px;
-  height: 76px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #fff5f8 0%, #fde9ef 100%);
-  border: 1px solid rgba(233, 0, 70, 0.16);
+.emptyImageWrap {
+  margin-bottom: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 22px;
-  box-shadow: 0 6px 18px rgba(233, 0, 70, 0.07);
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.emptyCartCard:hover .emptyIconCircle {
-  transform: scale(1.05);
-}
-
-.emptyFlowerSvg {
+.emptyFlowerImg {
+  width: 140px;
+  height: 140px;
+  max-width: 160px;
+  object-fit: contain;
   display: block;
+  filter: drop-shadow(0 6px 16px rgba(233, 0, 70, 0.08));
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.emptyCartCard:hover .emptyFlowerImg {
+  transform: scale(1.05);
 }
 
 .emptyHeading {

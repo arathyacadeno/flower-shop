@@ -304,60 +304,12 @@ export default function CartPage() {
         {displayItems.length === 0 ? (
           /* Empty Cart State */
           <div className={styles.emptyCartCard}>
-            <div className={styles.emptyIconCircle} aria-hidden="true">
-              <svg
-                width="42"
-                height="42"
-                viewBox="0 0 48 48"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                className={styles.emptyFlowerSvg}
-              >
-                {/* Stem & Leaves */}
-                <path
-                  d="M24 26V40"
-                  stroke="#E90046"
-                  strokeWidth="2.2"
-                  strokeLinecap="round"
-                />
-                <path
-                  d="M24 33C20.5 32 17 29.5 17 25.5C21 25.5 23 28 24 30.5"
-                  stroke="#E90046"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-                <path
-                  d="M24 30.5C25 28 27 25.5 31 25.5C31 29.5 27.5 32 24 33"
-                  stroke="#E90046"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-                {/* Petals */}
-                <path
-                  d="M24 8C20 12 15 15.5 15 20C15 24.5 18.5 27 24 27C29.5 27 33 24.5 33 20C33 15.5 28 12 24 8Z"
-                  fill="#FDE9EF"
-                  stroke="#E90046"
-                  strokeWidth="2.2"
-                  strokeLinejoin="round"
-                />
-                <path
-                  d="M19 16C16 18.5 13 21 13 23.5C13 26 15 27.5 18 27.5"
-                  stroke="#E90046"
-                  strokeWidth="1.8"
-                  strokeLinecap="round"
-                  strokeOpacity="0.8"
-                />
-                <path
-                  d="M29 16C32 18.5 35 21 35 23.5C35 26 33 27.5 30 27.5"
-                  stroke="#E90046"
-                  strokeWidth="1.8"
-                  strokeLinecap="round"
-                  strokeOpacity="0.8"
-                />
-                <circle cx="24" cy="18.5" r="3.5" fill="#E90046" />
-              </svg>
+            <div className={styles.emptyImageWrap}>
+              <img
+                src="/images/empty-cart-flower.png"
+                alt="Empty cart flower illustration"
+                className={styles.emptyFlowerImg}
+              />
             </div>
 
             <h1 className={styles.emptyHeading}>Your Cart is Empty</h1>
@@ -365,7 +317,7 @@ export default function CartPage() {
               There’s nothing blooming here yet. Find the perfect flowers to make someone’s day special.
             </p>
 
-            <Link href="/flower-bouquets" className={styles.exploreFlowersBtn}>
+            <Link href="/#categories" className={styles.exploreFlowersBtn}>
               <span>Explore Collections</span>
               <ArrowRight size={18} strokeWidth={2.2} />
             </Link>
@@ -395,13 +347,13 @@ export default function CartPage() {
                     <div className={styles.addressSubtext}>
                       {savedAddress
                         ? [
-                            savedAddress.house,
-                            savedAddress.street,
-                            savedAddress.city,
-                            savedAddress.pinCode,
-                          ]
-                            .filter(Boolean)
-                            .join(", ")
+                          savedAddress.house,
+                          savedAddress.street,
+                          savedAddress.city,
+                          savedAddress.pinCode,
+                        ]
+                          .filter(Boolean)
+                          .join(", ")
                         : "Delivery address will be confirmed at checkout"}
                     </div>
                   </div>
@@ -426,8 +378,8 @@ export default function CartPage() {
                 const hasDiscount = origPrice > item.bouquet.price;
                 const discountPercent = hasDiscount
                   ? Math.round(
-                      ((origPrice - item.bouquet.price) / origPrice) * 100
-                    )
+                    ((origPrice - item.bouquet.price) / origPrice) * 100
+                  )
                   : 0;
 
                 return (
@@ -533,12 +485,12 @@ export default function CartPage() {
                             Boolean((item.bouquet as { deliveryDate?: string }).deliveryDate))
                             ? (item.bouquet as { deliveryDate?: string }).deliveryDate
                             : `Delivery by ${new Date(
-                                Date.now() + (idx + 2) * 86400000
-                              ).toLocaleDateString("en-US", {
-                                month: "short",
-                                day: "numeric",
-                                weekday: "short",
-                              })}`}
+                              Date.now() + (idx + 2) * 86400000
+                            ).toLocaleDateString("en-US", {
+                              month: "short",
+                              day: "numeric",
+                              weekday: "short",
+                            })}`}
                         </div>
                       </div>
                     </div>
@@ -553,8 +505,8 @@ export default function CartPage() {
                           const addonHasDiscount = addonOrig > addonItem.bouquet.price;
                           const addonDiscount = addonHasDiscount
                             ? Math.round(
-                                ((addonOrig - addonItem.bouquet.price) / addonOrig) * 100
-                              )
+                              ((addonOrig - addonItem.bouquet.price) / addonOrig) * 100
+                            )
                             : 0;
 
                           return (

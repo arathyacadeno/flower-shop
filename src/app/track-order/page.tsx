@@ -277,12 +277,11 @@ export default function TrackOrderPage() {
               <h2 className={styles.howTitle}>How it works</h2>
               <div className={styles.howSteps}>
                 {[
-                  { icon: "📋", label: "Enter Order ID",      desc: "Use the ID from your confirmation" },
-                  { icon: "🔍", label: "Instant Search",      desc: "We fetch your live order status" },
-                  { icon: "🚚", label: "Track in Real Time",  desc: "See exactly where your flowers are" },
+                  { label: "Enter Order ID",      desc: "Use the ID from your confirmation" },
+                  { label: "Instant Search",      desc: "We fetch your live order status" },
+                  { label: "Track in Real Time",  desc: "See exactly where your flowers are" },
                 ].map((step) => (
                   <div key={step.label} className={styles.howStep}>
-                    <span className={styles.howEmoji}>{step.icon}</span>
                     <strong className={styles.howLabel}>{step.label}</strong>
                     <span className={styles.howDesc}>{step.desc}</span>
                   </div>
@@ -299,7 +298,7 @@ export default function TrackOrderPage() {
                 No order found for <strong>&ldquo;{input.trim()}&rdquo;</strong>. Please check the ID and try again.
               </p>
               <a href="https://wa.me/918606464700" target="_blank" rel="noopener noreferrer" className={styles.whatsappLink}>
-                💬 Chat on WhatsApp for help
+                Chat on WhatsApp for help
               </a>
             </div>
           )}
@@ -416,7 +415,7 @@ export default function TrackOrderPage() {
           </div>
           <div className={styles.helpActions}>
             <a href="https://wa.me/918606464700" target="_blank" rel="noopener noreferrer" className={styles.helpBtnPrimary}>
-              💬 WhatsApp Us
+              WhatsApp Us
             </a>
             <Link href="/orders" className={styles.helpBtnSecondary}>My Orders</Link>
           </div>

@@ -256,7 +256,7 @@ export default function TrackOrderPage() {
               <input
                 type="text"
                 className={styles.searchInput}
-                placeholder="Enter Order ID  e.g. OCC-100123"
+                placeholder="Enter Order ID  e.g. 178505"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 aria-label="Order ID"
@@ -288,9 +288,6 @@ export default function TrackOrderPage() {
                   </div>
                 ))}
               </div>
-              <div className={styles.demoHint}>
-                <strong>Try demo IDs:</strong> <code>OCC-100123</code> &nbsp;or&nbsp; <code>OCC-100098</code>
-              </div>
             </div>
           )}
 
@@ -304,9 +301,6 @@ export default function TrackOrderPage() {
               <a href="https://wa.me/918606464700" target="_blank" rel="noopener noreferrer" className={styles.whatsappLink}>
                 💬 Chat on WhatsApp for help
               </a>
-              <div className={styles.demoHint}>
-                <strong>Demo:</strong> Try <code>OCC-100123</code> or <code>OCC-100098</code>
-              </div>
             </div>
           )}
 

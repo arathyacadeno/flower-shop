@@ -315,14 +315,15 @@
   border-radius: 20px;
   max-width: 920px;
   width: 100%;
-  max-height: 90vh;
-  overflow-y: auto;
+  height: min(680px, 90vh);
+  min-height: min(580px, 90vh);
   position: relative;
   display: grid;
   grid-template-columns: 1.05fr 1fr;
   box-shadow: 0 28px 64px rgba(0, 0, 0, 0.24);
   border: 1px solid #fce7f3;
   animation: modalPop 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
 }
 
 .modalCloseBtn {
@@ -351,18 +352,23 @@
 
 .modalImageCol {
   background: #fff5f8;
-  min-height: 380px;
+  height: 100%;
+  width: 100%;
+  min-height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
   border-radius: 20px 0 0 20px;
+  position: relative;
 }
 
 .modalBigImg {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center;
+  display: block;
 }
 
 .modalDetailsCol {
@@ -370,6 +376,9 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  height: 100%;
+  overflow-y: auto;
+  box-sizing: border-box;
 }
 
 .modalTag {
@@ -640,14 +649,43 @@
 
   .modalContent {
     grid-template-columns: 1fr;
+    height: auto;
+    max-height: 90vh;
+    min-height: unset;
+    overflow-y: auto;
   }
 
   .modalImageCol {
-    min-height: 220px;
+    height: 240px;
+    min-height: 240px;
     border-radius: 20px 20px 0 0;
   }
 
   .modalDetailsCol {
     padding: 26px 20px;
+    height: auto;
+    overflow-y: visible;
+  }
+}
+
+@media (max-width: 768px) {
+  .modalContent {
+    grid-template-columns: 1fr;
+    height: auto;
+    max-height: 90vh;
+    min-height: unset;
+    overflow-y: auto;
+  }
+
+  .modalImageCol {
+    height: 260px;
+    min-height: 260px;
+    border-radius: 20px 20px 0 0;
+  }
+
+  .modalDetailsCol {
+    padding: 28px 22px;
+    height: auto;
+    overflow-y: visible;
   }
 }

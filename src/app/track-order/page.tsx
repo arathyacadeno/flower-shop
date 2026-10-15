@@ -75,7 +75,7 @@ interface StatusStep {
 
 const STATUS_STEPS: StatusStep[] = [
   { key: "placed",            label: "Order Placed",      icon: Package,    desc: "We received your order" },
-  { key: "confirmed",         label: "Confirmed",         icon: CheckCircle, desc: "Our florist confirmed your order" },
+  { key: "confirmed",         label: "Confirmed",         icon: CheckCircle, desc: "Occasions confirmed your order" },
   { key: "preparing",         label: "Preparing",         icon: RefreshCw,  desc: "Your arrangement is being prepared" },
   { key: "out_for_delivery",  label: "Out for Delivery",  icon: Truck,      desc: "Your order is on the way" },
   { key: "delivered",         label: "Delivered",         icon: CheckCircle, desc: "Delivered successfully" },

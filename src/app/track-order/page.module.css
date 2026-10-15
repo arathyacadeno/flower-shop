@@ -1,4 +1,4 @@
-﻿/* ============================================================
+/* ============================================================
    ORDER TRACKING PAGE
    ============================================================ */
 
@@ -437,25 +437,23 @@
 }
 
 .timelineStep {
-  display: grid;
-  grid-template-columns: 28px 28px 1fr;
+  display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
   position: relative;
   min-height: 48px;
 }
 
 .timelineLine {
-  grid-column: 1;
-  width: 2px;
-  height: 100%;
-  background: #e5e7eb;
-  margin: 0 auto;
-  border-radius: 1px;
   position: absolute;
   left: 13px;
   top: -50%;
   bottom: 50%;
+  width: 2px;
+  height: 100%;
+  background: #e5e7eb;
+  border-radius: 1px;
+  z-index: 0;
 }
 
 .timelineLineActive {
@@ -500,23 +498,30 @@
 
 .timelineLabel {
   display: flex;
-  flex-direction: column;
-  gap: 2px;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  min-width: 0;
+  flex-wrap: wrap;
 }
 
 .timelineLabel strong {
-  font-size: 13px;
+  font-size: 13.5px;
+  font-weight: 700;
   color: #111827;
+  white-space: nowrap;
 }
 
 .labelFuture strong {
   color: #9ca3af;
+  font-weight: 500;
 }
 
 .timelineSub {
-  font-size: 11px;
+  font-size: 12px;
   color: #E6004C;
   font-style: italic;
+  white-space: nowrap;
 }
 
 /* ── Support Row ────────────────────────────────────────── */

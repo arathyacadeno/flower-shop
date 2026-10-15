@@ -16,7 +16,6 @@ import { CartItem } from "@/types";
 import {
   Trash2,
   Star,
-  ArrowRight,
   Minus,
   Plus,
   Lock,
@@ -306,25 +305,20 @@ export default function CartPage() {
           <div className={styles.emptyCartCard}>
             <div className={styles.emptyImageWrap}>
               <img
-                src="/images/empty-cart-flower.png"
-                alt="Empty cart flower illustration"
-                className={styles.emptyFlowerImg}
+                src="/images/empty-cart-box.png"
+                alt="Empty gift box illustration"
+                className={styles.emptyBoxImg}
               />
             </div>
 
-            <h1 className={styles.emptyHeading}>Your Cart is Empty</h1>
+            <h1 className={styles.emptyHeading}>Your Gift box is empty</h1>
             <p className={styles.emptyDescription}>
-              There’s nothing blooming here yet. Find the perfect flowers to make someone’s day special.
+              Explore amazing gifts and share your feeling
             </p>
 
-            <Link href="/#categories" className={styles.exploreFlowersBtn}>
-              <span>Explore Collections</span>
-              <ArrowRight size={18} strokeWidth={2.2} />
+            <Link href="/#categories" className={styles.exploreGiftsBtn}>
+              Explore Gifts
             </Link>
-
-            <p className={styles.emptyNote}>
-              Discover bouquets made with love.
-            </p>
           </div>
         ) : (
           /* 2-Column Cart Grid */

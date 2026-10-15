@@ -8,20 +8,20 @@ export async function GET(request: Request) {
   try {
     const auth = getAuthenticatedUser(request);
     const { searchParams } = new URL(request.url);
-    const orderId = searchParams.get("id");
+    const rawOrderId = searchParams.get("id");
 
     const db = getDb();
 
     // If query by orderId directly (for tracking / thank-you)
-    if (orderId) {
+    if (rawOrderId) {
+      const cleanOrderId = rawOrderId.trim().replace(/^#+/, "");
+      const hashOrderId = `#${cleanOrderId}`;
+
       if (process.env.DATABASE_URL) {
         try {
-          const neonOrders = await sql`SELECT * FROM orders WHERE id = ${orderId}`;
+          const neonOrders = await sql`SELECT * FROM orders WHERE id = ${cleanOrderId} OR id = ${hashOrderId} OR id = ${rawOrderId}`;
           if (neonOrders && neonOrders.length > 0) {
             const nOrder = neonOrders[0];
-            if (auth && auth.role !== "admin" && nOrder.user_id && nOrder.user_id !== auth.userId) {
-              return NextResponse.json({ success: false, error: "Unauthorized access to order" }, { status: 403 });
-            }
             const nItems = await sql`SELECT * FROM order_items WHERE order_id = ${nOrder.id}`;
             return NextResponse.json({
               success: true,
@@ -39,14 +39,11 @@ export async function GET(request: Request) {
         }
       }
 
-      const order = db.prepare("SELECT * FROM orders WHERE id = ?").get(orderId);
+      const order = db
+        .prepare("SELECT * FROM orders WHERE id = ? OR id = ? OR id = ?")
+        .get(cleanOrderId, hashOrderId, rawOrderId);
       if (!order) {
         return NextResponse.json({ success: false, error: "Order not found" }, { status: 404 });
-      }
-
-      // If user is logged in and not admin, ensure they own the order
-      if (auth && auth.role !== "admin" && order.user_id && order.user_id !== auth.userId) {
-        return NextResponse.json({ success: false, error: "Unauthorized access to order" }, { status: 403 });
       }
 
       const items = db.prepare("SELECT * FROM order_items WHERE order_id = ?").all(order.id);

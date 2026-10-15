@@ -6,6 +6,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { useCheckout, CompletedOrder } from "@/context/CheckoutContext";
 import { CATALOG_PRODUCTS } from "@/data/catalog";
+import { FLOWER_PRODUCTS } from "@/data/flowerProducts";
 import {
   Package,
   Calendar,
@@ -17,6 +18,94 @@ import {
   Sparkles,
 } from "lucide-react";
 import styles from "./orders.module.css";
+
+function getOrderProductHref(order: CompletedOrder): string {
+  const pId = (order.productId || "").toLowerCase().trim();
+  const pSlug = (order.productSlug || "").toLowerCase().trim();
+  const pName = (order.productName || "").toLowerCase().trim();
+  const pImg = (order.productImage || "").trim();
+
+  // 1. Direct match in CATALOG_PRODUCTS (/cakes, /flower, /table-decor, /wreaths, /special-occasions)
+  const catalogMatch = CATALOG_PRODUCTS.find((p) => {
+    const id = p.id.toLowerCase().trim();
+    const slug = p.slug.toLowerCase().trim();
+    const name = p.name.toLowerCase().trim();
+
+    if (pId && (id === pId || slug === pId)) return true;
+    if (pSlug && (slug === pSlug || id === pSlug)) return true;
+    if (pImg && (p.image === pImg || (p.images && p.images.includes(pImg)))) return true;
+    if (pName && (name === pName || name.includes(pName) || pName.includes(name))) return true;
+
+    return false;
+  });
+
+  if (catalogMatch) {
+    return `/${catalogMatch.category}/${catalogMatch.slug}`;
+  }
+
+  // 2. Direct match in FLOWER_PRODUCTS (/flowers/[category]/[slug])
+  const flowerMatch = FLOWER_PRODUCTS.find((p) => {
+    const id = p.id.toLowerCase().trim();
+    const slug = p.slug.toLowerCase().trim();
+    const name = p.name.toLowerCase().trim();
+
+    if (pId && (id === pId || slug === pId)) return true;
+    if (pSlug && (slug === pSlug || id === pSlug)) return true;
+    if (pImg && (p.image === pImg || (p.images && p.images.includes(pImg)))) return true;
+    if (pName && (name === pName || name.includes(pName) || pName.includes(name))) return true;
+
+    return false;
+  });
+
+  if (flowerMatch) {
+    return `/flowers/${flowerMatch.category}/${flowerMatch.slug}`;
+  }
+
+  // 3. Fallbacks to specific product pages based on category keywords
+  if (pId.includes("cake") || pName.includes("cake")) {
+    const slugCandidate = pId.replace(/^cake-/, "");
+    const cakeMatch = CATALOG_PRODUCTS.find(
+      (p) =>
+        p.category === "cakes" &&
+        (p.slug.toLowerCase().includes(slugCandidate) || slugCandidate.includes(p.slug.toLowerCase()))
+    );
+    if (cakeMatch) return `/cakes/${cakeMatch.slug}`;
+    const anyCake = CATALOG_PRODUCTS.find((p) => p.category === "cakes");
+    return anyCake ? `/cakes/${anyCake.slug}` : "/cakes";
+  }
+
+  if (
+    pId.startsWith("bouquet-") ||
+    pId.startsWith("flower-") ||
+    pName.includes("rose") ||
+    pName.includes("flower") ||
+    pName.includes("bouquet") ||
+    pName.includes("basket")
+  ) {
+    const slugCandidate = pId.replace(/^(bouquet-|flower-)/, "");
+    const flowerSlugMatch = CATALOG_PRODUCTS.find(
+      (p) =>
+        p.category === "flower" &&
+        (p.slug.toLowerCase().includes(slugCandidate) || slugCandidate.includes(p.slug.toLowerCase()))
+    );
+    if (flowerSlugMatch) return `/flower/${flowerSlugMatch.slug}`;
+    const anyFlower = CATALOG_PRODUCTS.find((p) => p.category === "flower");
+    return anyFlower ? `/flower/${anyFlower.slug}` : "/flower-bouquets";
+  }
+
+  if (pId.includes("wreath") || pName.includes("wreath")) {
+    const wreathMatch = CATALOG_PRODUCTS.find((p) => p.category === "wreaths");
+    return wreathMatch ? `/wreaths/${wreathMatch.slug}` : "/wreaths";
+  }
+
+  if (pId.includes("table") || pName.includes("table")) {
+    const tableMatch = CATALOG_PRODUCTS.find((p) => p.category === "table-decor");
+    return tableMatch ? `/table-decor/${tableMatch.slug}` : "/table-decor";
+  }
+
+  const defaultFlower = CATALOG_PRODUCTS.find((p) => p.category === "flower");
+  return defaultFlower ? `/flower/${defaultFlower.slug}` : "/flower-bouquets";
+}
 
 export default function OrdersPage() {
   const { orders: contextOrders, viewOrder } = useCheckout();
@@ -31,12 +120,36 @@ export default function OrdersPage() {
         if (data && data.success && Array.isArray(data.orders)) {
           const mapped: CompletedOrder[] = data.orders.map((o: any) => {
             const firstItem = o.items?.[0];
+            const pId = (firstItem?.product_id || "").toLowerCase().trim();
+            const pImg = (firstItem?.product_image || "").trim();
+            const pName = (firstItem?.product_name || "").toLowerCase().trim();
+
+            const matchedProduct =
+              CATALOG_PRODUCTS.find(
+                (p) =>
+                  p.id.toLowerCase() === pId ||
+                  p.slug.toLowerCase() === pId ||
+                  (pImg && (p.image === pImg || (p.images && p.images.includes(pImg)))) ||
+                  (pName && p.name.toLowerCase() === pName)
+              ) ||
+              FLOWER_PRODUCTS.find(
+                (p) =>
+                  p.id.toLowerCase() === pId ||
+                  p.slug.toLowerCase() === pId ||
+                  (pImg && (p.image === pImg || (p.images && p.images.includes(pImg)))) ||
+                  (pName && p.name.toLowerCase() === pName)
+              );
+
             return {
               orderId: o.id,
               productId: firstItem?.product_id || "flower-item",
+              productSlug: matchedProduct?.slug,
               productName: firstItem?.product_name || "Handcrafted Fresh Arrangement",
               productImage: firstItem?.product_image || "/images/lily-6-stems.png",
-              productCategory: CATALOG_PRODUCTS.find((p) => p.id === firstItem?.product_id)?.categoryLabel || "Fresh Flowers",
+              productCategory:
+                (matchedProduct && "categoryLabel" in matchedProduct
+                  ? (matchedProduct as any).categoryLabel
+                  : (matchedProduct as any)?.category) || "Fresh Flowers",
               quantity: firstItem?.quantity || 1,
               price: o.final_amount,
               unitPrice: firstItem?.product_price || o.final_amount,
@@ -131,66 +244,70 @@ export default function OrdersPage() {
                   </div>
 
                   {/* Card Body */}
-                  <div className={styles.cardBody}>
-                    <div className={styles.productInfoBlock}>
-                      <img
-                        src={order.productImage}
-                        alt={order.productName}
-                        className={styles.productImage}
-                      />
-                      <div className={styles.detailsCol}>
-                        <h3 className={styles.productTitle}>
-                          {order.productName}
-                        </h3>
-                        <p className={styles.itemSubtext}>
-                          Quantity: {order.quantity || 1} &bull; Same-Day Express Delivery
-                        </p>
-                        <span className={styles.paymentTag}>
-                          <CreditCard size={13} />
-                          Paid via {order.paymentMethod}
-                        </span>
-                      </div>
-                    </div>
+                  {(() => {
+                    const productHref = getOrderProductHref(order);
+                    return (
+                      <div className={styles.cardBody}>
+                        <div className={styles.productInfoBlock}>
+                          <Link
+                            href={productHref}
+                            className={styles.productImageLink}
+                            title={`View ${order.productName}`}
+                          >
+                            <img
+                              src={order.productImage}
+                              alt={order.productName}
+                              className={styles.productImage}
+                            />
+                          </Link>
+                          <div className={styles.detailsCol}>
+                            <Link href={productHref} className={styles.productTitleLink}>
+                              <h3 className={styles.productTitle}>
+                                {order.productName}
+                              </h3>
+                            </Link>
+                            <p className={styles.itemSubtext}>
+                              Quantity: {order.quantity || 1} &bull; Same-Day Express Delivery
+                            </p>
+                            <span className={styles.paymentTag}>
+                              <CreditCard size={13} />
+                              Paid via {order.paymentMethod}
+                            </span>
+                          </div>
+                        </div>
 
-                    {/* Price and Actions */}
-                    <div className={styles.cardPriceAndActions}>
-                      <div className={styles.priceBlock}>
-                        <span className={styles.priceLabel}>Total Amount</span>
-                        <span className={styles.priceValue}>
-                          ₹{order.price.toLocaleString("en-IN")}
-                        </span>
-                      </div>
+                        {/* Price and Actions */}
+                        <div className={styles.cardPriceAndActions}>
+                          <div className={styles.priceBlock}>
+                            <span className={styles.priceLabel}>Total Amount</span>
+                            <span className={styles.priceValue}>
+                              ₹{order.price.toLocaleString("en-IN")}
+                            </span>
+                          </div>
 
-                      <div className={styles.actionsGroup}>
-                        <button
-                          type="button"
-                          onClick={() => viewOrder(order)}
-                          className={styles.viewDetailsBtn}
-                          title="View receipt and order details"
-                        >
-                          <span>View Details</span>
-                          <ArrowRight size={15} />
-                        </button>
+                          <div className={styles.actionsGroup}>
+                            <button
+                              type="button"
+                              onClick={() => viewOrder(order)}
+                              className={styles.viewDetailsBtn}
+                              title="View receipt and order details"
+                            >
+                              <span>View Details</span>
+                              <ArrowRight size={15} />
+                            </button>
 
-                        <Link 
-                          href={
-                            (() => {
-                              const id = (order.productId || "").toLowerCase();
-                              if (id.includes("cake")) return "/cakes";
-                              if (id.includes("basket")) return "/flower-baskets";
-                              if (id.includes("bouquet")) return "/flower-bouquets";
-                              if (id.includes("wreath")) return "/wreaths";
-                              if (id.includes("table")) return "/table-decor";
-                              return "/flower-bouquets";
-                            })()
-                          } 
-                          className={styles.reorderBtn}
-                        >
-                          Reorder
-                        </Link>
+                            <Link 
+                              href={productHref} 
+                              className={styles.reorderBtn}
+                              title={`Reorder ${order.productName}`}
+                            >
+                              Reorder
+                            </Link>
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                  </div>
+                    );
+                  })()}
                 </article>
               );
             })}

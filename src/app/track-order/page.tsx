@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -96,21 +96,31 @@ export default function TrackOrderPage() {
   const [searched, setSearched] = useState(false);
   const [order, setOrder]       = useState<OrderData | null>(null);
 
-  const handleSearch = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const key = input.trim().toUpperCase();
+  const executeLookup = async (searchId: string) => {
+    const rawKey = searchId.trim();
+    if (!rawKey) return;
+    const cleanKey = rawKey.replace(/^#+/, "").trim();
+    const key = cleanKey.toUpperCase();
     setSearched(true);
+
     try {
-      const res = await fetch(`/api/orders?id=${encodeURIComponent(key)}`);
+      const res = await fetch(`/api/orders?id=${encodeURIComponent(cleanKey)}`);
       if (res.ok) {
         const data = await res.json();
         if (data.success && data.order) {
           const o = data.order;
           const firstItem = o.items?.[0];
           const addr = o.deliveryAddress;
-          const addrStr = addr
-            ? `${addr.house || ""} ${addr.street || ""}, ${addr.area || ""}, ${addr.city || "Calicut"} - ${addr.pinCode || ""}`.trim()
-            : "Calicut, Kerala";
+          const addrParts = [
+            addr?.houseBuilding || addr?.house,
+            addr?.street,
+            addr?.landmark,
+            addr?.area,
+            addr?.city || "Calicut",
+            addr?.pinCode ? `- ${addr.pinCode}` : "",
+          ].filter(Boolean);
+          const addrStr = addrParts.length > 0 ? addrParts.join(", ") : "Calicut, Kerala";
+
           const mappedStatus: OrderStatus =
             o.order_status === "confirmed"
               ? "confirmed"
@@ -123,9 +133,9 @@ export default function TrackOrderPage() {
               : "placed";
 
           setOrder({
-            id: o.id,
+            id: o.id.startsWith("#") ? o.id : `#${o.id}`,
             status: mappedStatus,
-            product: firstItem?.product_name || "Handcrafted Flower Arrangement",
+            product: firstItem?.product_name || "Handcrafted Fresh Arrangement",
             image: firstItem?.product_image || "/images/lily-6-stems.png",
             placedAt: new Date(o.created_at).toLocaleDateString("en-IN", {
               month: "short",
@@ -133,11 +143,17 @@ export default function TrackOrderPage() {
               hour: "2-digit",
               minute: "2-digit",
             }),
-            deliveryDate: "Today",
-            timeSlot: "Express Calicut Delivery",
+            deliveryDate: addr?.deliveryDate
+              ? new Date(addr.deliveryDate).toLocaleDateString("en-IN", {
+                  day: "numeric",
+                  month: "short",
+                  year: "numeric",
+                })
+              : "Today",
+            timeSlot: addr?.deliveryTime || "Express Calicut Delivery",
             address: addrStr,
-            price: o.final_amount,
-            deliveryCharge: o.delivery_charge,
+            price: Number(o.final_amount) || Number(o.subtotal) || 0,
+            deliveryCharge: Number(o.delivery_charge) || 0,
             rider: "Occasions Floral Dispatch",
             riderPhone: "+91 8606 464 700",
           });
@@ -147,8 +163,74 @@ export default function TrackOrderPage() {
     } catch (err) {
       console.warn("Live order lookup fallback", err);
     }
-    setOrder(DUMMY_ORDERS[key] ?? null);
+
+    // Fallback 1: LocalStorage for recent guest orders
+    if (typeof window !== "undefined") {
+      try {
+        const storedLatest = localStorage.getItem("occassions_latest_order");
+        const storedHistory = localStorage.getItem("occassions_order_history");
+        const localOrders: any[] = [];
+        if (storedLatest) localOrders.push(JSON.parse(storedLatest));
+        if (storedHistory) localOrders.push(...JSON.parse(storedHistory));
+
+        const matchedLocal = localOrders.find(
+          (lo) =>
+            lo.orderId === cleanKey ||
+            lo.orderId === rawKey ||
+            `#${lo.orderId}` === rawKey ||
+            `#${lo.orderId}` === `#${cleanKey}`
+        );
+        if (matchedLocal) {
+          setOrder({
+            id: matchedLocal.orderId.startsWith("#") ? matchedLocal.orderId : `#${matchedLocal.orderId}`,
+            status: matchedLocal.orderStatus || "confirmed",
+            product: matchedLocal.productName,
+            image: matchedLocal.productImage,
+            placedAt: new Date(matchedLocal.createdAt).toLocaleDateString("en-IN", {
+              month: "short",
+              day: "numeric",
+              hour: "2-digit",
+              minute: "2-digit",
+            }),
+            deliveryDate: "Today",
+            timeSlot: matchedLocal.estimatedDelivery || "Express Calicut Delivery",
+            address: "Calicut, Kerala",
+            price: matchedLocal.price,
+            deliveryCharge: 0,
+            rider: "Occasions Floral Dispatch",
+            riderPhone: "+91 8606 464 700",
+          });
+          return;
+        }
+      } catch (localErr) {
+        console.warn("LocalStorage fallback check error:", localErr);
+      }
+    }
+
+    // Fallback 2: DUMMY_ORDERS
+    setOrder(
+      DUMMY_ORDERS[cleanKey] ??
+        DUMMY_ORDERS[`#${cleanKey}`] ??
+        DUMMY_ORDERS[rawKey.toUpperCase()] ??
+        null
+    );
   };
+
+  const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    executeLookup(input);
+  };
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      const urlId = params.get("orderId") || params.get("id");
+      if (urlId) {
+        setInput(urlId);
+        executeLookup(urlId);
+      }
+    }
+  }, []);
 
   const currentStepIndex = order ? STATUS_ORDER.indexOf(order.status) : -1;
 

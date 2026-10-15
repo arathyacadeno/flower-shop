@@ -18,6 +18,7 @@ export interface CheckoutItem {
 export interface CompletedOrder {
   orderId: string;
   productId: string;
+  productSlug?: string;
   productName: string;
   productImage: string;
   productCategory: string;
@@ -36,11 +37,12 @@ export interface CompletedOrder {
 const INITIAL_DEMO_ORDERS: CompletedOrder[] = [
   {
     orderId: "893120",
-    productId: "birthday-flower-basket",
-    productName: "Birthday Flower Basket",
+    productId: "flower-basket-3",
+    productSlug: "lilly-roses-chrysanthemum-chocolate-basket",
+    productName: "Lilly & Roses Basket with Chocolates",
     productImage:
-      "https://images.unsplash.com/photo-1561181286-d3fee7d55364?auto=format&fit=crop&w=800&q=80",
-    productCategory: "Flower",
+      "/images/flower-basket/lilly-roses-chrysanthemum-chocolate-basket.jpg",
+    productCategory: "flower",
     quantity: 1,
     price: 999,
     unitPrice: 999,
@@ -53,11 +55,12 @@ const INITIAL_DEMO_ORDERS: CompletedOrder[] = [
   },
   {
     orderId: "652419",
-    productId: "pink-rose-delight",
-    productName: "Pink Rose Delight Basket",
+    productId: "flower-9",
+    productSlug: "white-pink-roses-gypsophilla-bamboo-basket",
+    productName: "White & Pink Roses in Bamboo Basket",
     productImage:
-      "https://images.unsplash.com/photo-1526047932273-341f2a7631f9?auto=format&fit=crop&w=800&q=80",
-    productCategory: "Flower",
+      "/images/flower-basket/pastel-rose-wicker-basket.png",
+    productCategory: "flower",
     quantity: 1,
     price: 1299,
     unitPrice: 1299,
@@ -249,6 +252,7 @@ export function CheckoutProvider({ children }: { children: React.ReactNode }) {
     const newOrder: CompletedOrder = {
       orderId,
       productId: primaryItem.id,
+      productSlug: primaryItem.slug,
       productName:
         checkoutItems.length > 1
           ? `${primaryItem.name} + ${checkoutItems.length - 1} more items`

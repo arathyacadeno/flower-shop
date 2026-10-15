@@ -26,7 +26,12 @@ const nextConfig: NextConfig = {
       },
       {
         source: "/table-arrangements",
-        destination: "/table-decor",
+        destination: "/#highlights",
+        permanent: true,
+      },
+      {
+        source: "/stage-decor",
+        destination: "/#highlights",
         permanent: true,
       },
       {

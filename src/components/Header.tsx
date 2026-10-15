@@ -569,7 +569,7 @@ export default function Header({
         window.scrollTo({ top: 0, behavior: "smooth" });
       }
     } else if (categoryName === "Table arrangements") {
-      scrollToHighlightsOr("/table-decor");
+      scrollToHighlightsOr("/#highlights");
     } else if (categoryName === "Flower baskets & garlands") {
       scrollToHighlightsOr("/#highlights");
     } else if (categoryName === "Contact & Location") {
@@ -972,9 +972,12 @@ export default function Header({
                       </li>
                       <li>
                         <Link
-                          href="/table-decor"
+                          href="/#highlights"
                           className={styles.dropdownItemLink}
-                          onClick={() => setHighlightsHovered(false)}
+                          onClick={(e) => {
+                            handleSectionNav(e, "highlights", "highlights");
+                            setHighlightsHovered(false);
+                          }}
                         >
                           Stage Decor
                         </Link>

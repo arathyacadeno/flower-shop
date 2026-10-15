@@ -32,7 +32,7 @@ const highlightCards: HighlightCard[] = [
       "On-Site Venue Setup in Calicut",
     ],
     whatsAppText: "Hello Occassions Florist Calicut, I would like to inquire about wedding Car Decoration.",
-    href: "/car-decorations",
+    href: "/#highlights",
   },
   {
     id: "stage-decor",
@@ -48,7 +48,7 @@ const highlightCards: HighlightCard[] = [
       "VIP Head Table Styling",
     ],
     whatsAppText: "Hello Occassions Florist Calicut, I would like to inquire about wedding Table & Stage Arrangements.",
-    href: "/table-arrangements",
+    href: "/#highlights",
   },
   {
     id: "church-arrangement",
@@ -64,7 +64,7 @@ const highlightCards: HighlightCard[] = [
       "Parish Protocol Coordination",
     ],
     whatsAppText: "Hello Occassions Florist Calicut, I would like to inquire about Church Arrangements and wedding altar florals.",
-    href: "/church-arrangements",
+    href: "/#highlights",
   },
   {
     id: "garlands",
@@ -202,14 +202,17 @@ export default function HighlightSection() {
                       />
                       <div className={styles.cardOverlay}>
                         <span className={styles.cardTitle}>{card.title}</span>
-                        <Link
-                          href={card.href}
+                        <button
+                          type="button"
                           className={styles.cardArrowBtn}
-                          onClick={(e) => e.stopPropagation()}
-                          aria-label={`Explore ${card.title}`}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setModalItem(card);
+                          }}
+                          aria-label={`View ${card.title} details`}
                         >
                           <ArrowUpRight size={17} strokeWidth={2.4} />
-                        </Link>
+                        </button>
                       </div>
                     </div>
                   </div>

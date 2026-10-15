@@ -140,11 +140,16 @@ export default function OrdersPage() {
                   (pName && p.name.toLowerCase() === pName)
               );
 
+            const resolvedName =
+              firstItem?.product_id === "cake-blue-floral" || pImg.includes("blue-floral")
+                ? "Blue Floral Birthday Cake"
+                : firstItem?.product_name || matchedProduct?.name || "Handcrafted Fresh Arrangement";
+
             return {
               orderId: o.id,
               productId: firstItem?.product_id || "flower-item",
               productSlug: matchedProduct?.slug,
-              productName: firstItem?.product_name || "Handcrafted Fresh Arrangement",
+              productName: resolvedName,
               productImage: firstItem?.product_image || "/images/lily-6-stems.png",
               productCategory:
                 (matchedProduct && "categoryLabel" in matchedProduct

@@ -319,11 +319,18 @@ function seedInitialData(db: any) {
   }
 
   const insertProduct = db.prepare(`
-    INSERT OR IGNORE INTO products (
+    INSERT INTO products (
       id, name, slug, description, images, price, discount_price, stock, sku,
       category_id, flower_type_id, occasion_id, featured, active, rating,
       reviews_count, delivery_info, offers, includes, badge, created_at, updated_at
     ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    ON CONFLICT(id) DO UPDATE SET
+      name = excluded.name,
+      slug = excluded.slug,
+      description = excluded.description,
+      images = excluded.images,
+      price = excluded.price,
+      badge = excluded.badge
   `);
 
   for (const p of CATALOG_PRODUCTS) {
@@ -376,6 +383,11 @@ function seedInitialData(db: any) {
       now
     );
   }
+
+  // Ensure any existing order items for blue floral cake reflect the correct name
+  try {
+    db.prepare(`UPDATE order_items SET product_name = 'Blue Floral Birthday Cake' WHERE product_id = 'cake-blue-floral'`).run();
+  } catch {}
 
   // 7. Seed demo orders (matching track-order demo IDs: OCC-100123 and OCC-100098)
   const orderCount = db.prepare("SELECT count(*) as count FROM orders").get();

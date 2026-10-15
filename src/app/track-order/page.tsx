@@ -135,7 +135,10 @@ export default function TrackOrderPage() {
           setOrder({
             id: o.id.startsWith("#") ? o.id : `#${o.id}`,
             status: mappedStatus,
-            product: firstItem?.product_name || "Handcrafted Fresh Arrangement",
+            product:
+              firstItem?.product_id === "cake-blue-floral" || firstItem?.product_image?.includes("blue-floral")
+                ? "Blue Floral Birthday Cake"
+                : firstItem?.product_name || "Handcrafted Fresh Arrangement",
             image: firstItem?.product_image || "/images/lily-6-stems.png",
             placedAt: new Date(o.created_at).toLocaleDateString("en-IN", {
               month: "short",

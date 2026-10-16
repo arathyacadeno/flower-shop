@@ -355,6 +355,9 @@ export default function Header({
   const [flowersHovered, setFlowersHovered] = useState(false);
   const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
+  const [cakesHovered, setCakesHovered] = useState(false);
+  const cakesTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
   const [occasionsHovered, setOccasionsHovered] = useState(false);
   const occasionsTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -375,6 +378,20 @@ export default function Header({
   const handleMouseLeave = () => {
     hoverTimeoutRef.current = setTimeout(() => {
       setFlowersHovered(false);
+    }, 180);
+  };
+
+  const handleCakesEnter = () => {
+    if (cakesTimeoutRef.current) {
+      clearTimeout(cakesTimeoutRef.current);
+      cakesTimeoutRef.current = null;
+    }
+    setCakesHovered(true);
+  };
+
+  const handleCakesLeave = () => {
+    cakesTimeoutRef.current = setTimeout(() => {
+      setCakesHovered(false);
     }, 180);
   };
 
@@ -423,6 +440,7 @@ export default function Header({
   // Close menus on page change
   useEffect(() => {
     setFlowersHovered(false);
+    setCakesHovered(false);
     setOccasionsHovered(false);
     setHighlightsHovered(false);
     setProfileHovered(false);
@@ -439,6 +457,7 @@ export default function Header({
     return () => {
       window.removeEventListener("show-signin-modal", handleShowSignin);
       if (hoverTimeoutRef.current) clearTimeout(hoverTimeoutRef.current);
+      if (cakesTimeoutRef.current) clearTimeout(cakesTimeoutRef.current);
       if (occasionsTimeoutRef.current) clearTimeout(occasionsTimeoutRef.current);
       if (highlightsTimeoutRef.current) clearTimeout(highlightsTimeoutRef.current);
       if (profileTimeoutRef.current) clearTimeout(profileTimeoutRef.current);
@@ -758,13 +777,101 @@ export default function Header({
               )}
             </div>
 
-            <Link
-              href="/cakes"
-              className={`${styles.centerNavLink} ${isCakesActive ? styles.activeNavLink : ""
-                }`}
+            <div
+              className={styles.cakesNavWrapper}
+              onMouseEnter={handleCakesEnter}
+              onMouseLeave={handleCakesLeave}
             >
-              Cakes
-            </Link>
+              <Link
+                href="/cakes"
+                className={`${styles.centerNavLink} ${
+                  isCakesActive || cakesHovered ? styles.activeNavLink : ""
+                }`}
+                aria-expanded={cakesHovered}
+              >
+                <span>Cakes</span>
+                <span
+                  className={styles.flowersChevron}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    setCakesHovered((prev) => !prev);
+                  }}
+                  role="button"
+                  tabIndex={0}
+                  aria-label="Toggle cakes dropdown"
+                >
+                  <ChevronDown
+                    size={14}
+                    strokeWidth={2.2}
+                    style={{
+                      transition: "transform 0.25s cubic-bezier(0.16, 1, 0.3, 1)",
+                      transform: cakesHovered ? "rotate(180deg)" : "rotate(0deg)",
+                    }}
+                  />
+                </span>
+              </Link>
+
+              {cakesHovered && (
+                <div
+                  className={styles.cakesDropdown}
+                  role="menu"
+                  aria-label="Cakes navigation menu"
+                >
+                  <div className={styles.dropdownCol}>
+                    <h3 className={styles.dropdownColHeading}>Cake Collections</h3>
+                    <hr className={styles.dropdownDivider} />
+                    <ul className={styles.dropdownList}>
+                      <li>
+                        <Link
+                          href="/cakes"
+                          className={styles.dropdownItemLink}
+                          onClick={() => setCakesHovered(false)}
+                        >
+                          All Cakes
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          href="/cakes?tab=birthday"
+                          className={styles.dropdownItemLink}
+                          onClick={() => setCakesHovered(false)}
+                        >
+                          Birthday Cakes
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          href="/cakes?tab=chocolate"
+                          className={styles.dropdownItemLink}
+                          onClick={() => setCakesHovered(false)}
+                        >
+                          Chocolate Cakes
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          href="/cakes?tab=anniversary"
+                          className={styles.dropdownItemLink}
+                          onClick={() => setCakesHovered(false)}
+                        >
+                          Anniversary Cakes
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          href="/cakes?tab=fruit"
+                          className={styles.dropdownItemLink}
+                          onClick={() => setCakesHovered(false)}
+                        >
+                          Fruit &amp; Berry
+                        </Link>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              )}
+            </div>
 
             <div
               className={styles.occasionsNavWrapper}

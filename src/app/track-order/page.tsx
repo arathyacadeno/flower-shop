@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import styles from "./page.module.css";
@@ -271,155 +270,125 @@ export default function TrackOrderPage() {
         </section>
 
         {/* ── Result ── */}
-        <section className={styles.resultSection}>
-          {!searched && (
-            <div className={styles.howItWorks}>
-              <h2 className={styles.howTitle}>How it works</h2>
-              <div className={styles.howSteps}>
-                {[
-                  { label: "Enter Order ID",      desc: "Use the ID from your confirmation" },
-                  { label: "Instant Search",      desc: "We fetch your live order status" },
-                  { label: "Track in Real Time",  desc: "See exactly where your flowers are" },
-                ].map((step) => (
-                  <div key={step.label} className={styles.howStep}>
-                    <strong className={styles.howLabel}>{step.label}</strong>
-                    <span className={styles.howDesc}>{step.desc}</span>
+        {searched && (
+          <section className={styles.resultSection}>
+            {!order && (
+              <div className={styles.notFound}>
+                <AlertCircle size={44} className={styles.notFoundIcon} />
+                <h2 className={styles.notFoundTitle}>Order not found</h2>
+                <p className={styles.notFoundDesc}>
+                  No order found for <strong>&ldquo;{input.trim()}&rdquo;</strong>. Please check the ID and try again.
+                </p>
+                <a href="https://wa.me/918606464700" target="_blank" rel="noopener noreferrer" className={styles.whatsappLink}>
+                  Chat on WhatsApp for help
+                </a>
+              </div>
+            )}
+
+            {order && (
+              <div className={styles.orderCard}>
+                {/* Card header */}
+                <div className={styles.orderCardHeader}>
+                  <div className={styles.orderIdRow}>
+                    <Package size={16} className={styles.orderIdIcon} />
+                    <span className={styles.orderIdLabel}>Order ID</span>
+                    <strong className={styles.orderIdValue}>{order.id}</strong>
                   </div>
-                ))}
-              </div>
-            </div>
-          )}
+                  <span className={`${styles.statusBadge} ${
+                    order.status === "delivered"        ? styles.statusDelivered      :
+                    order.status === "out_for_delivery" ? styles.statusOutForDelivery :
+                    styles.statusActive
+                  }`}>
+                    {statusLabel(order.status)}
+                  </span>
+                </div>
 
-          {searched && !order && (
-            <div className={styles.notFound}>
-              <AlertCircle size={44} className={styles.notFoundIcon} />
-              <h2 className={styles.notFoundTitle}>Order not found</h2>
-              <p className={styles.notFoundDesc}>
-                No order found for <strong>&ldquo;{input.trim()}&rdquo;</strong>. Please check the ID and try again.
-              </p>
-              <a href="https://wa.me/918606464700" target="_blank" rel="noopener noreferrer" className={styles.whatsappLink}>
-                Chat on WhatsApp for help
-              </a>
-            </div>
-          )}
+                {/* Product row */}
+                <div className={styles.productRow}>
+                  <div className={styles.productImageWrap}>
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={order.image}
+                      alt={order.product}
+                      className={styles.productImage}
+                      onError={(e) => {
+                        (e.currentTarget as HTMLImageElement).src =
+                          "https://placehold.co/80x80/F9D7E0/E6004C?text=🌸";
+                      }}
+                    />
+                  </div>
+                  <div className={styles.productInfo}>
+                    <p className={styles.productName}>{order.product}</p>
+                    <p className={styles.productMeta}>Placed: {order.placedAt}</p>
+                    <p className={styles.productMeta}>
+                      <strong>₹{(order.price + order.deliveryCharge).toLocaleString("en-IN")}</strong>
+                      {order.deliveryCharge === 0
+                        ? <span className={styles.freeDeliveryBadge}>Free Delivery</span>
+                        : <span className={styles.chargeBadge}>+₹{order.deliveryCharge} delivery</span>}
+                    </p>
+                  </div>
+                </div>
 
-          {searched && order && (
-            <div className={styles.orderCard}>
-              {/* Card header */}
-              <div className={styles.orderCardHeader}>
-                <div className={styles.orderIdRow}>
-                  <Package size={16} className={styles.orderIdIcon} />
-                  <span className={styles.orderIdLabel}>Order ID</span>
-                  <strong className={styles.orderIdValue}>{order.id}</strong>
-                </div>
-                <span className={`${styles.statusBadge} ${
-                  order.status === "delivered"        ? styles.statusDelivered      :
-                  order.status === "out_for_delivery" ? styles.statusOutForDelivery :
-                  styles.statusActive
-                }`}>
-                  {statusLabel(order.status)}
-                </span>
-              </div>
-
-              {/* Product row */}
-              <div className={styles.productRow}>
-                <div className={styles.productImageWrap}>
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={order.image}
-                    alt={order.product}
-                    className={styles.productImage}
-                    onError={(e) => {
-                      (e.currentTarget as HTMLImageElement).src =
-                        "https://placehold.co/80x80/F9D7E0/E6004C?text=🌸";
-                    }}
-                  />
-                </div>
-                <div className={styles.productInfo}>
-                  <p className={styles.productName}>{order.product}</p>
-                  <p className={styles.productMeta}>Placed: {order.placedAt}</p>
-                  <p className={styles.productMeta}>
-                    <strong>₹{(order.price + order.deliveryCharge).toLocaleString("en-IN")}</strong>
-                    {order.deliveryCharge === 0
-                      ? <span className={styles.freeDeliveryBadge}>Free Delivery</span>
-                      : <span className={styles.chargeBadge}>+₹{order.deliveryCharge} delivery</span>}
-                  </p>
-                </div>
-              </div>
-
-              {/* Delivery details */}
-              <div className={styles.deliveryDetails}>
-                <div className={styles.deliveryDetailRow}>
-                  <Clock size={14} className={styles.detailIcon} />
-                  <span><strong>Slot:</strong> {order.deliveryDate} · {order.timeSlot}</span>
-                </div>
-                <div className={styles.deliveryDetailRow}>
-                  <MapPin size={14} className={styles.detailIcon} />
-                  <span><strong>Delivering to:</strong> {order.address}</span>
-                </div>
-                {order.rider && (
+                {/* Delivery details */}
+                <div className={styles.deliveryDetails}>
                   <div className={styles.deliveryDetailRow}>
-                    <Truck size={14} className={styles.detailIcon} />
-                    <span><strong>Delivery Partner:</strong> {order.rider}</span>
-                    {order.riderPhone && (
-                      <a href={`tel:${order.riderPhone}`} className={styles.riderCall}>
-                        <Phone size={12} /> Call
-                      </a>
-                    )}
+                    <Clock size={14} className={styles.detailIcon} />
+                    <span><strong>Slot:</strong> {order.deliveryDate} · {order.timeSlot}</span>
                   </div>
-                )}
-              </div>
-
-              {/* Timeline */}
-              <div className={styles.timeline}>
-                {STATUS_STEPS.map((step, idx) => {
-                  const Icon     = step.icon;
-                  const isPast    = idx < currentStepIndex;
-                  const isCurrent = idx === currentStepIndex;
-                  const isFuture  = idx > currentStepIndex;
-                  return (
-                    <div key={step.key} className={styles.timelineStep}>
-                      {idx > 0 && (
-                        <div className={`${styles.timelineLine} ${isPast || isCurrent ? styles.timelineLineActive : ""}`} />
+                  <div className={styles.deliveryDetailRow}>
+                    <MapPin size={14} className={styles.detailIcon} />
+                    <span><strong>Delivering to:</strong> {order.address}</span>
+                  </div>
+                  {order.rider && (
+                    <div className={styles.deliveryDetailRow}>
+                      <Truck size={14} className={styles.detailIcon} />
+                      <span><strong>Delivery Partner:</strong> {order.rider}</span>
+                      {order.riderPhone && (
+                        <a href={`tel:${order.riderPhone}`} className={styles.riderCall}>
+                          <Phone size={12} /> Call
+                        </a>
                       )}
-                      <div className={`${styles.timelineNode} ${isPast ? styles.nodeCompleted : isCurrent ? styles.nodeCurrent : styles.nodeFuture}`}>
-                        <Icon size={14} strokeWidth={isCurrent ? 2.5 : 2} />
-                      </div>
-                      <div className={`${styles.timelineLabel} ${isFuture ? styles.labelFuture : ""}`}>
-                        <strong>{step.label}</strong>
-                        {isCurrent && <span className={styles.timelineSub}>{step.desc}</span>}
-                      </div>
                     </div>
-                  );
-                })}
-              </div>
+                  )}
+                </div>
 
-              {/* Support */}
-              <div className={styles.supportRow}>
-                <a href="https://wa.me/918606464700" target="_blank" rel="noopener noreferrer" className={styles.supportBtn}>
-                  <MessageCircle size={15} /> WhatsApp Support
-                </a>
-                <a href="tel:+918606464700" className={styles.supportBtn}>
-                  <Phone size={15} /> Call Us
-                </a>
-              </div>
-            </div>
-          )}
-        </section>
+                {/* Timeline */}
+                <div className={styles.timeline}>
+                  {STATUS_STEPS.map((step, idx) => {
+                    const Icon     = step.icon;
+                    const isPast    = idx < currentStepIndex;
+                    const isCurrent = idx === currentStepIndex;
+                    const isFuture  = idx > currentStepIndex;
+                    return (
+                      <div key={step.key} className={styles.timelineStep}>
+                        {idx > 0 && (
+                          <div className={`${styles.timelineLine} ${isPast || isCurrent ? styles.timelineLineActive : ""}`} />
+                        )}
+                        <div className={`${styles.timelineNode} ${isPast ? styles.nodeCompleted : isCurrent ? styles.nodeCurrent : styles.nodeFuture}`}>
+                          <Icon size={14} strokeWidth={isCurrent ? 2.5 : 2} />
+                        </div>
+                        <div className={`${styles.timelineLabel} ${isFuture ? styles.labelFuture : ""}`}>
+                          <strong>{step.label}</strong>
+                          {isCurrent && <span className={styles.timelineSub}>{step.desc}</span>}
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
 
-        {/* ── Help Banner ── */}
-        <section className={styles.helpBanner}>
-          <div className={styles.helpContent}>
-            <h3 className={styles.helpTitle}>Need help with your order?</h3>
-            <p className={styles.helpDesc}>Our Occasions team is available 8 AM – 8 PM every day</p>
-          </div>
-          <div className={styles.helpActions}>
-            <a href="https://wa.me/918606464700" target="_blank" rel="noopener noreferrer" className={styles.helpBtnPrimary}>
-              WhatsApp Us
-            </a>
-            <Link href="/orders" className={styles.helpBtnSecondary}>My Orders</Link>
-          </div>
-        </section>
+                {/* Support */}
+                <div className={styles.supportRow}>
+                  <a href="https://wa.me/918606464700" target="_blank" rel="noopener noreferrer" className={styles.supportBtn}>
+                    <MessageCircle size={15} /> WhatsApp Support
+                  </a>
+                  <a href="tel:+918606464700" className={styles.supportBtn}>
+                    <Phone size={15} /> Call Us
+                  </a>
+                </div>
+              </div>
+            )}
+          </section>
+        )}
       </main>
       <Footer />
     </div>

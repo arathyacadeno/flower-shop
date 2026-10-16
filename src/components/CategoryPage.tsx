@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useState, useEffect } from "react";
 import styles from "./CategoryPage.module.css";
 import ProductCard from "@/components/ProductCard";
 import Navbar from "@/components/Navbar";
@@ -30,6 +30,22 @@ export default function CategoryPage({
 }: CategoryPageProps) {
   const tabs = filterTabs && filterTabs.length > 0 ? filterTabs : DEFAULT_FILTER_TABS;
   const [activeFilterId, setActiveFilterId] = useState<string>(tabs[0].id);
+
+  // Sync tab with URL search parameter if present (e.g. /cakes?tab=chocolate)
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      const tabParam = params.get("tab");
+      if (tabParam) {
+        const found = tabs.find(
+          (t) => t.id.toLowerCase() === tabParam.toLowerCase()
+        );
+        if (found) {
+          setActiveFilterId(found.id);
+        }
+      }
+    }
+  }, [tabs]);
 
   const visibleProducts = useMemo(() => {
     if (activeFilterId === "all" || activeFilterId.toLowerCase() === "all items") {

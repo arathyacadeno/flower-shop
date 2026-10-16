@@ -165,6 +165,7 @@ export default function ProductDetailView({ product }: ProductDetailViewProps) {
             product={product}
             onVariantChange={(variant) => setSelectedImageOverride(variant.image)}
             selectedAddons={selectedAddons}
+            onAddonChange={setSelectedAddons}
           />
         </section>
 

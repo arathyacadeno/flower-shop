@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { Minus, Plus, X } from "lucide-react";
 import { useCart } from "@/context/CartContext";
+import AddonModal from "@/components/AddonModal";
 import styles from "./RecommendedAddons.module.css";
 
 export interface AddonProduct {
@@ -160,7 +161,7 @@ export interface RecommendedAddonsProps {
   mainCategory?: string;
 }
 
-const getAddonProducts = (category?: string) => {
+export const getAddonProducts = (category?: string) => {
   const norm = category?.toLowerCase() || "";
   if (norm === "cakes") {
     return ADDON_PRODUCTS.filter(p => p.category === "Chocolates" || p.category === "Gifts");
@@ -322,98 +323,14 @@ export default function RecommendedAddons({
         </div>
       </div>
 
-      {isModalOpen && (
-        <div className={styles.modalOverlay} onClick={() => setIsModalOpen(false)}>
-          <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
-            <div className={styles.modalHeader}>
-              <h3 className={styles.modalTitle}>Choose Your Add-ons</h3>
-              <button className={styles.closeModalBtn} onClick={() => setIsModalOpen(false)}>
-                <X size={24} />
-              </button>
-            </div>
-
-            <div className={styles.modalGrid}>
-              {filteredAddons.map((product) => {
-                const qty = quantities[product.id] || 0;
-
-                return (
-                  <div key={product.id} className={styles.addonCard}>
-                    <div className={styles.imageContainer}>
-                      <img
-                        src={product.image}
-                        alt={product.name}
-                        className={styles.cardImage}
-                        loading="lazy"
-                      />
-                      <svg
-                        className={styles.waveDivider}
-                        viewBox="0 0 300 28"
-                        preserveAspectRatio="none"
-                        aria-hidden="true"
-                      >
-                        <path
-                          d="M -2,32 L -2,12 Q -2,0 16,0 L 185,0 C 208,0 216,20 242,20 L 304,20 L 304,32 Z"
-                          fill="#ffffff"
-                        />
-                      </svg>
-                    </div>
-
-                    <div className={styles.cardContent}>
-                      <h3 className={styles.productName} title={product.name}>
-                        {product.name}
-                      </h3>
-                      <div className={styles.productPrice}>
-                        ₹ {product.price.toFixed(2)}
-                      </div>
-
-                      {qty > 0 ? (
-                        <div className={styles.qtyControl}>
-                          <button
-                            type="button"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              handleDecrement(product.id);
-                            }}
-                            className={styles.qtyBtn}
-                            aria-label={`Decrease ${product.name} quantity`}
-                          >
-                            <Minus size={14} strokeWidth={2.6} />
-                          </button>
-                          <span className={styles.qtyValue}>
-                            {String(qty).padStart(2, "0")}
-                          </span>
-                          <button
-                            type="button"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              handleIncrement(product.id);
-                            }}
-                            className={styles.qtyBtn}
-                            aria-label={`Increase ${product.name} quantity`}
-                          >
-                            <Plus size={14} strokeWidth={2.6} />
-                          </button>
-                        </div>
-                      ) : (
-                        <button
-                          type="button"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            handleIncrement(product.id);
-                          }}
-                          className={styles.addBtn}
-                        >
-                          ADD
-                        </button>
-                      )}
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        </div>
-      )}
+      <AddonModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        selectedAddons={quantities}
+        onAddonChange={updateQuantities}
+        mainCategory={mainCategory}
+        isBuyNow={false}
+      />
     </section>
   );
 }

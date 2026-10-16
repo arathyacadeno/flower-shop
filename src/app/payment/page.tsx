@@ -124,9 +124,19 @@ export default function SinglePageCheckoutPayment() {
           quantity: 1,
         };
 
-  const quantity = primaryItem.quantity || 1;
+  const displayCheckoutItems =
+    checkoutItems.length > 0 ? checkoutItems : [primaryItem];
+
+  const totalItemCount = displayCheckoutItems.reduce(
+    (acc, it) => acc + (it.quantity || 1),
+    0
+  );
+  const subtotal = displayCheckoutItems.reduce(
+    (acc, it) => acc + (it.price || 0) * (it.quantity || 1),
+    0
+  );
+  const quantity = totalItemCount;
   const unitPrice = primaryItem.price;
-  const subtotal = unitPrice * quantity;
 
   // Delivery check state
   const [deliveryStatus, setDeliveryStatus] = useState<{
@@ -1098,28 +1108,27 @@ export default function SinglePageCheckoutPayment() {
             <h2 className={styles.summaryTitle}>Order Summary</h2>
 
             {/* Product Thumbnail & Details */}
-            <div className={styles.productSnippet}>
-              <img
-                src={primaryItem.image}
-                alt={primaryItem.name}
-                className={styles.productThumbnail}
-              />
-              <div className={styles.productMeta}>
-                <h3 className={styles.productName}>{primaryItem.name}</h3>
-                <p className={styles.productSubtitle}>
-                  {primaryItem.subtitle || "Premium Preserved Roses · Limited Edition"}
-                </p>
-                <div className={styles.ratingRow}>
-                  {[...Array(5)].map((_, i) => (
-                    <Star
-                      key={i}
-                      size={12}
-                      className={styles.starFilled}
-                    />
-                  ))}
-                  <span className={styles.reviewCount}>(126 reviews)</span>
+            <div className={styles.productSnippetList}>
+              {displayCheckoutItems.map((item, idx) => (
+                <div key={`${item.id}-${idx}`} className={styles.productSnippet}>
+                  <img
+                    src={item.image}
+                    alt={item.name}
+                    className={styles.productThumbnail}
+                  />
+                  <div className={styles.productMeta}>
+                    <h3 className={styles.productName}>{item.name}</h3>
+                    <p className={styles.productSubtitle}>
+                      {item.subtitle || "Premium Preserved Item"} {item.quantity && item.quantity > 1 ? `· Qty: ${item.quantity}` : ""}
+                    </p>
+                    <div className={styles.itemPriceRow}>
+                      <span className={styles.itemPriceVal}>
+                        ₹{((item.price || 0) * (item.quantity || 1)).toFixed(2)}
+                      </span>
+                    </div>
+                  </div>
                 </div>
-              </div>
+              ))}
             </div>
 
             {/* Breakdown Rows */}

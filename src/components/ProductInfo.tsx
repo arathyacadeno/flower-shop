@@ -23,6 +23,7 @@ import { useWishlist } from "@/context/WishlistContext";
 import { useCheckout, CheckoutItem } from "@/context/CheckoutContext";
 import { useAuth } from "@/context/AuthContext";
 import { ADDON_PRODUCTS } from "@/components/RecommendedAddons";
+import AddonModal from "@/components/AddonModal";
 import styles from "./ProductInfo.module.css";
 
 interface ProductVariant {
@@ -37,12 +38,14 @@ interface ProductInfoProps {
   product: Product;
   onVariantChange?: (variant: ProductVariant) => void;
   selectedAddons?: Record<string, number>;
+  onAddonChange?: (addons: Record<string, number>) => void;
 }
 
 export default function ProductInfo({
   product,
   onVariantChange,
-  selectedAddons,
+  selectedAddons = {},
+  onAddonChange,
 }: ProductInfoProps) {
   const { addItem } = useCart();
   const { startBuyNow } = useCheckout();
@@ -502,8 +505,17 @@ export default function ProductInfo({
     }, 2200);
   };
 
+  const [isBuyNowAddonOpen, setIsBuyNowAddonOpen] = useState(false);
+
   const handleBuyNow = () => {
     if (!validateForm()) return;
+    setIsBuyNowAddonOpen(true);
+  };
+
+  const proceedToCheckout = (customAddons?: Record<string, number>) => {
+    setIsBuyNowAddonOpen(false);
+
+    const activeAddonsMap = customAddons !== undefined ? customAddons : (selectedAddons || {});
 
     const mainItem: CheckoutItem = {
       id: isCustomMode && isBouquet ? `${product.id}-custom-${customFlowerQty}` : product.id,
@@ -520,25 +532,23 @@ export default function ProductInfo({
     };
 
     const addonItems: CheckoutItem[] = [];
-    if (selectedAddons) {
-      Object.entries(selectedAddons).forEach(([addonId, qty]) => {
-        if (qty > 0) {
-          const addon = ADDON_PRODUCTS.find((p) => p.id === addonId);
-          if (addon) {
-            addonItems.push({
-              id: addon.id,
-              slug: addon.id,
-              name: addon.name,
-              category: addon.category,
-              price: addon.price,
-              image: addon.image,
-              quantity: qty,
-              subtitle: "Recommended Addon",
-            });
-          }
+    Object.entries(activeAddonsMap).forEach(([addonId, qty]) => {
+      if (qty > 0) {
+        const addon = ADDON_PRODUCTS.find((p) => p.id === addonId);
+        if (addon) {
+          addonItems.push({
+            id: addon.id,
+            slug: addon.id,
+            name: addon.name,
+            category: addon.category,
+            price: addon.price,
+            image: addon.image,
+            quantity: qty,
+            subtitle: "Recommended Addon",
+          });
         }
-      });
-    }
+      }
+    });
 
     startBuyNow(mainItem, addonItems);
   };
@@ -1098,6 +1108,20 @@ export default function ProductInfo({
           <span>Buy Now</span>
         </button>
       </div>
+
+      {/* Buy Now Add-on Products Modal Popup */}
+      <AddonModal
+        isOpen={isBuyNowAddonOpen}
+        onClose={() => setIsBuyNowAddonOpen(false)}
+        selectedAddons={selectedAddons}
+        onAddonChange={onAddonChange || (() => {})}
+        mainCategory={product.category}
+        isBuyNow={true}
+        basePrice={activePrice}
+        quantity={quantity}
+        onProceed={() => proceedToCheckout(selectedAddons)}
+        onSkip={() => proceedToCheckout({})}
+      />
     </div>
   );
 }

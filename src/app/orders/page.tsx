@@ -384,18 +384,16 @@ export default function OrdersPage() {
           /* Empty State */
           <div className={styles.emptyStateCard}>
             <img
-              src="https://images.unsplash.com/photo-1561181286-d3fee7d55364?auto=format&fit=crop&w=600&q=80"
-              alt="Empty orders"
-              className={styles.emptyFloralImg}
+              src="/images/no-orders.png"
+              alt="No order found"
+              className={styles.emptyStateIllustration}
             />
-            <h2 className={styles.emptyTitle}>No Orders Yet</h2>
+            <h2 className={styles.emptyTitle}>NO ORDER FOUND</h2>
             <p className={styles.emptyDesc}>
-              Looks like your flower journey hasn&apos;t started yet. Brighten someone&apos;s
-              day with our handcrafted bouquets.
+              Looks like you haven&apos;t made your order yet
             </p>
-            <Link href="/flower-bouquets" className={styles.startShoppingBtn}>
-              <Sparkles size={16} />
-              <span>Explore Flowers</span>
+            <Link href="/" className={styles.startShoppingBtn}>
+              Back to Collection
             </Link>
           </div>
         )}

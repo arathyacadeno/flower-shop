@@ -289,14 +289,14 @@
 }
 
 .giftVariantCard:hover {
-  border-color: #0284c7;
+  border-color: #E6004C;
   transform: translateY(-2px);
-  box-shadow: 0 4px 10px rgba(2, 132, 199, 0.12);
+  box-shadow: 0 4px 10px rgba(230, 0, 76, 0.12);
 }
 
 .giftVariantCardSelected {
-  border: 2px solid #0087a8;
-  box-shadow: 0 0 0 1px #0087a8, 0 4px 12px rgba(0, 135, 168, 0.16);
+  border: 2px solid #E6004C;
+  box-shadow: 0 0 0 1px #E6004C, 0 4px 12px rgba(230, 0, 76, 0.16);
 }
 
 .giftCardThumbWrap {

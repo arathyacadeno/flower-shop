@@ -116,6 +116,101 @@
 }
 
 /* =========================================================
+   CATEGORY FILTER BAR & TABS
+   ========================================================= */
+
+.categoryBar {
+  padding: 12px 32px 14px;
+  background-color: #ffffff;
+  border-bottom: 1px solid #f1f5f9;
+  display: flex;
+  align-items: center;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  flex-shrink: 0;
+  z-index: 2;
+}
+
+.categoryBar::-webkit-scrollbar {
+  display: none;
+}
+
+.categoryTabs {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.categoryTab {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 18px;
+  border-radius: 9999px;
+  border: 1px solid #e2e8f0;
+  background-color: #f8fafc;
+  color: #475569;
+  font-family: var(--font-sans, "Plus Jakarta Sans", sans-serif);
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  outline: none;
+}
+
+.categoryTab:hover {
+  background-color: #f1f5f9;
+  border-color: #cbd5e1;
+  color: #1e293b;
+  transform: translateY(-1px);
+}
+
+.categoryTabActive {
+  background-color: #e40345;
+  border-color: #e40345;
+  color: #ffffff;
+  box-shadow: 0 4px 14px rgba(228, 3, 69, 0.25);
+}
+
+.categoryTabActive:hover {
+  background-color: #cc023d;
+  border-color: #cc023d;
+  color: #ffffff;
+}
+
+.categoryCount {
+  font-size: 0.78rem;
+  font-weight: 500;
+  opacity: 0.75;
+}
+
+.categoryTabActive .categoryCount {
+  opacity: 0.9;
+  color: #ffffff;
+}
+
+.categoryBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 9999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  background-color: #ffffff;
+  color: #e40345;
+}
+
+.categoryTab:not(.categoryTabActive) .categoryBadge {
+  background-color: #e40345;
+  color: #ffffff;
+}
+
+/* =========================================================
    MODAL BODY / GRID
    ========================================================= */
 
@@ -475,6 +570,15 @@
 
   .modalHeader {
     padding: 14px 16px 12px;
+  }
+
+  .categoryBar {
+    padding: 10px 16px 12px;
+  }
+
+  .categoryTab {
+    padding: 6px 14px;
+    font-size: 0.82rem;
   }
 
   .modalBody {

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { Minus, Plus, X, ArrowRight } from "lucide-react";
 import { ADDON_PRODUCTS, getAddonProducts } from "@/components/RecommendedAddons";
 import styles from "./AddonModal.module.css";
@@ -34,6 +34,8 @@ export default function AddonModal({
   title = "Choose Your Add-ons",
   subtitle = "Make the celebration extra special with thoughtful extras",
 }: AddonModalProps) {
+  const [activeCategory, setActiveCategory] = useState<string>("All");
+
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
@@ -52,9 +54,54 @@ export default function AddonModal({
     };
   }, [isOpen, onClose]);
 
-  if (!isOpen) return null;
+  const filteredAddons = useMemo(() => getAddonProducts(mainCategory), [mainCategory]);
 
-  const filteredAddons = getAddonProducts(mainCategory);
+  // Categories list with order: All, Cakes, Chocolates, Gifts
+  const categories = useMemo(() => {
+    const cats = Array.from(new Set(filteredAddons.map((p) => p.category)));
+    const order = ["Cakes", "Chocolates", "Gifts"];
+    cats.sort((a, b) => {
+      const iA = order.indexOf(a);
+      const iB = order.indexOf(b);
+      if (iA !== -1 && iB !== -1) return iA - iB;
+      if (iA !== -1) return -1;
+      if (iB !== -1) return 1;
+      return a.localeCompare(b);
+    });
+    return ["All", ...cats];
+  }, [filteredAddons]);
+
+  // Counts of items per category
+  const categoryItemCounts = useMemo(() => {
+    const counts: Record<string, number> = { All: filteredAddons.length };
+    filteredAddons.forEach((p) => {
+      counts[p.category] = (counts[p.category] || 0) + 1;
+    });
+    return counts;
+  }, [filteredAddons]);
+
+  // Selected count per category
+  const categorySelectedCounts = useMemo(() => {
+    const counts: Record<string, number> = { All: 0 };
+    Object.entries(selectedAddons).forEach(([id, qty]) => {
+      if (qty > 0) {
+        const item = ADDON_PRODUCTS.find((p) => p.id === id);
+        counts.All = (counts.All || 0) + qty;
+        if (item) {
+          counts[item.category] = (counts[item.category] || 0) + qty;
+        }
+      }
+    });
+    return counts;
+  }, [selectedAddons]);
+
+  // Filtered addons to display
+  const displayedAddons = useMemo(() => {
+    if (activeCategory === "All") return filteredAddons;
+    return filteredAddons.filter((p) => p.category === activeCategory);
+  }, [filteredAddons, activeCategory]);
+
+  if (!isOpen) return null;
 
   const handleIncrement = (id: string) => {
     const current = selectedAddons[id] || 0;
@@ -120,10 +167,41 @@ export default function AddonModal({
           </button>
         </div>
 
+        {/* Category Tabs Section */}
+        <div className={styles.categoryBar} role="tablist" aria-label="Add-on Categories">
+          <div className={styles.categoryTabs}>
+            {categories.map((cat) => {
+              const count = categoryItemCounts[cat] || 0;
+              const selectedCount = categorySelectedCounts[cat] || 0;
+              const isActive = activeCategory === cat;
+
+              return (
+                <button
+                  key={cat}
+                  type="button"
+                  role="tab"
+                  aria-selected={isActive}
+                  className={`${styles.categoryTab} ${
+                    isActive ? styles.categoryTabActive : ""
+                  }`}
+                  onClick={() => setActiveCategory(cat)}
+                >
+                  <span>{cat}</span>
+                  {selectedCount > 0 ? (
+                    <span className={styles.categoryBadge}>{selectedCount}</span>
+                  ) : (
+                    <span className={styles.categoryCount}>({count})</span>
+                  )}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
         {/* Modal Body / Products Grid */}
         <div className={styles.modalBody}>
           <div className={styles.modalGrid}>
-            {filteredAddons.map((product) => {
+            {displayedAddons.map((product) => {
               const qty = selectedAddons[product.id] || 0;
               const isSelected = qty > 0;
 

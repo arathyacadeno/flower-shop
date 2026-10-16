@@ -12,12 +12,132 @@ export interface AddonProduct {
   name: string;
   price: number;
   image: string;
-  category: string;
+  category: "Cakes" | "Chocolates" | "Gifts";
   href: string;
   sectionHref: string;
 }
 
 export const ADDON_PRODUCTS: AddonProduct[] = [
+  // ==================== CAKES ====================
+  {
+    id: "addon-cake-blue-floral",
+    name: "Blue Floral Birthday Cake",
+    price: 1150,
+    image: "/images/cakes/blue-floral-birthday-cake.png",
+    category: "Cakes",
+    href: "/cakes/blue-floral-birthday-cake",
+    sectionHref: "/cakes",
+  },
+  {
+    id: "addon-cake-chocolate-amma",
+    name: "Chocolate Birthday Cake for Amma",
+    price: 1150,
+    image: "/images/cakes/chocolate-birthday-cake-for-amma.png",
+    category: "Cakes",
+    href: "/cakes/chocolate-birthday-cake-for-amma",
+    sectionHref: "/cakes",
+  },
+  {
+    id: "addon-golden-crumb-chocolate-drizzle-cake",
+    name: "1kg Special Butterscotch Cake",
+    price: 1150,
+    image: "/images/cakes/golden-crumb-chocolate-drizzle-cake.png",
+    category: "Cakes",
+    href: "/cakes/golden-crumb-chocolate-drizzle-cake",
+    sectionHref: "/cakes",
+  },
+  {
+    id: "addon-elegant-red-heart-anniversary-cake",
+    name: "1kg Chocolate Truffle Cake White Topping",
+    price: 1150,
+    image: "/images/cakes/elegant-red-heart-anniversary-cake.png",
+    category: "Cakes",
+    href: "/cakes/1kg Chocolate truffle cake white topping 1150",
+    sectionHref: "/cakes",
+  },
+  {
+    id: "addon-cake-decadent-shavings",
+    name: "1kg Premium Belgium Chocolate Cake",
+    price: 2300,
+    image: "/images/cakes/decadent-chocolate-shavings-cake.png",
+    category: "Cakes",
+    href: "/cakes/1kg Premium Belgium Chocolate Cake",
+    sectionHref: "/cakes",
+  },
+  {
+    id: "addon-cake-chocolate-web",
+    name: "Artisan Chocolate Web Drizzle Cake",
+    price: 1199,
+    image: "/images/cakes/elegant-chocolate-web-cake.png",
+    category: "Cakes",
+    href: "/cakes/elegant-chocolate-web-cake",
+    sectionHref: "/cakes",
+  },
+  {
+    id: "addon-cake-just-engaged",
+    name: "Elegant Just Engaged Heart Cake",
+    price: 1299,
+    image: "/images/cakes/elegant-just-engaged-heart-cake.png",
+    category: "Cakes",
+    href: "/cakes/elegant-just-engaged-heart-cake",
+    sectionHref: "/cakes",
+  },
+  {
+    id: "addon-cake-evana-floral",
+    name: "Evana Pastel Floral Celebration Cake",
+    price: 1199,
+    image: "/images/cakes/evana-floral-celebration-cake.png",
+    category: "Cakes",
+    href: "/cakes/evana-floral-celebration-cake",
+    sectionHref: "/cakes",
+  },
+  {
+    id: "addon-cake-lavender-amma",
+    name: "1kg Vanilla Flavour Cake",
+    price: 995,
+    image: "/images/cakes/lavender-floral-happy-birthday-amma-cake.png",
+    category: "Cakes",
+    href: "/cakes/lavender-floral-happy-birthday-amma-cake",
+    sectionHref: "/cakes",
+  },
+  {
+    id: "addon-cake-luxury-half-choco",
+    name: "1kg Choco Vanilla Cake",
+    price: 1150,
+    image: "/images/cakes/luxury-half-chocolate-birthday-cake.png",
+    category: "Cakes",
+    href: "/cakes/luxury-half-chocolate-birthday-cake",
+    sectionHref: "/cakes",
+  },
+  {
+    id: "addon-cake-pastel-pink-heart",
+    name: "Pink Marvel Chocolate Cake",
+    price: 1150,
+    image: "/images/cakes/pastel-pink-heart-cake.png",
+    category: "Cakes",
+    href: "/cakes/Pink marvel Chocolate cake 1150",
+    sectionHref: "/cakes",
+  },
+  {
+    id: "addon-cake-onyx-black",
+    name: "Onyx Black Celebration Cake",
+    price: 1199,
+    image: "/images/cakes/onyx-black-celebration-cake.png",
+    category: "Cakes",
+    href: "/cakes/onyx-black-celebration-cake",
+    sectionHref: "/cakes",
+  },
+  {
+    id: "addon-cake-red-velvet-gold",
+    name: "1kg Red Velvet Cake With Topper",
+    price: 1250,
+    image: "/images/cakes/red-velvet-gold-birthday-cake.png",
+    category: "Cakes",
+    href: "/cakes/red-velvet-gold-birthday-cake",
+    sectionHref: "/cakes",
+  },
+
+  // ==================== CHOCOLATES ====================
   {
     id: "addon-ferrero-rocher-heart",
     name: "Ferrero Rocher 16 Pieces",
@@ -34,24 +154,6 @@ export const ADDON_PRODUCTS: AddonProduct[] = [
     image: "/images/addons/kitkat.jpg",
     category: "Chocolates",
     href: "/special-occasions/kitkat",
-    sectionHref: "/special-occasions",
-  },
-    {
-    id: "addon-golden-crumb-chocolate-drizzle-cake",
-    name: "Golden Crumb Chocolate Drizzle Cake",
-    price: 1200,
-    image: "/images/cakes/golden-crumb-chocolate-drizzle-cake.png",
-    category: "Cakes",
-    href: "/cakes/golden-crumb-chocolate-drizzle-cake",
-    sectionHref: "/cakes",
-  },
-  {
-    id: "addon-soft-toys",
-    name: "Soft Toys",
-    price: 80,
-    image: "/images/addons/soft-toys.jpg",
-    category: "Gifts",
-    href: "/special-occasions/soft-toys",
     sectionHref: "/special-occasions",
   },
   {
@@ -109,15 +211,6 @@ export const ADDON_PRODUCTS: AddonProduct[] = [
     sectionHref: "/special-occasions",
   },
   {
-    id: "addon-elegant-red-heart-anniversary-cake",
-    name: "Elegant Red Heart Anniversary Cake",
-    price: 1200,
-    image: "/images/cakes/elegant-red-heart-anniversary-cake.png",
-    category: "Cakes",
-    href: "/cakes/elegant-red-heart-anniversary-cake",
-    sectionHref: "/cakes",
-  },
-  {
     id: "addon-5-star",
     name: "5 Star",
     price: 20,
@@ -153,6 +246,17 @@ export const ADDON_PRODUCTS: AddonProduct[] = [
     href: "/special-occasions/temptations",
     sectionHref: "/special-occasions",
   },
+
+  // ==================== GIFTS ====================
+  {
+    id: "addon-soft-toys",
+    name: "Soft Toys",
+    price: 80,
+    image: "/images/addons/soft-toys.jpg",
+    category: "Gifts",
+    href: "/special-occasions/soft-toys",
+    sectionHref: "/special-occasions",
+  },
 ];
 
 export interface RecommendedAddonsProps {
@@ -164,15 +268,10 @@ export interface RecommendedAddonsProps {
 export const getAddonProducts = (category?: string) => {
   const norm = category?.toLowerCase() || "";
   if (norm === "cakes") {
-    return ADDON_PRODUCTS.filter(p => p.category === "Chocolates" || p.category === "Gifts");
-  }
-  if (norm === "flower" || norm === "basket") {
-    const valid = ADDON_PRODUCTS.filter(p => p.category === "Cakes" || p.category === "Chocolates" || p.category === "Gifts");
-    const cakes = valid.filter(p => p.category === "Cakes");
-    const gifts = valid.filter(p => p.category === "Gifts");
-    const chocolates = valid.filter(p => p.category === "Chocolates");
-    // Bring cakes and gifts to the front so they are visible in the initial 6 slots
-    return [...cakes, ...gifts, ...chocolates];
+    const chocolates = ADDON_PRODUCTS.filter((p) => p.category === "Chocolates");
+    const gifts = ADDON_PRODUCTS.filter((p) => p.category === "Gifts");
+    const cakes = ADDON_PRODUCTS.filter((p) => p.category === "Cakes");
+    return [...chocolates, ...gifts, ...cakes];
   }
   return ADDON_PRODUCTS;
 };
@@ -235,8 +334,22 @@ export default function RecommendedAddons({
 
       {/* Large Pink Card Container matching target layout */}
       <div className={styles.addonsContainer}>
-        <button type="button" onClick={() => setIsModalOpen(true)} className={styles.exploreMoreCircleBtn} aria-label="Explore More Addons">
-          <svg width="32" height="24" viewBox="0 0 32 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+        <button
+          type="button"
+          onClick={() => setIsModalOpen(true)}
+          className={styles.exploreMoreCircleBtn}
+          aria-label="Explore More Addons"
+        >
+          <svg
+            width="32"
+            height="24"
+            viewBox="0 0 32 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
             <path d="M2 12h28M23 5l7 7-7 7" />
           </svg>
         </button>
@@ -248,12 +361,12 @@ export default function RecommendedAddons({
               <div key={product.id} className={styles.addonCard}>
                 {/* Image Container with signature chamfered ramp wave cutout */}
                 <div className={styles.imageContainer}>
-                    <img
-                      src={product.image}
-                      alt={product.name}
-                      className={styles.cardImage}
-                      loading="lazy"
-                    />
+                  <img
+                    src={product.image}
+                    alt={product.name}
+                    className={styles.cardImage}
+                    loading="lazy"
+                  />
                   <svg
                     className={styles.waveDivider}
                     viewBox="0 0 300 28"

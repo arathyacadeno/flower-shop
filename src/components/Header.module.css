@@ -87,19 +87,19 @@
   gap: 5px;
 }
 
-/* Elegant bottom underline indicator matching user reference */
+/* Elegant bottom underline indicator matching user reference (flat square line, brand pink) */
 .centerNavLink::after {
   content: "";
   position: absolute;
   bottom: 0;
   left: 10px;
   right: 10px;
-  height: 2.5px;
+  height: 2px;
   background-color: #db2777;
-  border-radius: 2px;
+  border-radius: 0;
   transform: scaleX(0);
   transform-origin: center;
-  transition: transform 0.24s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease;
   opacity: 0;
 }
 
@@ -113,7 +113,7 @@
   opacity: 1;
 }
 
-/* Active item: pink text with the underline visible */
+/* Active item: pink text with the flat square underline visible */
 .activeNavLink {
   color: #db2777;
   font-weight: 600;
@@ -124,6 +124,7 @@
   transform: scaleX(1);
   opacity: 1;
   background-color: #db2777;
+  border-radius: 0;
 }
 
 .activeNavLink:hover {
@@ -152,15 +153,16 @@
 
 .occasionsDropdown {
   position: absolute;
-  top: calc(100% - 6px);
+  top: 100%;
   left: 50%;
   transform: translateX(-50%);
   background-color: #ffffff;
-  border: 1px solid #f1f5f9;
-  border-radius: 16px;
+  border: 1px solid #e2e8f0;
+  border-top: none;
+  border-radius: 0;
   padding: 22px 28px 20px 28px;
-  box-shadow: 0 20px 48px -8px rgba(15, 23, 42, 0.14),
-    0 8px 20px -4px rgba(15, 23, 42, 0.06);
+  box-shadow: 0 16px 36px -6px rgba(15, 23, 42, 0.12),
+    0 6px 14px -3px rgba(15, 23, 42, 0.05);
   box-sizing: border-box;
   z-index: 1000;
   width: max-content;
@@ -175,10 +177,10 @@
 .occasionsDropdown::before {
   content: "";
   position: absolute;
-  top: -16px;
+  top: -12px;
   left: 0;
   right: 0;
-  height: 16px;
+  height: 12px;
 }
 
 .occasionsDropdownHeader {
@@ -193,7 +195,7 @@
   align-items: center;
   text-decoration: none;
   padding: 6px 10px;
-  border-radius: 8px;
+  border-radius: 0;
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   box-sizing: border-box;
 }
@@ -231,7 +233,7 @@
   color: #334155;
   text-decoration: none;
   padding: 8px 12px;
-  border-radius: 8px;
+  border-radius: 0;
   display: flex;
   align-items: center;
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
@@ -255,14 +257,15 @@
 
 .highlightsDropdown {
   position: absolute;
-  top: calc(100% - 6px);
+  top: 100%;
   right: 0;
   background-color: #ffffff;
-  border: 1px solid #f1f5f9;
-  border-radius: 16px;
+  border: 1px solid #e2e8f0;
+  border-top: none;
+  border-radius: 0;
   padding: 22px 28px 20px 28px;
-  box-shadow: 0 20px 48px -8px rgba(15, 23, 42, 0.14),
-    0 8px 20px -4px rgba(15, 23, 42, 0.06);
+  box-shadow: 0 16px 36px -6px rgba(15, 23, 42, 0.12),
+    0 6px 14px -3px rgba(15, 23, 42, 0.05);
   box-sizing: border-box;
   z-index: 1000;
   width: max-content;
@@ -277,10 +280,10 @@
 .highlightsDropdown::before {
   content: "";
   position: absolute;
-  top: -16px;
+  top: -12px;
   left: 0;
   right: 0;
-  height: 16px;
+  height: 12px;
 }
 
 .highlightsDropdownHeader {
@@ -295,7 +298,7 @@
   align-items: center;
   text-decoration: none;
   padding: 6px 10px;
-  border-radius: 8px;
+  border-radius: 0;
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   box-sizing: border-box;
 }
@@ -333,7 +336,7 @@
   color: #334155;
   text-decoration: none;
   padding: 8px 12px;
-  border-radius: 8px;
+  border-radius: 0;
   display: flex;
   align-items: center;
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
@@ -346,17 +349,18 @@
   transform: translateX(4px);
 }
 
-/* ---------- Flowers Mega Menu (Matching User Reference) ---------- */
+/* ---------- Flowers Mega Menu (Square From Navbar) ---------- */
 .flowersDropdown {
   position: absolute;
-  top: calc(100% - 6px);
+  top: 100%;
   left: 0;
   background-color: #ffffff;
   border: 1px solid #e2e8f0;
-  border-radius: 12px;
+  border-top: none;
+  border-radius: 0;
   padding: 20px 24px;
-  box-shadow: 0 16px 40px -6px rgba(15, 23, 42, 0.12),
-    0 4px 14px -2px rgba(15, 23, 42, 0.05);
+  box-shadow: 0 16px 36px -6px rgba(15, 23, 42, 0.12),
+    0 6px 14px -3px rgba(15, 23, 42, 0.05);
   box-sizing: border-box;
   z-index: 1000;
   width: max-content;
@@ -369,16 +373,16 @@
 .flowersDropdown::before {
   content: "";
   position: absolute;
-  top: -16px;
+  top: -12px;
   left: 0;
   right: 0;
-  height: 16px;
+  height: 12px;
 }
 
 @keyframes dropdownSlideDown {
   from {
     opacity: 0;
-    transform: translateY(6px);
+    transform: translateY(4px);
   }
   to {
     opacity: 1;
@@ -429,7 +433,7 @@
   color: #4b5563;
   text-decoration: none;
   padding: 6px 8px;
-  border-radius: 6px;
+  border-radius: 0;
   display: inline-flex;
   align-items: center;
   transition: all 0.15s cubic-bezier(0.16, 1, 0.3, 1);

@@ -1,8 +1,8 @@
 .heroSection {
   position: relative;
   width: 100%;
-  height: calc(100vh - 78px);
-  height: calc(100svh - 78px);
+  min-height: calc(100vh - 78px);
+  min-height: calc(100svh - 78px);
   background-color: #FAD9E3;
   overflow: hidden;
   display: flex;
@@ -12,30 +12,38 @@
   cursor: pointer;
 }
 
-/* Header adjusts to 68px on viewports <= 1100px */
+/* Header is 68px on screens <= 1100px */
 @media (max-width: 1100px) {
   .heroSection {
-    height: calc(100vh - 68px);
-    height: calc(100svh - 68px);
+    min-height: calc(100vh - 68px);
+    min-height: calc(100svh - 68px);
+  }
+}
+
+/* On mobile screens, maintain clean 16:9 ratio so entire video is completely visible without excessive empty space */
+@media (max-width: 768px) {
+  .heroSection {
+    min-height: unset;
+    height: auto;
+    aspect-ratio: 16 / 9;
   }
 }
 
 .videoContainer {
   position: relative;
   width: 100%;
-  height: 100%;
+  aspect-ratio: 16 / 9;
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: #FAD9E3;
-  overflow: hidden;
 }
 
 .heroVideo {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  object-position: center 32%;
+  object-fit: contain;
+  object-position: center;
   display: block;
   pointer-events: none;
 }
@@ -47,54 +55,4 @@
   opacity: 0 !important;
   pointer-events: none !important;
 }
-
-/* 1. Standard 16:9 and wide laptop screens (e.g., 1920x1080, 1366x768):
-   Vertical overflow occurs; position towards top-center (28%)
-   so top blooming roses and stems remain fully visible without cutting off the basket base */
-@media (min-aspect-ratio: 16/9) {
-  .heroVideo {
-    object-position: center 28%;
-  }
-}
-
-/* 2. Ultrawide monitors (21:9 or wider):
-   Keep top roses anchored safely */
-@media (min-aspect-ratio: 21/9) {
-  .heroVideo {
-    object-position: center 22%;
-  }
-}
-
-/* 3. Taller laptops and 16:10 / 3:2 screens (e.g., 1440x900, 1920x1200, 2560x1600):
-   Slight horizontal overflow occurs; center with slight vertical offset to keep both
-   the text and flower bouquet balanced and fully in view */
-@media (max-aspect-ratio: 16/9) and (min-aspect-ratio: 4/3) {
-  .heroVideo {
-    object-position: 52% 30%;
-  }
-}
-
-/* 4. Tablets in landscape (e.g., 1024x768, 4:3 screens):
-   Carefully centered (46%) so both the left typography and the right floral basket
-   remain fully visible inside the 1024px viewport */
-@media (max-aspect-ratio: 4/3) and (min-aspect-ratio: 1.2/1) {
-  .heroVideo {
-    object-position: 46% 28%;
-  }
-}
-
-/* 5. Tablet portrait (e.g., 768x1024, 3:4 screens):
-   Shift focus towards the floral bouquet while preserving vertical flower bloom */
-@media (max-aspect-ratio: 1.2/1) and (min-aspect-ratio: 1/1) {
-  .heroVideo {
-    object-position: 74% 28%;
-  }
-}
-
-/* 6. Mobile portrait devices (e.g., 390x844, 414x896, 375x667):
-   Full-screen cover centered directly on the floral bouquet, basket, and top roses */
-@media (max-aspect-ratio: 1/1) {
-  .heroVideo {
-    object-position: 86% 24%;
-  }
-}
+

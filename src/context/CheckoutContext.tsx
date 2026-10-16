@@ -34,44 +34,7 @@ export interface CompletedOrder {
   items?: CheckoutItem[];
 }
 
-const INITIAL_DEMO_ORDERS: CompletedOrder[] = [
-  {
-    orderId: "893120",
-    productId: "flower-basket-3",
-    productSlug: "lilly-roses-chrysanthemum-chocolate-basket",
-    productName: "Lilly & Roses Basket with Chocolates",
-    productImage:
-      "/images/flower-basket/lilly-roses-chrysanthemum-chocolate-basket.jpg",
-    productCategory: "flower",
-    quantity: 1,
-    price: 999,
-    unitPrice: 999,
-    mobileNumber: "+91 9876543210",
-    paymentMethod: "UPI",
-    paymentStatus: "success",
-    orderStatus: "confirmed",
-    createdAt: new Date(Date.now() - 2 * 86400000).toISOString(),
-    estimatedDelivery: "Delivered to Calicut",
-  },
-  {
-    orderId: "652419",
-    productId: "flower-9",
-    productSlug: "white-pink-roses-gypsophilla-bamboo-basket",
-    productName: "White & Pink Roses in Bamboo Basket",
-    productImage:
-      "/images/flower-basket/pastel-rose-wicker-basket.png",
-    productCategory: "flower",
-    quantity: 1,
-    price: 1299,
-    unitPrice: 1299,
-    mobileNumber: "+91 9876543210",
-    paymentMethod: "Credit / Debit Card",
-    paymentStatus: "success",
-    orderStatus: "delivered",
-    createdAt: new Date(Date.now() - 9 * 86400000).toISOString(),
-    estimatedDelivery: "Delivered to Calicut",
-  },
-];
+const INITIAL_DEMO_ORDERS: CompletedOrder[] = [];
 
 interface CheckoutContextType {
   checkoutItem: CheckoutItem | null;

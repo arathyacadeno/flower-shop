@@ -16,7 +16,9 @@ import {
   ShoppingBag,
   Clock,
   Sparkles,
+  Lock,
 } from "lucide-react";
+import { useAuth } from "@/context/AuthContext";
 import styles from "./orders.module.css";
 
 function getOrderProductHref(order: CompletedOrder): string {
@@ -108,12 +110,23 @@ function getOrderProductHref(order: CompletedOrder): string {
 }
 
 export default function OrdersPage() {
-  const { orders: contextOrders, viewOrder } = useCheckout();
+  const { viewOrder } = useCheckout();
+  const { user, isAuthenticated, isLoading: authLoading } = useAuth();
   const [dbOrders, setDbOrders] = useState<CompletedOrder[]>([]);
+  const [loadingOrders, setLoadingOrders] = useState(false);
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!isAuthenticated) {
+      setDbOrders([]);
+      return;
+    }
+
+    setLoadingOrders(true);
     fetch("/api/orders", { credentials: "include" })
       .then((res) => (res.ok ? res.json() : null))
       .then((data) => {
@@ -167,22 +180,71 @@ export default function OrdersPage() {
             };
           });
           setDbOrders(mapped);
+        } else {
+          setDbOrders([]);
         }
       })
-      .catch((e) => console.warn("Failed to fetch live orders", e));
-  }, []);
+      .catch((e) => {
+        console.warn("Failed to fetch live orders", e);
+        setDbOrders([]);
+      })
+      .finally(() => setLoadingOrders(false));
+  }, [isAuthenticated]);
 
-  // Merge DB orders and Context orders (deduplicating by orderId)
-  const allOrdersMap = new Map<string, CompletedOrder>();
-  for (const o of [...dbOrders, ...contextOrders]) {
-    if (!allOrdersMap.has(o.orderId)) {
-      allOrdersMap.set(o.orderId, o);
-    }
-  }
-  const orders = Array.from(allOrdersMap.values());
+  const orders = dbOrders;
 
   if (!mounted) {
     return null;
+  }
+
+  if (authLoading) {
+    return (
+      <div className={styles.pageWrapper}>
+        <Navbar />
+        <main className={styles.mainContainer}>
+          <div style={{ textAlign: "center", padding: "80px 20px", color: "#64748b" }}>
+            <p>Checking account...</p>
+          </div>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
+
+  if (!isAuthenticated) {
+    return (
+      <div className={styles.pageWrapper}>
+        <Navbar />
+        <main className={styles.mainContainer}>
+          <div className={styles.authRequiredCard}>
+            <div className={styles.authIconWrap}>
+              <Lock size={32} strokeWidth={2.2} />
+            </div>
+            <h1 className={styles.authTitle}>Sign In to View Your Orders</h1>
+            <p className={styles.authDesc}>
+              Please sign in or register to access your personalized order history, track live delivery status, and view invoices.
+            </p>
+            <div className={styles.authBtnGroup}>
+              <button
+                type="button"
+                onClick={() => {
+                  if (typeof window !== "undefined") {
+                    window.dispatchEvent(new CustomEvent("show-signin-modal"));
+                  }
+                }}
+                className={styles.signInBtn}
+              >
+                <span>Sign In / Register</span>
+              </button>
+              <Link href="/" className={styles.browseBtn}>
+                Explore Collection
+              </Link>
+            </div>
+          </div>
+        </main>
+        <Footer />
+      </div>
+    );
   }
 
   return (
@@ -195,14 +257,15 @@ export default function OrdersPage() {
           <div>
             <h1 className={styles.pageTitle}>My Orders</h1>
             <p className={styles.pageSubtitle}>
-              {orders.length > 0
-                ? `You have placed ${orders.length} ${orders.length === 1 ? "order" : "orders"
-                } with Occassions Florist.`
-                : "Track your past and active flower deliveries."}
+              {loadingOrders
+                ? "Loading your orders..."
+                : orders.length > 0
+                ? `Welcome back, ${user?.name || "Customer"}. You have placed ${orders.length} ${
+                    orders.length === 1 ? "order" : "orders"
+                  } with Occassions Florist.`
+                : "You haven't placed any orders with this account yet."}
             </p>
           </div>
-
-
         </div>
 
         {/* Orders List */}

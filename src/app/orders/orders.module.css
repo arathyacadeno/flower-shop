@@ -359,20 +359,115 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background-color: #686b2e;
+  background-color: #E40345;
   color: #ffffff;
-  border-radius: 12px;
+  border-radius: 9999px;
   padding: 12px 28px;
   font-size: 0.95rem;
-  font-weight: 600;
+  font-weight: 700;
   text-decoration: none;
   transition: all 0.2s ease;
-  box-shadow: 0 4px 14px rgba(104, 107, 46, 0.25);
+  box-shadow: 0 4px 14px rgba(228, 3, 69, 0.28);
 }
 
 .startShoppingBtn:hover {
-  background-color: #555823;
+  background-color: #cc023e;
   transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(228, 3, 69, 0.36);
+}
+
+/* Auth Required State */
+.authRequiredCard {
+  background: #ffffff;
+  border-radius: 28px;
+  padding: 56px 32px;
+  text-align: center;
+  max-width: 520px;
+  margin: 40px auto;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.05);
+  border: 1px solid #fce7f3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.authIconWrap {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background-color: #fff0f4;
+  color: #E40345;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.authTitle {
+  font-size: 1.55rem;
+  font-weight: 700;
+  color: #111827;
+  margin: 0 0 10px 0;
+  letter-spacing: -0.01em;
+}
+
+.authDesc {
+  font-size: 0.95rem;
+  color: #64748b;
+  max-width: 420px;
+  line-height: 1.55;
+  margin: 0 0 28px 0;
+}
+
+.authBtnGroup {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.signInBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #E40345;
+  color: #ffffff;
+  border-radius: 9999px;
+  padding: 12px 28px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 14px rgba(228, 3, 69, 0.28);
+}
+
+.signInBtn:hover {
+  background-color: #cc023e;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(228, 3, 69, 0.36);
+}
+
+.browseBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: transparent;
+  color: #475569;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 9999px;
+  padding: 11px 24px;
+  font-size: 0.92rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.browseBtn:hover {
+  background-color: #f8fafc;
+  border-color: #cbd5e1;
+  color: #0f172a;
 }
 
 @media (max-width: 768px) {

@@ -154,21 +154,18 @@
 .occasionsDropdown {
   position: absolute;
   top: 100%;
-  left: 50%;
-  transform: translateX(-50%);
+  left: 0;
   background-color: #ffffff;
   border: 1px solid #e2e8f0;
   border-top: none;
   border-radius: 0;
-  padding: 22px 28px 20px 28px;
+  padding: 20px 24px;
   box-shadow: 0 16px 36px -6px rgba(15, 23, 42, 0.12),
     0 6px 14px -3px rgba(15, 23, 42, 0.05);
   box-sizing: border-box;
   z-index: 1000;
   width: max-content;
-  min-width: 440px;
-  display: flex;
-  flex-direction: column;
+  min-width: 220px;
   pointer-events: auto;
   animation: dropdownSlideDown 0.18s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
@@ -183,70 +180,6 @@
   height: 12px;
 }
 
-.occasionsDropdownHeader {
-  margin-bottom: 12px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid #f1f5f9;
-  width: 100%;
-}
-
-.occasionsHeaderLink {
-  display: inline-flex;
-  align-items: center;
-  text-decoration: none;
-  padding: 6px 10px;
-  border-radius: 0;
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-  box-sizing: border-box;
-}
-
-.occasionsHeaderLink:hover {
-  background-color: #fdf2f8;
-}
-
-.occasionsHeaderTitle {
-  font-family: inherit;
-  font-size: 1.05rem;
-  font-weight: 700;
-  color: #0f172a;
-  margin: 0;
-  padding: 0;
-  letter-spacing: -0.01em;
-  transition: color 0.15s ease;
-}
-
-.occasionsHeaderLink:hover .occasionsHeaderTitle {
-  color: #db2777;
-}
-
-.occasionsDropdownGrid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(190px, 1fr));
-  gap: 12px 36px;
-  width: 100%;
-}
-
-.occasionsDropdown .dropdownItemLink {
-  font-family: inherit;
-  font-size: 1rem;
-  font-weight: 500;
-  color: #334155;
-  text-decoration: none;
-  padding: 8px 12px;
-  border-radius: 0;
-  display: flex;
-  align-items: center;
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-  white-space: nowrap;
-  cursor: pointer;
-}
-
-.occasionsDropdown .dropdownItemLink:hover {
-  color: #db2777;
-  background-color: #fdf2f8;
-  transform: translateX(4px);
-}
-
 /* ---------- Our Highlights Dropdown ---------- */
 .highlightsNavWrapper {
   position: relative;
@@ -258,20 +191,18 @@
 .highlightsDropdown {
   position: absolute;
   top: 100%;
-  right: 0;
+  left: 0;
   background-color: #ffffff;
   border: 1px solid #e2e8f0;
   border-top: none;
   border-radius: 0;
-  padding: 22px 28px 20px 28px;
+  padding: 20px 24px;
   box-shadow: 0 16px 36px -6px rgba(15, 23, 42, 0.12),
     0 6px 14px -3px rgba(15, 23, 42, 0.05);
   box-sizing: border-box;
   z-index: 1000;
   width: max-content;
-  min-width: 360px;
-  display: flex;
-  flex-direction: column;
+  min-width: 220px;
   pointer-events: auto;
   animation: dropdownSlideDown 0.18s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
@@ -284,69 +215,6 @@
   left: 0;
   right: 0;
   height: 12px;
-}
-
-.highlightsDropdownHeader {
-  margin-bottom: 12px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid #f1f5f9;
-  width: 100%;
-}
-
-.highlightsHeaderLink {
-  display: inline-flex;
-  align-items: center;
-  text-decoration: none;
-  padding: 6px 10px;
-  border-radius: 0;
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-  box-sizing: border-box;
-}
-
-.highlightsHeaderLink:hover {
-  background-color: #fdf2f8;
-}
-
-.highlightsHeaderTitle {
-  font-family: inherit;
-  font-size: 1.05rem;
-  font-weight: 700;
-  color: #0f172a;
-  margin: 0;
-  padding: 0;
-  letter-spacing: -0.01em;
-  transition: color 0.15s ease;
-}
-
-.highlightsHeaderLink:hover .highlightsHeaderTitle {
-  color: #db2777;
-}
-
-.highlightsDropdownGrid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(130px, 1fr));
-  gap: 12px 32px;
-  width: 100%;
-}
-
-.highlightsDropdown .dropdownItemLink {
-  font-family: inherit;
-  font-size: 1rem;
-  font-weight: 500;
-  color: #334155;
-  text-decoration: none;
-  padding: 8px 12px;
-  border-radius: 0;
-  display: flex;
-  align-items: center;
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-  white-space: nowrap;
-}
-
-.highlightsDropdown .dropdownItemLink:hover {
-  color: #db2777;
-  background-color: #fdf2f8;
-  transform: translateX(4px);
 }
 
 /* ---------- Flowers Mega Menu (Square From Navbar) ---------- */
@@ -427,23 +295,40 @@
 }
 
 .dropdownItemLink {
+  position: relative;
   font-family: inherit;
   font-size: 0.92rem;
   font-weight: 400;
   color: #4b5563;
   text-decoration: none;
-  padding: 6px 8px;
-  border-radius: 0;
+  padding: 6px 2px;
   display: inline-flex;
   align-items: center;
-  transition: all 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: color 0.15s ease;
   white-space: nowrap;
+  width: fit-content;
+}
+
+.dropdownItemLink::after {
+  content: "";
+  position: absolute;
+  bottom: 2px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #db2777;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .dropdownItemLink:hover {
   color: #db2777;
-  background-color: #fdf2f8;
-  transform: translateX(3px);
+  background-color: transparent;
+}
+
+.dropdownItemLink:hover::after {
+  transform: scaleX(1);
 }
 
 .shopFlowersGrid {

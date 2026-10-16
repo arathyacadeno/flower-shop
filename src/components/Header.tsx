@@ -807,130 +807,105 @@ export default function Header({
                   role="menu"
                   aria-label="Special occasions navigation menu"
                 >
-                  <div className={styles.occasionsDropdownHeader}>
-                    <a
-                      href="#"
-                      role="button"
-                      className={styles.occasionsHeaderLink}
-                      onClick={(e) => {
-                        e.preventDefault();
-                        if (pathname === "/") {
-                          handleSectionNav(e as any, "occasions", "occasions");
-                        }
-                        setOccasionsHovered(false);
-                      }}
-                    >
-                      <h3 className={styles.occasionsHeaderTitle}>Shop by occasion</h3>
-                    </a>
-                  </div>
-
-                  <div className={styles.occasionsDropdownGrid}>
+                  <div className={styles.dropdownCol}>
+                    <h3 className={styles.dropdownColHeading}>Shop by Occasion</h3>
+                    <hr className={styles.dropdownDivider} />
                     <ul className={styles.dropdownList}>
                       <li>
-                        <a
-                          href="#"
-                          role="button"
+                        <Link
+                          href="/#occasions"
                           className={styles.dropdownItemLink}
                           onClick={(e) => {
-                            e.preventDefault();
+                            handleSectionNav(e, "occasions", "occasions");
                             setOccasionsHovered(false);
                           }}
                         >
                           Birthday
-                        </a>
+                        </Link>
                       </li>
                       <li>
-                        <a
-                          href="#"
-                          role="button"
+                        <Link
+                          href="/#occasions"
                           className={styles.dropdownItemLink}
                           onClick={(e) => {
-                            e.preventDefault();
+                            handleSectionNav(e, "occasions", "occasions");
                             setOccasionsHovered(false);
                           }}
                         >
                           Anniversary
-                        </a>
+                        </Link>
                       </li>
                       <li>
-                        <a
-                          href="#"
-                          role="button"
+                        <Link
+                          href="/#occasions"
                           className={styles.dropdownItemLink}
                           onClick={(e) => {
-                            e.preventDefault();
-                            setOccasionsHovered(false);
-                          }}
-                        >
-                          Get Well Soon
-                        </a>
-                      </li>
-                      <li>
-                        <a
-                          href="#"
-                          role="button"
-                          className={styles.dropdownItemLink}
-                          onClick={(e) => {
-                            e.preventDefault();
-                            setOccasionsHovered(false);
-                          }}
-                        >
-                          Condolence
-                        </a>
-                      </li>
-                    </ul>
-                    <ul className={styles.dropdownList}>
-                      <li>
-                        <a
-                          href="#"
-                          role="button"
-                          className={styles.dropdownItemLink}
-                          onClick={(e) => {
-                            e.preventDefault();
-                            setOccasionsHovered(false);
-                          }}
-                        >
-                          Best Wishes
-                        </a>
-                      </li>
-                      <li>
-                        <a
-                          href="#"
-                          role="button"
-                          className={styles.dropdownItemLink}
-                          onClick={(e) => {
-                            e.preventDefault();
-                            setOccasionsHovered(false);
-                          }}
-                        >
-                          Thank You
-                        </a>
-                      </li>
-                      <li>
-                        <a
-                          href="#"
-                          role="button"
-                          className={styles.dropdownItemLink}
-                          onClick={(e) => {
-                            e.preventDefault();
+                            handleSectionNav(e, "occasions", "occasions");
                             setOccasionsHovered(false);
                           }}
                         >
                           Wedding
-                        </a>
+                        </Link>
                       </li>
                       <li>
-                        <a
-                          href="#"
-                          role="button"
+                        <Link
+                          href="/#occasions"
                           className={styles.dropdownItemLink}
                           onClick={(e) => {
-                            e.preventDefault();
+                            handleSectionNav(e, "occasions", "occasions");
+                            setOccasionsHovered(false);
+                          }}
+                        >
+                          Best Wishes
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          href="/#occasions"
+                          className={styles.dropdownItemLink}
+                          onClick={(e) => {
+                            handleSectionNav(e, "occasions", "occasions");
                             setOccasionsHovered(false);
                           }}
                         >
                           Congratulation
-                        </a>
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          href="/#occasions"
+                          className={styles.dropdownItemLink}
+                          onClick={(e) => {
+                            handleSectionNav(e, "occasions", "occasions");
+                            setOccasionsHovered(false);
+                          }}
+                        >
+                          Thank You
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          href="/#occasions"
+                          className={styles.dropdownItemLink}
+                          onClick={(e) => {
+                            handleSectionNav(e, "occasions", "occasions");
+                            setOccasionsHovered(false);
+                          }}
+                        >
+                          Get Well Soon
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          href="/#occasions"
+                          className={styles.dropdownItemLink}
+                          onClick={(e) => {
+                            handleSectionNav(e, "occasions", "occasions");
+                            setOccasionsHovered(false);
+                          }}
+                        >
+                          Condolence
+                        </Link>
                       </li>
                     </ul>
                   </div>
@@ -979,20 +954,9 @@ export default function Header({
                   role="menu"
                   aria-label="Our highlights navigation menu"
                 >
-                  <div className={styles.highlightsDropdownHeader}>
-                    <Link
-                      href="/#highlights"
-                      className={styles.highlightsHeaderLink}
-                      onClick={(e) => {
-                        handleSectionNav(e, "highlights", "highlights");
-                        setHighlightsHovered(false);
-                      }}
-                    >
-                      <h3 className={styles.highlightsHeaderTitle}>Featured Services</h3>
-                    </Link>
-                  </div>
-
-                  <div className={styles.highlightsDropdownGrid}>
+                  <div className={styles.dropdownCol}>
+                    <h3 className={styles.dropdownColHeading}>Featured Services</h3>
+                    <hr className={styles.dropdownDivider} />
                     <ul className={styles.dropdownList}>
                       <li>
                         <Link
@@ -1018,8 +982,6 @@ export default function Header({
                           Stage Decor
                         </Link>
                       </li>
-                    </ul>
-                    <ul className={styles.dropdownList}>
                       <li>
                         <Link
                           href="/#highlights"

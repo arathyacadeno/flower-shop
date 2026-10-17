@@ -180,7 +180,13 @@ export const FLOWER_BASKET_PRODUCTS: CategoryProduct[] = [
   {
     id: "basket-13",
     title: "30 white yellow roses with gypsophilla arranged in premium quality basket 1995",
-    image: "/images/flower-basket/30-white-yellow-roses-premium-basket-2.jpg",
+    image: "/images/flower-basket/side-view/front-view 30-white-yellow-roses-premium-basket-2.jpg",
+    images: [
+      "/images/flower-basket/side-view/front-view 30-white-yellow-roses-premium-basket-2.jpg",
+      "/images/flower-basket/side-view/right-view30-white-yellow-roses-premium-basket-2.jpg",
+      "/images/flower-basket/side-view/back-view 30-white-yellow-roses-premium-basket-2.jpg",
+      "/images/flower-basket/side-view/left-view 30-white-yellow-roses-premium-basket-2.jpg",
+    ],
     price: "₹1,995",
     tag: "Premium Choice",
     description: "30 white yellow roses with gypsophilla delicately arranged in a premium quality basket.",

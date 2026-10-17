@@ -26,7 +26,13 @@ export const FLOWER_BASKET_PRODUCTS: CategoryProduct[] = [
   {
     id: "basket-2",
     title: "15 pink carnations with gypsophilla arranged in bamboo basket",
-    image: "/images/pink-carnation-ribbon-basket.png",
+    image: "/images/flower-basket/side-view/front-view pink-carnation-ribbon-basket.png",
+    images: [
+      "/images/flower-basket/side-view/front-view pink-carnation-ribbon-basket.png",
+      "/images/flower-basket/side-view/right-view pink-carnation-ribbon-basket.png",
+      "/images/flower-basket/side-view/back-view pink-carnation-ribbon-basket.png",
+      "/images/flower-basket/side-view/left-view pink-carnation-ribbon-basket.png",
+    ],
     price: "₹1,095",
     tag: "Artisanal Choice",
     description: "15 pink carnations with gypsophilla delicately arranged in a bamboo basket.",

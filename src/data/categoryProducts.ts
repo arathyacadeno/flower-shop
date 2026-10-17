@@ -96,7 +96,13 @@ export const FLOWER_BASKET_PRODUCTS: CategoryProduct[] = [
   {
     id: "basket-7",
     title: "Mix flower half ball arrangement in a basket.... 20 roses, chrysanthemum, gypsophilla",
-    image: "/images/flower-basket/mix-flower-half-ball-basket.jpg",
+    image: "/images/flower-basket/side-view/front-view mix-flower-half-ball-basket.jpg",
+    images: [
+      "/images/flower-basket/side-view/front-view mix-flower-half-ball-basket.jpg",
+      "/images/flower-basket/side-view/right-view mix-flower-half-ball-basket.jpg",
+      "/images/flower-basket/side-view/back-view mix-flower-half-ball-basket.jpg",
+      "/images/flower-basket/side-view/left-view mix-flower-half-ball-basket.jpg",
+    ],
     price: "₹1,495",
     tag: "Bestseller",
     description: "Mix flower half ball arrangement in a basket featuring 20 roses, chrysanthemum, and gypsophilla.",

@@ -138,7 +138,13 @@ export const FLOWER_BASKET_PRODUCTS: CategoryProduct[] = [
   {
     id: "basket-10",
     title: "1 stem Asiatic lilly, white pink peach roses, chrysanthemum, gypsophilla",
-    image: "/images/flower-basket/asiatic-lily-peach-roses-basket.jpg",
+    image: "/images/flower-basket/side-view/front-view asiatic-lily-peach-roses-basket.jpg",
+    images: [
+      "/images/flower-basket/side-view/front-view asiatic-lily-peach-roses-basket.jpg",
+      "/images/flower-basket/side-view/right-view asiatic-lily-peach-roses-basket.jpg",
+      "/images/flower-basket/side-view/back-view asiatic-lily-peach-roses-basket.jpg",
+      "/images/flower-basket/side-view/left-view asiatic-lily-peach-roses-basket.jpg",
+    ],
     price: "₹1,600",
     tag: "Bestseller",
     description: "1 stem Asiatic lily paired with beautiful white, pink, and peach roses, chrysanthemums, and gypsophilla arranged in a classic bamboo basket.",

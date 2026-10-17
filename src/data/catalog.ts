@@ -1640,7 +1640,10 @@ export const CATALOG_PRODUCTS: Product[] = [
     categoryLabel: "Cakes",
     image: "/images/cakes/decadent-chocolate-shavings-cake.png",
     images: [
-      "/images/cakes/decadent-chocolate-shavings-cake.png",
+      "/images/cakes/side-view/1-decadent-chocolate-shavings-cake.png",
+      "/images/cakes/side-view/2-decadent-chocolate-shavings-cake.png",
+      "/images/cakes/side-view/3-decadent-chocolate-shavings-cake.png",
+      "/images/cakes/side-view/4-decadent-chocolate-shavings-cake.png",
     ],
     rating: 4.9,
     reviewsCount: 88,
@@ -1664,7 +1667,10 @@ export const CATALOG_PRODUCTS: Product[] = [
     categoryLabel: "Cakes",
     image: "/images/cakes/elegant-chocolate-web-cake.png",
     images: [
-      "/images/cakes/elegant-chocolate-web-cake.png",
+      "/images/cakes/side-view/1-elegant-chocolate-web-cake.png",
+      "/images/cakes/side-view/2-elegant-chocolate-web-cake.png",
+      "/images/cakes/side-view/3-elegant-chocolate-web-cake.png",
+      "/images/cakes/side-view/4-elegant-chocolate-web-cake.png",
     ],
     rating: 4.8,
     reviewsCount: 75,

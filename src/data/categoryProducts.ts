@@ -110,7 +110,13 @@ export const FLOWER_BASKET_PRODUCTS: CategoryProduct[] = [
   {
     id: "basket-8",
     title: "40 pink white roses with pink Chrysanthemum n gypsophilla arranged in bamboo basket",
-    image: "/images/flower-basket/40-pink-white-roses-chrysanthemum-basket.jpg",
+    image: "/images/flower-basket/side-view/front-view 40-pink-white-roses-chrysanthemum-basket.jpg",
+    images: [
+      "/images/flower-basket/side-view/front-view 40-pink-white-roses-chrysanthemum-basket.jpg",
+      "/images/flower-basket/side-view/right-view 40-pink-white-roses-chrysanthemum-basket.jpg",
+      "/images/flower-basket/side-view/back-view 40-pink-white-roses-chrysanthemum-basket.jpg",
+      "/images/flower-basket/side-view/left-view 40-pink-white-roses-chrysanthemum-basket.jpg",
+    ],
     price: "₹2,500",
     tag: "Luxury Choice",
     description: "40 pink and white roses with pink Chrysanthemum and gypsophilla gracefully arranged in a bamboo basket.",

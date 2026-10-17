@@ -74,21 +74,9 @@ export default function ProductCard({
           <img
             src={product.image}
             alt={product.name}
-            className={`${styles.productImage} ${
-              product.images && product.images.length > 1 && product.images[1] !== product.image
-                ? styles.primaryImage
-                : ""
-            }`}
+            className={styles.productImage}
             loading="lazy"
           />
-          {product.images && product.images.length > 1 && product.images[1] !== product.image && (
-            <img
-              src={product.images[1]}
-              alt={`${product.name} alternate view`}
-              className={styles.secondaryImage}
-              loading="lazy"
-            />
-          )}
         </Link>
 
         {/* Floating Action Button (Delete Button or Wishlist Heart) */}

@@ -88,9 +88,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     categoryLabel: "Flowers",
     image: "/images/flower-basket/pink-carnation-ribbon-basket.png",
     images: [
-      "/images/flower-basket/side-view/Front-View RigPink Ribbon Floral Basket Arrangement.png",
-      "/images/flower-basket/side-view/Right-view Pink Ribbon Floral Basket Arrangement.png",
-      "/images/flower-basket/side-view/Left-view Pink Ribbon Floral Basket Arrangement.png",
+      "/images/flower-basket/pink-carnation-ribbon-basket.png",
     ],
     rating: 4.8,
     reviewsCount: 36,

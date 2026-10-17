@@ -1694,7 +1694,10 @@ export const CATALOG_PRODUCTS: Product[] = [
     categoryLabel: "Cakes",
     image: "/images/cakes/elegant-just-engaged-heart-cake.png",
     images: [
-      "/images/cakes/elegant-just-engaged-heart-cake.png",
+      "/images/cakes/side-view/1-elegant-just-engaged-heart-cake.png",
+      "/images/cakes/side-view/2-elegant-just-engaged-heart-cake.png",
+      "/images/cakes/side-view/3-elegant-just-engaged-heart-cake.png",
+      "/images/cakes/side-view/4-elegant-just-engaged-heart-cake.png",
     ],
     rating: 5.0,
     reviewsCount: 64,

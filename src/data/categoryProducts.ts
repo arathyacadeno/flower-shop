@@ -152,7 +152,13 @@ export const FLOWER_BASKET_PRODUCTS: CategoryProduct[] = [
   {
     id: "basket-11",
     title: "40 white /yellow roses with gypsophilla one sided arrangement in premium quality basket",
-    image: "/images/flower-basket/40-white-yellow-roses-one-sided-basket.jpg",
+    image: "/images/flower-basket/side-view/front-view 40-white-yellow-roses-one-sided-basket.jpg",
+    images: [
+      "/images/flower-basket/side-view/front-view 40-white-yellow-roses-one-sided-basket.jpg",
+      "/images/flower-basket/side-view/right-view 40-white-yellow-roses-one-sided-basket.jpg",
+      "/images/flower-basket/side-view/back-view40-white-yellow-roses-one-sided-basket.jpg",
+      "/images/flower-basket/side-view/left-view 40-white-yellow-roses-one-sided-basket.jpg",
+    ],
     price: "₹2,299",
     tag: "Premium Choice",
     description: "40 beautifully arranged white and yellow roses with gypsophilla in a one-sided premium quality basket.",

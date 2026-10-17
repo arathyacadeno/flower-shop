@@ -124,7 +124,13 @@ export const FLOWER_BASKET_PRODUCTS: CategoryProduct[] = [
   {
     id: "basket-9",
     title: "2 stem pink Lilly,20 stems roses, carnations, gypsophilla arrangement in a round container",
-    image: "/images/flower-basket/pink-lily-rose-carnation-round-container.jpg",
+    image: "/images/flower-basket/side-view/front-view pink-lily-rose-carnation-round-container.jpg",
+    images: [
+      "/images/flower-basket/side-view/front-view pink-lily-rose-carnation-round-container.jpg",
+      "/images/flower-basket/side-view/right-view pink-lily-rose-carnation-round-container.jpg",
+      "/images/flower-basket/side-view/back-view pink-lily-rose-carnation-round-container.jpg",
+      "/images/flower-basket/side-view/left-side pink-lily-rose-carnation-round-container.jpg",
+    ],
     price: "₹1,600",
     tag: "Elegant Choice",
     description: "2 stem pink Lilly, 20 stems roses, carnations, and gypsophilla beautifully arranged in a premium round container.",

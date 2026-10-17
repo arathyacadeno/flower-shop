@@ -2,6 +2,7 @@ export interface CategoryProduct {
   id: string;
   title: string;
   image: string;
+  images?: string[];
   price: string;
   tag?: string;
   description: string;
@@ -11,7 +12,13 @@ export const FLOWER_BASKET_PRODUCTS: CategoryProduct[] = [
   {
     id: "basket-1",
     title: "White /pink roses with gypsophilla in a bamboo basket",
-    image: "/images/pastel-rose-wicker-basket.png",
+    image: "/images/flower-basket/side-view/front-view pastel-rose-wicker-basket.png",
+    images: [
+      "/images/flower-basket/side-view/front-view pastel-rose-wicker-basket.png",
+      "/images/flower-basket/side-view/right-view pastel-rose-wicker-basket.png",
+      "/images/flower-basket/side-view/back-view pastel-rose-wicker-basket.png",
+      "/images/flower-basket/side-view/left-view pastel-rose-wicker-basket.png",
+    ],
     price: "₹1,800",
     tag: "Bestseller",
     description: "White and pink roses with gypsophilla arranged in a natural bamboo basket. A gentle, romantic centerpiece.",

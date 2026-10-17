@@ -193,6 +193,32 @@
   border-radius: 16px;
 }
 
+.primaryImage {
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.secondaryImage {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 16px;
+  opacity: 0;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+  pointer-events: none;
+}
+
+.imageContainer:hover .secondaryImage {
+  opacity: 1;
+}
+
+.imageContainer:hover .primaryImage {
+  opacity: 0;
+}
+
 /* ================= WAVE NOTCH (old element, hidden) ================= */
 .waveDivider {
   display: none;

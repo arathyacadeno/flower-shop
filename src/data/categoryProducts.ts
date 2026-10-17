@@ -68,7 +68,13 @@ export const FLOWER_BASKET_PRODUCTS: CategoryProduct[] = [
   {
     id: "basket-5",
     title: "20 white pink roses with gypsophilla arranged in bamboo basket",
-    image: "/images/flower-basket/20-white-pink-roses-bamboo-basket.jpg",
+    image: "/images/flower-basket/side-view/front-view 20-white-pink-roses-bamboo-basket.jpg",
+    images: [
+      "/images/flower-basket/side-view/front-view 20-white-pink-roses-bamboo-basket.jpg",
+      "/images/flower-basket/side-view/right-view 20-white-pink-roses-bamboo-basket.jpg",
+      "/images/flower-basket/side-view/back-view 20-white-pink-roses-bamboo-basket.jpg",
+      "/images/flower-basket/side-view/left-view 20-white-pink-roses-bamboo-basket.jpg",
+    ],
     price: "₹1,100",
     tag: "Elegant Choice",
     description: "20 white pink roses with gypsophilla delicately arranged in a bamboo basket.",

@@ -61,9 +61,10 @@ export const CATALOG_PRODUCTS: Product[] = [
     categoryLabel: "Flowers",
     image: "/images/flower-basket/pastel-rose-wicker-basket.png",
     images: [
-      "/images/flower-basket/pastel-rose-wicker-basket.png",
-      "/images/flower-basket/pink-carnation-ribbon-basket.png",
-      "/images/flower-basket/basket-crimson-pink-roses.jpg",
+      "/images/flower-basket/side-view/Front-View Pastel Rose Basket Bouquet.png",
+      "/images/flower-basket/side-view/Right-View Pastel Rose Basket Bouquet.png",
+      "/images/flower-basket/side-view/Left-View Pastel Rose Basket Bouquet.png",
+      
     ],
     rating: 4.9,
     reviewsCount: 42,

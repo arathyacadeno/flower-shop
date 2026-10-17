@@ -166,7 +166,13 @@ export const FLOWER_BASKET_PRODUCTS: CategoryProduct[] = [
   {
     id: "basket-12",
     title: "24 White/pink roses and gypsophilla beautifully arranged in a bamboo basket",
-    image: "/images/flower-basket/24-white-pink-roses-basket.jpg",
+    image: "/images/flower-basket/side-view/front-view 24-white-pink-roses-basket.jpg",
+    images: [
+      "/images/flower-basket/side-view/front-view 24-white-pink-roses-basket.jpg",
+      "/images/flower-basket/side-view/right-view24-white-pink-roses-basket.jpg",
+      "/images/flower-basket/side-view/back-view 24-white-pink-roses-basket.jpg",
+      "/images/flower-basket/side-view/left-view24-white-pink-roses-basket.jpg",
+    ],
     price: "₹1,400",
     tag: "Bestseller",
     description: "24 White and pink roses and gypsophilla beautifully arranged in a classic bamboo basket.",

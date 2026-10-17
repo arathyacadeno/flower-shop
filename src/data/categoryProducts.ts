@@ -40,7 +40,13 @@ export const FLOWER_BASKET_PRODUCTS: CategoryProduct[] = [
   {
     id: "basket-3",
     title: "Lilly roses chrysanthemum n assorted chocolates arranged in a bamboo basket",
-    image: "/images/lilly-roses-chrysanthemum-chocolate-basket.jpg",
+    image: "/images/flower-basket/side-view/front-view lilly-roses-chrysanthemum-chocolate-basket.jpg",
+    images: [
+      "/images/flower-basket/side-view/front-view lilly-roses-chrysanthemum-chocolate-basket.jpg",
+      "/images/flower-basket/side-view/right-view lilly-roses-chrysanthemum-chocolate-basket.jpg",
+      "/images/flower-basket/side-view/back-view lilly-roses-chrysanthemum-chocolate-basket.jpg",
+      "/images/flower-basket/side-view/left-view lilly-roses-chrysanthemum-chocolate-basket.jpg",
+    ],
     price: "₹1,600",
     tag: "Bestseller",
     description: "Lilly roses chrysanthemum n assorted chocolates arranged in a bamboo basket.",

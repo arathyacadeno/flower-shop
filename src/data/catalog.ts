@@ -1610,7 +1610,10 @@ export const CATALOG_PRODUCTS: Product[] = [
     categoryLabel: "Cakes",
     image: "/images/cakes/chocolate-birthday-cake-for-amma.png",
     images: [
-      "/images/cakes/chocolate-birthday-cake-for-amma.png",
+      "/images/cakes/side-view/1-chocolate-birthday-cake-for-amma.png",
+      "/images/cakes/side-view/2.chocolate-birthday-cake-for-amma.png",
+      "/images/cakes/side-view/3.chocolate-birthday-cake-for-amma.png",
+      "/images/cakes/side-view/4.chocolate-birthday-cake-for-amma.png",
     ],
     rating: 5.0,
     reviewsCount: 142,

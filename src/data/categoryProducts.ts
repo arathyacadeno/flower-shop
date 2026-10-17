@@ -54,7 +54,13 @@ export const FLOWER_BASKET_PRODUCTS: CategoryProduct[] = [
   {
     id: "basket-4",
     title: "20 Red Roses, white chrysanthemum n gypsophilla arranged in bamboo basket",
-    image: "/images/red-roses-chrysanthemum-bamboo-basket.jpg",
+    image: "/images/flower-basket/side-view/front-view red-roses-chrysanthemum-bamboo-basket.jpg",
+    images: [
+      "/images/flower-basket/side-view/front-view red-roses-chrysanthemum-bamboo-basket.jpg",
+      "/images/flower-basket/side-view/right-view red-roses-chrysanthemum-bamboo-basket.jpg",
+      "/images/flower-basket/side-view/back-view red-roses-chrysanthemum-bamboo-basket.jpg",
+      "/images/flower-basket/side-view/left-view red-roses-chrysanthemum-bamboo-basket.jpg",
+    ],
     price: "₹1,395",
     tag: "Classic Choice",
     description: "20 Red Roses, white chrysanthemum n gypsophilla arranged in bamboo basket.",

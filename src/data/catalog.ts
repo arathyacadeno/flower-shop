@@ -1580,7 +1580,10 @@ export const CATALOG_PRODUCTS: Product[] = [
     categoryLabel: "Cakes",
     image: "/images/cakes/blue-floral-birthday-cake.png",
     images: [
-      "/images/cakes/blue-floral-birthday-cake.png",
+      "/images/cakes/side-view/1-blue-floral-birthday-cake.png",
+      "/images/cakes/side-view/2-blue-floral-birthday-cake.png",
+      "/images/cakes/side-view/3-blue-floral-birthday-cake.png",
+      "/images/cakes/side-view/4-blue-floral-birthday-cake.png",
     ],
     rating: 5.0,
     reviewsCount: 118,

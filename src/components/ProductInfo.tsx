@@ -92,28 +92,28 @@ export default function ProductInfo({
             name: "500g",
             price: Math.round(product.price * 0.55),
             originalPrice: product.originalPrice ? Math.round(product.originalPrice * 0.55) : undefined,
-            image: product.images[0] || product.image,
+            image: product.image,
           },
           {
             id: "1kg",
             name: "1 KG",
             price: product.price,
             originalPrice: product.originalPrice,
-            image: product.images[1] || product.images[0] || product.image,
+            image: product.image,
           },
           {
             id: "1.5kg",
             name: "1.5 KG",
             price: Math.round(product.price * 1.45),
             originalPrice: product.originalPrice ? Math.round(product.originalPrice * 1.45) : undefined,
-            image: product.images[2] || product.images[0] || product.image,
+            image: product.image,
           },
           {
             id: "2kg",
             name: "2 KG",
             price: Math.round(product.price * 1.9),
             originalPrice: product.originalPrice ? Math.round(product.originalPrice * 1.9) : undefined,
-            image: product.images[3] || product.images[0] || product.image,
+            image: product.image,
           },
         ]
       : isOrchid

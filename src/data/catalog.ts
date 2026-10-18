@@ -1868,7 +1868,10 @@ export const CATALOG_PRODUCTS: Product[] = [
     categoryLabel: "Cakes",
     image: "/images/cakes/pastel-pink-heart-cake.png",
     images: [
-      "/images/cakes/pastel-pink-heart-cake.png",
+      "/images/cakes/side-view/1-pastel-pink-heart-cake.png",
+      "/images/cakes/side-view/2-pastel-pink-heart-cake.png",
+      "/images/cakes/side-view/3-Pink Rosette Heart Cake.png",
+      "/images/cakes/side-view/4-pastel-pink-heart-cake.png",
     ],
     rating: 4.9,
     reviewsCount: 88,

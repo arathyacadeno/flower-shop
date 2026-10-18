@@ -2620,7 +2620,7 @@ export const CATALOG_PRODUCTS: Product[] = [
     price: 795,
     category: "table-decor",
     categoryLabel: "Table Decor",
-    image: "/images/table decor/side-view/Elegant White Floral Dome Bouquet.png",
+    image: "/images/table decor/8-795.png",
     images: [
       "/images/table decor/side-view/Elegant White Floral Dome Bouquet.png",
       "/images/table decor/side-view/Elegant White and Green Floral Dome.png",
@@ -2651,7 +2651,10 @@ export const CATALOG_PRODUCTS: Product[] = [
     categoryLabel: "Table Decor",
     image: "/images/table decor/10-695.png",
     images: [
-      "/images/table decor/10-695.png",
+      "/images/table decor/side-view/Ivory and Peach Floral Centrepiece.png",
+      "/images/table decor/side-view/Elegant Peach and Ivory Floral Centerpiece.png",
+      "/images/table decor/side-view/Elegant Peach and Cream Floral Centerpiece.png",
+      "/images/table decor/side-view/Pastel Rose and Daisy Centerpiece.png",
     ],
     rating: 4.9,
     reviewsCount: 38,

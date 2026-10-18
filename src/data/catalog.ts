@@ -1724,7 +1724,10 @@ export const CATALOG_PRODUCTS: Product[] = [
     categoryLabel: "Cakes",
     image: "/images/cakes/elegant-red-heart-anniversary-cake.png",
     images: [
-      "/images/cakes/elegant-red-heart-anniversary-cake.png",
+      "/images/cakes/side-view/1-elegant-red-heart-anniversary-cake.png",
+      "/images/cakes/side-view/2-elegant-red-heart-anniversary-cake.png",
+      "/images/cakes/side-view/3-elegant-red-heart-anniversary-cake.png",
+      "/images/cakes/side-view/4-elegant-red-heart-anniversary-cake.png",
     ],
     rating: 4.9,
     reviewsCount: 110,

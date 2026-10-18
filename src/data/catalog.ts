@@ -1811,7 +1811,10 @@ export const CATALOG_PRODUCTS: Product[] = [
     categoryLabel: "Cakes",
     image: "/images/cakes/lavender-floral-happy-birthday-amma-cake.png",
     images: [
-      "/images/cakes/lavender-floral-happy-birthday-amma-cake.png",
+      "/images/cakes/side-view/1-lavender-floral-happy-birthday-amma-cake.png",
+      "/images/cakes/side-view/2-lavender-floral-happy-birthday-amma-cake.png",
+      "/images/cakes/side-view/3-lavender-floral-happy-birthday-amma-cake.png",
+      "/images/cakes/side-view/4-lavender-floral-happy-birthday-amma-cake.png",
     ],
     rating: 5.0,
     reviewsCount: 134,
@@ -1838,7 +1841,10 @@ export const CATALOG_PRODUCTS: Product[] = [
     categoryLabel: "Cakes",
     image: "/images/cakes/luxury-half-chocolate-birthday-cake.png",
     images: [
-      "/images/cakes/luxury-half-chocolate-birthday-cake.png",
+      "/images/cakes/side-view/1-luxury-half-chocolate-birthday-cake.png",
+      "/images/cakes/side-view/2-luxury-half-chocolate-birthday-cake.png",
+      "/images/cakes/side-view/3-luxury-half-chocolate-birthday-cake.png",
+      "/images/cakes/side-view/4-luxury-half-chocolate-birthday-cake.png",
     ],
     rating: 4.9,
     reviewsCount: 93,

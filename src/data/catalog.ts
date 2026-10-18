@@ -1925,7 +1925,10 @@ export const CATALOG_PRODUCTS: Product[] = [
     categoryLabel: "Cakes",
     image: "/images/cakes/red-velvet-gold-birthday-cake.png",
     images: [
-      "/images/cakes/red-velvet-gold-birthday-cake.png",
+      "/images/cakes/side-view/1-red-velvet-gold-birthday-cake.png",
+      "/images/cakes/side-view/2-red-velvet-gold-birthday-cake.png",
+      "/images/cakes/side-view/3-red-velvet-gold-birthday-cake.png",
+      "/images/cakes/side-view/4-red-velvet-gold-birthday-cake.png",
     ],
     rating: 5.0,
     reviewsCount: 156,

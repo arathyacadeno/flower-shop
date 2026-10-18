@@ -1895,7 +1895,10 @@ export const CATALOG_PRODUCTS: Product[] = [
     categoryLabel: "Cakes",
     image: "/images/cakes/onyx-black-celebration-cake.png",
     images: [
-      "/images/cakes/onyx-black-celebration-cake.png",
+      "/images/cakes/side-view/1-onyx-black-celebration-cake.png",
+      "/images/cakes/side-view/2-onyx-black-celebration-cake.png",
+      "/images/cakes/side-view/3-onyx-black-celebration-cake.png",
+      "/images/cakes/side-view/4-onyx-black-celebration-cake.png",
     ],
     rating: 4.9,
     reviewsCount: 96,

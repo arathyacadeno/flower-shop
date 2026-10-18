@@ -1754,7 +1754,10 @@ export const CATALOG_PRODUCTS: Product[] = [
     categoryLabel: "Cakes",
     image: "/images/cakes/evana-floral-celebration-cake.png",
     images: [
-      "/images/cakes/evana-floral-celebration-cake.png",
+      "/images/cakes/side-view/1-evana-floral-celebration-cake.png",
+      "/images/cakes/side-view/2-evana-floral-celebration-cake.png",
+      "/images/cakes/side-view/3-evana-floral-celebration-cake.png",
+      "/images/cakes/side-view/4-evana-floral-celebration-cake.png",
     ],
     rating: 4.9,
     reviewsCount: 82,
@@ -1781,7 +1784,10 @@ export const CATALOG_PRODUCTS: Product[] = [
     categoryLabel: "Cakes",
     image: "/images/cakes/golden-crumb-chocolate-drizzle-cake.png",
     images: [
-      "/images/cakes/golden-crumb-chocolate-drizzle-cake.png",
+      "/images/cakes/side-view/1-golden-crumb-chocolate-drizzle-cake.png",
+      "/images/cakes/side-view/2-golden-crumb-chocolate-drizzle-cake.png",
+      "/images/cakes/side-view/3-golden-crumb-chocolate-drizzle-cake.png",
+      "/images/cakes/side-view/4-golden-crumb-chocolate-drizzle-cake.png",
     ],
     rating: 4.8,
     reviewsCount: 67,

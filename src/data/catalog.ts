@@ -2851,8 +2851,10 @@ export const CATALOG_PRODUCTS: Product[] = [
     categoryLabel: "Table Decor",
     image: "/images/table decor/24-2400.png",
     images: [
-      "/images/table decor/24-2400.png",
-      "/images/white-roses-table-centerpiece.png",
+      "/images/table decor/side-view/Ivory Rose and Greenery Bouquet.png",
+      "/images/table decor/side-view/Elegant Cream-White Rose Floral Arrangement.png",
+      "/images/table decor/side-view/Ivory Rose and Daisy Bouquet.png",
+      "/images/table decor/side-view/Rear-view White Rose Floral Centrepiece.png",
     ],
     rating: 5.0,
     reviewsCount: 48,

@@ -2793,7 +2793,10 @@ export const CATALOG_PRODUCTS: Product[] = [
     categoryLabel: "Table Decor",
     image: "/images/table decor/18-2000.jpg",
     images: [
-      "/images/table decor/18-2000.jpg",
+      "/images/table decor/side-view/Symmetrical Pink and White Floral Centrepiece.png",
+      "/images/table decor/side-view/Lush Pink and White Floral Centerpiece.png",
+      "/images/table decor/side-view/Lush Pink and White Floral Centrepiece.png",
+      "/images/table decor/side-view/Rear View of Lush Pink Floral Arrangement.png",
     ],
     rating: 5.0,
     reviewsCount: 39,

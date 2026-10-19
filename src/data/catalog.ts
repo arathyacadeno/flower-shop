@@ -2935,7 +2935,10 @@ export const CATALOG_PRODUCTS: Product[] = [
     categoryLabel: "Table Decor",
     image: "/images/table decor/26-2700.jpg",
     images: [
-      "/images/table decor/26-2700.jpg",
+      "/images/table decor/side-view/Pastel Floral Centrepiece on White.png",
+      "/images/table decor/side-view/Romantic Pink and White Floral Centerpiece.png",
+      "/images/table decor/side-view/Elegant Pastel Floral Centrepiece.png",
+      "/images/table decor/side-view/Pastel Floral Centerpiece from the Back.png",
     ],
     rating: 5.0,
     reviewsCount: 41,

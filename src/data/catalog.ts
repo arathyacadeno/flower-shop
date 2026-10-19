@@ -3297,6 +3297,32 @@ export const CATALOG_PRODUCTS: Product[] = [
     includes: ["Handwoven Botanical Ring", "White Seasonal Blossoms", "Memorial Satin Bow"],
     badge: "Botanical Wreath",
   },
+  {
+    id: "wreath-pink-white-floral",
+    slug: "pink-and-white-floral-wreath",
+    name: "Pink and White Floral Wreath",
+    price: 6000,
+    originalPrice: 6800,
+    category: "wreaths",
+    categoryLabel: "Wreaths",
+    image: "/images/wreath/Pink and White Floral Wreath.png",
+    images: [
+      "/images/wreath/Pink and White Floral Wreath.png",
+    ],
+    rating: 5.0,
+    reviewsCount: 46,
+    description: "Graceful circular standing tribute wreath handcrafted with snowy white chrysanthemums, delicate pink garden roses, ethereal gypsophila baby's breath, and fresh green foliage. A tender and solemn expression of love, honor, and heartfelt remembrance.",
+    deliveryInfo: "Dignified, respectful priority delivery directly to church, memorial hall, or residence across Calicut.",
+    offers: ["Complimentary personalized memorial ribbon banner", "Free handwritten condolence card"],
+    includes: [
+      "28-Inch Circular Memorial Wreath Ring",
+      "Fresh White Chrysanthemums & Pink Roses",
+      "Delicate White Gypsophila Baby's Breath",
+      "Lush Emerald Foliage & Moisture Base",
+      "Standing Wooden Display Easel Option",
+    ],
+    badge: "Circular Ring Tribute",
+  },
 ];
 
 export function getProductsByCategory(

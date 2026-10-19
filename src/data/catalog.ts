@@ -2764,7 +2764,10 @@ export const CATALOG_PRODUCTS: Product[] = [
     categoryLabel: "Table Decor",
     image: "/images/table decor/18-1800.jpg",
     images: [
-      "/images/table decor/18-1800.jpg",
+      "/images/table decor/side-view/Romantic Mixed Floral Centrepiece Arrangement.png",
+      "/images/table decor/side-view/Elegant Pink and White Floral Centerpiece copy.png",
+      "/images/table decor/side-view/Elegant Pastel Rose and Lily Bouquet.png",
+      "/images/table decor/side-view/Pink and White Floral Mound Arrangement.png",
     ],
     rating: 4.9,
     reviewsCount: 35,

@@ -3192,7 +3192,10 @@ export const CATALOG_PRODUCTS: Product[] = [
     categoryLabel: "Wreaths",
     image: "/images/wreath/White Floral Cross with Matching Bouquets.png",
     images: [
-      "/images/wreath/White Floral Cross with Matching Bouquets.png",
+      "/images/wreath/side-view/White Floral Cross Wreath.png",
+      "/images/wreath/side-view/Side-Profile White Floral Cross.png",
+      "/images/wreath/side-view/Side-Profile White Floral Cross (1).png",
+      "/images/wreath/side-view/Back View of a White Floral Cross Wreath.png",
     ],
     rating: 5.0,
     reviewsCount: 39,
@@ -3233,6 +3236,31 @@ export const CATALOG_PRODUCTS: Product[] = [
       "Solid Wooden Display Easel Stand",
     ],
     badge: "Sacred Cross Tribute",
+  },
+  {
+    id: "wreath-white-chrysanthemum-peach-rose",
+    slug: "white-chrysanthemum-and-peach-rose-bouquet",
+    name: "White Chrysanthemum and Peach Rose Tribute Bouquet",
+    price: 3500,
+    originalPrice: 4200,
+    category: "wreaths",
+    categoryLabel: "Wreaths",
+    image: "/images/wreath/White Chrysanthemum and Peach Rose Bouquet.png",
+    images: [
+      "/images/wreath/White Chrysanthemum and Peach Rose Bouquet.png",
+    ],
+    rating: 4.9,
+    reviewsCount: 38,
+    description: "Serene circular dome memorial tribute arrangement handcrafted with fresh snowy white chrysanthemums, velvety peach avalanche roses, and rich evergreen foliage. A graceful expression of sympathy, warmth, and enduring love.",
+    deliveryInfo: "Respectful, punctual priority delivery directly to memorial service, chapel, or family home across Calicut.",
+    offers: ["Complimentary printed condolence ribbon", "Free heartfelt memorial note card"],
+    includes: [
+      "Circular Dome Memorial Floral Tribute",
+      "Fresh White Button & Daisy Chrysanthemums",
+      "Pastel Peach Avalanche Roses",
+      "Lush Evergreen Cedar & Foliage Base",
+    ],
+    badge: "Circular Tribute",
   },
 ];
 

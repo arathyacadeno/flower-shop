@@ -3337,7 +3337,10 @@ export const CATALOG_PRODUCTS: Product[] = [
     categoryLabel: "Wreaths",
     image: "/images/wreath/White Floral Memorial Wreath with Tribute Ribbon.png",
     images: [
-      "/images/wreath/White Floral Memorial Wreath with Tribute Ribbon.png",
+      "/images/wreath/side-view/White Floral Wreath with Blue Ribbon.png",
+      "/images/wreath/side-view/White Floral Wreath with Blue Ribbon (1).png",
+      "/images/wreath/side-view/Elegant White Floral Wreath with Blue Ribbon (1).png",
+      "/images/wreath/side-view/Back View of Lush White Floral Wreath.png",
     ],
     rating: 5.0,
     reviewsCount: 58,

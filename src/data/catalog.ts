@@ -3021,7 +3021,10 @@ export const CATALOG_PRODUCTS: Product[] = [
     categoryLabel: "Table Decor",
     image: "/images/table decor/26-2000.jpg",
     images: [
-      "/images/table decor/26-2000.jpg",
+      "/images/table decor/side-view/Vibrant Pink and White Floral Centerpiece copy.png",
+      "/images/table decor/side-view/Elegant Pink and White Floral Centerpiece copy 3.png",
+      "/images/table decor/side-view/Elegant White and Pink Floral Centrepiece copy.png",
+      "/images/table decor/side-view/Rear-View Floral Centerpiece Arrangement copy.png",
     ],
     rating: 4.9,
     reviewsCount: 35,
@@ -3072,7 +3075,10 @@ export const CATALOG_PRODUCTS: Product[] = [
     categoryLabel: "Table Decor",
     image: "/images/table decor/30-5500.jpg",
     images: [
-      "/images/table decor/30-5500.jpg",
+      "/images/table decor/side-view/Pastel Dome-Shaped Floral Arrangement.png",
+      "/images/table decor/side-view/Lush Mixed Flower Arrangement on White.png",
+      "/images/table decor/side-view/Lush Pastel Floral Mound Centerpiece.png",
+      "/images/table decor/side-view/Rear-View Pink and Peach Floral Arrangement.png",
     ],
     rating: 5.0,
     reviewsCount: 62,
@@ -3096,7 +3102,10 @@ export const CATALOG_PRODUCTS: Product[] = [
     categoryLabel: "Table Decor",
     image: "/images/table decor/24-1800.jpg",
     images: [
-      "/images/table decor/24-1800.jpg",
+      "/images/table decor/side-view/Elegant Red and White Floral Centerpiece.png",
+      "/images/table decor/side-view/Elegant Red Rose and Daisy Floral Centerpiece.png",
+      "/images/table decor/side-view/Romantic Mixed Flower Bouquet Arrangement.png",
+      "/images/table decor/side-view/Lush Red, White and Pink Floral Mound.png",
     ],
     rating: 4.9,
     reviewsCount: 44,
@@ -3112,7 +3121,6 @@ export const CATALOG_PRODUCTS: Product[] = [
     ],
     badge: "24\" Low Long Runner",
   },
-
   // ==================== WREATHS PRODUCTS (/wreaths) ====================
   {
     id: "wreath-eternal-devotion-heart",

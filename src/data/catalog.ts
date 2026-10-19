@@ -3395,7 +3395,10 @@ export const CATALOG_PRODUCTS: Product[] = [
     categoryLabel: "Wreaths",
     image: "/images/wreath/Elegant White Floral Tribute Wreath.png",
     images: [
-      "/images/wreath/Elegant White Floral Tribute Wreath.png",
+      "/images/wreath/side-view/Angled White Floral Wreath with Blue Ribbon (1).png",
+      "/images/wreath/side-view/Elegant White Floral Wreath with Blue Ribbon (1) copy.png",
+      "/images/wreath/side-view/White Floral Wreath with Blue Ribbon (1) copy.png",
+      "/images/wreath/side-view/Back View of a White Floral Wreath.png",
     ],
     rating: 4.9,
     reviewsCount: 37,

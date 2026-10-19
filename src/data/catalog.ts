@@ -3308,7 +3308,10 @@ export const CATALOG_PRODUCTS: Product[] = [
     categoryLabel: "Wreaths",
     image: "/images/wreath/Pastel Floral Wreath with Blue Banner.png",
     images: [
-      "/images/wreath/Pastel Floral Wreath with Blue Banner.png",
+      "/images/wreath/side-view/Pastel Floral Wreath on White.png",
+      "/images/wreath/side-view/Pastel Floral Wreath with Blue Ribbon.png",
+      "/images/wreath/side-view/Pastel Floral Wreath with Blue Ribbon (1).png",
+      "/images/wreath/side-view/Back View of a Lush Floral Wreath (1).png",
     ],
     rating: 5.0,
     reviewsCount: 41,

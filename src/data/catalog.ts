@@ -2679,7 +2679,10 @@ export const CATALOG_PRODUCTS: Product[] = [
     categoryLabel: "Table Decor",
     image: "/images/table decor/10-1200.jpg",
     images: [
-      "/images/table decor/10-1200.jpg",
+      "/images/table decor/side-view/Symmetrical Rose and Chrysanthemum Centrepiece.png",
+      "/images/table decor/side-view/Colourful Rose and Chrysanthemum Centrepiece.png",
+      "/images/table decor/side-view/Lush Pastel Rose and Chrysanthemum Centerpiece.png",
+      "/images/table decor/side-view/Rear-View Pastel Rose Floral Mound.png",
     ],
     rating: 4.9,
     reviewsCount: 31,
@@ -2704,7 +2707,10 @@ export const CATALOG_PRODUCTS: Product[] = [
     categoryLabel: "Table Decor",
     image: "/images/table decor/12-900.jpg",
     images: [
-      "/images/table decor/12-900.jpg",
+      "/images/table decor/side-view/Pastel Floral Centerpiece on White.png",
+      "/images/table decor/side-view/Elegant Pink and White Floral Centerpiece.png",
+      "/images/table decor/side-view/Elegant Pink and White Floral Centrepiece.png",
+      "/images/table decor/side-view/Rear-View Pastel Flower Arrangement.png",
     ],
     rating: 4.9,
     reviewsCount: 33,

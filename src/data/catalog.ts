@@ -2736,7 +2736,10 @@ export const CATALOG_PRODUCTS: Product[] = [
     categoryLabel: "Table Decor",
     image: "/images/table decor/15 oval shape 1800.png",
     images: [
-      "/images/table decor/15 oval shape 1800.png",
+      "/images/table decor/side-view/Lush Pink Rose and Daisy Bouquet.png",
+      "/images/table decor/side-view/Pink Rose and White Daisy Bouquet.png",
+      "/images/table decor/side-view/Pink Roses and White Chrysanthemum Bouquet.png",
+      "/images/table decor/side-view/Rear-View Pink Rose and White Mum Bouquet.png",
     ],
     rating: 5.0,
     reviewsCount: 42,

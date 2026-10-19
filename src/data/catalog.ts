@@ -2822,7 +2822,10 @@ export const CATALOG_PRODUCTS: Product[] = [
     categoryLabel: "Table Decor",
     image: "/images/table decor/24-2000.jpg",
     images: [
-      "/images/table decor/24-2000.jpg",
+      "/images/table decor/side-view/Pastel Dome Floral Centerpiece.png",
+      "/images/table decor/side-view/Pastel Pink and White Floral Arrangement.png",
+      "/images/table decor/side-view/Pastel Pink and White Floral Mound.png",
+      "/images/table decor/side-view/Elegant Pink and White Floral Mound.png",
     ],
     rating: 4.9,
     reviewsCount: 37,

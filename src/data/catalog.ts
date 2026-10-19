@@ -2964,7 +2964,10 @@ export const CATALOG_PRODUCTS: Product[] = [
     categoryLabel: "Table Decor",
     image: "/images/table decor/hydrangea-lily-2200.jpg",
     images: [
-      "/images/table decor/hydrangea-lily-2200.jpg",
+      "/images/table decor/side-view/Symmetrical Pastel Garden Floral Centerpiece.png",
+      "/images/table decor/side-view/Lush White and Pink Floral Centerpiece.png",
+      "/images/table decor/side-view/Pastel Garden Bouquet on White.png",
+      "/images/table decor/side-view/Rear View of a Lush Floral Arrangement.png",
     ],
     rating: 5.0,
     reviewsCount: 38,

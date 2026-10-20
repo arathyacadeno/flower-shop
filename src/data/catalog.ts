@@ -640,7 +640,10 @@ export const CATALOG_PRODUCTS: Product[] = [
     categoryLabel: "Flowers",
     image: "/images/flower-bouquet/passion-petals.jpg",
     images: [
-      "/images/flower-bouquet/passion-petals.jpg"
+      "/images/flower-bouquet/side-view/Red Rose Bouquets in Heart-Printed Wraps.png",
+      "/images/flower-bouquet/side-view/Red Rose Bouquets in Heart-Printed Wraps(1).png",
+      "/images/flower-bouquet/side-view/Red Rose Bouquets in Heart-Printed Wraps(2).png",
+      "/images/flower-bouquet/side-view/Red Rose Bouquets in Heart-Printed Wraps(3).png",
     ],
     rating: 4.8,
     reviewsCount: 22,

@@ -911,7 +911,10 @@ export const CATALOG_PRODUCTS: Product[] = [
     categoryLabel: "Flowers",
     image: "/images/flower-bouquet/luxury-rose-medley.jpg",
     images: [
-      "/images/flower-bouquet/luxury-rose-medley.jpg",
+      "/images/flower-bouquet/side-view/6/01_front_view.png",
+      "/images/flower-bouquet/side-view/6/02_side_angle.png",
+      "/images/flower-bouquet/side-view/6/03_front_view_2.png",
+      "/images/flower-bouquet/side-view/6/04_back_view.png",
     ],
     rating: 5.0,
     reviewsCount: 42,
@@ -1079,7 +1082,10 @@ export const CATALOG_PRODUCTS: Product[] = [
     categoryLabel: "Flowers",
     image: "/images/flower-bouquet/ocean-of-love.jpg",
     images: [
-      "/images/flower-bouquet/ocean-of-love.jpg"
+      "/images/flower-bouquet/side-view/3/01_front_view.png",
+      "/images/flower-bouquet/side-view/3/02_side_angle.png",
+      "/images/flower-bouquet/side-view/3/03_front_view_2.png",
+      "/images/flower-bouquet/side-view/3/04_back_view.png",
     ],
     rating: 4.8,
     reviewsCount: 15,
@@ -1102,7 +1108,10 @@ export const CATALOG_PRODUCTS: Product[] = [
     categoryLabel: "Flowers",
     image: "/images/flower-bouquet/midnight-roses.jpg",
     images: [
-      "/images/flower-bouquet/midnight-roses.jpg"
+      "/images/flower-bouquet/side-view/4/01_front_view.png",
+      "/images/flower-bouquet/side-view/4/02_side_angle.png",
+      "/images/flower-bouquet/side-view/4/03_front_view_2.png",
+      "/images/flower-bouquet/side-view/4/04_back_view.png",
     ],
     rating: 4.9,
     reviewsCount: 8,
@@ -1295,7 +1304,10 @@ export const CATALOG_PRODUCTS: Product[] = [
     categoryLabel: "Flowers",
     image: "/images/flower-bouquet/majestic-purple-blooms.jpg",
     images: [
-      "/images/flower-bouquet/majestic-purple-blooms.jpg",
+      "/images/flower-bouquet/side-view/5/01_front_view.png",
+      "/images/flower-bouquet/side-view/5/02_side_angle.png",
+      "/images/flower-bouquet/side-view/5/03_front_view_2.png",
+      "/images/flower-bouquet/side-view/5/04_back_view.png",
     ],
     rating: 4.9,
     reviewsCount: 20,

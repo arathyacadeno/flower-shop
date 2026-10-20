@@ -130,7 +130,7 @@ export default function ProductInfo({
             name: "12 Stems",
             price: 1195,
             originalPrice: 1395,
-            image: product.images?.[1] || product.images?.[0] || product.image,
+            image: product.images?.[0] || product.image,
           },
           {
             id: "custom",
@@ -154,7 +154,7 @@ export default function ProductInfo({
             name: "Customize",
             price: pricePerFlower * 12,
             originalPrice: Math.round(pricePerFlower * 12 * 1.15),
-            image: product.images?.[1] || product.images?.[0] || product.image,
+            image: product.images?.[0] || product.image,
           },
         ]
       : null;

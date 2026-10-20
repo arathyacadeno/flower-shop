@@ -38,7 +38,10 @@ export const CATALOG_PRODUCTS: Product[] = [
     categoryLabel: "Flowers",
     image: "/images/flower-bouquet/30-white-roses-sheeve-bouquet.jpg",
     images: [
-      "/images/flower-bouquet/30-white-roses-sheeve-bouquet.jpg"
+      "/images/flower-bouquet/side-view/Four Views of a Golden-Wrapped Rose Bouquet.png",
+      "/images/flower-bouquet/side-view/Four Views of a Golden-Wrapped Rose Bouquet(1).png",
+      "/images/flower-bouquet/side-view/Four Views of a Golden-Wrapped Rose Bouquet(2).png",
+      "/images/flower-bouquet/side-view/Four Views of a Golden-Wrapped Rose Bouquet(3).png",
     ],
     rating: 5.0,
     reviewsCount: 15,

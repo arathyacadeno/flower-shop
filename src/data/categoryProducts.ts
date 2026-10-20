@@ -318,6 +318,12 @@ export const BOUQUET_PRODUCTS: CategoryProduct[] = [
     id: "bouquet-passion-petals",
     title: "Passion Petals Bouquet",
     image: "/images/flower-bouquet/passion-petals.jpg",
+    images: [
+      "/images/flower-bouquet/side-view/Red Rose Bouquets in Heart-Printed Wraps.png",
+      "/images/flower-bouquet/side-view/Red Rose Bouquets in Heart-Printed Wraps(1).png",
+      "/images/flower-bouquet/side-view/Red Rose Bouquets in Heart-Printed Wraps(2).png",
+      "/images/flower-bouquet/side-view/Red Rose Bouquets in Heart-Printed Wraps(3).png",
+    ],
     price: "₹650",
     tag: "Bestseller",
     description: "A gorgeous bouquet of deep red roses wrapped beautifully to convey your deepest passion.",

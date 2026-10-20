@@ -479,7 +479,10 @@ export const CATALOG_PRODUCTS: Product[] = [
     categoryLabel: "Flowers",
     image: "/images/flower-bouquet/orchid-symphony-3.jpg",
     images: [
-      "/images/flower-bouquet/orchid-symphony-3.jpg",
+      "/images/flower-bouquet/side-view/Four-View Lavender Orchid Bouquet.png",
+      "/images/flower-bouquet/side-view/Four-View Lavender Orchid Bouquet(1).png",
+      "/images/flower-bouquet/side-view/Four-View Lavender Orchid Bouquet(2).png",
+      "/images/flower-bouquet/side-view/Four-View Lavender Orchid Bouquet(3).png",
     ],
     rating: 4.8,
     reviewsCount: 15,

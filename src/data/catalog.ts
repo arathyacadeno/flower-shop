@@ -718,7 +718,10 @@ export const CATALOG_PRODUCTS: Product[] = [
     categoryLabel: "Flowers",
     image: "/images/flower-bouquet/orchid-harmony.jpg",
     images: [
-      "/images/flower-bouquet/orchid-harmony.jpg",
+      "/images/flower-bouquet/side-view/2/01_front_view.png",
+      "/images/flower-bouquet/side-view/2/02_side_angle.png",
+      "/images/flower-bouquet/side-view/2/03_front_view_2.png",
+      "/images/flower-bouquet/side-view/2/04_back_view.png",
     ],
     rating: 4.8,
     reviewsCount: 15,

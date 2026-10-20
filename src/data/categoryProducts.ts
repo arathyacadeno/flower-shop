@@ -378,6 +378,12 @@ export const BOUQUET_PRODUCTS: CategoryProduct[] = [
     id: "bouquet-orchid-harmony",
     title: "Orchid Harmony",
     image: "/images/flower-bouquet/orchid-harmony.jpg",
+    images: [
+      "/images/flower-bouquet/side-view/2/01_front_view.png",
+      "/images/flower-bouquet/side-view/2/02_side_angle.png",
+      "/images/flower-bouquet/side-view/2/03_front_view_2.png",
+      "/images/flower-bouquet/side-view/2/04_back_view.png",
+    ],
     price: "₹500",
     tag: "Exotic",
     description: "A harmonious blend of striking purple orchids and delicate pink and white blooms, beautifully presented in an elegant wrap.",

@@ -340,6 +340,12 @@ export const BOUQUET_PRODUCTS: CategoryProduct[] = [
     id: "bouquet-orchid-symphony",
     title: "Orchid Symphony",
     image: "/images/flower-bouquet/orchid-symphony-3.jpg",
+    images: [
+      "/images/flower-bouquet/side-view/Four-View Lavender Orchid Bouquet.png",
+      "/images/flower-bouquet/side-view/Four-View Lavender Orchid Bouquet(1).png",
+      "/images/flower-bouquet/side-view/Four-View Lavender Orchid Bouquet(2).png",
+      "/images/flower-bouquet/side-view/Four-View Lavender Orchid Bouquet(3).png",
+    ],
     price: "₹2,000",
     tag: "Exotic",
     description: "A stunning symphony of exotic purple orchids and delicate pink roses, beautifully arranged to create a lasting impression.",

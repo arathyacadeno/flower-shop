@@ -303,6 +303,9 @@ export interface RecommendedAddonsProps {
 
 export const getAddonProducts = (category?: string) => {
   const norm = category?.toLowerCase() || "";
+  if (norm === "wreaths" || norm === "wreath") {
+    return [];
+  }
   if (norm === "cakes") {
     const chocolates = ADDON_PRODUCTS.filter((p) => p.category === "Chocolates");
     const gifts = ADDON_PRODUCTS.filter((p) => p.category === "Gifts");
@@ -320,6 +323,10 @@ export default function RecommendedAddons({
   const { addItem } = useCart();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const filteredAddons = getAddonProducts(mainCategory);
+
+  if (filteredAddons.length === 0) {
+    return null;
+  }
 
   const [localQuantities, setLocalQuantities] = useState<Record<string, number>>({});
   const quantities = selectedAddons !== undefined ? selectedAddons : localQuantities;

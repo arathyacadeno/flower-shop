@@ -92,7 +92,7 @@ export default function AddonModal({
     return filteredAddons.filter((p) => p.category === activeCategory);
   }, [filteredAddons, activeCategory]);
 
-  if (!isOpen) return null;
+  if (!isOpen || filteredAddons.length === 0) return null;
 
   const handleIncrement = (id: string) => {
     const current = selectedAddons[id] || 0;

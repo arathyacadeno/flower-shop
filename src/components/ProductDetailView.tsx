@@ -52,6 +52,12 @@ export default function ProductDetailView({ product }: ProductDetailViewProps) {
     product.name.toLowerCase().includes("teddy") ||
     product.name.toLowerCase().includes("toy");
 
+  const isWreath =
+    product.category === "wreaths" ||
+    product.id.includes("wreath") ||
+    product.slug?.includes("wreath") ||
+    product.name.toLowerCase().includes("wreath");
+
   let similarProducts: Product[] = [];
 
   if (isChocolate) {
@@ -169,8 +175,8 @@ export default function ProductDetailView({ product }: ProductDetailViewProps) {
           />
         </section>
 
-        {/* Recommended Addon Products - only show when viewing flowers, cakes, or main items */}
-        {(!isChocolate || isCakeProduct) && !isSoftToy && (
+        {/* Recommended Addon Products - only show when viewing flowers, cakes, or main items (never for wreaths, chocolates, or soft toys) */}
+        {(!isChocolate || isCakeProduct) && !isSoftToy && !isWreath && (
           <RecommendedAddons
             selectedAddons={selectedAddons}
             onAddonChange={setSelectedAddons}
@@ -232,6 +238,8 @@ export default function ProductDetailView({ product }: ProductDetailViewProps) {
                 ? "Similar Chocolates & Treats"
                 : isCakeProduct
                 ? "Similar Celebration Cakes"
+                : isWreath
+                ? "Similar Memorial & Tribute Wreaths"
                 : "Similar Product"}
             </h2>
             <div className={styles.scrollButtons}>

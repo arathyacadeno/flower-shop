@@ -80,6 +80,11 @@ export default function ProductInfo({
 
   const isCake = product.category === "cakes";
   const isFlower = product.category === "flower" || isBouquet;
+  const isWreath =
+    product.category === "wreaths" ||
+    product.id.includes("wreath") ||
+    product.slug?.includes("wreath") ||
+    product.name.toLowerCase().includes("wreath");
 
   // Resolve variants if explicitly defined, for cakes (weight options), or for lily products
   const variants: ProductVariant[] | null =
@@ -509,6 +514,10 @@ export default function ProductInfo({
 
   const handleBuyNow = () => {
     if (!validateForm()) return;
+    if (isWreath) {
+      proceedToCheckout({});
+      return;
+    }
     setIsBuyNowAddonOpen(true);
   };
 

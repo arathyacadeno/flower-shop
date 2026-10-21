@@ -71,15 +71,6 @@ export default function AddonModal({
     return ["All", ...cats];
   }, [filteredAddons]);
 
-  // Counts of items per category
-  const categoryItemCounts = useMemo(() => {
-    const counts: Record<string, number> = { All: filteredAddons.length };
-    filteredAddons.forEach((p) => {
-      counts[p.category] = (counts[p.category] || 0) + 1;
-    });
-    return counts;
-  }, [filteredAddons]);
-
   // Selected count per category
   const categorySelectedCounts = useMemo(() => {
     const counts: Record<string, number> = { All: 0 };
@@ -171,7 +162,6 @@ export default function AddonModal({
         <div className={styles.categoryBar} role="tablist" aria-label="Add-on Categories">
           <div className={styles.categoryTabs}>
             {categories.map((cat) => {
-              const count = categoryItemCounts[cat] || 0;
               const selectedCount = categorySelectedCounts[cat] || 0;
               const isActive = activeCategory === cat;
 
@@ -187,10 +177,8 @@ export default function AddonModal({
                   onClick={() => setActiveCategory(cat)}
                 >
                   <span>{cat}</span>
-                  {selectedCount > 0 ? (
+                  {selectedCount > 0 && (
                     <span className={styles.categoryBadge}>{selectedCount}</span>
-                  ) : (
-                    <span className={styles.categoryCount}>({count})</span>
                   )}
                 </button>
               );

@@ -212,7 +212,7 @@ export default function AddonModal({
                     isSelected ? styles.addonCardSelected : ""
                   }`}
                 >
-                  {/* Chamfered Image Container */}
+                  {/* Card Image */}
                   <div className={styles.imageContainer}>
                     <img
                       src={product.image}
@@ -220,17 +220,6 @@ export default function AddonModal({
                       className={styles.cardImage}
                       loading="lazy"
                     />
-                    <svg
-                      className={styles.waveDivider}
-                      viewBox="0 0 300 28"
-                      preserveAspectRatio="none"
-                      aria-hidden="true"
-                    >
-                      <path
-                        d="M -2,32 L -2,12 Q -2,0 16,0 L 185,0 C 208,0 216,20 242,20 L 304,20 L 304,32 Z"
-                        fill="#ffffff"
-                      />
-                    </svg>
                   </div>
 
                   {/* Card Content */}
@@ -239,7 +228,7 @@ export default function AddonModal({
                       {product.name}
                     </h4>
                     <div className={styles.productPrice}>
-                      ₹ {product.price.toFixed(2)}
+                      ₹ {Math.round(product.price).toLocaleString("en-IN")}
                     </div>
 
                     {qty > 0 ? (
@@ -253,7 +242,7 @@ export default function AddonModal({
                           className={styles.qtyBtn}
                           aria-label={`Decrease ${product.name} quantity`}
                         >
-                          <Minus size={13} strokeWidth={2.6} />
+                          <Minus size={14} strokeWidth={2.5} />
                         </button>
                         <span className={styles.qtyValue}>
                           {String(qty).padStart(2, "0")}
@@ -267,7 +256,7 @@ export default function AddonModal({
                           className={styles.qtyBtn}
                           aria-label={`Increase ${product.name} quantity`}
                         >
-                          <Plus size={13} strokeWidth={2.6} />
+                          <Plus size={14} strokeWidth={2.5} />
                         </button>
                       </div>
                     ) : (

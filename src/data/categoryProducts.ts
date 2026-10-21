@@ -754,6 +754,12 @@ export const BOUQUET_PRODUCTS: CategoryProduct[] = [
     id: "bouquet-peach-serenity",
     title: "Peach Serenity Bouquet",
     image: "/images/flower-bouquet/peach-serenity.jpg",
+    images: [
+      "/images/flower-bouquet/side-view/23/01_front_view.png",
+      "/images/flower-bouquet/side-view/23/02_side_angle.png",
+      "/images/flower-bouquet/side-view/23/03_front_view_2.png",
+      "/images/flower-bouquet/side-view/23/04_back_view.png",
+    ],
     price: "₹1,200",
     tag: "Pastel Elegance",
     description: "A tranquil and dreamy bouquet of soft peach, creamy ivory, and warm champagne roses nestled in a cloud of delicate gypsophila, wrapped in romantic heart-patterned origami wrap tied with a radiant gold satin ribbon.",

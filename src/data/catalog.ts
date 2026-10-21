@@ -884,7 +884,10 @@ export const CATALOG_PRODUCTS: Product[] = [
     categoryLabel: "Flowers",
     image: "/images/flower-bouquet/orchid-fantasy.jpg",
     images: [
-      "/images/flower-bouquet/orchid-fantasy.jpg",
+      "/images/flower-bouquet/side-view/23/01_front_view.png",
+      "/images/flower-bouquet/side-view/23/02_side_angle.png",
+      "/images/flower-bouquet/side-view/23/03_front_view_2.png",
+      "/images/flower-bouquet/side-view/23/04_back_view.png",
     ],
     rating: 4.8,
     reviewsCount: 15,

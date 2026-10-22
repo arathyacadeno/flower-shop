@@ -10,7 +10,6 @@ export const metadata: Metadata = {
 
 const WREATH_TABS = [
   { id: "all", label: "All Items" },
-  { id: "heart", label: "Heart Tributes" },
   { id: "cross", label: "Cross Wreaths" },
   { id: "circular", label: "Circular Rings" },
   { id: "easel", label: "Standing Easels" },

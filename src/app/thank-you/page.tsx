@@ -7,6 +7,8 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { useCheckout, CompletedOrder } from "@/context/CheckoutContext";
 import { useCart } from "@/context/CartContext";
+import { CATALOG_PRODUCTS } from "@/data/catalog";
+import { ADDON_PRODUCTS } from "@/data/addons";
 import {
   Sparkles,
   Phone,
@@ -37,6 +39,41 @@ const fallbackOrder: CompletedOrder = {
   createdAt: new Date().toISOString(),
   estimatedDelivery: "Today in 2–4 hours (Same-Day Express Delivery)",
 };
+
+function getCategoryMainPhoto(order: CompletedOrder): string {
+  const pName = (order.productName || "").toLowerCase().trim();
+
+  // 1. Try matching against CATALOG_PRODUCTS
+  const catalogMatch = CATALOG_PRODUCTS.find((p) => {
+    if (order.productId && p.id === order.productId) return true;
+    if (order.productSlug && p.slug === order.productSlug) return true;
+    const catName = p.name.toLowerCase().trim();
+    return catName === pName || pName.startsWith(catName) || catName.startsWith(pName);
+  });
+  if (catalogMatch && catalogMatch.image) {
+    return catalogMatch.image;
+  }
+
+  // 2. Try matching against ADDON_PRODUCTS
+  const addonMatch = ADDON_PRODUCTS.find((a) => {
+    if (order.productId && a.id === order.productId) return true;
+    const aName = a.name.toLowerCase().trim();
+    return aName === pName || pName.startsWith(aName) || aName.startsWith(pName);
+  });
+  if (addonMatch && addonMatch.image) {
+    return addonMatch.image;
+  }
+
+  // 3. Strip any side-view slice directory or prefix
+  if (order.productImage && order.productImage.includes("/side-view/")) {
+    return order.productImage
+      .replace(/\/side-view\/[0-9]+-/, "/")
+      .replace(/\/side-view\/[0-9]+\//, "/")
+      .replace(/\/side-view\//, "/");
+  }
+
+  return order.productImage || fallbackOrder.productImage;
+}
 
 export default function ThankYouPage() {
   const router = useRouter();
@@ -97,6 +134,7 @@ export default function ThankYouPage() {
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const activeOrder = order.orderId !== fallbackOrder.orderId ? order : (completedOrder || order || fallbackOrder);
+  const displayImage = getCategoryMainPhoto(activeOrder);
 
   // Format creation date
   const orderDate = new Date(activeOrder.createdAt).toLocaleDateString("en-IN", {
@@ -118,7 +156,7 @@ export default function ThankYouPage() {
           <div className={styles.imageColumn}>
             <div className={styles.imageWrapper}>
               <img
-                src={activeOrder.productImage}
+                src={displayImage}
                 alt={activeOrder.productName}
                 className={styles.heroFloralImg}
               />

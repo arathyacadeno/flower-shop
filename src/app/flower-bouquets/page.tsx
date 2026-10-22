@@ -5,20 +5,16 @@ import { getFlowerBouquets } from "@/data/catalog";
 export const metadata: Metadata = {
   title: "Flower Bouquets | Occassions Florist Calicut",
   description:
-    "Handcrafted fresh floral bouquets featuring premium Dutch roses, lilies, tulips & seasonal blooms.",
+    "Handcrafted fresh floral bouquets featuring premium Dutch roses, orchids, sunflowers & seasonal blooms.",
 };
 
 const BOUQUET_TABS = [
   { id: "all", label: "All Items" },
   { id: "roses", label: "Roses" },
   { id: "orchids", label: "Orchids" },
-  { id: "lilies", label: "Lilies" },
   { id: "carnations", label: "Carnations" },
   { id: "sunflowers", label: "Sunflowers" },
-  { id: "tulips", label: "Tulips" },
   { id: "birthday", label: "Birthday" },
-  { id: "anniversary", label: "Anniversary" },
-  { id: "bouquets", label: "Signature Bouquets" },
 ];
 
 export default function FlowerBouquetsPage() {
@@ -27,7 +23,7 @@ export default function FlowerBouquetsPage() {
   return (
     <CategoryPage
       title="Flower Bouquets"
-      description={"Handcrafted fresh floral bouquets featuring\npremium Dutch roses, lilies, tulips & seasonal blooms."}
+      description={"Handcrafted fresh floral bouquets featuring\npremium Dutch roses, orchids, sunflowers & seasonal blooms."}
       products={bouquetProducts}
       filterTabs={BOUQUET_TABS}
     />

@@ -1,51 +1,41 @@
 .heroSection {
   position: relative;
   width: 100%;
-  min-height: calc(100vh - 78px);
-  min-height: calc(100svh - 78px);
+  height: min(calc(100svh - 78px), 800px); /* never taller than the screen or 800px */
   background-color: #FAD9E3;
   overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   user-select: none;
   cursor: pointer;
-}
-
-/* Header is 68px on screens <= 1100px */
-@media (max-width: 1100px) {
-  .heroSection {
-    min-height: calc(100vh - 68px);
-    min-height: calc(100svh - 68px);
-  }
-}
-
-/* On mobile screens, maintain clean 16:9 ratio so entire video is completely visible without excessive empty space */
-@media (max-width: 768px) {
-  .heroSection {
-    min-height: unset;
-    height: auto;
-    aspect-ratio: 16 / 9;
-  }
 }
 
 .videoContainer {
   position: relative;
   width: 100%;
-  aspect-ratio: 16 / 9;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #FAD9E3;
+  height: 100%;
 }
 
 .heroVideo {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover; /* fills the area, crops extra top/bottom */
   object-position: center;
   display: block;
   pointer-events: none;
+}
+
+/* Header is 68px on screens <= 1100px */
+@media (max-width: 1100px) {
+  .heroSection {
+    height: min(calc(100svh - 68px), 800px);
+  }
+}
+
+/* Mobile: show the whole video at its natural 16:9 ratio */
+@media (max-width: 768px) {
+  .heroSection {
+    height: auto;
+    aspect-ratio: 16 / 9;
+  }
 }
 
 .heroVideo::-webkit-media-controls,
@@ -55,4 +45,3 @@
   opacity: 0 !important;
   pointer-events: none !important;
 }
-

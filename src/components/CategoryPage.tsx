@@ -175,15 +175,75 @@ export default function CategoryPage({
       if (f === "sunflowers" || f === "sunflower") return text.includes("sunflower");
       if (f === "gerberas" || f === "gerbera") return text.includes("gerbera");
       if (f === "peonies" || f === "peony") return text.includes("peon");
-      if (f === "bouquets") return text.includes("bouquet");
+      if (f === "bouquets" || f === "bouquet" || f === "flower-bouquets" || f === "flower bouquets") {
+        return (
+          !text.includes("basket") &&
+          !text.includes("box") &&
+          (text.includes("bouquet") ||
+            text.includes("wrap") ||
+            text.includes("bunch") ||
+            text.includes("hand-tied") ||
+            p.id.startsWith("bouquet-"))
+        );
+      }
+      if (
+        f === "baskets" ||
+        f === "basket" ||
+        f === "flower-baskets" ||
+        f === "flower baskets" ||
+        f === "handcrafted-baskets" ||
+        f === "handcrafted baskets"
+      ) {
+        return (
+          text.includes("basket") ||
+          text.includes("box") ||
+          text.includes("crate") ||
+          p.id.startsWith("flower-basket-")
+        );
+      }
       if (f === "flowers-in-boxes" || f === "flowers in boxes")
         return (
           text.includes("basket") ||
           text.includes("box") ||
           text.includes("crate")
         );
-      if (f === "handcrafted-baskets" || f === "handcrafted baskets")
-        return text.includes("basket");
+      if (
+        f === "cane" ||
+        f === "cane-basket" ||
+        f === "flowers in cane basket" ||
+        f.includes("cane")
+      ) {
+        return (
+          p.basketType === "cane" ||
+          (!p.basketType && (text.includes("cane") || text.includes("wicker")))
+        );
+      }
+      if (
+        f === "bamboo" ||
+        f === "bamboo-basket" ||
+        f === "flowers in bamboo basket" ||
+        f.includes("bamboo")
+      ) {
+        return (
+          p.basketType === "bamboo" ||
+          (!p.basketType && text.includes("bamboo") && !text.includes("cane") && !text.includes("wicker"))
+        );
+      }
+      if (
+        f === "container" ||
+        f === "conatiner" ||
+        f === "flowers in container" ||
+        f === "flowers in conatiner" ||
+        f.includes("container") ||
+        f.includes("conatiner")
+      ) {
+        return (
+          p.basketType === "container" ||
+          text.includes("container") ||
+          text.includes("conatiner") ||
+          p.id === "flower-basket-9"
+        );
+      }
       if (f === "centerpiece")
         return text.includes("centerpiece") || text.includes("candelabra");
       if (f === "runner")

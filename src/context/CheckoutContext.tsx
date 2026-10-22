@@ -212,6 +212,13 @@ export function CheckoutProvider({ children }: { children: React.ReactNode }) {
     const randomSuffix = Math.floor(100000 + Math.random() * 900000);
     const orderId = customOrderId || `${randomSuffix}`;
 
+    const resolvedProductImage = primaryItem.image
+      ? primaryItem.image
+          .replace(/\/side-view\/[0-9]+-/, "/")
+          .replace(/\/side-view\/[0-9]+\//, "/")
+          .replace(/\/side-view\//, "/")
+      : primaryItem.image;
+
     const newOrder: CompletedOrder = {
       orderId,
       productId: primaryItem.id,
@@ -220,7 +227,7 @@ export function CheckoutProvider({ children }: { children: React.ReactNode }) {
         checkoutItems.length > 1
           ? `${primaryItem.name} + ${checkoutItems.length - 1} more items`
           : primaryItem.name,
-      productImage: primaryItem.image,
+      productImage: resolvedProductImage,
       productCategory: primaryItem.category,
       quantity: checkoutItems.reduce((acc, i) => acc + (i.quantity || 1), 0),
       price: totalAmount,

@@ -977,15 +977,6 @@ export default function Header({
                           Anniversary Cakes
                         </Link>
                       </li>
-                      <li>
-                        <Link
-                          href="/cakes?tab=fruit"
-                          className={styles.dropdownItemLink}
-                          onClick={() => setCakesHovered(false)}
-                        >
-                          Fruit &amp; Berry
-                        </Link>
-                      </li>
                     </ul>
                   </div>
                 </div>

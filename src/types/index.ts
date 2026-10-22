@@ -17,6 +17,7 @@ export interface Bouquet {
   scent: 'Subtle & Sweet' | 'Heirloom Rose' | 'Fresh & Green' | 'Exotic Musk';
   badge?: string;
   dimensions: string;
+  basketType?: 'cane' | 'bamboo' | 'container';
 }
 
 export interface FlowerProduct extends Bouquet {

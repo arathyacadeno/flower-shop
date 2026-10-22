@@ -2,6 +2,7 @@ import path from "path";
 import fs from "fs";
 import bcrypt from "bcryptjs";
 import { CATALOG_PRODUCTS } from "@/data/catalog";
+import { ADDON_PRODUCTS } from "@/data/addons";
 
 // Lazy-load or require node:sqlite DatabaseSync
 let DatabaseSyncClass: any;
@@ -366,7 +367,11 @@ function seedInitialData(db: any) {
     else if (lower.includes("valentine") || lower.includes("love")) occasionId = "occ-valentines";
     else if (lower.includes("housewarming")) occasionId = "occ-housewarming";
 
-    const allImages = Array.isArray(p.images) && p.images.length > 0 ? p.images : [p.image];
+    const allImages = p.image
+      ? [p.image, ...(Array.isArray(p.images) ? p.images.filter((img) => img !== p.image) : [])]
+      : Array.isArray(p.images) && p.images.length > 0
+      ? p.images
+      : [];
 
     const existing = findProduct.get(p.id, p.slug);
     if (existing) {
@@ -407,6 +412,41 @@ function seedInitialData(db: any) {
         JSON.stringify(p.offers || []),
         JSON.stringify(p.includes || []),
         p.badge || null,
+        now,
+        now
+      );
+    }
+  }
+
+  // 6b. Seed Addon products (cakes, chocolates, gifts) so addon IDs resolve in orders & catalog
+  for (const a of ADDON_PRODUCTS) {
+    const existing = findProduct.get(a.id, a.id);
+    if (!existing) {
+      let catId = "cat-cakes";
+      if (a.category === "Chocolates") catId = "cat-flower-basket";
+      else if (a.category === "Gifts") catId = "cat-table-decor";
+
+      insertProduct.run(
+        a.id,
+        a.name,
+        a.id,
+        a.name,
+        JSON.stringify([a.image]),
+        a.price,
+        null,
+        100,
+        `SKU-${a.id.toUpperCase()}`,
+        catId,
+        "ft-mixed-flowers",
+        "occ-birthday",
+        0,
+        1,
+        5.0,
+        25,
+        "Same-day delivery available across Kerala",
+        JSON.stringify([]),
+        JSON.stringify([]),
+        null,
         now,
         now
       );

@@ -1,8 +1,9 @@
 import React from "react";
 import { Metadata } from "next";
 import { redirect } from "next/navigation";
-import FlowerCategoryPage from "@/components/flowers/FlowerCategoryPage";
-import { getCategoryInfo, getProductsByCategory, CATEGORIES_DATA } from "@/data/flowerProducts";
+import CategoryPage from "@/components/CategoryPage";
+import { getCategoryInfo, CATEGORIES_DATA } from "@/data/flowerProducts";
+import { getProductsForFlower, getAllProducts } from "@/data/catalog";
 
 interface PageProps {
   params: Promise<{ category: string }>;
@@ -40,7 +41,7 @@ export async function generateStaticParams() {
   }));
 }
 
-export default async function CategoryPage({ params }: PageProps) {
+export default async function FlowerTypeCategoryPage({ params }: PageProps) {
   const { category } = await params;
 
   if (category === "bouquets") {
@@ -51,7 +52,33 @@ export default async function CategoryPage({ params }: PageProps) {
   }
 
   const info = getCategoryInfo(category);
-  const products = getProductsByCategory(category);
+  let products = getProductsForFlower(category);
+  if (!products || products.length === 0) {
+    // fallback if specific search yields none
+    products = getAllProducts().filter(
+      (p) =>
+        p.category === "flower" &&
+        (p.name.toLowerCase().includes(category.toLowerCase()) ||
+          p.description?.toLowerCase().includes(category.toLowerCase()))
+    );
+  }
 
-  return <FlowerCategoryPage category={info} products={products} />;
+  const flowerName = info.name || "Flowers";
+  const tabs = [
+    { id: "all", label: `All ${flowerName}` },
+    { id: "baskets", label: "Flower Baskets" },
+    { id: "bouquets", label: "Flower Bouquets" },
+  ];
+
+  return (
+    <CategoryPage
+      title={`${flowerName} Collection`}
+      description={
+        info.description ||
+        `Handcrafted fresh floral bouquets & artisanal baskets featuring premium ${flowerName.toLowerCase()}.`
+      }
+      products={products}
+      filterTabs={tabs}
+    />
+  );
 }

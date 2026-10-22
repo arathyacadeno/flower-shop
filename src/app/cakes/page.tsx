@@ -12,7 +12,6 @@ const CAKE_TABS = [
   { id: "birthday", label: "Birthday" },
   { id: "anniversary", label: "Anniversary" },
   { id: "chocolate", label: "Chocolate Cakes" },
-  { id: "fruit", label: "Fruit & Berry" },
 ];
 
 export default function CakesCategoryPage() {

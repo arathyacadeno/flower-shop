@@ -9,11 +9,10 @@ export const metadata: Metadata = {
 };
 
 const BASKET_TABS = [
-  { id: "all", label: "All Items" },
-  { id: "birthday", label: "Birthday" },
-  { id: "anniversary", label: "Anniversary" },
-  { id: "boxes", label: "Flowers in Boxes" },
-  { id: "baskets", label: "Handcrafted Baskets" },
+  { id: "all", label: "All" },
+  { id: "cane", label: "Flowers in Cane Basket" },
+  { id: "bamboo", label: "Flowers in Bamboo Basket" },
+  { id: "container", label: "Flowers in Container" },
 ];
 
 export default function FlowerBasketsPage() {

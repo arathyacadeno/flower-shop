@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Breadcrumb from "@/components/Breadcrumb";
@@ -22,6 +23,10 @@ import {
   ChevronDown,
   Clock,
   Calendar,
+  MapPin,
+  Home,
+  Plus,
+  ExternalLink,
 } from "lucide-react";
 import styles from "./payment.module.css";
 
@@ -84,6 +89,40 @@ export default function SinglePageCheckoutPayment() {
   const [city, setCity] = useState("Kozhikode (Calicut)");
   const [state, setState] = useState("Kerala");
   const [pinCode, setPinCode] = useState("673602");
+
+  // Saved Addresses State
+  const [savedAddresses, setSavedAddresses] = useState<any[]>([]);
+  const [selectedAddressId, setSelectedAddressId] = useState<string | null>(null);
+  const [saveToProfile, setSaveToProfile] = useState<boolean>(true);
+  const [loadingAddresses, setLoadingAddresses] = useState<boolean>(false);
+
+  const handleSelectSavedAddress = (addr: any) => {
+    setSelectedAddressId(addr.id);
+    setReceiverName(addr.fullName || "");
+    setReceiverMobile((addr.phone || "").replace(/^\+91\s*/, ""));
+    setHouseBuilding(addr.house || "");
+    setStreet(addr.street || "");
+    setLandmark(addr.area || "");
+    setCity(addr.city || "Kozhikode (Calicut)");
+    setState(addr.state || "Kerala");
+    setPinCode(addr.pinCode || "673602");
+    if (addr.pinCode) {
+      checkDeliveryPin(addr.pinCode);
+    }
+  };
+
+  const handleUseNewAddress = () => {
+    setSelectedAddressId("new");
+    setReceiverName("");
+    setReceiverMobile("");
+    setHouseBuilding("");
+    setStreet("");
+    setLandmark("");
+    setCity("Kozhikode (Calicut)");
+    setState("Kerala");
+    setPinCode("673602");
+    checkDeliveryPin("673602");
+  };
   
   const [deliveryDate, setDeliveryDate] = useState("");
   const [deliveryTime, setDeliveryTime] = useState("");
@@ -232,6 +271,37 @@ export default function SinglePageCheckoutPayment() {
       }
     }
   }, [user]);
+
+  // Load saved addresses and populate receiver details
+  useEffect(() => {
+    if (isAuthenticated) {
+      setLoadingAddresses(true);
+      fetch("/api/addresses", { credentials: "include" })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data && data.success && Array.isArray(data.addresses) && data.addresses.length > 0) {
+            setSavedAddresses(data.addresses);
+            const defaultAddr = data.addresses.find((a: any) => a.isDefault) || data.addresses[0];
+            if (defaultAddr) {
+              setSelectedAddressId(defaultAddr.id);
+              setReceiverName(defaultAddr.fullName || "");
+              setReceiverMobile((defaultAddr.phone || "").replace(/^\+91\s*/, ""));
+              setHouseBuilding(defaultAddr.house || "");
+              setStreet(defaultAddr.street || "");
+              setLandmark(defaultAddr.area || "");
+              setCity(defaultAddr.city || "Kozhikode (Calicut)");
+              setState(defaultAddr.state || "Kerala");
+              setPinCode(defaultAddr.pinCode || "673602");
+              if (defaultAddr.pinCode) {
+                checkDeliveryPin(defaultAddr.pinCode);
+              }
+            }
+          }
+        })
+        .catch((err) => console.warn("Failed to load saved addresses in payment:", err))
+        .finally(() => setLoadingAddresses(false));
+    }
+  }, [isAuthenticated, checkDeliveryPin]);
 
   // Compute discount and final total with verified delivery charge
   const discountAmount = couponApplied ? 100 : 0;
@@ -418,6 +488,41 @@ export default function SinglePageCheckoutPayment() {
               year: "numeric",
             })} (${deliveryTime})`
           : undefined;
+
+      // Sync address to user profile if logged in and saveToProfile is enabled
+      if (isAuthenticated && saveToProfile) {
+        try {
+          const addrPayload = {
+            fullName: receiverName,
+            phone: `+91 ${receiverMobile}`,
+            house: houseBuilding,
+            street,
+            area: landmark,
+            city,
+            state,
+            pinCode,
+            type: "Home",
+            isDefault: savedAddresses.length === 0,
+          };
+          if (selectedAddressId && selectedAddressId !== "new") {
+            fetch(`/api/addresses/${selectedAddressId}`, {
+              method: "PUT",
+              headers: { "Content-Type": "application/json" },
+              credentials: "include",
+              body: JSON.stringify(addrPayload),
+            }).catch(() => {});
+          } else {
+            fetch("/api/addresses", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              credentials: "include",
+              body: JSON.stringify(addrPayload),
+            }).catch(() => {});
+          }
+        } catch (e) {
+          console.warn("Could not sync address to profile:", e);
+        }
+      }
 
       completeOrder(paymentMethodTitle, data.orderId, formattedDelivery);
       clearCart();
@@ -658,6 +763,69 @@ export default function SinglePageCheckoutPayment() {
               <h2 className={styles.sectionTitle}>Receiver Details & Address</h2>
             </div>
 
+            {/* Saved Delivery Addresses Selector */}
+            {savedAddresses.length > 0 && (
+              <div className={styles.savedAddressSection}>
+                <div className={styles.savedAddressHeader}>
+                  <div className={styles.savedAddressTitle}>
+                    <MapPin size={18} color="#e4004b" />
+                    <span>Select Saved Delivery Address</span>
+                  </div>
+                  <Link href="/profile" className={styles.savedAddressManageLink}>
+                    <span>Manage in Profile</span>
+                    <ExternalLink size={13} />
+                  </Link>
+                </div>
+
+                <div className={styles.savedAddressGrid}>
+                  {savedAddresses.map((addr) => {
+                    const isSelected = selectedAddressId === addr.id;
+                    return (
+                      <div
+                        key={addr.id}
+                        onClick={() => handleSelectSavedAddress(addr)}
+                        className={`${styles.savedAddressCard} ${
+                          isSelected ? styles.savedAddressCardActive : ""
+                        }`}
+                      >
+                        <div className={styles.savedAddressCardTop}>
+                          <span className={styles.savedAddressBadge}>
+                            {addr.type || "Home"} {addr.isDefault ? "• Default" : ""}
+                          </span>
+                          <input
+                            type="radio"
+                            name="selectedSavedAddress"
+                            checked={isSelected}
+                            onChange={() => handleSelectSavedAddress(addr)}
+                            className={styles.savedAddressRadio}
+                          />
+                        </div>
+                        <p className={styles.savedAddressName}>{addr.fullName}</p>
+                        <p className={styles.savedAddressText}>
+                          {addr.house}, {addr.street}
+                          {addr.area ? `, ${addr.area}` : ""}
+                        </p>
+                        <p className={styles.savedAddressText}>
+                          {addr.city}, {addr.state} - {addr.pinCode}
+                        </p>
+                        <p className={styles.savedAddressPhone}>{addr.phone}</p>
+                      </div>
+                    );
+                  })}
+
+                  <div
+                    onClick={handleUseNewAddress}
+                    className={`${styles.savedAddressCard} ${styles.newAddressCard} ${
+                      selectedAddressId === "new" ? styles.newAddressCardActive : ""
+                    }`}
+                  >
+                    <Plus size={16} />
+                    <span>+ Enter New Address</span>
+                  </div>
+                </div>
+              </div>
+            )}
+
             <div style={{ backgroundColor: "#fdf2f5", padding: "12px 16px", borderRadius: "8px", marginBottom: "24px" }}>
               <label style={{ display: "flex", alignItems: "center", gap: "8px", fontSize: "0.95rem", cursor: "pointer", color: "#3b2a22", fontWeight: 500 }}>
                 <input 
@@ -860,6 +1028,18 @@ export default function SinglePageCheckoutPayment() {
                 )}
               </div>
             </div>
+
+            {isAuthenticated && (
+              <label className={styles.saveAddressCheckboxRow}>
+                <input
+                  type="checkbox"
+                  checked={saveToProfile}
+                  onChange={(e) => setSaveToProfile(e.target.checked)}
+                  style={{ accentColor: "#e4004b", width: "18px", height: "18px", cursor: "pointer" }}
+                />
+                <span>Save / update this delivery address in My Profile for express checkout next time</span>
+              </label>
+            )}
 
             {/* Delivery Date & Time (Mandatory) */}
             <div id="delivery-preference-section" className={styles.deliveryTimeSection}>

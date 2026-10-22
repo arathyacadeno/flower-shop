@@ -8,7 +8,13 @@ import Breadcrumb from "@/components/Breadcrumb";
 import ProductGallery from "@/components/ProductGallery";
 import ProductInfo from "@/components/ProductInfo";
 import RecommendedAddons from "@/components/RecommendedAddons";
-import { Product, getProductsByCategory, CATALOG_PRODUCTS } from "@/data/catalog";
+import {
+  Product,
+  getProductsByCategory,
+  getFlowerBaskets,
+  getFlowerBouquets,
+  CATALOG_PRODUCTS,
+} from "@/data/catalog";
 import ProductCard from "@/components/ProductCard";
 import { Star, ChevronLeft, ChevronRight } from "lucide-react";
 import styles from "./ProductDetailView.module.css";
@@ -58,6 +64,20 @@ export default function ProductDetailView({ product }: ProductDetailViewProps) {
     product.slug?.includes("wreath") ||
     product.name.toLowerCase().includes("wreath");
 
+  const isFlowerBasket =
+    product.category === "flower" &&
+    (product.basketType !== undefined ||
+      product.id.startsWith("flower-basket-") ||
+      product.id === "flower-9" ||
+      product.id === "flower-10" ||
+      product.slug?.toLowerCase().includes("basket") ||
+      product.name?.toLowerCase().includes("basket") ||
+      product.slug?.toLowerCase().includes("container") ||
+      product.name?.toLowerCase().includes("container"));
+
+  const isFlowerBouquet =
+    product.category === "flower" && !isFlowerBasket;
+
   let similarProducts: Product[] = [];
 
   if (isChocolate) {
@@ -97,19 +117,36 @@ export default function ProductDetailView({ product }: ProductDetailViewProps) {
           p.name.toLowerCase().includes("gift") ||
           p.category === "special-occasions")
     );
+  } else if (isFlowerBasket) {
+    // Strictly show ONLY flower baskets (never flower bouquets)
+    similarProducts = getFlowerBaskets().filter((p) => p.id !== product.id);
+  } else if (isFlowerBouquet) {
+    // Strictly show ONLY flower bouquets (never flower baskets)
+    similarProducts = getFlowerBouquets().filter((p) => p.id !== product.id);
   } else {
-    const categoryProducts = getProductsByCategory(product.category).filter(
+    const categoryProducts = getProductsByCategory(product.category as any).filter(
       (p) => p.id !== product.id
     );
     similarProducts = categoryProducts;
   }
 
-  // Fallback if less than 4 items (for non-chocolate products)
+  // Fallback if less than 4 items (strictly kept within same type)
   if (!isChocolate && similarProducts.length < 4) {
-    const fallbackProducts = CATALOG_PRODUCTS.filter(
-      (p) => p.id !== product.id && !similarProducts.some((sp) => sp.id === p.id)
-    );
-    similarProducts = [...similarProducts, ...fallbackProducts];
+    if (isFlowerBasket) {
+      const fallback = getFlowerBaskets().filter((p) => !similarProducts.some((sp) => sp.id === p.id));
+      similarProducts = [...similarProducts, ...fallback];
+    } else if (isFlowerBouquet) {
+      const fallback = getFlowerBouquets().filter((p) => !similarProducts.some((sp) => sp.id === p.id));
+      similarProducts = [...similarProducts, ...fallback];
+    } else {
+      const fallbackProducts = CATALOG_PRODUCTS.filter(
+        (p) =>
+          p.id !== product.id &&
+          p.category === product.category &&
+          !similarProducts.some((sp) => sp.id === p.id)
+      );
+      similarProducts = [...similarProducts, ...fallbackProducts];
+    }
   }
 
   similarProducts = similarProducts.slice(0, 10);
@@ -160,7 +197,11 @@ export default function ProductDetailView({ product }: ProductDetailViewProps) {
           {/* Sticky left column: thumbnails + main image */}
           <div className={styles.stickyGallery}>
             <ProductGallery
-              images={product.images}
+              images={
+                product.image && !product.images.includes(product.image)
+                  ? [product.image, ...product.images]
+                  : product.images
+              }
               productName={product.name}
               product={product}
               selectedImageOverride={selectedImageOverride}
@@ -240,6 +281,10 @@ export default function ProductDetailView({ product }: ProductDetailViewProps) {
                 ? "Similar Celebration Cakes"
                 : isWreath
                 ? "Similar Memorial & Tribute Wreaths"
+                : isFlowerBasket
+                ? "Similar Flower Baskets"
+                : isFlowerBouquet
+                ? "Similar Flower Bouquets"
                 : "Similar Product"}
             </h2>
             <div className={styles.scrollButtons}>

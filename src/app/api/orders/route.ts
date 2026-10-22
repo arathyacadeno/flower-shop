@@ -3,6 +3,7 @@ import { getDb } from "@/lib/db";
 import { sql } from "@/lib/db/neon";
 import { getAuthenticatedUser } from "@/lib/auth/jwt";
 import { checkDelivery } from "@/lib/delivery/service";
+import { ADDON_PRODUCTS } from "@/data/addons";
 
 export async function GET(request: Request) {
   try {
@@ -142,7 +143,53 @@ export async function POST(request: Request) {
       const pId = it.productId || it.id;
       const requestedQty = Math.max(1, Number(it.quantity) || 1);
 
-      const product = db.prepare("SELECT * FROM products WHERE id = ? OR slug = ?").get(pId, pId);
+      let product: any = db.prepare("SELECT * FROM products WHERE id = ? OR slug = ?").get(pId, pId);
+
+      if (!product) {
+        // 1. If ID starts with addon-, try matching with prefix stripped
+        if (typeof pId === "string" && pId.startsWith("addon-")) {
+          const stripped = pId.replace(/^addon-/, "");
+          product = db.prepare("SELECT * FROM products WHERE id = ? OR slug = ?").get(stripped, stripped);
+        }
+
+        // 2. Check if product is in ADDON_PRODUCTS catalog
+        if (!product) {
+          const addon = ADDON_PRODUCTS.find(
+            (a) => a.id === pId || a.name.toLowerCase() === (it.name || "").toLowerCase()
+          );
+          if (addon) {
+            const slugFromHref = addon.href ? addon.href.split("/").pop() : "";
+            const dbMatch = db
+              .prepare("SELECT * FROM products WHERE slug = ? OR name = ? OR id = ?")
+              .get(slugFromHref, addon.name, slugFromHref);
+            if (dbMatch) {
+              product = dbMatch;
+            } else {
+              product = {
+                id: addon.id,
+                name: addon.name,
+                price: addon.price,
+                active: 1,
+                stock: 999,
+                images: JSON.stringify([addon.image]),
+              };
+            }
+          }
+        }
+
+        // 3. Fallback for valid cart items with name & price
+        if (!product && it.name && it.price !== undefined) {
+          product = {
+            id: pId,
+            name: it.name,
+            price: Number(it.price) || 0,
+            active: 1,
+            stock: 999,
+            images: JSON.stringify([it.image || "/images/lily-6-stems.png"]),
+          };
+        }
+      }
+
       if (!product) {
         return NextResponse.json({ success: false, error: `Product not found: ${pId}` }, { status: 404 });
       }
@@ -167,12 +214,19 @@ export async function POST(request: Request) {
       const itemSubtotal = itemPrice * requestedQty;
       verifiedSubtotal += itemSubtotal;
 
+      const cleanImage =
+        images.find((img: string) => img && !img.includes("/side-view/")) ||
+        (it.image && !it.image.includes("/side-view/") ? it.image : null) ||
+        (it.image ? it.image.replace(/\/side-view\/[0-9]+-/, "/").replace(/\/side-view\/[0-9]+\//, "/").replace(/\/side-view\//, "/") : null) ||
+        images[0] ||
+        "/images/lily-6-stems.png";
+
       validatedOrderItems.push({
         productId: product.id,
         productName: product.name,
         productPrice: itemPrice,
         quantity: requestedQty,
-        productImage: images[0] || it.image || "/images/lily-6-stems.png",
+        productImage: cleanImage,
         subtotal: itemSubtotal,
       });
     }
@@ -369,6 +423,58 @@ export async function POST(request: Request) {
     // 9. Clear user's DB cart if logged in
     if (auth) {
       db.prepare("DELETE FROM cart_items WHERE user_id = ?").run(auth.userId);
+    }
+
+    // 10. Auto-save delivery address to user's saved addresses
+    if (auth?.userId && delivery && (delivery.houseBuilding || delivery.house) && delivery.pinCode) {
+      try {
+        const dHouse = (delivery.houseBuilding || delivery.house || "").trim();
+        const dStreet = (delivery.street || "").trim();
+        const dLandmark = (delivery.landmark || delivery.area || "").trim();
+        const dCity = (delivery.city || "Kozhikode (Calicut)").trim();
+        const dState = (delivery.state || "Kerala").trim();
+        const dPinCode = (delivery.pinCode || delivery.pin_code || "").trim();
+        const dName = (delivery.receiverName || delivery.senderName || customerName || auth.name || "Customer").trim();
+        const dPhone = (delivery.receiverMobile || delivery.senderMobile || customerPhone || "+91 8606464700").trim();
+
+        const addrId = "addr-" + Math.random().toString(36).substring(2, 10);
+
+        // Check SQLite
+        const existingSqlite = db.prepare("SELECT id FROM addresses WHERE user_id = ? AND house = ? AND pin_code = ?").get(auth.userId, dHouse, dPinCode);
+        if (!existingSqlite) {
+          const count = db.prepare("SELECT count(*) as count FROM addresses WHERE user_id = ?").get(auth.userId)?.count || 0;
+          db.prepare(`
+            INSERT INTO addresses (
+              id, user_id, full_name, phone, house, street, area, city, state, pin_code,
+              type, is_default, created_at, updated_at
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'Home', ?, ?, ?)
+          `).run(addrId, auth.userId, dName, dPhone, dHouse, dStreet, dLandmark, dCity, dState, dPinCode, count === 0 ? 1 : 0, now, now);
+        }
+
+        // Check Neon
+        if (process.env.DATABASE_URL) {
+          try {
+            const existingNeon = await sql`SELECT id FROM addresses WHERE user_id = ${auth.userId} AND house = ${dHouse} AND pin_code = ${dPinCode}`;
+            if (existingNeon.length === 0) {
+              const countRes = await sql`SELECT count(*)::int as count FROM addresses WHERE user_id = ${auth.userId}`;
+              const count = countRes[0]?.count || 0;
+              await sql`
+                INSERT INTO addresses (
+                  id, user_id, full_name, phone, house, street, area, city, state, pin_code,
+                  type, is_default, created_at, updated_at
+                ) VALUES (
+                  ${addrId}, ${auth.userId}, ${dName}, ${dPhone}, ${dHouse}, ${dStreet}, ${dLandmark}, ${dCity}, ${dState}, ${dPinCode},
+                  'Home', ${count === 0 ? 1 : 0}, ${now}, ${now}
+                )
+              `;
+            }
+          } catch (e) {
+            console.warn("Could not save address to Neon on order:", e);
+          }
+        }
+      } catch (addrErr) {
+        console.warn("Could not auto-save delivery address on order:", addrErr);
+      }
     }
 
     return NextResponse.json({

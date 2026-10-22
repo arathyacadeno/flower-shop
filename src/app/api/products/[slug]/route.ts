@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { getDb } from "@/lib/db";
 import { getAuthenticatedUser } from "@/lib/auth/jwt";
+import { ADDON_PRODUCTS } from "@/data/addons";
 
 export async function GET(
   _request: Request,
@@ -10,7 +11,7 @@ export async function GET(
     const { slug } = await params;
     const db = getDb();
 
-    const product = db.prepare(`
+    let product: any = db.prepare(`
       SELECT
         p.id, p.name, p.slug, p.description, p.images, p.price, p.discount_price,
         p.stock, p.sku, p.featured, p.active, p.rating, p.reviews_count,
@@ -24,6 +25,59 @@ export async function GET(
       LEFT JOIN occasions o ON p.occasion_id = o.id
       WHERE p.slug = ? OR p.id = ?
     `).get(slug, slug);
+
+    if (!product && typeof slug === "string" && slug.startsWith("addon-")) {
+      const stripped = slug.replace(/^addon-/, "");
+      product = db.prepare(`
+        SELECT
+          p.id, p.name, p.slug, p.description, p.images, p.price, p.discount_price,
+          p.stock, p.sku, p.featured, p.active, p.rating, p.reviews_count,
+          p.delivery_info, p.offers, p.includes, p.badge, p.created_at, p.updated_at,
+          c.name as category_name, c.slug as category_slug,
+          ft.name as flower_type_name, ft.slug as flower_type_slug,
+          o.name as occasion_name, o.slug as occasion_slug
+        FROM products p
+        LEFT JOIN categories c ON p.category_id = c.id
+        LEFT JOIN flower_types ft ON p.flower_type_id = ft.id
+        LEFT JOIN occasions o ON p.occasion_id = o.id
+        WHERE p.slug = ? OR p.id = ?
+      `).get(stripped, stripped);
+    }
+
+    if (!product) {
+      const addon = ADDON_PRODUCTS.find(
+        (a) => a.id === slug || a.href.endsWith(`/${slug}`) || a.name.toLowerCase() === slug.toLowerCase()
+      );
+      if (addon) {
+        product = {
+          id: addon.id,
+          name: addon.name,
+          slug: addon.id,
+          description: addon.name,
+          images: JSON.stringify([addon.image]),
+          price: addon.price,
+          discount_price: null,
+          stock: 100,
+          sku: `SKU-${addon.id.toUpperCase()}`,
+          featured: 0,
+          active: 1,
+          rating: 5.0,
+          reviews_count: 24,
+          delivery_info: "Same-day delivery available across Kerala",
+          offers: "[]",
+          includes: "[]",
+          badge: null,
+          category_name: addon.category,
+          category_slug: addon.category.toLowerCase(),
+          flower_type_name: null,
+          flower_type_slug: null,
+          occasion_name: null,
+          occasion_slug: null,
+          created_at: new Date().toISOString(),
+          updated_at: new Date().toISOString(),
+        };
+      }
+    }
 
     if (!product) {
       return NextResponse.json({ success: false, error: "Product not found" }, { status: 404 });
@@ -59,7 +113,10 @@ export async function GET(
         description: product.description,
         price: product.price,
         originalPrice: product.discount_price,
-        image: parsedImages[0] || "/images/lily-6-stems.png",
+        image:
+          parsedImages.find((img: string) => img && !img.includes("/side-view/")) ||
+          parsedImages[0] ||
+          "/images/lily-6-stems.png",
         images: parsedImages,
         stock: product.stock,
         sku: product.sku,

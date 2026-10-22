@@ -8,7 +8,6 @@ import { useAuth } from "@/context/AuthContext";
 import {
   User as UserIcon,
   MapPin,
-  Lock,
   Package,
   Plus,
   Trash2,
@@ -36,17 +35,12 @@ interface Address {
 
 export default function ProfilePage() {
   const { user, isAuthenticated, isLoading, updateProfile, logout } = useAuth();
-  const [activeTab, setActiveTab] = useState<"profile" | "addresses" | "password">("profile");
+  const [activeTab, setActiveTab] = useState<"profile" | "addresses">("profile");
 
   // Profile Form state
   const [profileForm, setProfileForm] = useState({ name: "", phone: "" });
   const [profileStatus, setProfileStatus] = useState<{ type: "success" | "error"; msg: string } | null>(null);
   const [savingProfile, setSavingProfile] = useState(false);
-
-  // Password Form state
-  const [passwordForm, setPasswordForm] = useState({ currentPassword: "", newPassword: "", confirmPassword: "" });
-  const [passwordStatus, setPasswordStatus] = useState<{ type: "success" | "error"; msg: string } | null>(null);
-  const [savingPassword, setSavingPassword] = useState(false);
 
   // Addresses state
   const [addresses, setAddresses] = useState<Address[]>([]);
@@ -113,35 +107,6 @@ export default function ProfilePage() {
       }
     } finally {
       setSavingProfile(false);
-    }
-  };
-
-  const handlePasswordSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setPasswordStatus(null);
-    if (passwordForm.newPassword !== passwordForm.confirmPassword) {
-      setPasswordStatus({ type: "error", msg: "New passwords do not match" });
-      return;
-    }
-    if (passwordForm.newPassword.length < 6) {
-      setPasswordStatus({ type: "error", msg: "New password must be at least 6 characters" });
-      return;
-    }
-
-    setSavingPassword(true);
-    try {
-      const res = await updateProfile({
-        currentPassword: passwordForm.currentPassword,
-        newPassword: passwordForm.newPassword,
-      });
-      if (res.success) {
-        setPasswordStatus({ type: "success", msg: "Password changed successfully!" });
-        setPasswordForm({ currentPassword: "", newPassword: "", confirmPassword: "" });
-      } else {
-        setPasswordStatus({ type: "error", msg: res.error || "Failed to update password" });
-      }
-    } finally {
-      setSavingPassword(false);
     }
   };
 
@@ -298,15 +263,6 @@ export default function ProfilePage() {
               >
                 <MapPin size={18} />
                 <span>Saved Addresses</span>
-              </button>
-
-              <button
-                type="button"
-                className={`${styles.navItem} ${activeTab === "password" ? styles.navItemActive : ""}`}
-                onClick={() => setActiveTab("password")}
-              >
-                <Lock size={18} />
-                <span>Change Password</span>
               </button>
             </nav>
           </aside>
@@ -566,61 +522,6 @@ export default function ProfilePage() {
                     ))
                   )}
                 </div>
-              </div>
-            )}
-
-            {/* TAB 3: Change Password */}
-            {activeTab === "password" && (
-              <div>
-                <div className={styles.sectionHeader}>
-                  <h2 className={styles.sectionTitle}>Change Password</h2>
-                  <p className={styles.sectionDesc}>Ensure your account is protected with a secure password</p>
-                </div>
-
-                {passwordStatus && (
-                  <div className={passwordStatus.type === "success" ? styles.alertSuccess : styles.alertError}>
-                    {passwordStatus.msg}
-                  </div>
-                )}
-
-                <form onSubmit={handlePasswordSubmit}>
-                  <div className={styles.formGroup} style={{ maxWidth: 420 }}>
-                    <label className={styles.formLabel}>Current Password</label>
-                    <input
-                      type="password"
-                      className={styles.formInput}
-                      required
-                      value={passwordForm.currentPassword}
-                      onChange={(e) => setPasswordForm({ ...passwordForm, currentPassword: e.target.value })}
-                    />
-                  </div>
-
-                  <div className={styles.formGroup} style={{ maxWidth: 420, marginTop: 14 }}>
-                    <label className={styles.formLabel}>New Password (min 6 characters)</label>
-                    <input
-                      type="password"
-                      className={styles.formInput}
-                      required
-                      value={passwordForm.newPassword}
-                      onChange={(e) => setPasswordForm({ ...passwordForm, newPassword: e.target.value })}
-                    />
-                  </div>
-
-                  <div className={styles.formGroup} style={{ maxWidth: 420, marginTop: 14 }}>
-                    <label className={styles.formLabel}>Confirm New Password</label>
-                    <input
-                      type="password"
-                      className={styles.formInput}
-                      required
-                      value={passwordForm.confirmPassword}
-                      onChange={(e) => setPasswordForm({ ...passwordForm, confirmPassword: e.target.value })}
-                    />
-                  </div>
-
-                  <button type="submit" className={styles.saveBtn} disabled={savingPassword}>
-                    {savingPassword ? "Updating Password..." : "Update Password"}
-                  </button>
-                </form>
               </div>
             )}
           </section>

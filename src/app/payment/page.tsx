@@ -820,7 +820,7 @@ export default function SinglePageCheckoutPayment() {
                     }`}
                   >
                     <Plus size={16} />
-                    <span>+ Enter New Address</span>
+                    <span>Enter New Address</span>
                   </div>
                 </div>
               </div>

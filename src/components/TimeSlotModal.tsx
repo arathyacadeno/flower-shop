@@ -5,8 +5,8 @@ import { X, Truck } from "lucide-react";
 import styles from "./TimeSlotModal.module.css";
 
 const TIME_SLOTS = [
-  "9:00 AM – 2:00 PM (FREE)",
-  "2:00 PM – 7:00 PM (FREE)",
+  "9:00 AM – 2:00 PM",
+  "2:00 PM – 7:00 PM",
   "9:00 – 10:00 AM",
   "10:00 – 11:00 AM",
   "11:00 AM – 12:00 PM",
@@ -59,12 +59,6 @@ export default function TimeSlotModal({
           <button type="button" onClick={onClose} className={styles.closeBtn}>
             <X size={18} />
           </button>
-        </div>
-
-        {/* Banner */}
-        <div className={styles.banner}>
-          <Truck size={15} className={styles.bannerIcon} />
-          <span>Want it free? Pick a slot with the <strong>FREE</strong> tag.</span>
         </div>
 
         {/* Date Row */}

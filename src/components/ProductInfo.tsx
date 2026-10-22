@@ -502,6 +502,9 @@ export default function ProductInfo({
           }
         }
       });
+      if (onAddonChange) {
+        onAddonChange({});
+      }
     }
 
     setAddedFeedback(true);

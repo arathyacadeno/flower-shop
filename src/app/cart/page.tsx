@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Breadcrumb from "@/components/Breadcrumb";
-import { useCart } from "@/context/CartContext";
+import { useCart, isLegacyDemoItem } from "@/context/CartContext";
 import { useCheckout } from "@/context/CheckoutContext";
 import { useAuth } from "@/context/AuthContext";
 import { ADDON_PRODUCTS } from "@/components/RecommendedAddons";
@@ -141,7 +141,7 @@ interface GroupedCartItem {
 
 export default function CartPage() {
   const router = useRouter();
-  const { items, updateQty, removeItem } = useCart();
+  const { items, updateQty, removeItem, clearCart } = useCart();
   const { startCartCheckout } = useCheckout();
   const { user, isAuthenticated } = useAuth();
   const [mounted, setMounted] = useState(false);
@@ -171,8 +171,11 @@ export default function CartPage() {
     setMounted(true);
   }, []);
 
-  // Display only real cart items added by the customer
-  const displayItems = items;
+  // Display only real cart items added by the customer, strictly filtering out any legacy demo items
+  const displayItems = useMemo(
+    () => items.filter((item) => !isLegacyDemoItem(item)),
+    [items]
+  );
 
   // Group add-on items inside their preceding main product card
   const groupedCartItems = useMemo(() => {
@@ -293,7 +296,17 @@ export default function CartPage() {
         {/* Centered Heading: displayed when cart has items */}
         {displayItems.length > 0 && (
           <div className={styles.headerBlock}>
-            <h1 className={styles.pageTitle}>Your Floral Selection</h1>
+            <div className={styles.headerTitleRow}>
+              <h1 className={styles.pageTitle}>Your Floral Selection</h1>
+              <button
+                type="button"
+                onClick={clearCart}
+                className={styles.clearCartBtn}
+                title="Remove all items from cart"
+              >
+                Clear Cart
+              </button>
+            </div>
             <p className={styles.pageSubtitle}>
               The flowers you love, gathered in one beautiful place.
             </p>

@@ -21,6 +21,63 @@ interface CartContextType {
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
+// Helper to detect any legacy hardcoded demo placeholder items
+export const isLegacyDemoItem = (item: CartItem): boolean => {
+  if (!item || !item.bouquet) return true;
+  const b = item.bouquet;
+  const id = String(b.id || "").toLowerCase().trim();
+  const slug = String(b.slug || "").toLowerCase().trim();
+  const name = String(b.name || "").toLowerCase().trim();
+  const note = String(item.customNote || "").toLowerCase().trim();
+  const img = String(b.image || "").toLowerCase().trim();
+
+  // Known legacy demo IDs
+  if (
+    id === "celebration-hamper" ||
+    id === "classic-calicut-bridal" ||
+    id === "bouquet-1" ||
+    id === "bouquet-2" ||
+    id === "bouquet-3"
+  ) {
+    return true;
+  }
+
+  // Known legacy demo slugs
+  if (
+    slug === "celebration-cake-flower-hamper-luxe" ||
+    slug === "classic-calicut-bridal-bouquet"
+  ) {
+    return true;
+  }
+
+  // Known legacy demo names
+  if (
+    name === "celebration floral & cake hamper" ||
+    name === "classic calicut bridal bouquet" ||
+    name === "exotic orchid cascade"
+  ) {
+    return true;
+  }
+
+  // Known legacy demo notes
+  if (
+    note.includes("wishing you a lifetime of love") ||
+    note.includes("happy birthday! may your day be as sweet")
+  ) {
+    return true;
+  }
+
+  // Known legacy demo images
+  if (
+    img === "/images/cat-flower-bouquet-luxe.jpg" ||
+    img === "/images/farm-hand-bouquet-large.jpg"
+  ) {
+    return true;
+  }
+
+  return false;
+};
+
 export function CartProvider({ children }: { children: React.ReactNode }) {
   const [items, setItems] = useState<CartItem[]>([]);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -32,23 +89,23 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       if (stored) {
         const parsed = JSON.parse(stored);
         if (Array.isArray(parsed)) {
-          // Filter out legacy hardcoded demo placeholder items if present
-          const userItems = parsed.filter(
-            (item: CartItem) =>
-              item.customNote !==
-              "Wishing you a lifetime of love and blooming happiness!" &&
-              item.customNote !==
-              "Happy Birthday! May your day be as sweet as these blooms."
-          );
-          setItems(userItems);
+          // Strictly filter out all legacy hardcoded demo placeholder items
+          const realItems = parsed.filter((item: CartItem) => !isLegacyDemoItem(item));
+          setItems(realItems);
+          // Overwrite localStorage immediately to purge demo items permanently
+          localStorage.setItem("occassions_cart", JSON.stringify(realItems));
         } else {
           setItems([]);
+          localStorage.setItem("occassions_cart", "[]");
         }
       } else {
         setItems([]);
       }
     } catch {
       setItems([]);
+      try {
+        localStorage.setItem("occassions_cart", "[]");
+      } catch {}
     }
     setIsLoaded(true);
   }, []);
@@ -124,6 +181,11 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
 
   const clearCart = React.useCallback(() => {
     setItems([]);
+    try {
+      localStorage.setItem("occassions_cart", "[]");
+    } catch (e) {
+      console.error("Failed to clear cart in localStorage", e);
+    }
   }, []);
 
   const subtotal = items.reduce((acc, item) => {

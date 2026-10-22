@@ -568,6 +568,55 @@ export default function Header({
     }
   };
 
+  // Smart Navbar: hide on scroll down, show on scroll up
+  const [isHeaderVisible, setIsHeaderVisible] = useState(true);
+  const lastScrollYRef = useRef(0);
+
+  useEffect(() => {
+    let ticking = false;
+
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const currentScrollY = window.scrollY || window.pageYOffset || 0;
+          const prevScrollY = lastScrollYRef.current;
+          const diff = currentScrollY - prevScrollY;
+
+          // Always show navbar if near top (within 80px) or if drawer/modal is open
+          if (currentScrollY <= 80 || isDrawerOpen || activeModal !== null) {
+            setIsHeaderVisible(true);
+          } else if (diff > 8 && currentScrollY > 100) {
+            // Scrolling down -> hide navbar and dismiss any open dropdown menus
+            setIsHeaderVisible(false);
+            setFlowersHovered(false);
+            setCakesHovered(false);
+            setOccasionsHovered(false);
+            setHighlightsHovered(false);
+            setProfileHovered(false);
+          } else if (diff < -8) {
+            // Scrolling up -> show navbar
+            setIsHeaderVisible(true);
+          }
+
+          lastScrollYRef.current = currentScrollY <= 0 ? 0 : currentScrollY;
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [isDrawerOpen, activeModal]);
+
+  // Always show navbar immediately when navigating to another route
+  useEffect(() => {
+    setIsHeaderVisible(true);
+    lastScrollYRef.current = 0;
+  }, [pathname]);
+
   const scrollToHighlightsOr = (fallbackUrl: string) => {
     const highlightEl = document.getElementById("highlights");
     if (highlightEl) {
@@ -676,7 +725,10 @@ export default function Header({
 
   return (
     <>
-      <header className={styles.headerWrapper} role="banner">
+      <header
+        className={`${styles.headerWrapper} ${!isHeaderVisible ? styles.headerHidden : ""}`}
+        role="banner"
+      >
         <div className={styles.navbarContainer}>
           {/* Left: logo */}
           <Link
@@ -784,9 +836,8 @@ export default function Header({
             >
               <Link
                 href="/cakes"
-                className={`${styles.centerNavLink} ${
-                  isCakesActive || cakesHovered ? styles.activeNavLink : ""
-                }`}
+                className={`${styles.centerNavLink} ${isCakesActive || cakesHovered ? styles.activeNavLink : ""
+                  }`}
                 aria-expanded={cakesHovered}
               >
                 <span>Cakes</span>

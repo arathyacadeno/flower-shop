@@ -370,6 +370,7 @@
   width: 100%;
   box-sizing: border-box;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
 }
 
 .deliveryPill:focus-within {
@@ -445,8 +446,15 @@
 }
 
 @keyframes dropdownFadeIn {
-  from { opacity: 0; transform: translateY(-4px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .countryDropdownHeader {
@@ -471,7 +479,7 @@
   align-items: center;
   border-radius: 3px;
   overflow: hidden;
-  box-shadow: 0 0 0 1px rgba(0,0,0,0.08);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08);
   flex-shrink: 0;
 }
 
@@ -522,8 +530,13 @@
 }
 
 @keyframes pulse {
-  0% { opacity: 0.4; }
-  100% { opacity: 1; }
+  0% {
+    opacity: 0.4;
+  }
+
+  100% {
+    opacity: 1;
+  }
 }
 
 /* Reference 2nd Image Warning Style: Clean terracotta text with alert triangle */
@@ -575,6 +588,11 @@
   color: #1a1a1a;
   min-width: 0;
   text-overflow: ellipsis;
+  cursor: text;
+}
+
+.pillInput:focus {
+  cursor: text;
 }
 
 .pillInput::placeholder {
@@ -620,7 +638,13 @@
   color: #444444;
   padding: 0;
   box-sizing: border-box;
+  cursor: text;
 }
+
+.cakeMessageInput:focus {
+  cursor: text;
+}
+
 .cakeMessageInput::placeholder {
   color: #999999;
 }

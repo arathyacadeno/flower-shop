@@ -286,6 +286,7 @@ export default function ProductInfo({
   const [showCountryDropdown, setShowCountryDropdown] = useState(false);
   const countryDropdownRef = useRef<HTMLDivElement>(null);
   const deliveryWrapperRef = useRef<HTMLDivElement>(null);
+  const pinInputRef = useRef<HTMLInputElement>(null);
 
   // Close country dropdown on outside click
   useEffect(() => {
@@ -729,6 +730,10 @@ export default function ProductInfo({
             className={`${styles.deliveryPill} ${
               deliveryStatus.serviceable === false ? styles.deliveryPillError : ""
             }`}
+            onClick={(e) => {
+              if (countryDropdownRef.current?.contains(e.target as Node)) return;
+              pinInputRef.current?.focus();
+            }}
           >
             {/* Country Selector with dropdown */}
             <div className={styles.countrySelectorWrapper} ref={countryDropdownRef}>
@@ -784,6 +789,7 @@ export default function ProductInfo({
             <span className={styles.pillDivider} />
 
             <input
+              ref={pinInputRef}
               type="text"
               value={
                 isPinFocused

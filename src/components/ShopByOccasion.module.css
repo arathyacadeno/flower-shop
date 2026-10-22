@@ -179,7 +179,7 @@
   width: 100%;
   overflow: hidden;
   padding-top: 16px;
-  padding-bottom: 64px; /* Room for card shadow & hanging pill labels without clipping */
+  padding-bottom: 100px; /* Room for 48px stagger + 22px hanging pill label & box-shadow without clipping */
   margin: 0 auto;
   touch-action: pan-y;
   user-select: none;
@@ -460,7 +460,7 @@
   }
 
   .viewport {
-    padding-bottom: 48px;
+    padding-bottom: 56px;
   }
 
   .pillSolidInner {

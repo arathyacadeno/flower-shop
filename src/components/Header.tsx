@@ -30,12 +30,14 @@ interface HeaderProps {
   onToggleDrawer?: (open: boolean) => void;
   onSelectSlide?: (index: number) => void;
   currentSlide?: number;
+  onSelectOccasion?: (occasionId: string) => void;
 }
 
 export default function Header({
   isDrawerOpen: controlledDrawerOpen,
   onToggleDrawer,
   onSelectSlide,
+  onSelectOccasion,
 }: HeaderProps) {
   const pathname = usePathname();
   const router = useRouter();
@@ -486,10 +488,39 @@ export default function Header({
     }
   };
 
+  // Smooth scroll and center occasion card in ShopByOccasion
+  const handleOccasionNav = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    occasionId: string
+  ) => {
+    setOccasionsHovered(false);
+
+    if (onSelectOccasion) {
+      onSelectOccasion(occasionId);
+    }
+
+    if (typeof window !== "undefined") {
+      window.dispatchEvent(
+        new CustomEvent("centerOccasionCard", { detail: { occasion: occasionId } })
+      );
+    }
+
+    if (pathname === "/") {
+      e.preventDefault();
+      const el = document.getElementById("occasions");
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth" });
+        window.history.pushState(null, "", `/#occasions?occasion=${occasionId}`);
+        setActiveSection("occasions");
+      }
+    }
+  };
+
   // If landing on "/" from another page with a hash in URL (e.g. /#highlights), scroll to it
   useEffect(() => {
     if (pathname === "/" && typeof window !== "undefined" && window.location.hash) {
-      const hashId = window.location.hash.replace("#", "");
+      const rawHash = window.location.hash.replace("#", "");
+      const hashId = rawHash.split("?")[0];
       const targetEl = document.getElementById(hashId);
       if (targetEl) {
         const timer = setTimeout(() => {
@@ -971,96 +1002,72 @@ export default function Header({
                     <ul className={styles.dropdownList}>
                       <li>
                         <Link
-                          href="/#occasions"
+                          href="/#occasions?occasion=birthday"
                           className={styles.dropdownItemLink}
-                          onClick={(e) => {
-                            handleSectionNav(e, "occasions", "occasions");
-                            setOccasionsHovered(false);
-                          }}
+                          onClick={(e) => handleOccasionNav(e, "birthday")}
                         >
                           Birthday
                         </Link>
                       </li>
                       <li>
                         <Link
-                          href="/#occasions"
+                          href="/#occasions?occasion=anniversary"
                           className={styles.dropdownItemLink}
-                          onClick={(e) => {
-                            handleSectionNav(e, "occasions", "occasions");
-                            setOccasionsHovered(false);
-                          }}
+                          onClick={(e) => handleOccasionNav(e, "anniversary")}
                         >
                           Anniversary
                         </Link>
                       </li>
                       <li>
                         <Link
-                          href="/#occasions"
+                          href="/#occasions?occasion=wedding"
                           className={styles.dropdownItemLink}
-                          onClick={(e) => {
-                            handleSectionNav(e, "occasions", "occasions");
-                            setOccasionsHovered(false);
-                          }}
+                          onClick={(e) => handleOccasionNav(e, "wedding")}
                         >
                           Wedding
                         </Link>
                       </li>
                       <li>
                         <Link
-                          href="/#occasions"
+                          href="/#occasions?occasion=best-wishes"
                           className={styles.dropdownItemLink}
-                          onClick={(e) => {
-                            handleSectionNav(e, "occasions", "occasions");
-                            setOccasionsHovered(false);
-                          }}
+                          onClick={(e) => handleOccasionNav(e, "best-wishes")}
                         >
                           Best Wishes
                         </Link>
                       </li>
                       <li>
                         <Link
-                          href="/#occasions"
+                          href="/#occasions?occasion=congratulations"
                           className={styles.dropdownItemLink}
-                          onClick={(e) => {
-                            handleSectionNav(e, "occasions", "occasions");
-                            setOccasionsHovered(false);
-                          }}
+                          onClick={(e) => handleOccasionNav(e, "congratulations")}
                         >
                           Congratulation
                         </Link>
                       </li>
                       <li>
                         <Link
-                          href="/#occasions"
+                          href="/#occasions?occasion=thank-you"
                           className={styles.dropdownItemLink}
-                          onClick={(e) => {
-                            handleSectionNav(e, "occasions", "occasions");
-                            setOccasionsHovered(false);
-                          }}
+                          onClick={(e) => handleOccasionNav(e, "thank-you")}
                         >
                           Thank You
                         </Link>
                       </li>
                       <li>
                         <Link
-                          href="/#occasions"
+                          href="/#occasions?occasion=get-well-soon"
                           className={styles.dropdownItemLink}
-                          onClick={(e) => {
-                            handleSectionNav(e, "occasions", "occasions");
-                            setOccasionsHovered(false);
-                          }}
+                          onClick={(e) => handleOccasionNav(e, "get-well-soon")}
                         >
                           Get Well Soon
                         </Link>
                       </li>
                       <li>
                         <Link
-                          href="/#occasions"
+                          href="/#occasions?occasion=condolences"
                           className={styles.dropdownItemLink}
-                          onClick={(e) => {
-                            handleSectionNav(e, "occasions", "occasions");
-                            setOccasionsHovered(false);
-                          }}
+                          onClick={(e) => handleOccasionNav(e, "condolences")}
                         >
                           Condolence
                         </Link>

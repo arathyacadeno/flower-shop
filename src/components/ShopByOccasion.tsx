@@ -89,7 +89,25 @@ const EXTENDED_ITEMS = [
   ...OCCASIONS_ITEMS.map((item, idx) => ({ ...item, uniqueKey: `post-${idx}` })),
 ];
 
-export default function ShopByOccasion() {
+interface ShopByOccasionProps {
+  targetOccasion?: string;
+}
+
+const findOccasionIndex = (idOrName: string) => {
+  const target = idOrName.toLowerCase().trim().replace(/[-\s_]/g, "");
+  return OCCASIONS_ITEMS.findIndex((item) => {
+    const itemCleanId = item.id.toLowerCase().replace(/[-\s_]/g, "");
+    const itemCleanName = item.name.toLowerCase().replace(/[-\s_]/g, "");
+    return (
+      itemCleanId === target ||
+      itemCleanName === target ||
+      itemCleanId.replace(/s$/, "") === target.replace(/s$/, "") ||
+      itemCleanName.replace(/s$/, "") === target.replace(/s$/, "")
+    );
+  });
+};
+
+export default function ShopByOccasion({ targetOccasion }: ShopByOccasionProps = {}) {
   const [index, setIndex] = useState(START_INDEX);
   const [withTransition, setWithTransition] = useState(true);
   const [visibleCount, setVisibleCount] = useState(3);
@@ -99,6 +117,73 @@ export default function ShopByOccasion() {
   const isTransitioningRef = useRef(false);
   const pointerStartX = useRef<number | null>(null);
   const isPointerDown = useRef(false);
+
+  // Center a specific occasion card in the middle of the carousel
+  const centerOccasion = (idOrName: string) => {
+    if (!idOrName) return;
+    const targetIdx = findOccasionIndex(idOrName);
+    if (targetIdx === -1) return;
+
+    isTransitioningRef.current = false;
+    setWithTransition(true);
+
+    setIndex((prevIndex) => {
+      // On 3-card layout (desktop), center card is index + 1
+      // On 1-card layout (mobile), center card is index
+      const centerOffset = visibleCount === 3 ? 1 : 0;
+      let currentCenter = (prevIndex + centerOffset) % ORIGINAL_COUNT;
+      if (currentCenter < 0) currentCenter += ORIGINAL_COUNT;
+
+      // Circular shortest distance delta (mod ORIGINAL_COUNT)
+      let delta = (targetIdx - currentCenter) % ORIGINAL_COUNT;
+      if (delta > ORIGINAL_COUNT / 2) delta -= ORIGINAL_COUNT;
+      if (delta < -ORIGINAL_COUNT / 2) delta += ORIGINAL_COUNT;
+
+      return prevIndex + delta;
+    });
+  };
+
+  // Listen to prop changes
+  useEffect(() => {
+    if (targetOccasion) {
+      centerOccasion(targetOccasion);
+    }
+  }, [targetOccasion, visibleCount]);
+
+  // Listen to custom window events & URL query/hash changes
+  useEffect(() => {
+    const handleCustomEvent = (e: Event) => {
+      const customEvent = e as CustomEvent<{ occasion: string }>;
+      if (customEvent.detail?.occasion) {
+        centerOccasion(customEvent.detail.occasion);
+      }
+    };
+    window.addEventListener("centerOccasionCard", handleCustomEvent);
+
+    const checkUrlOccasion = () => {
+      if (typeof window === "undefined") return;
+      const urlParams = new URLSearchParams(window.location.search);
+      let occ = urlParams.get("occasion");
+      if (!occ && window.location.hash) {
+        const hash = window.location.hash.replace("#", "");
+        if (hash.includes("occasion=")) {
+          const match = hash.match(/occasion=([^&]+)/);
+          if (match) occ = decodeURIComponent(match[1]);
+        }
+      }
+      if (occ) {
+        centerOccasion(occ);
+      }
+    };
+
+    checkUrlOccasion();
+    window.addEventListener("hashchange", checkUrlOccasion);
+
+    return () => {
+      window.removeEventListener("centerOccasionCard", handleCustomEvent);
+      window.removeEventListener("hashchange", checkUrlOccasion);
+    };
+  }, [visibleCount]);
 
   // Responsive visible count
   useEffect(() => {
@@ -161,11 +246,11 @@ export default function ShopByOccasion() {
     isTransitioningRef.current = false;
 
     if (index >= START_INDEX + ORIGINAL_COUNT) {
-      // Reached post clones: teleport back by 6 items instantly
+      // Reached post clones: teleport back by ORIGINAL_COUNT items instantly
       setWithTransition(false);
       setIndex((prev) => prev - ORIGINAL_COUNT);
-    } else if (index < START_INDEX) {
-      // Reached pre clones: teleport forward by 6 items instantly
+    } else if (index < START_INDEX - 4) {
+      // Reached pre clones: teleport forward by ORIGINAL_COUNT items instantly
       setWithTransition(false);
       setIndex((prev) => prev + ORIGINAL_COUNT);
     }

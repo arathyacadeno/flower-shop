@@ -15,11 +15,18 @@ export default function Home() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [targetSlide, setTargetSlide] = useState<number | undefined>(undefined);
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [targetOccasion, setTargetOccasion] = useState<string | undefined>(undefined);
 
   const handleSelectSlide = (index: number) => {
     setTargetSlide(index);
     // Reset so selecting the same slide again will still trigger
     setTimeout(() => setTargetSlide(undefined), 100);
+  };
+
+  const handleSelectOccasion = (occasionId: string) => {
+    setTargetOccasion(occasionId);
+    // Reset so selecting the same occasion again will still trigger
+    setTimeout(() => setTargetOccasion(undefined), 100);
   };
 
   return (
@@ -30,6 +37,7 @@ export default function Home() {
         onToggleDrawer={setIsDrawerOpen}
         onSelectSlide={handleSelectSlide}
         currentSlide={currentSlide}
+        onSelectOccasion={handleSelectOccasion}
       />
 
       {/* 1. Home Page Hero */}
@@ -43,7 +51,7 @@ export default function Home() {
       <ShopByCategory />
 
       {/* 3. Shop by Occasion */}
-      <ShopByOccasion />
+      <ShopByOccasion targetOccasion={targetOccasion} />
 
       {/* 3.5 Celebration Gifts Promotional Banner */}
       <JoyfulGiftsBanner />

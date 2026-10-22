@@ -82,6 +82,13 @@ export default function ProductGallery({
   // Hover zoom (mouse devices only)
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!window.matchMedia("(hover: hover)").matches) return;
+
+    // Cursor is over the wishlist / arrow buttons -> reset image to normal
+    if ((e.target as HTMLElement).closest("button")) {
+      setZoom((z) => (z.active ? { ...z, active: false } : z));
+      return;
+    }
+
     const rect = e.currentTarget.getBoundingClientRect();
     const x = ((e.clientX - rect.left) / rect.width) * 100;
     const y = ((e.clientY - rect.top) / rect.height) * 100;
@@ -122,8 +129,9 @@ export default function ProductGallery({
               onMouseEnter={() => {
                 if (window.matchMedia("(hover: hover)").matches) setSelectedIndex(idx);
               }}
-              className={`${styles.thumbnailBtn} ${selectedIndex === idx ? styles.thumbnailActive : ""
-                }`}
+              className={`${styles.thumbnailBtn} ${
+                selectedIndex === idx ? styles.thumbnailActive : ""
+              }`}
             >
               <img
                 src={img}
@@ -156,8 +164,9 @@ export default function ProductGallery({
 
           <button
             type="button"
-            className={`${styles.wishlistBtn} ${isWishlisted ? styles.wishlistActive : ""
-              }`}
+            className={`${styles.wishlistBtn} ${
+              isWishlisted ? styles.wishlistActive : ""
+            }`}
             onClick={handleToggleWishlist}
             aria-label={isWishlisted ? "Remove from wishlist" : "Add to wishlist"}
             title={isWishlisted ? "Remove from wishlist" : "Add to wishlist"}
@@ -195,7 +204,8 @@ export default function ProductGallery({
       </div>
 
       {/* Fullscreen lightbox */}
-      {isZoomOpen && typeof document !== "undefined" &&
+      {isZoomOpen &&
+        typeof document !== "undefined" &&
         createPortal(
           <div
             className={styles.modalBackdrop}
@@ -208,53 +218,58 @@ export default function ProductGallery({
               className={styles.modalContent}
               onClick={(e) => e.stopPropagation()}
             >
-            <button
-              type="button"
-              onClick={() => setIsZoomOpen(false)}
-              className={styles.closeModalBtn}
-              aria-label="Close preview"
-            >
-              <X size={24} />
-            </button>
+              <button
+                type="button"
+                onClick={() => setIsZoomOpen(false)}
+                className={styles.closeModalBtn}
+                aria-label="Close preview"
+              >
+                <X size={24} />
+              </button>
 
-            <button
-              type="button"
-              className={`${styles.modalArrow} ${styles.modalArrowLeft}`}
-              onClick={goPrev}
-              aria-label="Previous image"
-            >
-              <ChevronLeft size={26} />
-            </button>
+              <button
+                type="button"
+                className={`${styles.modalArrow} ${styles.modalArrowLeft}`}
+                onClick={goPrev}
+                aria-label="Previous image"
+              >
+                <ChevronLeft size={26} />
+              </button>
 
-            <img src={currentImage} alt={productName} className={styles.modalImage} />
+              <img
+                src={currentImage}
+                alt={productName}
+                className={styles.modalImage}
+              />
 
-            <button
-              type="button"
-              className={`${styles.modalArrow} ${styles.modalArrowRight}`}
-              onClick={goNext}
-              aria-label="Next image"
-            >
-              <ChevronRight size={26} />
-            </button>
+              <button
+                type="button"
+                className={`${styles.modalArrow} ${styles.modalArrowRight}`}
+                onClick={goNext}
+                aria-label="Next image"
+              >
+                <ChevronRight size={26} />
+              </button>
 
-            <div className={styles.modalThumbs}>
-              {thumbnails.map((img, idx) => (
-                <button
-                  key={idx}
-                  type="button"
-                  onClick={() => setSelectedIndex(idx)}
-                  aria-label={`Show image ${idx + 1}`}
-                  className={`${styles.modalThumbBtn} ${selectedIndex === idx ? styles.modalThumbActive : ""
+              <div className={styles.modalThumbs}>
+                {thumbnails.map((img, idx) => (
+                  <button
+                    key={idx}
+                    type="button"
+                    onClick={() => setSelectedIndex(idx)}
+                    aria-label={`Show image ${idx + 1}`}
+                    className={`${styles.modalThumbBtn} ${
+                      selectedIndex === idx ? styles.modalThumbActive : ""
                     }`}
-                >
-                  <img src={img} alt="" className={styles.thumbnailImg} />
-                </button>
-              ))}
+                  >
+                    <img src={img} alt="" className={styles.thumbnailImg} />
+                  </button>
+                ))}
+              </div>
             </div>
-          </div>
-        </div>,
-        document.body
-      )}
+          </div>,
+          document.body
+        )}
     </>
   );
 }

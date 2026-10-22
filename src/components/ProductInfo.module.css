@@ -276,6 +276,11 @@
 .deliveryPillWrapper {
   position: relative;
   width: 100%;
+  z-index: 50;
+}
+
+.suggestionItemActive {
+  background-color: #f1f5f9;
 }
 
 .suggestionsDropdown {
@@ -291,6 +296,7 @@
   max-height: 220px;
   overflow-y: auto;
   padding: 4px 0;
+  user-select: none;
 }
 
 .suggestionItem {
@@ -301,10 +307,17 @@
   cursor: pointer;
   transition: background-color 0.15s ease;
   font-size: 12px;
+  user-select: none;
+  outline: none;
 }
 
-.suggestionItem:hover {
-  background-color: #f8fafc;
+.suggestionItem:hover,
+.suggestionItem:focus-visible {
+  background-color: #f1f5f9;
+}
+
+.suggestionItem:active {
+  background-color: #e2e8f0;
 }
 
 .suggestionIcon {

@@ -8,13 +8,9 @@ import {
   MapPin,
   X,
   Truck,
-  ShoppingCart,
   Check,
-  Info,
   Minus,
   Plus,
-  Heart,
-  Sparkles,
   AlertTriangle,
 } from "lucide-react";
 import { Product, isFlowerBouquet, getPricePerFlower } from "@/data/catalog";
@@ -40,6 +36,25 @@ interface ProductInfoProps {
   selectedAddons?: Record<string, number>;
   onAddonChange?: (addons: Record<string, number>) => void;
 }
+
+type LocationSuggestion = {
+  pinCode: string;
+  area: string;
+  district: string;
+  state: string;
+};
+
+const EMPTY_DELIVERY_STATUS = {
+  loading: false,
+  serviceable: null as boolean | null,
+  distance_km: null as number | null,
+  delivery_charge: null as number | null,
+  area: null as string | null,
+  district: null as string | null,
+  state: null as string | null,
+  message: null as string | null,
+  tier_label: null as string | null,
+};
 
 export default function ProductInfo({
   product,
@@ -211,27 +226,7 @@ export default function ProductInfo({
   const [quantity, setQuantity] = useState(1);
 
   // Delivery check state
-  const [deliveryStatus, setDeliveryStatus] = useState<{
-    loading: boolean;
-    serviceable: boolean | null;
-    distance_km: number | null;
-    delivery_charge: number | null;
-    area: string | null;
-    district: string | null;
-    state: string | null;
-    message: string | null;
-    tier_label: string | null;
-  }>({
-    loading: false,
-    serviceable: null,
-    distance_km: null,
-    delivery_charge: null,
-    area: null,
-    district: null,
-    state: null,
-    message: null,
-    tier_label: null,
-  });
+  const [deliveryStatus, setDeliveryStatus] = useState(EMPTY_DELIVERY_STATUS);
 
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -240,17 +235,7 @@ export default function ProductInfo({
     const q = queryOrPin.trim();
 
     if (!q) {
-      setDeliveryStatus({
-        loading: false,
-        serviceable: null,
-        distance_km: null,
-        delivery_charge: null,
-        area: null,
-        district: null,
-        state: null,
-        message: null,
-        tier_label: null,
-      });
+      setDeliveryStatus(EMPTY_DELIVERY_STATUS);
       return;
     }
 
@@ -282,15 +267,9 @@ export default function ProductInfo({
         });
       } catch {
         setDeliveryStatus({
-          loading: false,
+          ...EMPTY_DELIVERY_STATUS,
           serviceable: false,
-          distance_km: null,
-          delivery_charge: null,
-          area: null,
-          district: null,
-          state: null,
           message: "Unable to check delivery. Please try again.",
-          tier_label: null,
         });
       }
     }, 350);
@@ -298,13 +277,15 @@ export default function ProductInfo({
 
   const [isPinFocused, setIsPinFocused] = useState(false);
   const [typedInput, setTypedInput] = useState("");
-  const [suggestions, setSuggestions] = useState<
-    Array<{ pinCode: string; area: string; district: string; state: string }>
-  >([]);
+  const [suggestions, setSuggestions] = useState<LocationSuggestion[]>([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
+  const [activeIndex, setActiveIndex] = useState<number>(-1);
   const searchDebounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const searchAbortRef = useRef<AbortController | null>(null);
+  const suggestionsListRef = useRef<HTMLDivElement>(null);
   const [showCountryDropdown, setShowCountryDropdown] = useState(false);
   const countryDropdownRef = useRef<HTMLDivElement>(null);
+  const deliveryWrapperRef = useRef<HTMLDivElement>(null);
 
   // Close country dropdown on outside click
   useEffect(() => {
@@ -318,44 +299,91 @@ export default function ProductInfo({
     return () => document.removeEventListener("mousedown", handler);
   }, [showCountryDropdown]);
 
+  // Close location suggestions on outside click
+  useEffect(() => {
+    if (!showSuggestions) return;
+    const handler = (e: MouseEvent | TouchEvent) => {
+      if (deliveryWrapperRef.current && !deliveryWrapperRef.current.contains(e.target as Node)) {
+        setShowSuggestions(false);
+        setIsPinFocused(false);
+        setActiveIndex(-1);
+      }
+    };
+    document.addEventListener("mousedown", handler);
+    document.addEventListener("touchstart", handler);
+    return () => {
+      document.removeEventListener("mousedown", handler);
+      document.removeEventListener("touchstart", handler);
+    };
+  }, [showSuggestions]);
+
+  // Reset highlight whenever a new list arrives
+  useEffect(() => {
+    setActiveIndex(-1);
+  }, [suggestions]);
+
+  // Keep highlighted item visible while using arrow keys
+  useEffect(() => {
+    if (activeIndex < 0 || !suggestionsListRef.current) return;
+    const el = suggestionsListRef.current.querySelector<HTMLElement>(
+      `[data-index="${activeIndex}"]`
+    );
+    el?.scrollIntoView({ block: "nearest" });
+  }, [activeIndex]);
+
   const searchLocationQuery = useCallback((query: string) => {
     if (searchDebounceRef.current) clearTimeout(searchDebounceRef.current);
+    searchAbortRef.current?.abort();
+
     const q = query.trim();
-    if (q.length < 2) {
+    if (q.length < 1) {
       setSuggestions([]);
       setShowSuggestions(false);
       return;
     }
 
     searchDebounceRef.current = setTimeout(async () => {
+      const controller = new AbortController();
+      searchAbortRef.current = controller;
       try {
-        const res = await fetch(`/api/delivery/check?q=${encodeURIComponent(q)}`);
+        const res = await fetch(
+          `/api/delivery/check?q=${encodeURIComponent(q)}`,
+          { signal: controller.signal, cache: "no-store" }
+        );
+        if (!res.ok) throw new Error("Bad response");
         const data = await res.json();
-        if (data.suggestions && data.suggestions.length > 0) {
-          setSuggestions(data.suggestions);
-          setShowSuggestions(true);
-        } else {
-          setSuggestions([]);
-          setShowSuggestions(false);
-        }
-      } catch {
+        const list: LocationSuggestion[] = Array.isArray(data.suggestions)
+          ? data.suggestions
+          : [];
+        setSuggestions(list);
+        setShowSuggestions(list.length > 0);
+      } catch (err) {
+        if ((err as Error).name === "AbortError") return;
         setSuggestions([]);
         setShowSuggestions(false);
       }
     }, 150);
   }, []);
 
-  const handleSelectLocation = (item: {
-    pinCode: string;
-    area: string;
-    district: string;
-    state: string;
-  }) => {
+  const handleSelectLocation = (item: LocationSuggestion) => {
+    // Cancel any pending search so it can't reopen the dropdown
+    if (searchDebounceRef.current) clearTimeout(searchDebounceRef.current);
+    searchAbortRef.current?.abort();
+
     setPinCode(item.pinCode);
-    setTypedInput(`${item.pinCode}, ${item.area}, ${item.district || item.state || "Kerala"}, India`);
+    const formatted = `${item.pinCode}, ${item.area}, ${item.district || item.state || "Kerala"}, India`;
+    setTypedInput(formatted);
     setValidationErrors((prev) => ({ ...prev, location: undefined }));
     setShowSuggestions(false);
     setIsPinFocused(false);
+    setActiveIndex(-1);
+    setDeliveryStatus((prev) => ({
+      ...prev,
+      loading: true,
+      area: item.area,
+      district: item.district,
+      state: item.state,
+    }));
     checkDelivery(item.pinCode);
   };
 
@@ -636,7 +664,6 @@ export default function ProductInfo({
       {/* If customize mode is explicitly activated via ?customize=true, display customizer */}
       {isCustomMode && (
         <div className={styles.customBouquetSection}>
-
           <div className={styles.customPanel}>
             <div className={styles.customInfoRow}>
               <span className={styles.pricePerFlowerLabel}>Flower Unit Price:</span>
@@ -683,8 +710,6 @@ export default function ProductInfo({
                 </button>
               </div>
             </div>
-
-
           </div>
         </div>
       )}
@@ -693,14 +718,13 @@ export default function ProductInfo({
       <div className={styles.preferenceSection}>
         <h3 className={styles.sectionHeading}>Choose Delivery Preference</h3>
 
-
         <div className={styles.locationSubtitle}>
           <MapPin size={15} className={styles.pinIcon} />
           <span>Delivery Location</span>
         </div>
 
         {/* 1. Location Pill with Country Flag & Autocomplete for Location/PIN */}
-        <div className={styles.deliveryPillWrapper}>
+        <div className={styles.deliveryPillWrapper} ref={deliveryWrapperRef}>
           <div
             className={`${styles.deliveryPill} ${
               deliveryStatus.serviceable === false ? styles.deliveryPillError : ""
@@ -764,7 +788,7 @@ export default function ProductInfo({
               value={
                 isPinFocused
                   ? typedInput
-                  : deliveryStatus.area
+                  : pinCode && deliveryStatus.area
                   ? `${pinCode}, ${deliveryStatus.area}, ${
                       deliveryStatus.district || deliveryStatus.state || "Kerala"
                     }, India`
@@ -772,15 +796,10 @@ export default function ProductInfo({
               }
               onFocus={() => {
                 setIsPinFocused(true);
-                if (pinCode) {
-                  searchLocationQuery(pinCode);
+                const q = typedInput || pinCode;
+                if (q && q.length >= 1) {
+                  searchLocationQuery(q);
                 }
-              }}
-              onBlur={() => {
-                setTimeout(() => {
-                  setIsPinFocused(false);
-                  setShowSuggestions(false);
-                }, 200);
               }}
               onChange={(e) => {
                 let val = e.target.value;
@@ -793,7 +812,7 @@ export default function ProductInfo({
 
                 setTypedInput(val);
                 setValidationErrors((prev) => ({ ...prev, location: undefined }));
-                
+
                 searchLocationQuery(val);
 
                 if (/^\d{6}$/.test(cleanDigits)) {
@@ -804,9 +823,39 @@ export default function ProductInfo({
                 }
               }}
               onKeyDown={(e) => {
+                const hasList = showSuggestions && suggestions.length > 0;
+
+                if (e.key === "ArrowDown") {
+                  if (suggestions.length === 0) return;
+                  e.preventDefault();
+                  if (!showSuggestions) {
+                    setShowSuggestions(true);
+                    setActiveIndex(0);
+                    return;
+                  }
+                  setActiveIndex((i) => (i + 1) % suggestions.length);
+                  return;
+                }
+
+                if (e.key === "ArrowUp") {
+                  if (!hasList) return;
+                  e.preventDefault();
+                  setActiveIndex((i) => (i <= 0 ? suggestions.length - 1 : i - 1));
+                  return;
+                }
+
+                if (e.key === "Escape") {
+                  setShowSuggestions(false);
+                  setActiveIndex(-1);
+                  return;
+                }
+
                 if (e.key === "Enter") {
                   e.preventDefault();
-                  if (typedInput) {
+                  if (hasList) {
+                    // Pick the highlighted one, or the first if none is highlighted
+                    handleSelectLocation(suggestions[activeIndex >= 0 ? activeIndex : 0]);
+                  } else if (typedInput) {
                     checkDelivery(typedInput);
                     setShowSuggestions(false);
                   }
@@ -815,6 +864,14 @@ export default function ProductInfo({
               className={styles.pillInput}
               placeholder="Enter PIN code or Location"
               aria-label="Delivery Location"
+              role="combobox"
+              aria-expanded={showSuggestions}
+              aria-controls="location-suggestions"
+              aria-autocomplete="list"
+              aria-activedescendant={
+                activeIndex >= 0 ? `location-option-${activeIndex}` : undefined
+              }
+              autoComplete="off"
             />
 
             {deliveryStatus.loading && (
@@ -830,18 +887,9 @@ export default function ProductInfo({
                   setIsPinFocused(true);
                   setSuggestions([]);
                   setShowSuggestions(false);
+                  setActiveIndex(-1);
                   setValidationErrors((prev) => ({ ...prev, location: undefined }));
-                  setDeliveryStatus({
-                    loading: false,
-                    serviceable: null,
-                    distance_km: null,
-                    delivery_charge: null,
-                    area: null,
-                    district: null,
-                    state: null,
-                    message: null,
-                    tier_label: null,
-                  });
+                  setDeliveryStatus(EMPTY_DELIVERY_STATUS);
                 }}
                 className={styles.clearCircleBtn}
                 aria-label="Clear location"
@@ -853,12 +901,29 @@ export default function ProductInfo({
 
           {/* Autocomplete Dropdown for Location / PIN */}
           {showSuggestions && suggestions.length > 0 && (
-            <div className={styles.suggestionsDropdown}>
-              {suggestions.map((item) => (
+            <div
+              id="location-suggestions"
+              ref={suggestionsListRef}
+              role="listbox"
+              className={styles.suggestionsDropdown}
+              onMouseDown={(e) => e.preventDefault()}
+            >
+              {suggestions.map((item, idx) => (
                 <div
-                  key={item.pinCode}
-                  className={styles.suggestionItem}
-                  onMouseDown={() => handleSelectLocation(item)}
+                  key={`${item.pinCode}-${item.area}-${idx}`}
+                  id={`location-option-${idx}`}
+                  data-index={idx}
+                  role="option"
+                  aria-selected={idx === activeIndex}
+                  className={`${styles.suggestionItem} ${
+                    idx === activeIndex ? styles.suggestionItemActive : ""
+                  }`}
+                  onMouseEnter={() => setActiveIndex(idx)}
+                  onPointerDown={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    handleSelectLocation(item);
+                  }}
                 >
                   <MapPin size={13} className={styles.suggestionIcon} />
                   <div className={styles.suggestionInfo}>
@@ -881,7 +946,7 @@ export default function ProductInfo({
           </div>
         )}
 
-        {/* Warning text matching reference 2nd image when location is unavailable */}
+        {/* Warning text when location is unavailable */}
         {!deliveryStatus.loading && deliveryStatus.serviceable === false && (
           <div
             className={styles.unavailableWarning}
@@ -941,8 +1006,6 @@ export default function ProductInfo({
             </div>
           </div>
         )}
-
-        {/* Delivery Date and Time Removed */}
       </div>
 
       {/* About the product heading + 3 Standalone White Rounded Accordions */}

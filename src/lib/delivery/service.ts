@@ -189,6 +189,7 @@ export function checkDelivery(input: DeliveryCheckInput): DeliveryCheckResult {
   if (!zoneConfig) {
     return {
       serviceable: false,
+      pinCode: pin,
       distance_km: distanceKm,
       delivery_charge: null,
       area: customerCoords.area,
@@ -206,6 +207,7 @@ export function checkDelivery(input: DeliveryCheckInput): DeliveryCheckResult {
   if (tier.charge === null) {
     return {
       serviceable: false,
+      pinCode: pin,
       distance_km: distanceKm,
       delivery_charge: null,
       area: customerCoords.area,
@@ -219,6 +221,7 @@ export function checkDelivery(input: DeliveryCheckInput): DeliveryCheckResult {
 
   return {
     serviceable: true,
+    pinCode: pin,
     distance_km: distanceKm,
     delivery_charge: tier.charge,
     area: customerCoords.area,

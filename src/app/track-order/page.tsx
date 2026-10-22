@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import styles from "./page.module.css";
@@ -91,6 +91,7 @@ function statusLabel(status: OrderStatus): string {
 }
 
 export default function TrackOrderPage() {
+  const inputRef                = useRef<HTMLInputElement>(null);
   const [input, setInput]       = useState("");
   const [searched, setSearched] = useState(false);
   const [order, setOrder]       = useState<OrderData | null>(null);
@@ -250,9 +251,22 @@ export default function TrackOrderPage() {
           <p className={styles.heroSubtitle}>Enter your order ID to get real-time delivery updates</p>
 
           <form onSubmit={handleSearch} className={styles.searchForm}>
-            <div className={styles.searchBox}>
-              <Search size={18} className={styles.searchIcon} />
+            <label
+              htmlFor="trackOrderIdInput"
+              className={styles.searchBox}
+              onClick={() => inputRef.current?.focus()}
+            >
+              <Search
+                size={18}
+                className={styles.searchIcon}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  inputRef.current?.focus();
+                }}
+              />
               <input
+                ref={inputRef}
+                id="trackOrderIdInput"
                 type="text"
                 className={styles.searchInput}
                 placeholder="Enter Order ID  e.g. 178505"
@@ -261,7 +275,7 @@ export default function TrackOrderPage() {
                 aria-label="Order ID"
                 autoComplete="off"
               />
-            </div>
+            </label>
             <button type="submit" className={styles.searchBtn}>
               Track Now <ChevronRight size={17} strokeWidth={2.5} />
             </button>

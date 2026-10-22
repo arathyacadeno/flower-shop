@@ -77,6 +77,7 @@
   box-shadow: 0 2px 8px rgba(0,0,0,0.06);
   min-width: 200px;
   transition: border-color 0.2s ease;
+  cursor: text;
 }
 
 .searchBox:focus-within {
@@ -88,6 +89,7 @@
   color: #9ca3af;
   flex-shrink: 0;
   margin-right: 10px;
+  cursor: text;
 }
 
 .searchInput {

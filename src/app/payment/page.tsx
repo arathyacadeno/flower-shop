@@ -80,7 +80,7 @@ export default function SinglePageCheckoutPayment() {
   const [senderCity, setSenderCity] = useState("Kozhikode (Calicut)");
   const [senderState, setSenderState] = useState("Kerala");
   const [senderPinCode, setSenderPinCode] = useState("673602");
-  
+
   const [receiverName, setReceiverName] = useState("");
   const [receiverMobile, setReceiverMobile] = useState("");
   const [houseBuilding, setHouseBuilding] = useState("");
@@ -123,7 +123,7 @@ export default function SinglePageCheckoutPayment() {
     setPinCode("673602");
     checkDeliveryPin("673602");
   };
-  
+
   const [deliveryDate, setDeliveryDate] = useState("");
   const [deliveryTime, setDeliveryTime] = useState("");
   const [showTimeSlotModal, setShowTimeSlotModal] = useState(false);
@@ -154,14 +154,14 @@ export default function SinglePageCheckoutPayment() {
     checkoutItems.length > 0
       ? checkoutItems[0]
       : checkoutItem || {
-          id: "sunshine-rose-basket",
-          name: "Sunshine Golden Rose Basket",
-          subtitle: "Premium Preserved Roses · Limited Edition",
-          price: 649,
-          originalPrice: 749,
-          image: "/images/artisanal-flower-basket.jpg",
-          quantity: 1,
-        };
+        id: "sunshine-rose-basket",
+        name: "Sunshine Golden Rose Basket",
+        subtitle: "Premium Preserved Roses · Limited Edition",
+        price: 649,
+        originalPrice: 749,
+        image: "/images/artisanal-flower-basket.jpg",
+        quantity: 1,
+      };
 
   const displayCheckoutItems =
     checkoutItems.length > 0 ? checkoutItems : [primaryItem];
@@ -387,7 +387,7 @@ export default function SinglePageCheckoutPayment() {
     if (deliveryStatus.serviceable === false) {
       alert(
         deliveryStatus.message ||
-          "Sorry, delivery is not available to this location. Please enter another delivery location."
+        "Sorry, delivery is not available to this location. Please enter another delivery location."
       );
       return;
     }
@@ -466,7 +466,7 @@ export default function SinglePageCheckoutPayment() {
       if (!response.ok || !data.success) {
         alert(
           data.error ||
-            "Sorry, delivery is not available to this location. Please enter another delivery location."
+          "Sorry, delivery is not available to this location. Please enter another delivery location."
         );
         setIsSubmitting(false);
         return;
@@ -477,16 +477,16 @@ export default function SinglePageCheckoutPayment() {
         activeTab === "upi"
           ? "UPI"
           : activeTab === "card"
-          ? "Credit / Debit Card"
-          : `Net Banking (${selectedBank})`;
+            ? "Credit / Debit Card"
+            : `Net Banking (${selectedBank})`;
 
       const formattedDelivery =
         deliveryDate && deliveryTime
           ? `${new Date(deliveryDate).toLocaleDateString("en-GB", {
-              day: "numeric",
-              month: "short",
-              year: "numeric",
-            })} (${deliveryTime})`
+            day: "numeric",
+            month: "short",
+            year: "numeric",
+          })} (${deliveryTime})`
           : undefined;
 
       // Sync address to user profile if logged in and saveToProfile is enabled
@@ -510,14 +510,14 @@ export default function SinglePageCheckoutPayment() {
               headers: { "Content-Type": "application/json" },
               credentials: "include",
               body: JSON.stringify(addrPayload),
-            }).catch(() => {});
+            }).catch(() => { });
           } else {
             fetch("/api/addresses", {
               method: "POST",
               headers: { "Content-Type": "application/json" },
               credentials: "include",
               body: JSON.stringify(addrPayload),
-            }).catch(() => {});
+            }).catch(() => { });
           }
         } catch (e) {
           console.warn("Could not sync address to profile:", e);
@@ -603,7 +603,7 @@ export default function SinglePageCheckoutPayment() {
             <div className={styles.sectionHeader} style={{ marginTop: 0 }}>
               <h2 className={styles.sectionTitle}>Sender Details</h2>
             </div>
-            
+
             <div className={`${styles.formRow} ${styles.threeCols}`}>
               <div className={styles.fieldGroup}>
                 <label htmlFor="senderName" className={styles.fieldLabel}>
@@ -784,9 +784,8 @@ export default function SinglePageCheckoutPayment() {
                       <div
                         key={addr.id}
                         onClick={() => handleSelectSavedAddress(addr)}
-                        className={`${styles.savedAddressCard} ${
-                          isSelected ? styles.savedAddressCardActive : ""
-                        }`}
+                        className={`${styles.savedAddressCard} ${isSelected ? styles.savedAddressCardActive : ""
+                          }`}
                       >
                         <div className={styles.savedAddressCardTop}>
                           <span className={styles.savedAddressBadge}>
@@ -815,9 +814,8 @@ export default function SinglePageCheckoutPayment() {
 
                   <div
                     onClick={handleUseNewAddress}
-                    className={`${styles.savedAddressCard} ${styles.newAddressCard} ${
-                      selectedAddressId === "new" ? styles.newAddressCardActive : ""
-                    }`}
+                    className={`${styles.savedAddressCard} ${styles.newAddressCard} ${selectedAddressId === "new" ? styles.newAddressCardActive : ""
+                      }`}
                   >
                     <Plus size={16} />
                     <span>Enter New Address</span>
@@ -828,8 +826,8 @@ export default function SinglePageCheckoutPayment() {
 
             <div style={{ backgroundColor: "#fdf2f5", padding: "12px 16px", borderRadius: "8px", marginBottom: "24px" }}>
               <label style={{ display: "flex", alignItems: "center", gap: "8px", fontSize: "0.95rem", cursor: "pointer", color: "#3b2a22", fontWeight: 500 }}>
-                <input 
-                  type="checkbox" 
+                <input
+                  type="checkbox"
                   onChange={(e) => {
                     if (e.target.checked) {
                       setReceiverName(senderName);
@@ -850,7 +848,7 @@ export default function SinglePageCheckoutPayment() {
                       setState("Kerala");
                       setPinCode("673602");
                     }
-                  }} 
+                  }}
                   style={{ accentColor: "#e4004b", width: "18px", height: "18px", cursor: "pointer" }}
                 />
                 Same as Sender
@@ -996,13 +994,12 @@ export default function SinglePageCheckoutPayment() {
                       setPinCode(val);
                       checkDeliveryPin(val);
                     }}
-                    className={`${styles.inputField} ${
-                      deliveryStatus.serviceable === true
+                    className={`${styles.inputField} ${deliveryStatus.serviceable === true
                         ? styles.inputSuccess
                         : deliveryStatus.serviceable === false
-                        ? styles.inputError
-                        : ""
-                    }`}
+                          ? styles.inputError
+                          : ""
+                      }`}
                   />
                   {deliveryStatus.loading && (
                     <span className={styles.pinLoadingSpinner}>…</span>
@@ -1052,9 +1049,8 @@ export default function SinglePageCheckoutPayment() {
                     Delivery Date <span className={styles.requiredStar}>*</span>
                   </label>
                   <div
-                    className={`${styles.dropdownPill} ${
-                      deliveryPrefError?.date ? styles.dropdownPillError : ""
-                    }`}
+                    className={`${styles.dropdownPill} ${deliveryPrefError?.date ? styles.dropdownPillError : ""
+                      }`}
                     onClick={() => {
                       setShowDateModal(true);
                       if (deliveryPrefError?.date) {
@@ -1066,10 +1062,10 @@ export default function SinglePageCheckoutPayment() {
                     <div className={styles.dropdownSelect} style={{ display: "flex", alignItems: "center" }}>
                       {deliveryDate
                         ? new Date(deliveryDate).toLocaleDateString("en-GB", {
-                            day: "numeric",
-                            month: "long",
-                            year: "numeric",
-                          })
+                          day: "numeric",
+                          month: "long",
+                          year: "numeric",
+                        })
                         : "Select Date"}
                     </div>
                     <Calendar size={14} className={styles.dropdownChevron} />
@@ -1087,9 +1083,8 @@ export default function SinglePageCheckoutPayment() {
                     Delivery Time Slot <span className={styles.requiredStar}>*</span>
                   </label>
                   <div
-                    className={`${styles.dropdownPill} ${
-                      deliveryPrefError?.time ? styles.dropdownPillError : ""
-                    }`}
+                    className={`${styles.dropdownPill} ${deliveryPrefError?.time ? styles.dropdownPillError : ""
+                      }`}
                     onClick={() => {
                       setShowTimeSlotModal(true);
                       if (deliveryPrefError?.time) {
@@ -1149,9 +1144,8 @@ export default function SinglePageCheckoutPayment() {
                 <button
                   type="button"
                   onClick={() => setActiveTab("upi")}
-                  className={`${styles.paymentTabBtn} ${
-                    activeTab === "upi" ? styles.activeTabBtn : ""
-                  }`}
+                  className={`${styles.paymentTabBtn} ${activeTab === "upi" ? styles.activeTabBtn : ""
+                    }`}
                   aria-label="Pay with UPI"
                 >
                   <Smartphone size={20} className={styles.tabIcon} />
@@ -1161,9 +1155,8 @@ export default function SinglePageCheckoutPayment() {
                 <button
                   type="button"
                   onClick={() => setActiveTab("card")}
-                  className={`${styles.paymentTabBtn} ${
-                    activeTab === "card" ? styles.activeTabBtn : ""
-                  }`}
+                  className={`${styles.paymentTabBtn} ${activeTab === "card" ? styles.activeTabBtn : ""
+                    }`}
                   aria-label="Pay with Credit or Debit Card"
                 >
                   <CreditCard size={20} className={styles.tabIcon} />
@@ -1247,16 +1240,16 @@ export default function SinglePageCheckoutPayment() {
                     <div className={styles.upiInterfaceWrapper}>
                       <div className={styles.qrBox}>
                         {showQrCode ? (
-                          <img 
-                            src="https://upload.wikimedia.org/wikipedia/commons/d/d0/QR_code_for_mobile_English_Wikipedia.svg" 
-                            alt="Scan QR" 
-                            style={{ width: '100%', height: '100%', objectFit: 'contain' }} 
+                          <img
+                            src="https://upload.wikimedia.org/wikipedia/commons/d/d0/QR_code_for_mobile_English_Wikipedia.svg"
+                            alt="Scan QR"
+                            style={{ width: '100%', height: '100%', objectFit: 'contain' }}
                           />
                         ) : (
                           <div className={styles.qrImagePlaceholder}>
                             <div className={styles.showQrOverlay}>
-                              <button 
-                                type="button" 
+                              <button
+                                type="button"
                                 className={styles.showQrBtn}
                                 onClick={() => setShowQrCode(true)}
                               >
@@ -1374,46 +1367,46 @@ export default function SinglePageCheckoutPayment() {
             </div>
 
 
-              {/* Master Place Order Button */}
-              <button
-                type="submit"
-                disabled={
-                  isSubmitting ||
-                  deliveryStatus.serviceable === false ||
-                  deliveryStatus.loading
-                }
-                className={styles.placeOrderBtn}
-                title={
-                  deliveryStatus.serviceable === false
-                    ? "Sorry, delivery is not available to this location. Please enter another delivery location."
-                    : undefined
-                }
-              >
-                {isSubmitting ? (
-                  <>
-                    <div className={styles.spinner} />
-                    <span>Processing Payment...</span>
-                  </>
-                ) : deliveryStatus.serviceable === false ? (
-                  <span>Location Not Serviceable</span>
-                ) : !isAuthenticated ? (
-                  <>
-                    <Lock size={16} />
-                    <span>Sign In & Place Order</span>
-                  </>
-                ) : (
-                  <>
-                    <Lock size={16} />
-                    <span>Place Order</span>
-                  </>
-                )}
-              </button>
-              {!isAuthenticated && (
-                <div className={styles.authNoticeFooterNote}>
-                  <Lock size={13} color="#94a3b8" />
-                  <span>Login details requested at checkout</span>
-                </div>
+            {/* Master Place Order Button */}
+            <button
+              type="submit"
+              disabled={
+                isSubmitting ||
+                deliveryStatus.serviceable === false ||
+                deliveryStatus.loading
+              }
+              className={styles.placeOrderBtn}
+              title={
+                deliveryStatus.serviceable === false
+                  ? "Sorry, delivery is not available to this location. Please enter another delivery location."
+                  : undefined
+              }
+            >
+              {isSubmitting ? (
+                <>
+                  <div className={styles.spinner} />
+                  <span>Processing Payment...</span>
+                </>
+              ) : deliveryStatus.serviceable === false ? (
+                <span>Location Not Serviceable</span>
+              ) : !isAuthenticated ? (
+                <>
+                  <Lock size={16} />
+                  <span>Sign In & Place Order</span>
+                </>
+              ) : (
+                <>
+                  <Lock size={16} />
+                  <span>Place Order</span>
+                </>
               )}
+            </button>
+            {!isAuthenticated && (
+              <div className={styles.authNoticeFooterNote}>
+                <Lock size={13} color="#94a3b8" />
+                <span>Login details requested at checkout</span>
+              </div>
+            )}
           </aside>
         </form>
       </main>

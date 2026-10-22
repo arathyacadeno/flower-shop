@@ -20,6 +20,8 @@ interface CategoryPageProps {
   description?: string;
   products: Product[];
   filterTabs?: { id: string; label: string }[];
+  initialFilterId?: string;
+  initialSearch?: string;
 }
 
 export default function CategoryPage({
@@ -27,10 +29,14 @@ export default function CategoryPage({
   description,
   products,
   filterTabs,
+  initialFilterId,
+  initialSearch,
 }: CategoryPageProps) {
   const tabs = filterTabs && filterTabs.length > 0 ? filterTabs : DEFAULT_FILTER_TABS;
-  const [activeFilterId, setActiveFilterId] = useState<string>(tabs[0].id);
-  const [searchParam, setSearchParam] = useState<string>("");
+  const [activeFilterId, setActiveFilterId] = useState<string>(
+    initialFilterId || tabs[0].id
+  );
+  const [searchParam, setSearchParam] = useState<string>(initialSearch || "");
 
   // Sync tab with URL search parameter if present (e.g. /flower-bouquets?tab=roses or ?flower=roses or ?search=cake)
   useEffect(() => {
@@ -46,13 +52,16 @@ export default function CategoryPage({
           params.get("type") ||
           params.get("category");
         if (tabParam) {
-          const cleanParam = tabParam.toLowerCase().trim().replace(/s$/, "");
+          const rawParam = tabParam.toLowerCase().trim();
+          const cleanParam = rawParam.replace(/s$/, "").replace(/[-_]/g, " ");
           const found = tabs.find(
             (t) =>
-              t.id.toLowerCase() === tabParam.toLowerCase() ||
+              t.id.toLowerCase() === rawParam ||
               t.id.toLowerCase().replace(/s$/, "") === cleanParam ||
-              t.label.toLowerCase() === tabParam.toLowerCase() ||
-              t.label.toLowerCase().replace(/s$/, "") === cleanParam
+              t.label.toLowerCase() === rawParam ||
+              t.label.toLowerCase().replace(/s$/, "") === cleanParam ||
+              cleanParam.includes(t.id.toLowerCase()) ||
+              rawParam.includes(t.id.toLowerCase())
           );
           if (found) {
             setActiveFilterId(found.id);
@@ -184,13 +193,42 @@ export default function CategoryPage({
       if (f === "rustic")
         return text.includes("rustic") || text.includes("burlap") || text.includes("woven");
       if (f === "heart")
-        return text.includes("heart");
-      if (f === "cross")
-        return text.includes("cross");
-      if (f === "circular")
-        return text.includes("circular") || text.includes("ring") || text.includes("laurel");
-      if (f === "easel")
-        return text.includes("easel") || text.includes("standing");
+        return /\bheart\b/i.test(`${p.name} ${p.badge ?? ""} ${p.id} ${p.description ?? ""}`);
+      if (f === "cross") {
+        const crossCheck = `${p.name} ${p.badge ?? ""} ${p.id}`.toLowerCase();
+        return /\bcross\b/i.test(crossCheck);
+      }
+      if (f === "circular") {
+        const crossCheck = `${p.name} ${p.badge ?? ""} ${p.id}`.toLowerCase();
+        if (/\bcross\b/i.test(crossCheck)) return false;
+        const name = p.name.toLowerCase();
+        const badge = (p.badge ?? "").toLowerCase();
+        if (name.includes("dome") || name.includes("bouquet") || badge.includes("dome")) return false;
+        return (
+          name.includes("wreath") ||
+          /\bring\b/i.test(name) ||
+          /\bring\b/i.test(badge) ||
+          badge.includes("circular") ||
+          badge.includes("tribute")
+        );
+      }
+      if (f === "easel") {
+        const crossCheck = `${p.name} ${p.badge ?? ""} ${p.id}`.toLowerCase();
+        if (/\bcross\b/i.test(crossCheck)) return false;
+        const name = p.name.toLowerCase();
+        const badge = (p.badge ?? "").toLowerCase();
+        const desc = (p.description ?? "").toLowerCase();
+        if (name.includes("wreath") && (badge.includes("ring") || badge.includes("circular"))) return false;
+        return (
+          name.includes("easel") ||
+          name.includes("dome") ||
+          name.includes("bouquet") ||
+          badge.includes("dome") ||
+          desc.includes("dome") ||
+          desc.includes("standing easel") ||
+          desc.includes("spherical dome")
+        );
+      }
       return text.includes(f);
     });
   }, [activeFilterId, products, searchParam]);

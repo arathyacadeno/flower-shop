@@ -83,15 +83,36 @@ export default function ProductGallery({
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!window.matchMedia("(hover: hover)").matches) return;
 
-    // Cursor is over the wishlist / arrow buttons -> reset image to normal
-    if ((e.target as HTMLElement).closest("button")) {
+    const target = e.target as HTMLElement;
+    // Cursor is over any button or interactive element -> reset to normal
+    if (
+      target.closest("button") ||
+      target.closest(`.${styles.wishlistBtn}`) ||
+      target.closest(`.${styles.arrowBtn}`) ||
+      target.closest(`.${styles.counter}`)
+    ) {
       setZoom((z) => (z.active ? { ...z, active: false } : z));
       return;
     }
 
     const rect = e.currentTarget.getBoundingClientRect();
-    const x = ((e.clientX - rect.left) / rect.width) * 100;
-    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    const mouseX = e.clientX - rect.left;
+    const mouseY = e.clientY - rect.top;
+
+    // Proximity buffer: when reaching near the Like button (top-right)
+    // or near the Slide Left / Slide Right buttons (left/right edges), reset image to normal
+    const isNearLikeBtn = mouseX > rect.width - 80 && mouseY < 80;
+    const isNearLeftArrow = mouseX < 75 && Math.abs(mouseY - rect.height / 2) < 65;
+    const isNearRightArrow = mouseX > rect.width - 75 && Math.abs(mouseY - rect.height / 2) < 65;
+    const isNearCounter = mouseX < 95 && mouseY > rect.height - 65;
+
+    if (isNearLikeBtn || isNearLeftArrow || isNearRightArrow || isNearCounter) {
+      setZoom((z) => (z.active ? { ...z, active: false } : z));
+      return;
+    }
+
+    const x = (mouseX / rect.width) * 100;
+    const y = (mouseY / rect.height) * 100;
     setZoom({ active: true, x, y });
   };
   const handleMouseLeave = () => setZoom((z) => ({ ...z, active: false }));
@@ -168,6 +189,14 @@ export default function ProductGallery({
               isWishlisted ? styles.wishlistActive : ""
             }`}
             onClick={handleToggleWishlist}
+            onMouseEnter={(e) => {
+              e.stopPropagation();
+              setZoom((z) => ({ ...z, active: false }));
+            }}
+            onMouseMove={(e) => {
+              e.stopPropagation();
+              setZoom((z) => ({ ...z, active: false }));
+            }}
             aria-label={isWishlisted ? "Remove from wishlist" : "Add to wishlist"}
             title={isWishlisted ? "Remove from wishlist" : "Add to wishlist"}
           >
@@ -181,6 +210,14 @@ export default function ProductGallery({
               e.stopPropagation();
               goPrev();
             }}
+            onMouseEnter={(e) => {
+              e.stopPropagation();
+              setZoom((z) => ({ ...z, active: false }));
+            }}
+            onMouseMove={(e) => {
+              e.stopPropagation();
+              setZoom((z) => ({ ...z, active: false }));
+            }}
             aria-label="Previous image"
           >
             <ChevronLeft size={20} />
@@ -192,12 +229,30 @@ export default function ProductGallery({
               e.stopPropagation();
               goNext();
             }}
+            onMouseEnter={(e) => {
+              e.stopPropagation();
+              setZoom((z) => ({ ...z, active: false }));
+            }}
+            onMouseMove={(e) => {
+              e.stopPropagation();
+              setZoom((z) => ({ ...z, active: false }));
+            }}
             aria-label="Next image"
           >
             <ChevronRight size={20} />
           </button>
 
-          <span className={styles.counter}>
+          <span
+            className={styles.counter}
+            onMouseEnter={(e) => {
+              e.stopPropagation();
+              setZoom((z) => ({ ...z, active: false }));
+            }}
+            onMouseMove={(e) => {
+              e.stopPropagation();
+              setZoom((z) => ({ ...z, active: false }));
+            }}
+          >
             {selectedIndex + 1} / {total}
           </span>
         </div>

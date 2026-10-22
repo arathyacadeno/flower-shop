@@ -91,6 +91,30 @@ export default function Header({
     timer = setTimeout(typeLoop, 2500);
     return () => clearTimeout(timer);
   }, []);
+
+  // Synchronize searchQuery with URL query parameter (e.g. /cakes?search=cake or ?q=cake)
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const syncSearchFromUrl = () => {
+      try {
+        const params = new URLSearchParams(window.location.search);
+        const q = params.get("search") || params.get("q") || params.get("query");
+        if (q) {
+          setSearchQuery(q);
+        } else if (params.toString() === "" || (!params.has("search") && !params.has("q") && !params.has("query"))) {
+          setSearchQuery("");
+        }
+      } catch {
+        // ignore
+      }
+    };
+
+    syncSearchFromUrl();
+    window.addEventListener("popstate", syncSearchFromUrl);
+    return () => window.removeEventListener("popstate", syncSearchFromUrl);
+  }, [pathname]);
+
   const [activeModal, setActiveModal] = useState<"cart" | "signin" | null>(null);
 
   const [authTab, setAuthTab] = useState<"signin" | "signup">("signin");
@@ -677,41 +701,44 @@ export default function Header({
   };
 
   const handleSearchSubmit = (term: string) => {
-    const q = term.toLowerCase().trim();
-    if (!q) return;
+    const rawTerm = term.trim();
+    if (!rawTerm) return;
+    const q = rawTerm.toLowerCase();
+    const encoded = encodeURIComponent(rawTerm);
+    setSearchQuery(rawTerm);
 
-    if (q.includes("basket")) {
-      window.location.href = "/flower-baskets";
+    if (q.includes("cake")) {
+      router.push(`/cakes?search=${encoded}`);
+      return;
+    } else if (q.includes("basket")) {
+      router.push(`/flower-baskets?search=${encoded}`);
       return;
     } else if (q.includes("rose")) {
-      window.location.href = "/flowers/roses";
+      router.push(`/flowers/roses?search=${encoded}`);
       return;
     } else if (q.includes("tulip")) {
-      window.location.href = "/flowers/tulips";
+      router.push(`/flowers/tulips?search=${encoded}`);
       return;
     } else if (q.includes("sunflower")) {
-      window.location.href = "/flowers/sunflowers";
+      router.push(`/flowers/sunflowers?search=${encoded}`);
       return;
     } else if (q.includes("lilies") || q.includes("lily")) {
-      window.location.href = "/flowers/lilies";
+      router.push(`/flowers/lilies?search=${encoded}`);
       return;
-    } else if (q.includes("bouquet")) {
-      window.location.href = "/flower-bouquets";
+    } else if (q.includes("orchid")) {
+      router.push(`/flower-bouquets?flower=orchids&search=${encoded}`);
+      return;
+    } else if (q.includes("bouquet") || q.includes("flower")) {
+      router.push(`/flower-bouquets?search=${encoded}`);
       return;
     } else if (q.includes("table") || q.includes("centerpiece")) {
-      router.push("/table-decor");
+      router.push(`/table-decor?search=${encoded}`);
       return;
     } else if (q.includes("wreath")) {
-      router.push("/wreaths");
+      router.push(`/wreaths?search=${encoded}`);
       return;
     } else if (q.includes("garland") || q.includes("varmala")) {
       handleNavCategory("Flower baskets & garlands", 1);
-      return;
-    } else if (q.includes("cake")) {
-      router.push("/cakes");
-      return;
-    } else if (q.includes("flower")) {
-      window.location.href = "/flower-bouquets";
       return;
     } else if (
       q.includes("contact") ||
@@ -722,7 +749,17 @@ export default function Header({
       setDrawerOpen(true);
       return;
     } else {
-      window.location.href = "/flower-bouquets";
+      if (pathname === "/cakes") {
+        router.push(`/cakes?search=${encoded}`);
+      } else if (pathname === "/flower-baskets") {
+        router.push(`/flower-baskets?search=${encoded}`);
+      } else if (pathname === "/table-decor") {
+        router.push(`/table-decor?search=${encoded}`);
+      } else if (pathname === "/wreaths") {
+        router.push(`/wreaths?search=${encoded}`);
+      } else {
+        router.push(`/flower-bouquets?search=${encoded}`);
+      }
       return;
     }
   };
@@ -1224,6 +1261,16 @@ export default function Header({
                   onClick={(e) => {
                     e.stopPropagation();
                     setSearchQuery("");
+                    if (typeof window !== "undefined") {
+                      const url = new URL(window.location.href);
+                      if (url.searchParams.has("search") || url.searchParams.has("q") || url.searchParams.has("query")) {
+                        url.searchParams.delete("search");
+                        url.searchParams.delete("q");
+                        url.searchParams.delete("query");
+                        window.history.replaceState(null, "", url.pathname + (url.search ? url.search : ""));
+                        window.dispatchEvent(new Event("popstate"));
+                      }
+                    }
                     searchInputRef.current?.focus();
                   }}
                   aria-label="Clear search"

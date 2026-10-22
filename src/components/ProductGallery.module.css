@@ -91,7 +91,7 @@
   height: 100%;
   object-fit: cover;
   display: block;
-  transition: transform 0.15s ease-out;
+  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: transform;
 }
 

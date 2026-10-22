@@ -318,19 +318,29 @@ function seedInitialData(db: any) {
     insertCoupon.run(cp.id, cp.code, cp.type, cp.value, cp.minOrder, cp.maxDiscount);
   }
 
+  const findProduct = db.prepare("SELECT id FROM products WHERE id = ? OR slug = ?");
+  const updateProduct = db.prepare(`
+    UPDATE products SET
+      id = ?,
+      name = ?,
+      slug = ?,
+      description = ?,
+      images = ?,
+      price = ?,
+      discount_price = ?,
+      category_id = ?,
+      flower_type_id = ?,
+      occasion_id = ?,
+      badge = ?,
+      updated_at = ?
+    WHERE id = ?
+  `);
   const insertProduct = db.prepare(`
     INSERT INTO products (
       id, name, slug, description, images, price, discount_price, stock, sku,
       category_id, flower_type_id, occasion_id, featured, active, rating,
       reviews_count, delivery_info, offers, includes, badge, created_at, updated_at
     ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-    ON CONFLICT(id) DO UPDATE SET
-      name = excluded.name,
-      slug = excluded.slug,
-      description = excluded.description,
-      images = excluded.images,
-      price = excluded.price,
-      badge = excluded.badge
   `);
 
   for (const p of CATALOG_PRODUCTS) {
@@ -358,30 +368,49 @@ function seedInitialData(db: any) {
 
     const allImages = Array.isArray(p.images) && p.images.length > 0 ? p.images : [p.image];
 
-    insertProduct.run(
-      p.id,
-      p.name,
-      p.slug,
-      p.description || "",
-      JSON.stringify(allImages),
-      p.price,
-      p.originalPrice || null,
-      45, // initial stock
-      `SKU-${p.id.toUpperCase()}`,
-      categoryId,
-      flowerTypeId,
-      occasionId,
-      p.badge ? 1 : 0,
-      1,
-      p.rating || 4.8,
-      p.reviewsCount || 10,
-      p.deliveryInfo || "Express same-day Calicut delivery available",
-      JSON.stringify(p.offers || []),
-      JSON.stringify(p.includes || []),
-      p.badge || null,
-      now,
-      now
-    );
+    const existing = findProduct.get(p.id, p.slug);
+    if (existing) {
+      updateProduct.run(
+        p.id,
+        p.name,
+        p.slug,
+        p.description || "",
+        JSON.stringify(allImages),
+        p.price,
+        p.originalPrice || null,
+        categoryId,
+        flowerTypeId,
+        occasionId,
+        p.badge || null,
+        now,
+        existing.id
+      );
+    } else {
+      insertProduct.run(
+        p.id,
+        p.name,
+        p.slug,
+        p.description || "",
+        JSON.stringify(allImages),
+        p.price,
+        p.originalPrice || null,
+        45, // initial stock
+        `SKU-${p.id.toUpperCase()}`,
+        categoryId,
+        flowerTypeId,
+        occasionId,
+        p.badge ? 1 : 0,
+        1,
+        p.rating || 4.8,
+        p.reviewsCount || 10,
+        p.deliveryInfo || "Express same-day Calicut delivery available",
+        JSON.stringify(p.offers || []),
+        JSON.stringify(p.includes || []),
+        p.badge || null,
+        now,
+        now
+      );
+    }
   }
 
   // Ensure any existing order items for blue floral cake reflect the correct name

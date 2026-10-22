@@ -57,11 +57,11 @@ const FLOWER_CATEGORIES: FlowerCategory[] = [
     href: "/flower-bouquets?tab=peonies",
   },
   {
-    id: "gerberas",
-    title: "Gerberas",
-    description: "Joyful & radiant",
-    image: "/images/flowers-gerberas-nobg.png",
-    href: "/flower-bouquets?tab=gerberas",
+    id: "orchids",
+    title: "Orchids",
+    description: "Exotic & graceful",
+    image: "/images/flowers-orchids-nobg.png",
+    href: "/flower-bouquets?tab=orchids",
   },
   {
     id: "pastel-tulips",

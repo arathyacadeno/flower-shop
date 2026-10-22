@@ -115,6 +115,7 @@ export default function CategoryPage({
           text.includes("vanilla")
         );
       if (f === "roses" || f === "rose") return text.includes("rose");
+      if (f === "orchids" || f === "orchid") return text.includes("orchid");
       if (f === "lilies" || f === "lily") return text.includes("lil");
       if (f === "carnations" || f === "carnation") return text.includes("carnation");
       if (f === "tulips" || f === "tulip" || f === "pastel-tulips") return text.includes("tulip");

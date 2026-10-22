@@ -11,6 +11,7 @@ export const metadata: Metadata = {
 const BOUQUET_TABS = [
   { id: "all", label: "All Items" },
   { id: "roses", label: "Roses" },
+  { id: "orchids", label: "Orchids" },
   { id: "lilies", label: "Lilies" },
   { id: "carnations", label: "Carnations" },
   { id: "sunflowers", label: "Sunflowers" },

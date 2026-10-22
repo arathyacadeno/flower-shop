@@ -31,21 +31,50 @@ export default function CategoryPage({
   const tabs = filterTabs && filterTabs.length > 0 ? filterTabs : DEFAULT_FILTER_TABS;
   const [activeFilterId, setActiveFilterId] = useState<string>(tabs[0].id);
 
-  // Sync tab with URL search parameter if present (e.g. /cakes?tab=chocolate)
+  // Sync tab with URL search parameter if present (e.g. /flower-bouquets?tab=roses or ?flower=roses)
   useEffect(() => {
     if (typeof window !== "undefined") {
-      const params = new URLSearchParams(window.location.search);
-      const tabParam = params.get("tab");
-      if (tabParam) {
-        const found = tabs.find(
-          (t) => t.id.toLowerCase() === tabParam.toLowerCase()
-        );
-        if (found) {
-          setActiveFilterId(found.id);
+      const checkParams = () => {
+        const params = new URLSearchParams(window.location.search);
+        const tabParam =
+          params.get("tab") ||
+          params.get("flower") ||
+          params.get("type") ||
+          params.get("category");
+        if (tabParam) {
+          const cleanParam = tabParam.toLowerCase().trim().replace(/s$/, "");
+          const found = tabs.find(
+            (t) =>
+              t.id.toLowerCase() === tabParam.toLowerCase() ||
+              t.id.toLowerCase().replace(/s$/, "") === cleanParam ||
+              t.label.toLowerCase() === tabParam.toLowerCase() ||
+              t.label.toLowerCase().replace(/s$/, "") === cleanParam
+          );
+          if (found) {
+            setActiveFilterId(found.id);
+          }
         }
-      }
+      };
+
+      checkParams();
+      window.addEventListener("popstate", checkParams);
+      return () => window.removeEventListener("popstate", checkParams);
     }
   }, [tabs]);
+
+  const handleTabClick = (tabId: string) => {
+    setActiveFilterId(tabId);
+    if (typeof window !== "undefined") {
+      const url = new URL(window.location.href);
+      if (tabId === "all") {
+        url.searchParams.delete("tab");
+        url.searchParams.delete("flower");
+      } else {
+        url.searchParams.set("tab", tabId);
+      }
+      window.history.replaceState(null, "", url.toString());
+    }
+  };
 
   const visibleProducts = useMemo(() => {
     if (activeFilterId === "all" || activeFilterId.toLowerCase() === "all items") {
@@ -85,8 +114,13 @@ export default function CategoryPage({
           text.includes("blueberr") ||
           text.includes("vanilla")
         );
-      if (f === "lilies") return text.includes("lil");
-      if (f === "roses") return text.includes("rose");
+      if (f === "roses" || f === "rose") return text.includes("rose");
+      if (f === "lilies" || f === "lily") return text.includes("lil");
+      if (f === "carnations" || f === "carnation") return text.includes("carnation");
+      if (f === "tulips" || f === "tulip" || f === "pastel-tulips") return text.includes("tulip");
+      if (f === "sunflowers" || f === "sunflower") return text.includes("sunflower");
+      if (f === "gerberas" || f === "gerbera") return text.includes("gerbera");
+      if (f === "peonies" || f === "peony") return text.includes("peon");
       if (f === "bouquets") return text.includes("bouquet");
       if (f === "flowers-in-boxes" || f === "flowers in boxes")
         return (
@@ -154,7 +188,7 @@ export default function CategoryPage({
                   className={`${styles.filterPill} ${
                     isActive ? styles.filterPillActive : ""
                   }`}
-                  onClick={() => setActiveFilterId(tab.id)}
+                  onClick={() => handleTabClick(tab.id)}
                 >
                   {tab.label}
                 </button>

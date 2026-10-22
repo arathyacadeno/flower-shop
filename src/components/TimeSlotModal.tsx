@@ -32,7 +32,7 @@ export default function TimeSlotModal({
   selectedDate,
   onConfirm,
 }: TimeSlotModalProps) {
-  const [selectedSlot, setSelectedSlot] = useState<string>("9:00 AM – 2:00 PM (FREE)");
+  const [selectedSlot, setSelectedSlot] = useState<string>("9:00 AM – 2:00 PM");
 
   if (!isOpen) return null;
 

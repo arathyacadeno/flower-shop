@@ -2,12 +2,28 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import styles from "./Footer.module.css";
 import { Send } from "lucide-react";
 
 export default function Footer() {
+  const pathname = usePathname();
   const [email, setEmail] = useState("");
   const [subscribed, setSubscribed] = useState(false);
+
+  const handleScrollTo = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    targetId: string
+  ) => {
+    if (pathname === "/") {
+      e.preventDefault();
+      const el = document.getElementById(targetId);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth" });
+        window.history.pushState(null, "", `/#${targetId}`);
+      }
+    }
+  };
 
   const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault();
@@ -42,16 +58,34 @@ export default function Footer() {
             <h4 className={styles.colTitle}>Our Services</h4>
             <ul className={`${styles.linksList} ${styles.servicesList}`}>
               <li>
-                <Link href="/#flowers" className={styles.navLink}>Flowers</Link>
+                <Link
+                  href="/#shop-by-flowers"
+                  className={styles.navLink}
+                  onClick={(e) => handleScrollTo(e, "shop-by-flowers")}
+                >
+                  Flowers
+                </Link>
               </li>
               <li>
                 <Link href="/cakes" className={styles.navLink}>Cakes</Link>
               </li>
               <li>
-                <Link href="/#occasions" className={styles.navLink}>Special Occasions</Link>
+                <Link
+                  href="/#occasions"
+                  className={styles.navLink}
+                  onClick={(e) => handleScrollTo(e, "occasions")}
+                >
+                  Special Occasions
+                </Link>
               </li>
               <li>
-                <Link href="/#highlights" className={styles.navLink}>Our Highlights</Link>
+                <Link
+                  href="/#highlights"
+                  className={styles.navLink}
+                  onClick={(e) => handleScrollTo(e, "highlights")}
+                >
+                  Our Highlights
+                </Link>
               </li>
             </ul>
           </div>
@@ -102,7 +136,7 @@ export default function Footer() {
             <form className={styles.newsletterForm} onSubmit={handleSubscribe}>
               <input
                 type="email"
-                placeholder={subscribed ? "Thank you!" : "Your email......"}
+                placeholder={subscribed ? "Thank you!" : "Your email..."}
                 className={styles.newsletterInput}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}

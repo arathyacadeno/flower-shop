@@ -549,7 +549,7 @@ export default function Header({
       if (targetEl) {
         const timer = setTimeout(() => {
           targetEl.scrollIntoView({ behavior: "smooth" });
-          if (hashId === "shop-by-flowers" || hashId === "flower") setActiveSection("flower");
+          if (hashId === "shop-by-flowers" || hashId === "flower" || hashId === "flowers") setActiveSection("flower");
           else if (hashId === "occasions") setActiveSection("occasions");
           else if (hashId === "highlights") setActiveSection("highlights");
         }, 120);

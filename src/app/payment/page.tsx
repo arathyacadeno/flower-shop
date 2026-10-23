@@ -177,6 +177,12 @@ export default function SinglePageCheckoutPayment() {
   const quantity = totalItemCount;
   const unitPrice = primaryItem.price;
 
+  // Order summary dropdown expansion state
+  const [showAllItems, setShowAllItems] = useState(false);
+  const visibleCheckoutItems = showAllItems
+    ? displayCheckoutItems
+    : displayCheckoutItems.slice(0, 2);
+
   // Delivery check state
   const [deliveryStatus, setDeliveryStatus] = useState<{
     loading: boolean;
@@ -1282,7 +1288,7 @@ export default function SinglePageCheckoutPayment() {
 
             {/* Product Thumbnail & Details */}
             <div className={styles.productSnippetList}>
-              {displayCheckoutItems.map((item, idx) => (
+              {visibleCheckoutItems.map((item, idx) => (
                 <div key={`${item.id}-${idx}`} className={styles.productSnippet}>
                   <img
                     src={item.image}
@@ -1303,6 +1309,27 @@ export default function SinglePageCheckoutPayment() {
                 </div>
               ))}
             </div>
+
+            {displayCheckoutItems.length > 2 && (
+              <div className={styles.viewMoreContainer}>
+                <button
+                  type="button"
+                  className={styles.viewMoreDropdownBtn}
+                  onClick={() => setShowAllItems((prev) => !prev)}
+                  aria-expanded={showAllItems}
+                >
+                  <span>
+                    {showAllItems
+                      ? "Show Less"
+                      : `View More (${displayCheckoutItems.length - 2} more item${displayCheckoutItems.length - 2 > 1 ? "s" : ""})`}
+                  </span>
+                  <ChevronDown
+                    size={16}
+                    className={`${styles.viewMoreChevron} ${showAllItems ? styles.chevronRotated : ""}`}
+                  />
+                </button>
+              </div>
+            )}
 
             {/* Breakdown Rows */}
             <div className={styles.breakdownList}>

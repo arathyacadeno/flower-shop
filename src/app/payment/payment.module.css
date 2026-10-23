@@ -291,10 +291,44 @@
   display: flex;
   flex-direction: column;
   gap: 14px;
-  margin-bottom: 20px;
-  max-height: 220px;
-  overflow-y: auto;
-  padding-right: 4px;
+  margin-bottom: 18px;
+  overflow: visible;
+}
+
+.viewMoreContainer {
+  margin-top: -6px;
+  margin-bottom: 18px;
+}
+
+.viewMoreDropdownBtn {
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border-radius: 12px;
+  border: 1px solid #fce7f3;
+  background: #fdf2f8;
+  color: #db2777;
+  font-size: 0.84rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.viewMoreDropdownBtn:hover {
+  background: #fce7f3;
+  border-color: #f472b6;
+  color: #be185d;
+}
+
+.viewMoreChevron {
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.chevronRotated {
+  transform: rotate(180deg);
 }
 
 .productSnippet {

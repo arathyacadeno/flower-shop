@@ -545,7 +545,7 @@ export const FLOWER_PRODUCTS: FlowerProduct[] = [
     ],
     occasion: "celebration",
     colorTag: "yellow",
-    occasionsList: ["birthday", "congratulations"],
+    occasionsList: ["congratulations"],
     stems: [
       "Bright Sunflowers",
       "Striking Purple Orchids",

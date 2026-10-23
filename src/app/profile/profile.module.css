@@ -239,12 +239,15 @@
   justify-content: center;
   gap: 8px;
   padding: 12px 24px;
+  min-height: 46px;
   border-radius: 12px;
-  border: none;
+  border: 1.5px solid transparent;
   background: linear-gradient(135deg, #e11d48 0%, #db2777 100%);
   color: #ffffff;
   font-size: 0.92rem;
   font-weight: 600;
+  line-height: 1.2;
+  box-sizing: border-box;
   cursor: pointer;
   box-shadow: 0 4px 14px rgba(225, 29, 72, 0.25);
   transition: all 0.2s ease;
@@ -258,6 +261,44 @@
 .saveBtn:disabled {
   opacity: 0.6;
   cursor: not-allowed;
+  transform: none;
+}
+
+.formActions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.formActions .saveBtn {
+  margin-top: 0;
+}
+
+.cancelBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 24px;
+  min-height: 46px;
+  border-radius: 12px;
+  border: 1.5px solid #fce7f3;
+  background: #ffffff;
+  color: #be185d;
+  font-size: 0.92rem;
+  font-weight: 600;
+  line-height: 1.2;
+  box-sizing: border-box;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.cancelBtn:hover {
+  background: #fdf2f8;
+  border-color: #db2777;
+  color: #9d174d;
+  transform: translateY(-1px);
 }
 
 .alertSuccess {

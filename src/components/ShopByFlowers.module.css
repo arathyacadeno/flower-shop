@@ -126,22 +126,12 @@
   transform: translateY(-50%) scale(0.96);
 }
 
-/* Slider Viewport with Edge Fade Mask showing partial neighboring categories */
+/* Slider Viewport */
 .sliderViewport {
   position: relative;
   width: 100%;
   overflow: hidden;
   padding: 16px 0 28px 0;
-  mask-image: linear-gradient(to right,
-      transparent 0%,
-      black 3%,
-      black 97%,
-      transparent 100%);
-  -webkit-mask-image: linear-gradient(to right,
-      transparent 0%,
-      black 3%,
-      black 97%,
-      transparent 100%);
 }
 
 /* Continuous Auto-Slide Track to the RIGHT */

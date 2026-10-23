@@ -117,11 +117,11 @@ export const CATALOG_PRODUCTS: Product[] = [
   {
     id: "flower-basket-4",
     slug: "red-roses-chrysanthemum-bamboo-basket",
-    name: "20 Red Roses, white chrysanthemum n gypsophilla arranged in bamboo basket",
+    name: "20 Red Roses, white chrysanthemum n gypsophilla arranged in cane basket",
     price: 1395,
     category: "flower",
     categoryLabel: "Flowers",
-    basketType: "bamboo",
+    basketType: "cane",
     image: "/images/flower-basket/side-view/front-view red-roses-chrysanthemum-bamboo-basket.jpg",
     images: [
       "/images/flower-basket/side-view/front-view red-roses-chrysanthemum-bamboo-basket.jpg",
@@ -131,13 +131,13 @@ export const CATALOG_PRODUCTS: Product[] = [
     ],
     rating: 4.9,
     reviewsCount: 30,
-    description: "20 Red Roses, white chrysanthemum n gypsophilla arranged in bamboo basket.",
+    description: "20 Red Roses, white chrysanthemum n gypsophilla arranged in cane basket.",
     deliveryInfo: "Delivered fresh from botanical farms in insulated floristry vans.",
     offers: ["Free customized greeting card"],
     includes: [
       "20 Red Roses",
       "White Chrysanthemums & Gypsophila",
-      "Handcrafted Bamboo Basket",
+      "Handcrafted Cane Basket",
     ],
     badge: "Classic Choice",
   },
@@ -171,11 +171,11 @@ export const CATALOG_PRODUCTS: Product[] = [
   {
     id: "flower-basket-6",
     slug: "30-white-yellow-roses-gypsophilla-premium-basket",
-    name: "Mix flower one sided arrangements in white yellow combination in a premium cane basket",
+    name: "Mix flower one sided arrangements in white yellow combination in a premium bamboo basket",
     price: 1800,
     category: "flower",
     categoryLabel: "Flowers",
-    basketType: "cane",
+    basketType: "bamboo",
     image: "/images/flower-basket/side-view/front-view 30-white-yellow-roses-premium-basket.jpg",
     images: [
       "/images/flower-basket/side-view/front-view 30-white-yellow-roses-premium-basket.jpg",
@@ -185,13 +185,13 @@ export const CATALOG_PRODUCTS: Product[] = [
     ],
     rating: 4.9,
     reviewsCount: 18,
-    description: "30 white yellow roses with gypsophilla delicately arranged in a premium quality cane basket.",
+    description: "30 white yellow roses with gypsophilla delicately arranged in a premium quality bamboo basket.",
     deliveryInfo: "Delivered fresh from botanical farms in insulated floristry vans.",
     offers: ["Free customized greeting card"],
     includes: [
       "30 White & Yellow Roses",
       "Gypsophila Filler",
-      "Premium Handcrafted Cane Basket",
+      "Premium Handcrafted Bamboo Basket",
     ],
     badge: "Premium Choice",
   },
@@ -280,11 +280,11 @@ export const CATALOG_PRODUCTS: Product[] = [
   {
     id: "flower-basket-10",
     slug: "asiatic-lily-peach-roses-basket",
-    name: "1 stem Asiatic lilly, white pink peach roses, chrysanthemum, gypsophilla in cane basket",
+    name: "1 stem Asiatic lilly, white pink peach roses, chrysanthemum, gypsophilla in bamboo basket",
     price: 1600,
     category: "flower",
     categoryLabel: "Flowers",
-    basketType: "cane",
+    basketType: "bamboo",
     image: "/images/flower-basket/side-view/front-view asiatic-lily-peach-roses-basket.jpg",
     images: [
       "/images/flower-basket/side-view/front-view asiatic-lily-peach-roses-basket.jpg",
@@ -294,24 +294,24 @@ export const CATALOG_PRODUCTS: Product[] = [
     ],
     rating: 4.9,
     reviewsCount: 16,
-    description: "1 stem Asiatic lily paired with beautiful white, pink, and peach roses, chrysanthemums, and gypsophilla arranged in a classic cane basket.",
+    description: "1 stem Asiatic lily paired with beautiful white, pink, and peach roses, chrysanthemums, and gypsophilla arranged in a classic bamboo basket.",
     deliveryInfo: "Delivered fresh from botanical farms in insulated floristry vans.",
     offers: ["Free customized greeting card"],
     includes: [
       "1 White Asiatic Lily",
       "Assorted Peach, Pink & White Roses",
-      "Handcrafted Cane Basket",
+      "Handcrafted Bamboo Basket",
     ],
     badge: "Bestseller",
   },
   {
     id: "flower-basket-11",
     slug: "40-white-yellow-roses-one-sided-basket",
-    name: "40 white /yellow roses with gypsophilla one sided arrangement in premium cane basket",
+    name: "40 white /yellow roses with gypsophilla one sided arrangement in premium bamboo basket",
     price: 2299,
     category: "flower",
     categoryLabel: "Flowers",
-    basketType: "cane",
+    basketType: "bamboo",
     image: "/images/flower-basket/side-view/front-view 40-white-yellow-roses-one-sided-basket.jpg",
     images: [
       "/images/flower-basket/side-view/front-view 40-white-yellow-roses-one-sided-basket.jpg",
@@ -321,13 +321,13 @@ export const CATALOG_PRODUCTS: Product[] = [
     ],
     rating: 4.9,
     reviewsCount: 19,
-    description: "40 beautifully arranged white and yellow roses with gypsophilla in a one-sided premium quality cane basket.",
+    description: "40 beautifully arranged white and yellow roses with gypsophilla in a one-sided premium quality bamboo basket.",
     deliveryInfo: "Delivered fresh from botanical farms in insulated floristry vans.",
     offers: ["Free customized greeting card"],
     includes: [
       "40 White & Yellow Roses",
       "Gypsophila Fillers",
-      "Premium Handcrafted Cane Basket",
+      "Premium Handcrafted Bamboo Basket",
     ],
     badge: "Premium Choice",
   },
@@ -361,11 +361,11 @@ export const CATALOG_PRODUCTS: Product[] = [
   {
     id: "flower-basket-13",
     slug: "30-white-yellow-roses-premium-basket",
-    name: "30 white yellow roses with gypsophilla arranged in premium cane basket",
+    name: "30 white yellow roses with gypsophilla arranged in premium bamboo basket",
     price: 1995,
     category: "flower",
     categoryLabel: "Flowers",
-    basketType: "cane",
+    basketType: "bamboo",
     image: "/images/flower-basket/side-view/front-view 30-white-yellow-roses-premium-basket-2.jpg",
     images: [
       "/images/flower-basket/side-view/front-view 30-white-yellow-roses-premium-basket-2.jpg",
@@ -375,13 +375,13 @@ export const CATALOG_PRODUCTS: Product[] = [
     ],
     rating: 4.8,
     reviewsCount: 20,
-    description: "30 white yellow roses with gypsophilla delicately arranged in a premium quality cane basket.",
+    description: "30 white yellow roses with gypsophilla delicately arranged in a premium quality bamboo basket.",
     deliveryInfo: "Delivered fresh from botanical farms in insulated floristry vans.",
     offers: ["Free customized greeting card"],
     includes: [
       "30 White & Yellow Roses",
       "Gypsophila Fillers",
-      "Premium Handcrafted Cane Basket",
+      "Premium Handcrafted Bamboo Basket",
     ],
     badge: "Premium Choice",
   },
@@ -3727,7 +3727,16 @@ export function getProductsForFlower(flower: string): Product[] {
     if (p.category !== "flower") return false;
     const text = `${p.name} ${p.description ?? ""} ${p.slug ?? ""} ${p.badge ?? ""} ${p.includes?.join(" ") ?? ""}`.toLowerCase();
     if (norm === "sunflower") return text.includes("sunflower");
-    if (norm === "rose") return text.includes("rose");
+    if (norm === "rose") {
+      if (
+        p.id === "bouquet-orchid-symphony" ||
+        p.id === "bouquet-golden-blush" ||
+        p.id === "bouquet-pink-roses-purple-orchids"
+      ) {
+        return false;
+      }
+      return text.includes("rose");
+    }
     if (norm === "lili" || norm === "lily") return text.includes("lil");
     if (norm === "orchid") return text.includes("orchid");
     if (norm === "tulip") return text.includes("tulip");

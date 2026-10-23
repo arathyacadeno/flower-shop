@@ -92,6 +92,7 @@ export default function ShopByFlowers() {
       id="shop-by-flowers"
       aria-label="Shop by Flowers"
     >
+      <span id="flowers" style={{ position: "relative", top: "-100px", visibility: "hidden" }} />
       <div className={styles.container}>
         {/* ================= SECTION HEADER ================= */}
         <div className={styles.sectionHeader}>

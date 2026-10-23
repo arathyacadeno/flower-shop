@@ -138,10 +138,10 @@ export default function CategoryPage({
       const text = `${p.name} ${p.description ?? ""} ${p.slug ?? ""} ${p.badge ?? ""}`.toLowerCase();
       if (f === "birthday")
         return (
-          text.includes("birthday") ||
-          text.includes("celebration") ||
-          text.includes("sunflower") ||
-          text.includes("gerbera")
+          p.id !== "bouquet-sunshine-orchids" &&
+          !text.includes("sunshine & orchids") &&
+          (text.includes("birthday") ||
+            (p.badge && p.badge.toLowerCase().includes("birthday")))
         );
       if (f === "anniversary")
         return (
@@ -167,7 +167,16 @@ export default function CategoryPage({
           text.includes("blueberr") ||
           text.includes("vanilla")
         );
-      if (f === "roses" || f === "rose") return text.includes("rose");
+      if (f === "roses" || f === "rose") {
+        if (
+          p.id === "bouquet-orchid-symphony" ||
+          p.id === "bouquet-golden-blush" ||
+          p.id === "bouquet-pink-roses-purple-orchids"
+        ) {
+          return false;
+        }
+        return text.includes("rose");
+      }
       if (f === "orchids" || f === "orchid") return text.includes("orchid");
       if (f === "lilies" || f === "lily") return text.includes("lil");
       if (f === "carnations" || f === "carnation") return text.includes("carnation");
@@ -213,10 +222,8 @@ export default function CategoryPage({
         f === "flowers in cane basket" ||
         f.includes("cane")
       ) {
-        return (
-          p.basketType === "cane" ||
-          (!p.basketType && (text.includes("cane") || text.includes("wicker")))
-        );
+        if (p.basketType) return p.basketType === "cane";
+        return text.includes("cane") || text.includes("wicker");
       }
       if (
         f === "bamboo" ||
@@ -224,10 +231,8 @@ export default function CategoryPage({
         f === "flowers in bamboo basket" ||
         f.includes("bamboo")
       ) {
-        return (
-          p.basketType === "bamboo" ||
-          (!p.basketType && text.includes("bamboo") && !text.includes("cane") && !text.includes("wicker"))
-        );
+        if (p.basketType) return p.basketType === "bamboo";
+        return text.includes("bamboo") && !text.includes("cane") && !text.includes("wicker");
       }
       if (
         f === "container" ||
@@ -237,12 +242,8 @@ export default function CategoryPage({
         f.includes("container") ||
         f.includes("conatiner")
       ) {
-        return (
-          p.basketType === "container" ||
-          text.includes("container") ||
-          text.includes("conatiner") ||
-          p.id === "flower-basket-9"
-        );
+        if (p.basketType) return p.basketType === "container";
+        return text.includes("container") || text.includes("conatiner") || p.id === "flower-basket-9";
       }
       if (f === "centerpiece")
         return text.includes("centerpiece") || text.includes("candelabra");

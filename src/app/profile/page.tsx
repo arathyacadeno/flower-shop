@@ -367,7 +367,7 @@ export default function ProfilePage() {
                           <input
                             type="text"
                             className={styles.formInput}
-                            placeholder="e.g. Arathy T P"
+                            placeholder="e.g. Jone "
                             required
                             value={addressForm.fullName}
                             onChange={(e) => setAddressForm({ ...addressForm, fullName: e.target.value })}
@@ -444,13 +444,13 @@ export default function ProfilePage() {
                         </label>
                       </div>
 
-                      <div style={{ display: "flex", gap: 12, marginTop: 20 }}>
+                      <div className={styles.formActions}>
                         <button type="submit" className={styles.saveBtn} disabled={savingAddress}>
                           {savingAddress ? "Saving..." : "Save Address"}
                         </button>
                         <button
                           type="button"
-                          className={styles.outlineBtn}
+                          className={styles.cancelBtn}
                           onClick={() => setShowAddAddress(false)}
                         >
                           Cancel

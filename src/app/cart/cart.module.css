@@ -78,6 +78,7 @@
   grid-template-columns: 1fr 380px;
   gap: 28px;
   align-items: flex-start;
+  margin-top: 100px;
 }
 
 /* Left Column */

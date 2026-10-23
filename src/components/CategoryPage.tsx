@@ -143,14 +143,24 @@ export default function CategoryPage({
           (text.includes("birthday") ||
             (p.badge && p.badge.toLowerCase().includes("birthday")))
         );
-      if (f === "anniversary")
+      if (f === "anniversary") {
+        if (
+          p.id === "cake-chocolate-amma" ||
+          p.id === "cake-lavender-amma" ||
+          p.id.includes("amma") ||
+          p.name.toLowerCase().includes("birthday") ||
+          (p.category === "cakes" && text.includes("birthday"))
+        ) {
+          return false;
+        }
         return (
           text.includes("anniversary") ||
           text.includes("wedding") ||
-          text.includes("heart") ||
+          text.includes("engaged") ||
           text.includes("romance") ||
-          text.includes("engaged")
+          (text.includes("heart") && !text.includes("heartwarming") && !text.includes("heartfelt"))
         );
+      }
       if (f === "chocolate")
         return (
           text.includes("chocolate") ||

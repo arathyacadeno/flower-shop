@@ -128,7 +128,7 @@ export default function RecommendedAddons({
           </svg>
         </button>
         <div className={styles.addonsTrack}>
-          {filteredAddons.slice(0, 12).map((product) => {
+          {filteredAddons.slice(0, 5).map((product) => {
             const qty = quantities[product.id] || 0;
 
             return (

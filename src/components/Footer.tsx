@@ -95,7 +95,7 @@ export default function Footer() {
             <h4 className={styles.colTitle}>Connect</h4>
             <ul className={styles.linksList}>
               <li>
-                <a href="#footer-contact" className={styles.navLink}>Contact Us</a>
+                <Link href="/contact" className={styles.navLink}>Contact Us</Link>
               </li>
               <li>
                 <a href="#our-story" className={styles.navLink}>About Us</a>

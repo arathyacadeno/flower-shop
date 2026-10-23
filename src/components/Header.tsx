@@ -696,7 +696,7 @@ export default function Header({
     } else if (categoryName === "Flower baskets & garlands") {
       scrollToHighlightsOr("/#highlights");
     } else if (categoryName === "Contact & Location") {
-      setDrawerOpen(true);
+      router.push("/contact");
     }
   };
 
@@ -2081,6 +2081,13 @@ export default function Header({
               style={{ color: "inherit", textDecoration: "none" }}
             >
               ▶ Wreaths
+            </Link>
+            <Link
+              href="/contact"
+              onClick={() => setDrawerOpen(false)}
+              style={{ color: "inherit", textDecoration: "none" }}
+            >
+              ▶ Contact Us
             </Link>
           </div>
 

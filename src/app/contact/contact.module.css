@@ -1,0 +1,175 @@
+.pageWrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+  color: #111827;
+  font-family: var(--font-inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
+}
+
+.container {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 24px 20px 80px;
+  box-sizing: border-box;
+}
+
+/* Breadcrumb */
+.breadcrumb {
+  font-size: 0.82rem;
+  color: #6b7280;
+  margin-bottom: 24px;
+}
+
+.breadcrumb a {
+  color: #6b7280;
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.breadcrumb a:hover {
+  color: #111827;
+}
+
+.breadcrumbCurrent {
+  color: #111827;
+  font-weight: 500;
+}
+
+/* Main Section */
+.contentBlock {
+  width: 100%;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.pageTitle {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #111827;
+  margin: 0 0 24px;
+  letter-spacing: -0.01em;
+}
+
+/* Cards Stack */
+.cardList {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.contactCard {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-decoration: none;
+  color: #1f2937;
+  font-size: 0.94rem;
+  line-height: 1.45;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.contactCard:hover {
+  border-color: #cbd5e1;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+
+.cardIcon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #1f2937;
+}
+
+.cardIconWhatsApp {
+  color: #25d366;
+}
+
+.cardText {
+  color: #374151;
+  font-size: 0.94rem;
+}
+
+.cardText strong {
+  color: #111827;
+  font-weight: 600;
+}
+
+.chatLinkText {
+  color: #16a34a;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.chatLinkText:hover {
+  text-decoration: underline;
+}
+
+/* Support Timings Row */
+.timingGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.timingCard {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 16px 14px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.timingLabel {
+  font-size: 0.88rem;
+  color: #4b5563;
+  font-weight: 500;
+}
+
+.timingValue {
+  font-size: 0.96rem;
+  color: #111827;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+@media (max-width: 640px) {
+  .container {
+    padding: 16px 16px 60px;
+  }
+
+  .contentBlock {
+    max-width: 100%;
+  }
+
+  .pageTitle {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+  }
+
+  .contactCard {
+    padding: 12px 14px;
+    font-size: 0.88rem;
+  }
+
+  .cardText {
+    font-size: 0.88rem;
+  }
+
+  .timingGrid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+}

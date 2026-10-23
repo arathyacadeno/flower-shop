@@ -298,14 +298,6 @@ export default function CartPage() {
           <div className={styles.headerBlock}>
             <div className={styles.headerTitleRow}>
               <h1 className={styles.pageTitle}>Your Floral Selection</h1>
-              <button
-                type="button"
-                onClick={clearCart}
-                className={styles.clearCartBtn}
-                title="Remove all items from cart"
-              >
-                Clear Cart
-              </button>
             </div>
             <p className={styles.pageSubtitle}>
               The flowers you love, gathered in one beautiful place.

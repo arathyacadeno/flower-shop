@@ -16,44 +16,127 @@ export interface TestimonialItem {
 const TESTIMONIALS_DATA: TestimonialItem[] = [
   {
     id: 1,
+    headline: "“Fresh flowers & on-time delivery”",
     quote:
-      "The quality was amazing. The colors were soft and beautiful, and the arrangement looked very premium. Everything arrived safely and exactly as shown.",
-    name: "MEERA S.",
-    rating: 4,
+      "Amazing collection of fresh flowers and wonderful customer service. Ordered a bouquet for an anniversary and it was delivered right on time. Highly recommended florist in Calicut!",
+    name: "RAHUL DAS",
+    rating: 5,
     quotePosition: "left",
   },
   {
     id: 2,
-    headline: "“Absolutely beautiful flowers!”",
+    headline: "“Best flower shop in Kozhikode!”",
     quote:
-      "The bouquet was even more beautiful in person. Every flower looked fresh and carefully arranged. The packaging was elegant, and the delivery was right on time. It made the birthday celebration extra special.",
-    name: "ANANYA R.",
-    rating: 4,
+      "Best flower shop in Kozhikode! The decoration for our event was breathtaking. Very professional, creative, and attentive team at Occasions. Will definitely choose them again.",
+    name: "SNEHA MENON",
+    rating: 5,
     quotePosition: "right",
   },
   {
     id: 3,
+    headline: "“Quality blooms & polite staff”",
     quote:
-      "I ordered these for our anniversary and couldn't have been happier. The flowers were fresh, vibrant, and arranged beautifully. My wife absolutely loved them!",
-    name: "RAHUL M.",
-    rating: 4,
+      "Very good experience. Quality flowers, elegant packing, and polite staff. Sreejesh was extremely helpful and accommodating. They truly know how to make occasions special.",
+    name: "MOHAMMED AFSAL",
+    rating: 5,
     quotePosition: "right",
   },
   {
     id: 4,
-    headline: "“Breathtaking bridal arrangements”",
+    headline: "“Prompt delivery & fresh orchids”",
     quote:
-      "Occasions made our wedding day magical. The bridal bouquet was so fresh and fragrant, and the custom orchids lasted for days after the event. Truly unmatched florist artistry in Kozhikode.",
-    name: "PRIYA K.",
+      "Prompt delivery and fresh orchids! Ordered online and got it delivered in Calicut within hours. Truly impressed with their quick service, communication, and floral freshness.",
+    name: "DIVYA NAIR",
     rating: 5,
     quotePosition: "right",
   },
   {
     id: 5,
-    headline: "“Prompt delivery & fresh blooms”",
+    headline: "“Breathtaking wedding decor”",
     quote:
-      "Ordered a morning birthday surprise hamper and it was delivered right on time. The chocolate cake was delectable and the flowers smelled divine. Superb service!",
-    name: "ARJUN K.",
+      "Exceptional floral arrangements for our wedding reception. Everyone praised the stage decor and fresh bloom bouquets. Thank you Occasions - Do It With Flowers!",
+    name: "FATHIMA ZAHRA",
+    rating: 5,
+    quotePosition: "right",
+  },
+  {
+    id: 6,
+    headline: "“Exotic flowers & reasonable prices”",
+    quote:
+      "Great variety of exotic flowers and fresh roses. Prices are reasonable and their shop location at YMCA Cross Road is very accessible. Outstanding floral artistry!",
+    name: "ARUN KUMAR",
+    rating: 5,
+    quotePosition: "right",
+  },
+  {
+    id: 7,
+    headline: "“Polite service & stunning flowers”",
+    quote:
+      "Wonderful experience with Occasions! Sreejesh was extremely polite and accommodating. The flower arrangement was fresh, beautifully styled, and delivered right on time in Calicut.",
+    name: "ANANTHU KRISHNAN",
+    rating: 5,
+    quotePosition: "left",
+  },
+  {
+    id: 8,
+    headline: "“Gorgeous birthday bouquet surprise”",
+    quote:
+      "Ordered a birthday bouquet and cake surprise for my parents in Kozhikode. The flowers were gorgeous, vibrant, and lasted for days. Seamless communication via WhatsApp!",
+    name: "DR. NEHA MATHEW",
+    rating: 5,
+    quotePosition: "right",
+  },
+  {
+    id: 9,
+    headline: "“Urgent delivery handled perfectly”",
+    quote:
+      "Needed urgent flower delivery near Beach Road. Sreejesh went out of his way to arrange a stunning fresh red roses basket within a couple of hours. Outstanding dedication!",
+    name: "DEEPAK NAMBIAR",
+    rating: 5,
+    quotePosition: "right",
+  },
+  {
+    id: 10,
+    headline: "“Most reliable florist in Calicut”",
+    quote:
+      "Hands down the most reliable flower shop in Calicut. Their flower baskets and custom flower boxes are crafted with so much care and elegance. 10/10 service every time!",
+    name: "AISWARYA RAJ",
+    rating: 5,
+    quotePosition: "right",
+  },
+  {
+    id: 11,
+    headline: "“Lush engagement stage backdrop”",
+    quote:
+      "Occasions designed our engagement stage floral backdrop and bridal bouquets. The blooms were lush, fragrant, and stayed fresh throughout the event. Best event florists in town!",
+    name: "MIDHUN GEORGE",
+    rating: 5,
+    quotePosition: "left",
+  },
+  {
+    id: 12,
+    headline: "“Neat packaging & punctual delivery”",
+    quote:
+      "Beautifully arranged carnations and lilies for our housewarming celebration. The packaging was neat, and delivery was punctually handled. Highly recommended!",
+    name: "ROSHNI P.",
+    rating: 5,
+    quotePosition: "right",
+  },
+  {
+    id: 13,
+    headline: "“Consistently fresh blooms”",
+    quote:
+      "Consistently great quality whenever I order flowers in Kozhikode. Very friendly service, prompt response on WhatsApp, and always fresh, fragrant blooms.",
+    name: "GOKUL KRISHNA",
+    rating: 5,
+    quotePosition: "right",
+  },
+  {
+    id: 14,
+    headline: "“Top-notch florist in Kozhikode”",
+    quote:
+      "Top-notch florist in Kozhikode. Excellent variety of roses, orchids, and lilies, long-lasting freshness, and courteous staff. They make gifting so effortless.",
+    name: "SREEJESH V.",
     rating: 5,
     quotePosition: "right",
   },
@@ -250,6 +333,33 @@ export default function Testimonials() {
             >
               <ChevronRight size={22} strokeWidth={2.4} />
             </button>
+          </div>
+
+          {/* Dots & Counter showing all testimonials */}
+          <div className={styles.paginationArea}>
+            <div className={styles.dotsWrapper}>
+              {TESTIMONIALS_DATA.map((item, i) => {
+                const activeIndex = ((active % total) + total) % total;
+                const isActive = i === activeIndex;
+                return (
+                  <button
+                    key={item.id}
+                    type="button"
+                    className={`${styles.dot} ${isActive ? styles.activeDot : ""}`}
+                    onClick={() => {
+                      goTo((curr) => {
+                        const currentMod = ((curr % total) + total) % total;
+                        return curr + (i - currentMod);
+                      });
+                    }}
+                    aria-label={`Go to review ${i + 1} of ${total} by ${item.name}`}
+                  />
+                );
+              })}
+            </div>
+            <div className={styles.counterText}>
+              Review {(((active % total) + total) % total) + 1} of {total} • Real Google Reviews
+            </div>
           </div>
         </div>
       </div>

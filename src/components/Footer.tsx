@@ -205,6 +205,11 @@ export default function Footer() {
             </div>
           </div>
         </div>
+
+        {/* ================= COPYRIGHT ================= */}
+        <div className={styles.copyrightRow}>
+          © 2026 Occassions - Do it with flowers. All Rights Reserved.
+        </div>
       </div>
     </footer>
   );

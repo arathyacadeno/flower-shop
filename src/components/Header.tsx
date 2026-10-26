@@ -1617,6 +1617,22 @@ export default function Header({
             </div>
 
             {/* Tabs */}
+            <div className={styles.authTabs}>
+              <button
+                type="button"
+                className={`${styles.authTab} ${authTab === "signin" ? styles.authTabActive : ""}`}
+                onClick={() => { setAuthTab("signin"); setAuthError(null); }}
+              >
+                Sign In
+              </button>
+              <button
+                type="button"
+                className={`${styles.authTab} ${authTab === "signup" ? styles.authTabActive : ""}`}
+                onClick={() => { setAuthTab("signup"); setAuthError(null); }}
+              >
+                Create Account
+              </button>
+            </div>
 
             {authError && <div className={styles.authError}>{authError}</div>}
 
@@ -1698,162 +1714,37 @@ export default function Header({
               </button>
             </form>
 
-            <div className={styles.authDivider}>
-              <span>or</span>
+            <div style={{ marginTop: 20, fontSize: "0.85rem", color: "#64748b", textAlign: "center", lineHeight: 1.5 }}>
+              {authTab === "signin" ? (
+                <>
+                  Don&apos;t have an account?{" "}
+                  <button
+                    type="button"
+                    style={{ color: "#0284c7", fontWeight: 700, textDecoration: "underline", background: "none", border: "none", cursor: "pointer", padding: 0, fontSize: "inherit" }}
+                    onClick={() => { setAuthTab("signup"); setAuthError(null); }}
+                  >
+                    Create Account
+                  </button>
+                </>
+              ) : (
+                <>
+                  Already have an account?{" "}
+                  <button
+                    type="button"
+                    style={{ color: "#0284c7", fontWeight: 700, textDecoration: "underline", background: "none", border: "none", cursor: "pointer", padding: 0, fontSize: "inherit" }}
+                    onClick={() => { setAuthTab("signin"); setAuthError(null); }}
+                  >
+                    Sign In
+                  </button>
+                </>
+              )}
             </div>
 
-            {/* Firebase reCAPTCHA container (kept in DOM for both initial Send & Resend OTP) */}
-            <div id="recaptcha-phone-container"></div>
-
-            {/* Phone OTP flow */}
-            {phoneFlow === "idle" && (
-              <button
-                type="button"
-                className={styles.phoneBtn}
-                onClick={() => { setPhoneFlow("enter"); setPhoneError(null); }}
-                disabled={authLoading}
-              >
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.36 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 5.49 5.49l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
-                </svg>
-                <span>Continue with Phone Number</span>
-              </button>
-            )}
-
-            {phoneFlow === "enter" && (
-              <div className={styles.phoneFlowBox}>
-                <p className={styles.phoneFlowLabel}>Enter your mobile number</p>
-                <div className={styles.phoneInputRow}>
-                  <select
-                    className={styles.countrySelect}
-                    value={countryCode}
-                    onChange={(e) => setCountryCode(e.target.value)}
-                    aria-label="Country Code"
-                  >
-                    <option value="+91">🇮🇳 +91</option>
-                    <option value="+1">🇺🇸 +1</option>
-                    <option value="+44">🇬🇧 +44</option>
-                    <option value="+971">🇦🇪 +971</option>
-                    <option value="+966">🇸🇦 +966</option>
-                    <option value="+65">🇸🇬 +65</option>
-                  </select>
-                  <input
-                    type="tel"
-                    className={styles.phoneInput}
-                    placeholder="10-digit mobile number"
-                    value={phoneNumber}
-                    maxLength={10}
-                    onChange={(e) => setPhoneNumber(e.target.value.replace(/\D/g, ""))}
-                    autoFocus
-                  />
-                </div>
-                {phoneError && <p className={styles.phoneError}>{phoneError}</p>}
-                <button
-                  type="button"
-                  className={styles.primaryBtn}
-                  style={{ marginTop: 12 }}
-                  onClick={handleSendOtp}
-                  disabled={phoneLoading || phoneNumber.replace(/\D/g, "").length < 10}
-                >
-                  {phoneLoading ? "Sending OTP…" : "Send OTP"}
-                </button>
-                <button type="button" className={styles.phoneCancelBtn} onClick={resetPhoneFlow}>
-                  Use email instead
-                </button>
-              </div>
-            )}
-
-            {phoneFlow === "otp" && (
-              <div className={styles.phoneFlowBox}>
-                <p className={styles.phoneFlowLabel}>
-                  OTP sent to <strong>{countryCode} {phoneNumber}</strong>
-                </p>
-                <div
-                  className={styles.otpInputRow}
-                  onPaste={(e) => {
-                    e.preventDefault();
-                    const pasted = e.clipboardData.getData("text").replace(/\D/g, "").slice(0, 6);
-                    if (pasted) {
-                      setOtpValue(pasted);
-                      const inputs = (e.currentTarget as HTMLElement).querySelectorAll("input");
-                      const nextIdx = Math.min(pasted.length, 5);
-                      (inputs[nextIdx] as HTMLInputElement)?.focus();
-                    }
-                  }}
-                >
-                  {[0, 1, 2, 3, 4, 5].map((i) => (
-                    <input
-                      key={i}
-                      type="text"
-                      inputMode="numeric"
-                      maxLength={1}
-                      className={styles.otpDigit}
-                      value={otpValue[i] || ""}
-                      onChange={(e) => {
-                        const val = e.target.value.replace(/\D/g, "");
-                        const arr = otpValue.split("");
-                        arr[i] = val.slice(-1);
-                        const nextOtp = arr.join("").slice(0, 6);
-                        setOtpValue(nextOtp);
-                        if (val && e.target.nextElementSibling) {
-                          (e.target.nextElementSibling as HTMLInputElement).focus();
-                        }
-                      }}
-                      onKeyDown={(e) => {
-                        if (e.key === "Backspace" && !otpValue[i] && e.currentTarget.previousElementSibling) {
-                          (e.currentTarget.previousElementSibling as HTMLInputElement).focus();
-                        }
-                      }}
-                    />
-                  ))}
-                </div>
-                {phoneError && <p className={styles.phoneError}>{phoneError}</p>}
-                <button
-                  type="button"
-                  className={styles.primaryBtn}
-                  style={{ marginTop: 14 }}
-                  onClick={handleVerifyOtp}
-                  disabled={phoneLoading || otpValue.replace(/\D/g, "").length < 6}
-                >
-                  {phoneLoading ? "Verifying…" : "Verify OTP"}
-                </button>
-                <div className={styles.otpResend}>
-                  {otpResendTimer > 0 ? (
-                    <span>Resend OTP in {otpResendTimer}s</span>
-                  ) : (
-                    <button type="button" className={styles.phoneCancelBtn} onClick={handleSendOtp}>
-                      Resend OTP
-                    </button>
-                  )}
-                  <button type="button" className={styles.phoneCancelBtn} onClick={resetPhoneFlow}>
-                    Change number
-                  </button>
-                </div>
-              </div>
-            )}
-
-            <button
-              type="button"
-              className={styles.googleBtn}
-              onClick={handleGoogleLogin}
-              disabled={authLoading}
-              aria-busy={authLoading}
-            >
-              <svg width="18" height="18" viewBox="0 0 24 24">
-                <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17z" />
-                <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.24v3.15C3.26 21.36 7.33 24 12 24z" />
-                <path fill="#FBBC05" d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.24C.45 8.15 0 9.98 0 12s.45 3.85 1.24 5.42l4.04-3.15z" />
-                <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.33 0 3.26 2.64 1.24 6.58l4.04 3.15c.95-2.83 3.6-4.98 6.72-4.98z" />
-              </svg>
-              <span>{authLoading ? "Connecting with Google…" : "Continue with Google"}</span>
-            </button>
-
-            <div style={{ marginTop: 18, fontSize: "0.75rem", color: "#64748b", textAlign: "center", lineHeight: 1.5 }}>
-              By continuing, you agree to AVELISSE{" "}
+            <div style={{ marginTop: 14, fontSize: "0.75rem", color: "#64748b", textAlign: "center", lineHeight: 1.5 }}>
+              By signing in, you agree to AVELISSE{" "}
               <span style={{ color: "#0284c7", fontWeight: 600 }}>Terms of Service</span>
               {" "}&amp;{" "}
               <span style={{ color: "#0284c7", fontWeight: 600 }}>Privacy Policy</span>.
-              Fast checkout for all floral arrangements.
             </div>
           </div>
         </div>

@@ -4,7 +4,7 @@
    Prevents image cropping site-wide by guaranteeing:
    - Consistent aspect ratios (4 / 5 for cards/gallery, 1 / 1 for thumbnails/add-ons, 283 / 327 for categories)
    - width: 100%; height: 100%; object-fit: contain; object-position: center;
-   - Soft background (#FAF4F6 / #FFFFFF) matching card tone so empty letterbox space looks intentional
+   - Soft background (#f0f7ff / #FFFFFF) matching card tone so empty letterbox space looks intentional
    - Unbroken support for hover-zoom, curved wave dividers, and wishlist overlays
    ========================================================= */
 
@@ -12,7 +12,7 @@
   position: relative;
   width: 100%;
   overflow: hidden;
-  background-color: var(--img-bg, #FAF4F6);
+  background-color: var(--img-bg, #f0f7ff);
   display: flex;
   align-items: center;
   justify-content: center;

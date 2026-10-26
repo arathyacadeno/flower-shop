@@ -206,7 +206,7 @@
 }
 
 .productTitleLink:hover .productTitle {
-  color: #c21460;
+  color: #0284c7;
 }
 
 .productCategoryTag {
@@ -277,7 +277,7 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background-color: #c21460;
+  background-color: #0284c7;
   color: #ffffff;
   border: none;
   border-radius: 12px;
@@ -290,7 +290,7 @@
 }
 
 .viewDetailsBtn:hover {
-  background-color: #a3104e;
+  background-color: #0369a1;
   transform: translateY(-1px);
 }
 
@@ -311,8 +311,8 @@
 }
 
 .reorderBtn:hover {
-  border-color: #c21460;
-  color: #c21460;
+  border-color: #0284c7;
+  color: #0284c7;
   background-color: #fafbfc;
 }
 
@@ -363,7 +363,7 @@
   align-items: center;
   justify-content: center;
   gap: 8px;
-  background-color: #E40345;
+  background-color: #0284c7;
   color: #ffffff;
   border-radius: 12px;
   padding: 13px 36px;
@@ -371,14 +371,14 @@
   font-weight: 700;
   text-decoration: none;
   transition: all 0.2s ease;
-  box-shadow: 0 4px 14px rgba(228, 3, 69, 0.28);
+  box-shadow: 0 4px 14px rgba(2, 132, 199, 0.28);
   border: none;
 }
 
 .startShoppingBtn:hover {
-  background-color: #cc023e;
+  background-color: #0369a1;
   transform: translateY(-1px);
-  box-shadow: 0 6px 18px rgba(228, 3, 69, 0.36);
+  box-shadow: 0 6px 18px rgba(2, 132, 199, 0.36);
 }
 
 /* Auth Required State */
@@ -401,7 +401,7 @@
   height: 72px;
   border-radius: 50%;
   background-color: #fff0f4;
-  color: #E40345;
+  color: #0284c7;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -436,7 +436,7 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background-color: #E40345;
+  background-color: #0284c7;
   color: #ffffff;
   border-radius: 9999px;
   padding: 12px 28px;
@@ -445,13 +445,13 @@
   border: none;
   cursor: pointer;
   transition: all 0.2s ease;
-  box-shadow: 0 4px 14px rgba(228, 3, 69, 0.28);
+  box-shadow: 0 4px 14px rgba(2, 132, 199, 0.28);
 }
 
 .signInBtn:hover {
-  background-color: #cc023e;
+  background-color: #0369a1;
   transform: translateY(-1px);
-  box-shadow: 0 6px 18px rgba(228, 3, 69, 0.36);
+  box-shadow: 0 6px 18px rgba(2, 132, 199, 0.36);
 }
 
 .browseBtn {

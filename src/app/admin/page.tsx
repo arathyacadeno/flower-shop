@@ -202,7 +202,7 @@ export default function AdminPage() {
             </p>
 
             {loginError && (
-              <div style={{ background: "#fff1f2", color: "#e11d48", padding: 10, borderRadius: 10, fontSize: "0.82rem", marginBottom: 14 }}>
+              <div style={{ background: "#f0f9ff", color: "#0284c7", padding: 10, borderRadius: 10, fontSize: "0.82rem", marginBottom: 14 }}>
                 {loginError}
               </div>
             )}
@@ -377,7 +377,7 @@ export default function AdminPage() {
         {/* TAB 1: Orders */}
         {activeTab === "orders" && (
           <div className={styles.panelCard}>
-            <h2 style={{ fontFamily: "var(--font-serif)", color: "#831843", fontSize: "1.3rem", margin: "0 0 16px" }}>
+            <h2 style={{ fontFamily: "var(--font-serif)", color: "#0369a1", fontSize: "1.3rem", margin: "0 0 16px" }}>
               Customer Orders &amp; Fulfillment
             </h2>
             <div className={styles.tableResponsive}>
@@ -396,7 +396,7 @@ export default function AdminPage() {
                 <tbody>
                   {orders.map((o) => (
                     <tr key={o.id}>
-                      <td style={{ fontWeight: 700, color: "#831843" }}>#{o.id}</td>
+                      <td style={{ fontWeight: 700, color: "#0369a1" }}>#{o.id}</td>
                       <td>
                         <div style={{ fontWeight: 600 }}>{o.customer_name}</div>
                         <div style={{ fontSize: "0.78rem", color: "#64748b" }}>{o.customer_phone}</div>
@@ -453,7 +453,7 @@ export default function AdminPage() {
         {activeTab === "stock" && (
           <div className={styles.panelCard}>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
-              <h2 style={{ fontFamily: "var(--font-serif)", color: "#831843", fontSize: "1.3rem", margin: 0 }}>
+              <h2 style={{ fontFamily: "var(--font-serif)", color: "#0369a1", fontSize: "1.3rem", margin: 0 }}>
                 Inventory &amp; Stock Levels
               </h2>
               {stockSaveMsg && (
@@ -599,7 +599,7 @@ export default function AdminPage() {
               </button>
             </form>
 
-            <h3 style={{ margin: "32px 0 14px", color: "#831843" }}>Active Store Coupons</h3>
+            <h3 style={{ margin: "32px 0 14px", color: "#0369a1" }}>Active Store Coupons</h3>
             <div className={styles.tableResponsive}>
               <table className={styles.dataTable}>
                 <thead>
@@ -615,7 +615,7 @@ export default function AdminPage() {
                 <tbody>
                   {coupons.map((c) => (
                     <tr key={c.id || c.code}>
-                      <td style={{ fontWeight: 700, color: "#831843" }}>{c.code}</td>
+                      <td style={{ fontWeight: 700, color: "#0369a1" }}>{c.code}</td>
                       <td style={{ textTransform: "capitalize" }}>{c.discount_type || c.type}</td>
                       <td>
                         {c.discount_type === "percentage" ? `${c.discount_value}%` : `₹${c.discount_value}`}
@@ -638,7 +638,7 @@ export default function AdminPage() {
         {/* TAB 4: Delivery Settings */}
         {activeTab === "delivery" && (
           <div className={styles.panelCard}>
-            <h2 style={{ fontFamily: "var(--font-serif)", color: "#831843", fontSize: "1.3rem", margin: "0 0 8px" }}>
+            <h2 style={{ fontFamily: "var(--font-serif)", color: "#0369a1", fontSize: "1.3rem", margin: "0 0 8px" }}>
               Calicut Delivery Zones &amp; Haversine Distance Rates
             </h2>
             <p style={{ color: "#64748b", fontSize: "0.88rem", marginBottom: 20 }}>
@@ -648,7 +648,7 @@ export default function AdminPage() {
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: 18, marginBottom: 24 }}>
               <div style={{ padding: 18, background: "#f8fafc", borderRadius: 12, border: "1px solid #e2e8f0" }}>
                 <div style={{ fontSize: "0.8rem", color: "#64748b" }}>Shop Base Location</div>
-                <div style={{ fontSize: "1.2rem", fontWeight: 700, color: "#831843" }}>Kozhikode Head Post Office</div>
+                <div style={{ fontSize: "1.2rem", fontWeight: 700, color: "#0369a1" }}>Kozhikode Head Post Office</div>
                 <div style={{ fontSize: "0.88rem", color: "#334155" }}>Shop PIN: <strong>673001</strong></div>
               </div>
 
@@ -702,7 +702,7 @@ export default function AdminPage() {
                   </tr>
                   <tr>
                     <td>&gt; 50 km</td>
-                    <td style={{ color: "#e11d48", fontWeight: 700 }}>Not Serviceable</td>
+                    <td style={{ color: "#0284c7", fontWeight: 700 }}>Not Serviceable</td>
                     <td>Outside Delivery Zone</td>
                     <td>Active</td>
                   </tr>
@@ -715,7 +715,7 @@ export default function AdminPage() {
         {/* TAB 5: Users */}
         {activeTab === "users" && (
           <div className={styles.panelCard}>
-            <h2 style={{ fontFamily: "var(--font-serif)", color: "#831843", fontSize: "1.3rem", margin: "0 0 16px" }}>
+            <h2 style={{ fontFamily: "var(--font-serif)", color: "#0369a1", fontSize: "1.3rem", margin: "0 0 16px" }}>
               Registered Customer Accounts
             </h2>
             <div className={styles.tableResponsive}>

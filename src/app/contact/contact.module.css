@@ -57,7 +57,7 @@
 
 /* ================= PINK ROUNDED CONTAINER ================= */
 .pinkContainer {
-  background-color: #FAD9E3;
+  background-color: #f0f7ff;
   border-radius: 36px;
   padding: 50px 54px;
   margin-bottom: 84px;
@@ -119,8 +119,8 @@
 }
 
 .pillInput:focus {
-  border-color: #E90046;
-  box-shadow: 0 0 0 3px rgba(233, 0, 70, 0.12);
+  border-color: #0284c7;
+  box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.12);
 }
 
 .messageTextarea {
@@ -141,8 +141,8 @@
 }
 
 .messageTextarea:focus {
-  border-color: #E90046;
-  box-shadow: 0 0 0 3px rgba(233, 0, 70, 0.12);
+  border-color: #0284c7;
+  box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.12);
 }
 
 .messageTextarea::placeholder {
@@ -172,7 +172,7 @@
 }
 
 .sendButton {
-  background-color: #E90046;
+  background-color: #0284c7;
   color: #ffffff;
   border: none;
   border-radius: 6px;
@@ -186,14 +186,14 @@
   align-items: center;
   gap: 8px;
   transition: all 0.22s ease;
-  box-shadow: 0 3px 10px rgba(233, 0, 70, 0.2);
+  box-shadow: 0 3px 10px rgba(2, 132, 199, 0.2);
   user-select: none;
 }
 
 .sendButton:hover:not(:disabled) {
-  background-color: #c7003b;
+  background-color: #0369a1;
   transform: translateY(-1px);
-  box-shadow: 0 5px 14px rgba(233, 0, 70, 0.3);
+  box-shadow: 0 5px 14px rgba(2, 132, 199, 0.3);
 }
 
 .sendButton:active:not(:disabled) {
@@ -299,8 +299,8 @@
 .socialBtn:hover {
   transform: translateY(-2px);
   background-color: #ffffff;
-  color: #E90046;
-  box-shadow: 0 4px 12px rgba(233, 0, 70, 0.18);
+  color: #0284c7;
+  box-shadow: 0 4px 12px rgba(2, 132, 199, 0.18);
 }
 
 /* ================= RIGHT COLUMN: INFO CARD ================= */
@@ -346,7 +346,7 @@
 .viewMapLink {
   font-size: 13px;
   font-weight: 600;
-  color: #E90046;
+  color: #0284c7;
   text-decoration: underline;
   text-underline-offset: 3px;
   display: inline-block;
@@ -389,7 +389,7 @@
 }
 
 .connectItem:hover {
-  color: #E90046;
+  color: #0284c7;
 }
 
 .connectIcon {
@@ -406,7 +406,7 @@
 }
 
 .connectItem:hover .emailText {
-  color: #E90046;
+  color: #0284c7;
 }
 
 .hoursGroup {

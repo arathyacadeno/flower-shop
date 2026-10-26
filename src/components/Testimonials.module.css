@@ -9,7 +9,7 @@
   overflow: hidden;
   margin-top: 28px;
   padding: 64px 0 84px 0;
-  background-color: #FAD9E3;
+  background-color: #f0f7ff;
   box-sizing: border-box;
 }
 
@@ -97,24 +97,24 @@
   height: 7px;
   flex-shrink: 0;
   border-radius: 9999px;
-  background-color: #fce7f3;
-  border: 1px solid #fbcfe8;
+  background-color: #e0f2fe;
+  border: 1px solid #bae6fd;
   cursor: pointer;
   padding: 0;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .dot:hover {
-  background-color: #f472b6;
+  background-color: #38bdf8;
   transform: scale(1.2);
 }
 
 .activeDot {
   width: 22px;
   flex-shrink: 0;
-  background-color: #ff2d6c;
-  border-color: #ff2d6c;
-  box-shadow: 0 2px 10px rgba(255, 45, 108, 0.35);
+  background-color: #0284c7;
+  border-color: #0284c7;
+  box-shadow: 0 2px 10px rgba(2, 132, 199, 0.35);
 }
 
 .counterText {
@@ -221,7 +221,7 @@
   opacity: 1;
   filter: none;
   z-index: 3;
-  box-shadow: 0 18px 45px rgba(225, 29, 72, 0.12), 0 4px 18px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 18px 45px rgba(2, 132, 199, 0.12), 0 4px 18px rgba(0, 0, 0, 0.04);
 }
 
 /* ---- Unfocused side cards: smaller, faded, soft ---- */
@@ -267,13 +267,13 @@
 }
 
 .starCenterFilled {
-  fill: #ff2d6c;
-  stroke: #ff2d6c;
+  fill: #0284c7;
+  stroke: #0284c7;
 }
 
 .starSideFilled {
-  fill: #ff809f;
-  stroke: #ff809f;
+  fill: #38bdf8;
+  stroke: #38bdf8;
 }
 
 .starEmpty {
@@ -376,7 +376,7 @@
 
 .navBtn:hover {
   background: #ffffff;
-  color: #ff2d6c;
+  color: #0284c7;
   transform: translateY(-50%) scale(1.08);
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
 }

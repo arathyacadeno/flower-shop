@@ -144,7 +144,7 @@
 }
 
 .selectedDay {
-  background-color: #e4004b;
+  background-color: #0284c7;
   color: #ffffff;
 }
 
@@ -162,7 +162,7 @@
 
 /* Override banner background to match theme */
 .bottomBanner {
-  background-color: #fdf2f5;
+  background-color: #f0f9ff;
 }
 
 .bannerIcon {

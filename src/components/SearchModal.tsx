@@ -167,7 +167,7 @@ export default function SearchModal({
                         style={{
                           fontFamily: "var(--font-serif)",
                           fontSize: "1.2rem",
-                          color: "#831843",
+                          color: "#0369a1",
                         }}
                       >
                         {b.name}

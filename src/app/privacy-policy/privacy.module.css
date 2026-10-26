@@ -4,7 +4,7 @@
    - Pure white background #FFFFFF
    - Centered title in dark charcoal #2D2D2D (40px)
    - Left-aligned sections
-   - Numbered bright pink headings #F00046 (28px)
+   - Numbered bright pink headings #0284c7 (28px)
    - Slate gray readable body text #6B7280 (20px, line-height 1.85)
    - Bold black subsection headings & bullet labels #111827
    - Generous whitespace, clean document flow
@@ -61,7 +61,7 @@
 .sectionHeading {
   font-size: 28px;
   font-weight: 700;
-  color: #F00046;
+  color: #0284c7;
   margin: 0 0 22px 0;
   letter-spacing: -0.015em;
   line-height: 1.35;
@@ -142,7 +142,7 @@
 }
 
 .contactLink:hover {
-  color: #F00046;
+  color: #0284c7;
 }
 
 .contactIcon {

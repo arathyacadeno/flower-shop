@@ -44,7 +44,7 @@
 .title {
   font-family: var(--font-serif);
   font-size: 1.6rem;
-  color: #831843;
+  color: #0369a1;
 }
 
 .closeBtn {
@@ -52,7 +52,7 @@
   border: none;
   cursor: pointer;
   padding: 6px;
-  color: #831843;
+  color: #0369a1;
 }
 
 .shippingBar {
@@ -126,7 +126,7 @@
 .itemName {
   font-family: var(--font-serif);
   font-size: 1.15rem;
-  color: #831843;
+  color: #0369a1;
   margin-bottom: 4px;
 }
 
@@ -147,7 +147,7 @@
   font-family: var(--font-serif);
   font-size: 1.15rem;
   font-weight: 600;
-  color: #831843;
+  color: #0369a1;
 }
 
 .qtyControl {
@@ -199,11 +199,11 @@
   justify-content: space-between;
   font-family: var(--font-serif);
   font-size: 1.4rem;
-  color: #831843;
+  color: #0369a1;
 }
 
 .checkoutBtn {
-  background: #831843;
+  background: #0369a1;
   color: #ffffff;
   padding: 16px;
   border: none;

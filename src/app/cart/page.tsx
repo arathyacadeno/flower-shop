@@ -432,7 +432,7 @@ export default function CartPage() {
                   <>
                     <div className={styles.addressInfo}>
                       <div className={styles.addressTopRow}>
-                        <MapPin size={16} color="#E40345" />
+                        <MapPin size={16} color="#0284c7" />
                         <span className={styles.deliverToLabel}>Deliver to:</span>
                         <span className={styles.recipientName}>
                           {savedAddress?.fullName || user?.name || (deliveryStatus?.area ? `${deliveryStatus.area}` : "Your Location")}
@@ -495,7 +495,7 @@ export default function CartPage() {
                   /* Form to enter / update 6-digit PIN code */
                   <div className={styles.addressInfo} style={{ width: "100%" }}>
                     <div className={styles.addressTopRow}>
-                      <MapPin size={16} color="#E40345" />
+                      <MapPin size={16} color="#0284c7" />
                       <span className={styles.deliverToLabel} style={{ fontWeight: 600, color: "#111827" }}>
                         {pinCode ? "Change Delivery PIN Code" : "Delivery Location PIN Code"}
                       </span>
@@ -543,12 +543,12 @@ export default function CartPage() {
                       )}
                     </form>
                     {pinInputError && (
-                      <span style={{ fontSize: "0.8rem", color: "#e11d48", marginTop: "2px" }}>
+                      <span style={{ fontSize: "0.8rem", color: "#0284c7", marginTop: "2px" }}>
                         {pinInputError}
                       </span>
                     )}
                     {deliveryStatus && deliveryStatus.serviceable === false && (
-                      <span style={{ fontSize: "0.8rem", color: "#e11d48", marginTop: "2px" }}>
+                      <span style={{ fontSize: "0.8rem", color: "#0284c7", marginTop: "2px" }}>
                         {deliveryStatus.message || "Sorry, delivery is not available to this location."}
                       </span>
                     )}

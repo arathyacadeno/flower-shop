@@ -289,7 +289,7 @@ export default function OrdersPage() {
                   <div className={styles.cardHeader}>
                     <div className={styles.headerLeft}>
                       <span className={styles.orderIdBadge}>
-                        <Package size={17} color="#c21460" />
+                        <Package size={17} color="#0284c7" />
                         #{order.orderId}
                       </span>
                       <span className={styles.orderDateText}>

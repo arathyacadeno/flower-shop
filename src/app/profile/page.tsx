@@ -357,7 +357,7 @@ export default function ProfilePage() {
                 {/* Add Address Form */}
                 {showAddAddress && (
                   <div className={styles.addAddressBox}>
-                    <h3 style={{ margin: "0 0 16px", color: "#831843", fontSize: "1.1rem" }}>
+                    <h3 style={{ margin: "0 0 16px", color: "#0369a1", fontSize: "1.1rem" }}>
                       Add New Delivery Address
                     </h3>
                     <form onSubmit={handleAddAddressSubmit}>

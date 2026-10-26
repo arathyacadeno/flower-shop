@@ -903,7 +903,7 @@
 .modalBackdrop {
   position: fixed;
   inset: 0;
-  background: rgba(131, 24, 67, 0.35);
+  background: rgba(3, 105, 161, 0.35);
   backdrop-filter: blur(6px);
   z-index: 1200;
   display: flex;
@@ -1014,7 +1014,7 @@
 .drawerOverlay {
   position: fixed;
   inset: 0;
-  background: rgba(131, 24, 67, 0.3);
+  background: rgba(3, 105, 161, 0.3);
   backdrop-filter: blur(6px);
   z-index: 1500;
   opacity: 0;
@@ -1367,9 +1367,9 @@
 }
 
 .authError {
-  background: #fff1f2;
-  color: #e11d48;
-  border: 1px solid #ffe4e6;
+  background: #f0f9ff;
+  color: #0284c7;
+  border: 1px solid #e0f2fe;
   padding: 9px 12px;
   border-radius: 9px;
   font-size: 0.82rem;
@@ -1475,7 +1475,7 @@
 
 .phoneError {
   font-size: 0.78rem;
-  color: #e11d48;
+  color: #0284c7;
   margin: 8px 0 0;
   font-weight: 500;
 }

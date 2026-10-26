@@ -57,7 +57,7 @@
   height: auto;
   border-radius: 16px;
   overflow: hidden;
-  background-color: #FAF4F6;
+  background-color: #f0f7ff;
   position: relative;
 }
 
@@ -117,7 +117,7 @@
 }
 
 .compactCard .titleLink:hover {
-  color: #E40345;
+  color: #0284c7;
 }
 
 .compactCard .ratingBadge {
@@ -239,7 +239,7 @@
 }
 
 .wishlistActive {
-  color: #db2777 !important;
+  color: #0284c7 !important;
 }
 
 /* ================= CARD BODY ================= */
@@ -385,8 +385,8 @@
   font-size: 11.5px;
   font-weight: 500;
   border-radius: 999px;
-  border: 1px solid #fecdd3;
-  background-color: #fff1f2;
+  border: 1px solid #bae6fd;
+  background-color: #f0f9ff;
   color: #4b5563;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -395,22 +395,22 @@
 }
 
 .stemPill:hover {
-  background-color: #ffe4e6;
-  border-color: #fda4af;
-  color: #e11d48;
+  background-color: #e0f2fe;
+  border-color: #7dd3fc;
+  color: #0284c7;
 }
 
 .stemPillActive {
-  background-color: #ff4770;
-  border-color: #ff4770;
+  background-color: #38bdf8;
+  border-color: #38bdf8;
   color: #ffffff;
   font-weight: 600;
   box-shadow: 0 2px 8px rgba(255, 71, 112, 0.25);
 }
 
 .stemPillActive:hover {
-  background-color: #e63960;
-  border-color: #e63960;
+  background-color: #38bdf8;
+  border-color: #38bdf8;
   color: #ffffff;
 }
 
@@ -418,12 +418,12 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: #fdf2f8;
-  border: 1px dashed #f472b6;
+  background: #f0f9ff;
+  border: 1px dashed #38bdf8;
   border-radius: 12px;
   padding: 4px 8px;
   font-size: 11px;
-  color: #831843;
+  color: #0369a1;
 }
 
 .customStemLabel {
@@ -434,7 +434,7 @@
   display: inline-flex;
   align-items: center;
   background: #ffffff;
-  border: 1px solid #fbcfe8;
+  border: 1px solid #bae6fd;
   border-radius: 999px;
   padding: 1px 4px;
   gap: 6px;
@@ -452,12 +452,12 @@
   cursor: pointer;
   font-weight: 700;
   font-size: 13px;
-  color: #ff4770;
+  color: #38bdf8;
   transition: background 0.15s ease;
 }
 
 .customStepBtn:hover {
-  background: #ffe4e6;
+  background: #e0f2fe;
 }
 
 .customStepVal {
@@ -470,7 +470,7 @@
 
 .customRateHint {
   font-size: 10px;
-  color: #9d174d;
+  color: #0369a1;
   font-weight: 500;
 }
 
@@ -492,23 +492,23 @@
   gap: 5px;
   padding: 8px 13px;
   border-radius: 999px;
-  background: #fff0f5;
-  border: 1.5px solid #fbcfe8;
-  color: #db2777;
+  background: #f0f9ff;
+  border: 1.5px solid #bae6fd;
+  color: #0284c7;
   font-family: var(--font-sans, "Plus Jakarta Sans", sans-serif);
   font-size: 12px;
   font-weight: 700;
   text-decoration: none;
   transition: all 0.22s ease;
   white-space: nowrap;
-  box-shadow: 0 2px 6px rgba(219, 39, 119, 0.08);
+  box-shadow: 0 2px 6px rgba(2, 132, 199, 0.08);
 }
 
 .customizeBtn:hover {
-  background: #ff3d7a;
-  border-color: #ff3d7a;
+  background: #0284c7;
+  border-color: #0284c7;
   color: #ffffff;
-  box-shadow: 0 4px 14px rgba(255, 61, 122, 0.28);
+  box-shadow: 0 4px 14px rgba(2, 132, 199, 0.28);
   transform: translateY(-1px);
 }
 

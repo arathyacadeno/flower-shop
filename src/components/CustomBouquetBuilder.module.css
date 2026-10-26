@@ -38,7 +38,7 @@
   font-size: clamp(2.2rem, 3.5vw, 3rem);
   text-transform: uppercase;
   letter-spacing: 0.12em;
-  color: #831843;
+  color: #0369a1;
   margin-bottom: 16px;
 }
 
@@ -87,7 +87,7 @@
   font-weight: 600;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: #831843;
+  color: #0369a1;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -126,7 +126,7 @@
 }
 
 .optionCard:hover {
-  border-color: #831843;
+  border-color: #0369a1;
 }
 
 .optionSelected {
@@ -148,7 +148,7 @@
   font-family: var(--font-sans);
   font-size: 0.75rem;
   font-weight: 600;
-  color: #831843;
+  color: #0369a1;
 }
 
 .optionSub {
@@ -198,7 +198,7 @@
 .previewTitle {
   font-family: var(--font-serif);
   font-size: 1.8rem;
-  color: #831843;
+  color: #0369a1;
 }
 
 .previewPrice {
@@ -222,7 +222,7 @@
   width: 100%;
   height: 100%;
   object-fit: contain;
-  background-color: #FAF4F6;
+  background-color: #f0f7ff;
   transition: all 0.5s ease;
 }
 
@@ -243,11 +243,11 @@
 }
 
 .summaryItem strong {
-  color: #831843;
+  color: #0369a1;
 }
 
 .submitBtn {
-  background: #831843;
+  background: #0369a1;
   color: #ffffff;
   padding: 16px 28px;
   border: none;

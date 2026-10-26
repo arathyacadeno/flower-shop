@@ -1,7 +1,7 @@
 /* ========================================================
    CART PAGE STYLES - "Your Floral Selection"
-   - Background: #ffeaee (soft pink)
-   - Accent button: #E40345
+   - Background: #f0f7ff (soft pink)
+   - Accent button: #0284c7
    ======================================================== */
 
 .pageWrapper {
@@ -47,8 +47,8 @@
 
 .clearCartBtn {
   background-color: #ffffff;
-  border: 1px solid #fecdd3;
-  color: #e11d48;
+  border: 1px solid #bae6fd;
+  color: #0284c7;
   font-size: 0.8rem;
   font-weight: 600;
   padding: 6px 14px;
@@ -59,9 +59,9 @@
 }
 
 .clearCartBtn:hover {
-  background-color: #ffe4e6;
-  border-color: #fda4af;
-  color: #be123c;
+  background-color: #e0f2fe;
+  border-color: #7dd3fc;
+  color: #0369a1;
   transform: translateY(-1px);
 }
 
@@ -141,8 +141,8 @@
 }
 
 .changeAddressBtn {
-  border: 1.5px solid #fda4af;
-  color: #e11d48;
+  border: 1.5px solid #7dd3fc;
+  color: #0284c7;
   background-color: #ffffff;
   border-radius: 20px;
   padding: 6px 18px;
@@ -153,8 +153,8 @@
 }
 
 .changeAddressBtn:hover {
-  background-color: #fff1f2;
-  border-color: #e11d48;
+  background-color: #f0f9ff;
+  border-color: #0284c7;
 }
 
 /* PIN Code Form in Address Card */
@@ -180,11 +180,11 @@
 }
 
 .pinInput:focus {
-  border-color: #E40345;
+  border-color: #0284c7;
 }
 
 .pinApplyBtn {
-  background-color: #E40345;
+  background-color: #0284c7;
   color: #ffffff;
   border: none;
   border-radius: 8px;
@@ -196,7 +196,7 @@
 }
 
 .pinApplyBtn:hover:not(:disabled) {
-  background-color: #c0023a;
+  background-color: #0369a1;
 }
 
 .pinApplyBtn:disabled {
@@ -236,7 +236,7 @@
 }
 
 .pinServiceError {
-  color: #e11d48;
+  color: #0284c7;
   font-weight: 600;
 }
 
@@ -295,7 +295,7 @@
   height: 90px;
   border-radius: 8px;
   object-fit: contain;
-  background-color: #fdf2f4;
+  background-color: #f0f9ff;
   display: block;
 }
 
@@ -328,7 +328,7 @@
 }
 
 .qtyStepperBtn:hover:not(:disabled) {
-  background-color: #E40345;
+  background-color: #0284c7;
   color: #ffffff;
 }
 
@@ -374,7 +374,7 @@
 .itemTitleLink:hover .productName,
 .itemTitleLink:hover .addonName,
 .itemTitleLink:hover {
-  color: #E40345;
+  color: #0284c7;
 }
 
 .productName {
@@ -497,8 +497,8 @@
 .addonSection {
   margin-top: 18px;
   padding: 16px;
-  background-color: #fff8f9;
-  border: 1px solid #ffdce3;
+  background-color: #f0f9ff;
+  border: 1px solid #e0f2fe;
   border-radius: 12px;
   display: flex;
   flex-direction: column;
@@ -509,7 +509,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px dashed #fecdd3;
+  border-bottom: 1px dashed #bae6fd;
   padding-bottom: 10px;
 }
 
@@ -521,12 +521,12 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  color: #E40345;
+  color: #0284c7;
 }
 
 .addonCountBadge {
-  background-color: #ffe2e8;
-  color: #E40345;
+  background-color: #e0f2fe;
+  color: #0284c7;
   font-size: 0.72rem;
   font-weight: 700;
   padding: 3px 8px;
@@ -553,7 +553,7 @@
   border-radius: 8px;
   object-fit: contain;
   background-color: #ffffff;
-  border: 1px solid #fed7df;
+  border: 1px solid #e0f2fe;
   display: block;
 }
 
@@ -698,7 +698,7 @@
 }
 
 .couponBox:focus-within {
-  border-color: #E40345;
+  border-color: #0284c7;
 }
 
 .couponInput {
@@ -740,7 +740,7 @@
 /* Master Check out button */
 .checkoutMasterBtn {
   width: 100%;
-  background-color: #E40345;
+  background-color: #0284c7;
   color: #ffffff;
   border: none;
   border-radius: 12px;
@@ -752,14 +752,14 @@
   align-items: center;
   justify-content: center;
   margin-top: 18px;
-  box-shadow: 0 4px 14px rgba(228, 3, 69, 0.3);
+  box-shadow: 0 4px 14px rgba(2, 132, 199, 0.3);
   transition: background-color 0.2s ease, transform 0.15s ease;
 }
 
 .checkoutMasterBtn:hover {
-  background-color: #c7023c;
+  background-color: #0369a1;
   transform: translateY(-1px);
-  box-shadow: 0 6px 18px rgba(228, 3, 69, 0.38);
+  box-shadow: 0 6px 18px rgba(2, 132, 199, 0.38);
 }
 
 /* Empty State */
@@ -772,9 +772,9 @@
   width: 100%;
   margin: 32px auto 60px auto;
   box-shadow:
-    0 16px 40px -8px rgba(233, 0, 70, 0.07),
+    0 16px 40px -8px rgba(2, 132, 199, 0.07),
     0 2px 10px rgba(0, 0, 0, 0.02);
-  border: 1px solid rgba(253, 233, 239, 0.9);
+  border: 1px solid rgba(224, 242, 254, 0.9);
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -795,7 +795,7 @@
   height: auto;
   object-fit: contain;
   display: block;
-  filter: drop-shadow(0 8px 20px rgba(233, 0, 70, 0.08));
+  filter: drop-shadow(0 8px 20px rgba(2, 132, 199, 0.08));
   transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -824,7 +824,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background-color: #E90046;
+  background-color: #0284c7;
   color: #ffffff;
   padding: 13px 44px;
   border-radius: 10px;
@@ -832,14 +832,14 @@
   font-weight: 600;
   text-decoration: none;
   letter-spacing: 0.01em;
-  box-shadow: 0 4px 14px rgba(233, 0, 70, 0.25);
+  box-shadow: 0 4px 14px rgba(2, 132, 199, 0.25);
   transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .exploreGiftsBtn:hover {
-  background-color: #d1003f;
+  background-color: #0369a1;
   transform: translateY(-2px);
-  box-shadow: 0 8px 22px rgba(233, 0, 70, 0.32);
+  box-shadow: 0 8px 22px rgba(2, 132, 199, 0.32);
 }
 
 .exploreGiftsBtn:active {

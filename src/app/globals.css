@@ -12,12 +12,12 @@
   --font-playfair: 'Playfair Display', Georgia, serif;
   --font-inter: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 
-  /* Exclusive Light Pink & Pure White Palette */
-  --color-bg: #FAD9E3;
-  --color-bg-alt: #FAD9E3;
-  --color-bg-cream: #FAD9E3;
-  --color-bg-pink-light: #FAD9E3;
-  --color-bg-pink-soft: #fce7f3;
+  /* Exclusive Ocean & Sky Blue Palette */
+  --color-bg: #f0f7ff;
+  --color-bg-alt: #f0f7ff;
+  --color-bg-cream: #f0f7ff;
+  --color-bg-pink-light: #f0f7ff;
+  --color-bg-pink-soft: #e0f2fe;
   
   --color-dark: #111111; /* Crisp black for headlines */
   --color-dark-soft: #222222; /* Soft black */
@@ -25,20 +25,20 @@
   --color-text-subtle: #4b5563; /* Charcoal subtle text */
   --color-muted: #6b7280;
   
-  --color-border: #fce7f3; /* Light pink border */
-  --color-border-dark: #f472b6; /* Mid pink border */
+  --color-border: #e0f2fe; /* Light pink border */
+  --color-border-dark: #38bdf8; /* Mid pink border */
   
-  --color-rose: #ec4899; /* Vibrant accent pink */
-  --color-rose-dark: #be185d; /* Rich pink */
-  --color-rose-light: #fff0f5; /* Ultra soft light blush */
-  --color-pink-accent: #f472b6;
-  --color-gold: #db2777;
-  --color-gold-light: #fdf2f8;
+  --color-rose: #0284c7; /* Vibrant accent pink */
+  --color-rose-dark: #0369a1; /* Rich pink */
+  --color-rose-light: #f0f9ff; /* Ultra soft light blush */
+  --color-pink-accent: #38bdf8;
+  --color-gold: #0284c7;
+  --color-gold-light: #f0f9ff;
 
-  --shadow-sm: 0 2px 10px rgba(236, 72, 153, 0.06);
-  --shadow-md: 0 10px 30px rgba(236, 72, 153, 0.1);
-  --shadow-lg: 0 20px 50px rgba(236, 72, 153, 0.14);
-  --shadow-float: 0 25px 50px rgba(236, 72, 153, 0.18);
+  --shadow-sm: 0 2px 10px rgba(2, 132, 199, 0.06);
+  --shadow-md: 0 10px 30px rgba(2, 132, 199, 0.1);
+  --shadow-lg: 0 20px 50px rgba(2, 132, 199, 0.14);
+  --shadow-float: 0 25px 50px rgba(2, 132, 199, 0.18);
 
   --radius-sm: 4px;
   --radius-md: 8px;
@@ -77,14 +77,14 @@ body, h1, h2, h3, h4, h5, h6, p {
 html {
   scroll-behavior: smooth;
   font-size: 16px;
-  background-color: #FAD9E3;
+  background-color: #f0f7ff;
   font-family: var(--font-sans);
 }
 
 body {
   font-family: var(--font-sans);
   color: var(--color-text);
-  background-color: #FAD9E3;
+  background-color: #f0f7ff;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -258,14 +258,14 @@ button, input, select, textarea {
   width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #fff0f5;
+  background: #f0f9ff;
 }
 ::-webkit-scrollbar-thumb {
-  background: #f472b6;
+  background: #38bdf8;
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #db2777;
+  background: #0284c7;
 }
 
 /* Atelier Video Showcase Section Global Styles (Failsafe for Next.js CSS chunking) */
@@ -285,7 +285,7 @@ button, input, select, textarea {
 #atelier-film-showcase .atelier-tagline {
   font-family: var(--font-script, 'Great Vibes', cursive);
   font-size: clamp(2.2rem, 3.4vw, 3.2rem);
-  color: #db2777;
+  color: #0284c7;
   margin-bottom: 6px;
   line-height: 1.1;
   text-align: left;
@@ -316,8 +316,8 @@ button, input, select, textarea {
   background: #ffffff;
   border-radius: 28px;
   overflow: hidden;
-  border: 1px solid rgba(244, 114, 182, 0.35);
-  box-shadow: 0 20px 50px -15px rgba(219, 39, 119, 0.12),
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  box-shadow: 0 20px 50px -15px rgba(2, 132, 199, 0.12),
               0 0 0 1px rgba(255, 255, 255, 0.8);
 }
 
@@ -366,7 +366,7 @@ button, input, select, textarea {
 
 #atelier-film-showcase .atelier-progress-fill {
   height: 100%;
-  background: linear-gradient(90deg, #f472b6, #ec4899, #f43f5e);
+  background: linear-gradient(90deg, #38bdf8, #0284c7, #0284c7);
   transition: width 0.1s linear;
 }
 
@@ -399,8 +399,8 @@ button, input, select, textarea {
 }
 
 #atelier-film-showcase .atelier-ctrl-btn:hover {
-  background: #db2777;
-  border-color: #db2777;
+  background: #0284c7;
+  border-color: #0284c7;
   transform: scale(1.08);
 }
 
@@ -445,7 +445,7 @@ button, input, select, textarea {
   height: auto !important;
   border-radius: 16px !important;
   overflow: hidden !important;
-  background-color: #FAF4F6 !important;
+  background-color: #f0f7ff !important;
   position: relative !important;
   padding: 0 !important;
   box-sizing: border-box !important;

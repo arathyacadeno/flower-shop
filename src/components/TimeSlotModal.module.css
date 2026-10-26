@@ -61,15 +61,15 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  background: linear-gradient(90deg, #fdf2f5 0%, #ffffff 100%);
+  background: linear-gradient(90deg, #f0f9ff 0%, #ffffff 100%);
   padding: 12px 20px;
   border-bottom: 1px solid #f0f0f0;
-  color: #e4004b;
+  color: #0284c7;
   font-size: 0.85rem;
 }
 
 .bannerIcon {
-  color: #e4004b;
+  color: #0284c7;
 }
 
 /* Date Row */
@@ -119,14 +119,14 @@
 }
 
 .radioInput:checked + .customRadio {
-  border-color: #e4004b;
+  border-color: #0284c7;
 }
 
 .radioInput:checked + .customRadio::after {
   content: "";
   width: 10px;
   height: 10px;
-  background-color: #e4004b;
+  background-color: #0284c7;
   border-radius: 50%;
 }
 
@@ -139,7 +139,7 @@
 
 .confirmBtn {
   width: 100%;
-  background-color: #e4004b;
+  background-color: #0284c7;
   color: #ffffff;
   border: none;
   border-radius: 8px;
@@ -151,10 +151,10 @@
 }
 
 .confirmBtn:hover {
-  background-color: #d10045;
+  background-color: #0369a1;
 }
 
 .confirmBtn:disabled {
-  background-color: #ffb3c6;
+  background-color: #bae6fd;
   cursor: not-allowed;
 }

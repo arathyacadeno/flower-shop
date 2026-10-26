@@ -23,7 +23,7 @@
   font-size: clamp(2.2rem, 3.5vw, 3rem);
   text-transform: uppercase;
   letter-spacing: 0.12em;
-  color: #831843;
+  color: #0369a1;
   margin-bottom: 16px;
 }
 
@@ -59,14 +59,14 @@
 }
 
 .filterBtn:hover {
-  border-color: #831843;
-  color: #831843;
+  border-color: #0369a1;
+  color: #0369a1;
 }
 
 .filterBtnActive {
-  background: #831843;
+  background: #0369a1;
   color: #ffffff;
-  border-color: #831843;
+  border-color: #0369a1;
   box-shadow: 0 4px 15px rgba(26, 23, 21, 0.15);
 }
 
@@ -120,7 +120,7 @@
   width: 100%;
   height: 100%;
   object-fit: contain;
-  background-color: #FAF4F6;
+  background-color: #f0f7ff;
   transition: transform 0.8s cubic-bezier(0.2, 1, 0.3, 1);
 }
 
@@ -163,7 +163,7 @@
 
 .quickActionBtn {
   background: #ffffff;
-  color: #831843;
+  color: #0369a1;
   border: none;
   padding: 12px 20px;
   font-size: 0.72rem;
@@ -210,7 +210,7 @@
 .cardTitle {
   font-family: var(--font-serif);
   font-size: 1.45rem;
-  color: #831843;
+  color: #0369a1;
   margin-bottom: 6px;
   line-height: 1.25;
 }
@@ -257,7 +257,7 @@
 .price {
   font-family: var(--font-serif);
   font-size: 1.55rem;
-  color: #831843;
+  color: #0369a1;
   font-weight: 500;
 }
 
@@ -269,7 +269,7 @@
 }
 
 .addToCartBtn {
-  background: #831843;
+  background: #0369a1;
   color: #ffffff;
   border: none;
   padding: 10px 18px;

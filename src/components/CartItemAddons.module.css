@@ -62,9 +62,9 @@
 .itemCountBadge {
   font-size: 0.75rem;
   font-weight: 700;
-  color: #E40345;
-  background-color: #fff1f2;
-  border: 1px solid #fecdd3;
+  color: #0284c7;
+  background-color: #f0f9ff;
+  border: 1px solid #bae6fd;
   padding: 2px 8px;
   border-radius: 9999px;
   letter-spacing: 0.01em;
@@ -123,15 +123,15 @@
 }
 
 .pillBtn:hover {
-  border-color: #E40345;
-  color: #E40345;
+  border-color: #0284c7;
+  color: #0284c7;
 }
 
 .pillBtnActive,
 .pillBtnActive:hover {
-  background-color: #fff1f2;
-  border-color: #E40345;
-  color: #E40345;
+  background-color: #f0f9ff;
+  border-color: #0284c7;
+  color: #0284c7;
   font-weight: 600;
 }
 
@@ -166,8 +166,8 @@
 }
 
 .floatingArrowBtn:hover {
-  background-color: #E40345;
-  border-color: #E40345;
+  background-color: #0284c7;
+  border-color: #0284c7;
   color: #ffffff;
 }
 
@@ -224,8 +224,8 @@
 }
 
 .addonCardAdded .addonImageWrap {
-  border-color: #E40345;
-  box-shadow: 0 0 0 1px #E40345;
+  border-color: #0284c7;
+  box-shadow: 0 0 0 1px #0284c7;
 }
 
 .addonImg {
@@ -243,9 +243,9 @@
   width: 26px;
   height: 26px;
   border-radius: 6px;
-  border: 1.5px solid #E40345;
+  border: 1.5px solid #0284c7;
   background-color: #ffffff;
-  color: #E40345;
+  color: #0284c7;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -255,18 +255,18 @@
 }
 
 .quickAddBtn:hover {
-  background-color: #fff1f2;
+  background-color: #f0f9ff;
 }
 
 .quickAddBtnAdded {
-  background-color: #E40345;
-  border-color: #E40345;
+  background-color: #0284c7;
+  border-color: #0284c7;
   color: #ffffff;
 }
 
 .quickAddBtnAdded:hover {
-  background-color: #c7023c;
-  border-color: #c7023c;
+  background-color: #0369a1;
+  border-color: #0369a1;
 }
 
 /* Text Content below tile */

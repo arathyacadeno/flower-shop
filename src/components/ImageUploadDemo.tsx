@@ -30,7 +30,7 @@ export default function ImageUploadDemo() {
             <button 
               onClick={() => open()}
               style={{
-                background: "#E6004C",
+                background: "#0284c7",
                 color: "white",
                 padding: "10px 16px",
                 border: "none",

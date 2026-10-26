@@ -22,7 +22,7 @@
   font-size: clamp(2.2rem, 3.5vw, 3rem);
   text-transform: uppercase;
   letter-spacing: 0.12em;
-  color: #831843;
+  color: #0369a1;
   margin-bottom: 16px;
 }
 
@@ -64,7 +64,7 @@
   width: 100%;
   height: 100%;
   object-fit: contain;
-  background-color: #FAF4F6;
+  background-color: #f0f7ff;
   transition: transform 0.8s cubic-bezier(0.2, 1, 0.3, 1);
 }
 

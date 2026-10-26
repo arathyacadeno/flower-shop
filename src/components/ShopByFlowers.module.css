@@ -1,6 +1,6 @@
 .sectionWrapper {
   width: 100%;
-  background-color: #fad9e3;
+  background-color: #f0f7ff;
   padding: 68px 0 84px 0;
   position: relative;
   overflow: hidden;
@@ -28,7 +28,7 @@
   font-size: 13px;
   font-weight: 600;
   letter-spacing: 0.12em;
-  color: #db2777;
+  color: #0284c7;
   text-transform: uppercase;
 }
 
@@ -75,7 +75,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  color: #FF5A9A;
+  color: #38bdf8;
 }
 
 /* ================= CAROUSEL OUTER WRAPPER ================= */
@@ -97,7 +97,7 @@
   border-radius: 50%;
   border: 1.5px solid #FCE4F3;
   background: #FFFFFF;
-  color: #FF5A9A;
+  color: #38bdf8;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -117,8 +117,8 @@
 
 .navBtn:hover {
   background: #FFFFFF;
-  border-color: #FF5A9A;
-  color: #FF5A9A;
+  border-color: #38bdf8;
+  color: #38bdf8;
   transform: translateY(-50%) scale(1.08);
   box-shadow: 0 6px 20px rgba(255, 90, 154, 0.25);
 }
@@ -236,7 +236,7 @@
 }
 
 .itemInner:hover .flowerTitle {
-  color: #FF5A9A;
+  color: #38bdf8;
 }
 
 /* ================= RESPONSIVE ================= */

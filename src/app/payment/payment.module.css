@@ -1,8 +1,8 @@
 /* ========================================================
    SINGLE-PAGE CHECKOUT / PAYMENT STYLES
-   - Background: #ffeaee (soft pink)
+   - Background: #f0f7ff (soft pink)
    - Text: #3b2a22 (dark brown)
-   - Active crimson accent: #e4004b
+   - Active crimson accent: #0284c7
    - Inputs: #faf8f3 (filled light background, no border)
    ======================================================== */
 
@@ -10,7 +10,7 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background-color: #ffeaee;
+  background-color: #f0f7ff;
   color: #3b2a22;
   font-family: inherit;
 }
@@ -107,7 +107,7 @@
 .inputField:focus {
   outline: none;
   background-color: #ffffff;
-  box-shadow: 0 0 0 2px #e4004b;
+  box-shadow: 0 0 0 2px #0284c7;
 }
 
 /* Mobile input with prefix */
@@ -122,7 +122,7 @@
 
 .phoneInputWrapper:focus-within {
   background-color: #ffffff;
-  box-shadow: 0 0 0 2px #e4004b;
+  box-shadow: 0 0 0 2px #0284c7;
 }
 
 .phonePrefix {
@@ -168,7 +168,7 @@
 .selectField:focus {
   outline: none;
   background-color: #ffffff;
-  box-shadow: 0 0 0 2px #e4004b;
+  box-shadow: 0 0 0 2px #0284c7;
 }
 
 /* Payment Method Section */
@@ -221,9 +221,9 @@
 }
 
 .activeTabBtn {
-  border-color: #e4004b !important;
-  color: #e4004b;
-  box-shadow: 0 2px 8px rgba(228, 0, 75, 0.12);
+  border-color: #0284c7 !important;
+  color: #0284c7;
+  box-shadow: 0 2px 8px rgba(2, 132, 199, 0.12);
 }
 
 .tabIcon {
@@ -492,7 +492,7 @@
 .couponInput {
   flex: 1;
   background-color: #ffffff;
-  border: 1.5px solid #e4004b;
+  border: 1.5px solid #0284c7;
   border-radius: 8px;
   padding: 10px 14px;
   font-size: 0.88rem;
@@ -502,7 +502,7 @@
 }
 
 .couponInput:focus {
-  box-shadow: 0 0 0 2px rgba(228, 0, 75, 0.2);
+  box-shadow: 0 0 0 2px rgba(2, 132, 199, 0.2);
 }
 
 .couponApplyBtn {
@@ -538,7 +538,7 @@
 /* Place Order Submit Button */
 .placeOrderBtn {
   width: 100%;
-  background-color: #e4004b;
+  background-color: #0284c7;
   color: #ffffff;
   border: none;
   border-radius: 10px;
@@ -551,13 +551,13 @@
   justify-content: center;
   gap: 8px;
   transition: background-color 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
-  box-shadow: 0 4px 14px rgba(228, 0, 75, 0.3);
+  box-shadow: 0 4px 14px rgba(2, 132, 199, 0.3);
 }
 
 .placeOrderBtn:hover:not(:disabled) {
-  background-color: #c7003f;
+  background-color: #0369a1;
   transform: translateY(-1px);
-  box-shadow: 0 6px 18px rgba(228, 0, 75, 0.38);
+  box-shadow: 0 6px 18px rgba(2, 132, 199, 0.38);
 }
 
 .placeOrderBtn:disabled {
@@ -630,8 +630,8 @@
 }
 
 .inputError {
-  border: 1.5px solid #f43f5e !important;
-  background-color: #fff1f2 !important;
+  border: 1.5px solid #0284c7 !important;
+  background-color: #f0f9ff !important;
 }
 
 .pinCheckingText {
@@ -660,9 +660,9 @@
   align-items: flex-start;
   gap: 6px;
   font-size: 0.8rem;
-  color: #9f1239;
-  background-color: #fff1f2;
-  border: 1px solid #fecdd3;
+  color: #0369a1;
+  background-color: #f0f9ff;
+  border: 1px solid #bae6fd;
   border-radius: 6px;
   padding: 8px 10px;
   margin-top: 6px;
@@ -681,7 +681,7 @@
 }
 
 .unavailableText {
-  color: #e11d48;
+  color: #0284c7;
   font-weight: 600;
   font-size: 0.85rem;
 }
@@ -761,7 +761,7 @@
 }
 
 .showQrBtn {
-  background-color: #e4004b;
+  background-color: #0284c7;
   color: #ffffff;
   border: none;
   padding: 6px 12px;
@@ -773,7 +773,7 @@
 }
 
 .showQrBtn:hover {
-  background-color: #c7003f;
+  background-color: #0369a1;
 }
 
 .upiAppsSection {
@@ -908,14 +908,14 @@
 }
 
 .requiredStar {
-  color: #e4004b;
+  color: #0284c7;
   font-weight: 700;
   margin-left: 2px;
 }
 
 .dropdownPillError {
-  border: 1.5px solid #e4004b !important;
-  background-color: #fff5f7 !important;
+  border: 1.5px solid #0284c7 !important;
+  background-color: #f0f9ff !important;
 }
 
 .fieldErrorText {
@@ -923,7 +923,7 @@
   align-items: center;
   gap: 4px;
   font-size: 0.76rem;
-  color: #e4004b;
+  color: #0284c7;
   margin-top: 4px;
   font-weight: 500;
 }
@@ -934,8 +934,8 @@
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  background: #fff8f9;
-  border: 1px solid #fecdd3;
+  background: #f0f9ff;
+  border: 1px solid #bae6fd;
   border-radius: 12px;
   padding: 14px 18px;
   margin-bottom: 24px;
@@ -951,7 +951,7 @@
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  background: #ffe4e6;
+  background: #e0f2fe;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -959,7 +959,7 @@
 }
 
 .authNoticeIcon {
-  color: #e4004b;
+  color: #0284c7;
 }
 
 .authNoticeTitle {
@@ -976,7 +976,7 @@
 }
 
 .authNoticeBtn {
-  background: #e4004b;
+  background: #0284c7;
   color: #ffffff;
   border: none;
   border-radius: 8px;
@@ -989,7 +989,7 @@
 }
 
 .authNoticeBtn:hover {
-  background: #c7003f;
+  background: #0369a1;
 }
 
 .authNoticeFooterNote {
@@ -1018,11 +1018,11 @@
    ======================================================== */
 .savedAddressSection {
   background: #ffffff;
-  border: 1.5px solid rgba(228, 0, 75, 0.18);
+  border: 1.5px solid rgba(2, 132, 199, 0.18);
   border-radius: 12px;
   padding: 16px 18px;
   margin-bottom: 22px;
-  box-shadow: 0 4px 16px rgba(228, 0, 75, 0.05);
+  box-shadow: 0 4px 16px rgba(2, 132, 199, 0.05);
 }
 
 .savedAddressHeader {
@@ -1046,7 +1046,7 @@
 .savedAddressManageLink {
   font-size: 0.82rem;
   font-weight: 600;
-  color: #e4004b;
+  color: #0284c7;
   text-decoration: none;
   display: flex;
   align-items: center;
@@ -1078,15 +1078,15 @@
 }
 
 .savedAddressCard:hover {
-  border-color: #e4004b;
+  border-color: #0284c7;
   background: #ffffff;
-  box-shadow: 0 4px 12px rgba(228, 0, 75, 0.08);
+  box-shadow: 0 4px 12px rgba(2, 132, 199, 0.08);
 }
 
 .savedAddressCardActive {
-  border-color: #e4004b;
-  background: #fff5f7;
-  box-shadow: 0 4px 14px rgba(228, 0, 75, 0.12);
+  border-color: #0284c7;
+  background: #f0f9ff;
+  box-shadow: 0 4px 14px rgba(2, 132, 199, 0.12);
 }
 
 .savedAddressCardTop {
@@ -1101,13 +1101,13 @@
   font-weight: 700;
   padding: 2px 8px;
   border-radius: 20px;
-  background: rgba(228, 0, 75, 0.1);
-  color: #e4004b;
+  background: rgba(2, 132, 199, 0.1);
+  color: #0284c7;
   text-transform: uppercase;
 }
 
 .savedAddressRadio {
-  accent-color: #e4004b;
+  accent-color: #0284c7;
   width: 16px;
   height: 16px;
   cursor: pointer;
@@ -1148,15 +1148,15 @@
 }
 
 .newAddressCard:hover {
-  border-color: #e4004b;
-  color: #e4004b;
+  border-color: #0284c7;
+  color: #0284c7;
   background: #ffffff;
 }
 
 .newAddressCardActive {
-  border-color: #e4004b;
-  background: #fff5f7;
-  color: #e4004b;
+  border-color: #0284c7;
+  background: #f0f9ff;
+  color: #0284c7;
 }
 
 .saveAddressCheckboxRow {
@@ -1165,7 +1165,7 @@
   gap: 10px;
   margin: 14px 0 24px 0;
   padding: 12px 16px;
-  background: #fdf2f5;
+  background: #f0f9ff;
   border-radius: 8px;
   font-size: 0.88rem;
   font-weight: 500;

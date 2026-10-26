@@ -80,7 +80,7 @@
   border-radius: 24px;
   overflow: hidden;
   /* clips the zoomed image */
-  background-color: #FAF4F6;
+  background-color: #f0f7ff;
   box-sizing: border-box;
   cursor: zoom-in;
   user-select: none;

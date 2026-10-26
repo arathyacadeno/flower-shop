@@ -113,8 +113,8 @@ export default function ProductCard({
           <Heart
             size={18}
             strokeWidth={1.5}
-            fill={isWishlisted ? "#db2777" : "none"}
-            color={isWishlisted ? "#db2777" : "#1a1a1a"}
+            fill={isWishlisted ? "#0284c7" : "none"}
+            color={isWishlisted ? "#0284c7" : "#1a1a1a"}
           />
         </button>
 

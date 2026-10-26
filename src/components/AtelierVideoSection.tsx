@@ -187,8 +187,8 @@ export default function AtelierVideoSection() {
             background: "#ffffff",
             borderRadius: "28px",
             overflow: "hidden",
-            border: "1px solid rgba(244, 114, 182, 0.35)",
-            boxShadow: "0 20px 50px -15px rgba(219, 39, 119, 0.12), 0 0 0 1px rgba(255, 255, 255, 0.8)",
+            border: "1px solid rgba(56, 189, 248, 0.35)",
+            boxShadow: "0 20px 50px -15px rgba(2, 132, 199, 0.12), 0 0 0 1px rgba(255, 255, 255, 0.8)",
           }}
         >
           <div
@@ -244,7 +244,7 @@ export default function AtelierVideoSection() {
                   width: "76px",
                   height: "76px",
                   borderRadius: "50%",
-                  background: "rgba(219, 39, 119, 0.88)",
+                  background: "rgba(2, 132, 199, 0.88)",
                   backdropFilter: "blur(8px)",
                   WebkitBackdropFilter: "blur(8px)",
                   border: "2px solid rgba(255, 255, 255, 0.85)",

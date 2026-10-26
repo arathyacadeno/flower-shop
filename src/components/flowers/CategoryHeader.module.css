@@ -68,17 +68,17 @@
 
 .tabItem:hover {
   background-color: #ffffff;
-  color: #e11d48;
-  border-color: #fecdd3;
+  color: #0284c7;
+  border-color: #bae6fd;
   transform: translateY(-1px);
 }
 
 .tabActive {
-  background-color: #e11d48 !important;
+  background-color: #0284c7 !important;
   color: #ffffff !important;
-  border-color: #e11d48 !important;
+  border-color: #0284c7 !important;
   font-weight: 600;
-  box-shadow: 0 4px 12px rgba(225, 29, 72, 0.25);
+  box-shadow: 0 4px 12px rgba(2, 132, 199, 0.25);
 }
 
 .countInfo {

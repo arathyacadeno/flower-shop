@@ -147,9 +147,9 @@
 }
 
 .addToCartBtn:hover {
-  background-color: #C8235E;
+  background-color: #0284c7;
   color: #ffffff;
-  border-color: #C8235E;
+  border-color: #0284c7;
   transform: translateY(-1px);
   box-shadow: 0 4px 12px rgba(200, 35, 94, 0.25);
 }
@@ -161,7 +161,7 @@
 }
 
 .pillBtn {
-  background-color: #C8235E;
+  background-color: #0284c7;
   color: #ffffff;
   border: none;
   border-radius: 9999px;
@@ -172,7 +172,7 @@
 }
 
 .pillBtn:hover {
-  background-color: #A01849;
+  background-color: #0369a1;
   color: #ffffff;
   border-color: transparent;
   transform: translateY(-1px);

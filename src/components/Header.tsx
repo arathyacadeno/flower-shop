@@ -1362,9 +1362,9 @@ export default function Header({
                               router.refresh();
                             }}
                             role="menuitem"
-                            style={{ color: "#e11d48" }}
+                            style={{ color: "#0284c7" }}
                           >
-                            <LogOut size={17} className={styles.profileMenuIcon} style={{ color: "#e11d48" }} />
+                            <LogOut size={17} className={styles.profileMenuIcon} style={{ color: "#0284c7" }} />
                             <span>Sign Out</span>
                           </button>
                         </>
@@ -1493,8 +1493,8 @@ export default function Header({
                         gap: "12px",
                         padding: "10px",
                         borderRadius: "12px",
-                        background: "#fff1f2",
-                        border: "1px solid #ffe4e6",
+                        background: "#f0f9ff",
+                        border: "1px solid #e0f2fe",
                       }}
                     >
                       <img

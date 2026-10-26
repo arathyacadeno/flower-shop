@@ -782,7 +782,7 @@ export default function SinglePageCheckoutPayment() {
               <div className={styles.savedAddressSection}>
                 <div className={styles.savedAddressHeader}>
                   <div className={styles.savedAddressTitle}>
-                    <MapPin size={18} color="#e4004b" />
+                    <MapPin size={18} color="#0284c7" />
                     <span>Select Saved Delivery Address</span>
                   </div>
                   <Link href="/profile" className={styles.savedAddressManageLink}>
@@ -838,7 +838,7 @@ export default function SinglePageCheckoutPayment() {
               </div>
             )}
 
-            <div style={{ backgroundColor: "#fdf2f5", padding: "12px 16px", borderRadius: "8px", marginBottom: "24px" }}>
+            <div style={{ backgroundColor: "#f0f9ff", padding: "12px 16px", borderRadius: "8px", marginBottom: "24px" }}>
               <label style={{ display: "flex", alignItems: "center", gap: "8px", fontSize: "0.95rem", cursor: "pointer", color: "#3b2a22", fontWeight: 500 }}>
                 <input
                   type="checkbox"
@@ -863,7 +863,7 @@ export default function SinglePageCheckoutPayment() {
                       setPinCode("673602");
                     }
                   }}
-                  style={{ accentColor: "#e4004b", width: "18px", height: "18px", cursor: "pointer" }}
+                  style={{ accentColor: "#0284c7", width: "18px", height: "18px", cursor: "pointer" }}
                 />
                 Same as Sender
               </label>
@@ -1046,7 +1046,7 @@ export default function SinglePageCheckoutPayment() {
                   type="checkbox"
                   checked={saveToProfile}
                   onChange={(e) => setSaveToProfile(e.target.checked)}
-                  style={{ accentColor: "#e4004b", width: "18px", height: "18px", cursor: "pointer" }}
+                  style={{ accentColor: "#0284c7", width: "18px", height: "18px", cursor: "pointer" }}
                 />
                 <span>Save / update this delivery address in My Profile for express checkout next time</span>
               </label>

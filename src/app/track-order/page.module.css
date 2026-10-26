@@ -20,20 +20,20 @@
 
 /* ── Hero Banner ─────────────────────────────────────────── */
 .heroBanner {
-  background: linear-gradient(135deg, #F9D7E0 0%, #fce7f0 50%, #fff0f5 100%);
+  background: linear-gradient(135deg, #f0f7ff 0%, #e0f2fe 50%, #f0f9ff 100%);
   border-radius: 28px;
   padding: 40px 36px 36px 36px;
   text-align: center;
   margin-bottom: 36px;
-  box-shadow: 0 4px 24px rgba(230, 0, 76, 0.08);
+  box-shadow: 0 4px 24px rgba(2, 132, 199, 0.08);
 }
 
 .heroBadge {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  background: rgba(230, 0, 76, 0.1);
-  color: #E6004C;
+  background: rgba(2, 132, 199, 0.1);
+  color: #0284c7;
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.06em;
@@ -81,8 +81,8 @@
 }
 
 .searchBox:focus-within {
-  border-color: #E6004C;
-  box-shadow: 0 0 0 3px rgba(230, 0, 76, 0.08);
+  border-color: #0284c7;
+  box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.08);
 }
 
 .searchIcon {
@@ -111,7 +111,7 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  background: #E6004C;
+  background: #0284c7;
   color: #ffffff;
   border: none;
   border-radius: 12px;
@@ -125,7 +125,7 @@
 }
 
 .searchBtn:hover {
-  background: #c70040;
+  background: #0369a1;
   transform: translateY(-1px);
 }
 
@@ -283,7 +283,7 @@
 }
 
 .orderIdIcon {
-  color: #E6004C;
+  color: #0284c7;
 }
 
 .orderIdLabel {
@@ -342,7 +342,7 @@
   border-radius: 12px;
   overflow: hidden;
   flex-shrink: 0;
-  background: #f9d7e0;
+  background: #f0f7ff;
 }
 
 .productImage {
@@ -410,7 +410,7 @@
 }
 
 .detailIcon {
-  color: #E6004C;
+  color: #0284c7;
   flex-shrink: 0;
 }
 
@@ -459,7 +459,7 @@
 }
 
 .timelineLineActive {
-  background: linear-gradient(180deg, #E6004C, #f472b6);
+  background: linear-gradient(180deg, #0284c7, #38bdf8);
 }
 
 .timelineNode {
@@ -481,15 +481,15 @@
 }
 
 .nodeCurrent {
-  background: #E6004C;
+  background: #0284c7;
   color: #ffffff;
-  box-shadow: 0 0 0 4px rgba(230, 0, 76, 0.15);
+  box-shadow: 0 0 0 4px rgba(2, 132, 199, 0.15);
   animation: pulse 2s infinite;
 }
 
 @keyframes pulse {
-  0%, 100% { box-shadow: 0 0 0 4px rgba(230, 0, 76, 0.15); }
-  50%       { box-shadow: 0 0 0 7px rgba(230, 0, 76, 0.08); }
+  0%, 100% { box-shadow: 0 0 0 4px rgba(2, 132, 199, 0.15); }
+  50%       { box-shadow: 0 0 0 7px rgba(2, 132, 199, 0.08); }
 }
 
 .nodeFuture {
@@ -521,7 +521,7 @@
 
 .timelineSub {
   font-size: 12px;
-  color: #E6004C;
+  color: #0284c7;
   font-style: italic;
   white-space: nowrap;
 }
@@ -551,9 +551,9 @@
 }
 
 .supportBtn:hover {
-  border-color: #E6004C;
-  color: #E6004C;
-  background: #fff5f7;
+  border-color: #0284c7;
+  color: #0284c7;
+  background: #f0f9ff;
 }
 
 /* ── Help Banner ────────────────────────────────────────── */

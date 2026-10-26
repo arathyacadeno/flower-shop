@@ -48,7 +48,7 @@
 }
 
 .closeBtn:hover {
-  background: #831843;
+  background: #0369a1;
   color: #fff;
 }
 
@@ -81,7 +81,7 @@
 .modalTitle {
   font-family: var(--font-serif);
   font-size: 2rem;
-  color: #831843;
+  color: #0369a1;
   margin-bottom: 6px;
 }
 
@@ -129,7 +129,7 @@
   font-weight: 600;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: #831843;
+  color: #0369a1;
   margin-bottom: 8px;
 }
 
@@ -159,7 +159,7 @@
 }
 
 .specsGrid strong {
-  color: #831843;
+  color: #0369a1;
   display: block;
 }
 
@@ -193,7 +193,7 @@
 
 .modalAddBtn {
   flex-grow: 1;
-  background: #831843;
+  background: #0369a1;
   color: #ffffff;
   border: none;
   font-family: var(--font-sans);

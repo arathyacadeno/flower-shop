@@ -313,9 +313,9 @@
 }
 
 .alertError {
-  background: #fff1f2;
-  color: #be123c;
-  border: 1px solid #fecdd3;
+  background: #f0f9ff;
+  color: #0369a1;
+  border: 1px solid #bae6fd;
   padding: 12px 16px;
   border-radius: 12px;
   margin-bottom: 20px;
@@ -420,11 +420,11 @@
 }
 
 .addressDeleteBtn {
-  color: #e11d48;
+  color: #0284c7;
 }
 
 .addressDeleteBtn:hover {
-  background: #fff1f2;
+  background: #f0f9ff;
 }
 
 .addAddressBox {

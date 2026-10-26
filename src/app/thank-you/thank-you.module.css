@@ -98,7 +98,7 @@
 .pillCategory {
   font-size: 0.72rem;
   font-weight: 700;
-  color: #E90046;
+  color: #0284c7;
   letter-spacing: 0.06em;
   display: block;
   margin-bottom: 2px;
@@ -155,7 +155,7 @@
 .pageSubtitle {
   font-size: 1.05rem;
   font-weight: 600;
-  color: #c21460;
+  color: #0284c7;
   margin: 0 0 4px 0;
 }
 
@@ -326,7 +326,7 @@
   align-items: center;
   justify-content: center;
   gap: 10px;
-  background-color: #c21460;
+  background-color: #0284c7;
   color: #ffffff;
   border: none;
   border-radius: 12px;
@@ -342,7 +342,7 @@
 }
 
 .continueShoppingBtn:hover {
-  background-color: #a3104e;
+  background-color: #0369a1;
   transform: translateY(-1px);
   box-shadow: 0 6px 18px rgba(194, 20, 96, 0.35);
 }

@@ -2,7 +2,7 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background-color: #FAD9E3;
+  background-color: #f0f7ff;
 }
 
 .mainContainer {
@@ -187,7 +187,7 @@
   width: 90px;
   height: 90px;
   border-radius: 14px;
-  object-fit: cover;
+  object-fit: contain;
   border: 1px solid #f1f5f9;
   flex-shrink: 0;
   display: block;
@@ -320,7 +320,7 @@
 .emptyStateCard {
   background: #ffffff;
   border-radius: 28px;
-  border: 1px solid #fce7f3;
+  border: 1px solid #dbeafe;
   padding: 56px 36px 48px;
   text-align: center;
   display: flex;
@@ -390,7 +390,7 @@
   max-width: 520px;
   margin: 40px auto;
   box-shadow: 0 16px 40px rgba(0, 0, 0, 0.05);
-  border: 1px solid #fce7f3;
+  border: 1px solid #dbeafe;
   display: flex;
   flex-direction: column;
   align-items: center;

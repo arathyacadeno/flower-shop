@@ -58,18 +58,18 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  background: linear-gradient(135deg, rgba(219, 39, 119, 0.2), rgba(244, 114, 182, 0.1));
-  border: 1px solid rgba(244, 114, 182, 0.3);
+  background: linear-gradient(135deg, rgba(2, 132, 199, 0.2), rgba(56, 189, 248, 0.1));
+  border: 1px solid rgba(56, 189, 248, 0.3);
   padding: 4px 12px;
   border-radius: 9999px;
-  color: #f472b6;
+  color: #0284c7;
   font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.1em;
 }
 
 .sparkleIcon {
-  color: #fb7185;
+  color: #38bdf8;
 }
 
 .closeBtn {
@@ -87,8 +87,8 @@
 }
 
 .closeBtn:hover {
-  background: rgba(219, 39, 119, 0.8);
-  border-color: #db2777;
+  background: rgba(2, 132, 199, 0.8);
+  border-color: #0284c7;
   transform: rotate(90deg);
 }
 
@@ -130,7 +130,7 @@
 
 .progressBar {
   height: 100%;
-  background: linear-gradient(90deg, #ec4899, #f43f5e);
+  background: linear-gradient(90deg, #38bdf8, #0284c7);
   transition: width 0.1s linear;
 }
 
@@ -167,8 +167,8 @@
 }
 
 .ctrlBtn:hover {
-  background: #db2777;
-  border-color: #db2777;
+  background: #0284c7;
+  border-color: #0284c7;
   transform: scale(1.08);
 }
 

@@ -118,7 +118,7 @@ export default function AtelierVideoSection() {
       ref={sectionRef}
       className={`${styles.sectionWrapper || ""} atelier-section-wrapper`}
       id="atelier-film-showcase"
-      aria-label="Occassions Atelier Film"
+      aria-label="AVELISSE Atelier Film"
       style={{
         width: "100%",
         maxWidth: "1360px",
@@ -141,7 +141,7 @@ export default function AtelierVideoSection() {
             style={{
               fontFamily: "var(--font-script, 'Great Vibes', cursive)",
               fontSize: "clamp(2.2rem, 3.4vw, 3.2rem)",
-              color: "#db2777",
+              color: "#0284c7",
               marginBottom: "6px",
               lineHeight: 1.1,
               textAlign: "left",
@@ -295,7 +295,7 @@ export default function AtelierVideoSection() {
                   style={{
                     width: `${progress}%`,
                     height: "100%",
-                    background: "linear-gradient(90deg, #f472b6, #ec4899, #f43f5e)",
+                    background: "linear-gradient(90deg, #38bdf8, #0ea5e9, #0284c7)",
                   }}
                 />
               </div>

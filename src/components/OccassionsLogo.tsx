@@ -22,7 +22,7 @@ export default function OccassionsLogo({
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className={className}
-      aria-label="Occassions - Do it with flowers"
+      aria-label="AVELISSE - Do it with flowers"
       style={{ display: "block", overflow: "visible" }}
     >
       <defs>
@@ -97,7 +97,7 @@ export default function OccassionsLogo({
         />
       </g>
 
-      {/* 2. THE WORDMARK 'Occassions' (in vibrant emerald green brush script) */}
+      {/* 2. THE WORDMARK 'AVELISSE' (in vibrant emerald green brush script) */}
       <g transform="translate(10, 28) rotate(-4)">
         {/* Rendered with playful cursive hand-lettered style from the card */}
         <text
@@ -112,7 +112,7 @@ export default function OccassionsLogo({
             filter: "drop-shadow(0 1px 1px rgba(21, 100, 42, 0.25))",
           }}
         >
-          Occassions
+          AVELISSE
         </text>
       </g>
 

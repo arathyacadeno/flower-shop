@@ -2,7 +2,7 @@
   position: relative;
   width: 100%;
   height: min(calc(100svh - 78px), 800px); /* never taller than the screen or 800px */
-  background-color: #FAD9E3;
+  background-color: #ffffff;
   overflow: hidden;
   user-select: none;
   cursor: pointer;

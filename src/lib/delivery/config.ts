@@ -34,7 +34,7 @@ export interface DeliveryZoneConfig {
 export const SHOPS: ShopConfig[] = [
   {
     id: "occasions-main",
-    name: "Occasions Florist – Kozhikode Main",
+    name: "AVELISSE Florist – Kozhikode Main",
     pinCode: "673001",
     // Kozhikode (Calicut) city centre, approximate coords for PIN 673001
     lat: 11.2588,

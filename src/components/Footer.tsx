@@ -44,10 +44,10 @@ export default function Footer() {
         <div className={styles.mainGrid}>
           {/* Brand */}
           <div className={styles.brandCol}>
-            <Link href="/" className={styles.logoLink} aria-label="Occasions Home">
+            <Link href="/" className={styles.logoLink} aria-label="AVELISSE Home">
               <img
-                src="/images/occasions-logo.png"
-                alt="Occasions - Do it with flowers"
+                src="/images/footer-logo.png"
+                alt="AVELISSE - Beautifully Made for Every Occasion"
                 className={styles.logoImg}
               />
             </Link>
@@ -98,10 +98,10 @@ export default function Footer() {
                 <Link href="/contact" className={styles.navLink}>Contact Us</Link>
               </li>
               <li>
-                <a href="#our-story" className={styles.navLink}>About Us</a>
+                <Link href="/about" className={styles.navLink}>About Us</Link>
               </li>
               <li>
-                <a href="#faq" className={styles.navLink}>FAQs</a>
+                <Link href="/faq" className={styles.navLink}>FAQs</Link>
               </li>
               <li>
                 <Link href="/privacy-policy" className={styles.navLink}>
@@ -208,7 +208,7 @@ export default function Footer() {
 
         {/* ================= COPYRIGHT ================= */}
         <div className={styles.copyrightRow}>
-          © 2026 Occassions - Do it with flowers. All Rights Reserved.
+          © 2026 AVELISSE - Do it with flowers. All Rights Reserved.
         </div>
       </div>
     </footer>

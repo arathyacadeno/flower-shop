@@ -3,7 +3,7 @@ import CategoryPage from "@/components/CategoryPage";
 import { getFlowerBouquets } from "@/data/catalog";
 
 export const metadata: Metadata = {
-  title: "Flower Bouquets | Occassions Florist Calicut",
+  title: "Flower Bouquets | AVELISSE Florist Calicut",
   description:
     "Handcrafted fresh floral bouquets featuring premium Dutch roses, orchids, sunflowers & seasonal blooms.",
 };

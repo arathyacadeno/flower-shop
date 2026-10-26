@@ -2,7 +2,7 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background-color: #FADAE5;
+  background-color: #f0f7ff;
 }
 
 .mainContainer {
@@ -42,7 +42,7 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: #E40345;
+  color: #0284c7;
   margin-bottom: 6px;
 }
 
@@ -248,7 +248,7 @@
 .cardImg {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   transition: transform 0.3s ease;
 }
 
@@ -260,7 +260,7 @@
   position: absolute;
   top: 12px;
   left: 12px;
-  background-color: #db2777;
+  background-color: #0284c7;
   color: #ffffff;
   font-size: 0.72rem;
   font-weight: 700;
@@ -305,7 +305,7 @@
 }
 
 .productTitle:hover {
-  color: #db2777;
+  color: #0284c7;
 }
 
 .priceRow {

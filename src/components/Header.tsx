@@ -19,6 +19,7 @@ import {
   ShieldCheck,
   ChevronDown,
 } from "lucide-react";
+import { getSearchRoute } from "@/lib/searchRoutes";
 import { useCart } from "@/context/CartContext";
 import { useWishlist } from "@/context/WishlistContext";
 import { useAuth } from "@/context/AuthContext";
@@ -703,64 +704,13 @@ export default function Header({
   const handleSearchSubmit = (term: string) => {
     const rawTerm = term.trim();
     if (!rawTerm) return;
-    const q = rawTerm.toLowerCase();
-    const encoded = encodeURIComponent(rawTerm);
     setSearchQuery(rawTerm);
 
-    if (q.includes("cake")) {
-      router.push(`/cakes?search=${encoded}`);
-      return;
-    } else if (q.includes("basket")) {
-      router.push(`/flower-baskets?search=${encoded}`);
-      return;
-    } else if (q.includes("rose")) {
-      router.push(`/flowers/roses?search=${encoded}`);
-      return;
-    } else if (q.includes("tulip")) {
-      router.push(`/flowers/tulips?search=${encoded}`);
-      return;
-    } else if (q.includes("sunflower")) {
-      router.push(`/flowers/sunflowers?search=${encoded}`);
-      return;
-    } else if (q.includes("lilies") || q.includes("lily")) {
-      router.push(`/flowers/lilies?search=${encoded}`);
-      return;
-    } else if (q.includes("orchid")) {
-      router.push(`/flower-bouquets?flower=orchids&search=${encoded}`);
-      return;
-    } else if (q.includes("bouquet") || q.includes("flower")) {
-      router.push(`/flower-bouquets?search=${encoded}`);
-      return;
-    } else if (q.includes("table") || q.includes("centerpiece")) {
-      router.push(`/table-decor?search=${encoded}`);
-      return;
-    } else if (q.includes("wreath")) {
-      router.push(`/wreaths?search=${encoded}`);
-      return;
-    } else if (q.includes("garland") || q.includes("varmala")) {
-      handleNavCategory("Flower baskets & garlands", 1);
-      return;
-    } else if (
-      q.includes("contact") ||
-      q.includes("phone") ||
-      q.includes("location") ||
-      q.includes("address")
-    ) {
-      setDrawerOpen(true);
-      return;
+    const matchedRoute = getSearchRoute(rawTerm);
+    if (matchedRoute) {
+      router.push(matchedRoute);
     } else {
-      if (pathname === "/cakes") {
-        router.push(`/cakes?search=${encoded}`);
-      } else if (pathname === "/flower-baskets") {
-        router.push(`/flower-baskets?search=${encoded}`);
-      } else if (pathname === "/table-decor") {
-        router.push(`/table-decor?search=${encoded}`);
-      } else if (pathname === "/wreaths") {
-        router.push(`/wreaths?search=${encoded}`);
-      } else {
-        router.push(`/flower-bouquets?search=${encoded}`);
-      }
-      return;
+      router.push(`/search?q=${encodeURIComponent(rawTerm)}`);
     }
   };
 
@@ -802,11 +752,11 @@ export default function Header({
           <Link
             href="/"
             className={styles.brandArea}
-            aria-label="Occasions - Do it with flowers"
+            aria-label="AVELISSE - Do it with flowers"
           >
             <img
               src="/images/occasions-logo.png"
-              alt="Occasions - Do it with flowers"
+              alt="AVELISSE - Do it with flowers"
               className={styles.brandMasterLogo}
             />
           </Link>
@@ -866,7 +816,7 @@ export default function Header({
                             className={styles.dropdownItemLink}
                             onClick={() => setFlowersHovered(false)}
                           >
-                            Flowers in basket
+                            Flowers in Basket
                           </Link>
                         </li>
                         <li>
@@ -887,7 +837,7 @@ export default function Header({
                               setFlowersHovered(false);
                             }}
                           >
-                            Shop by flowers
+                            Shop by Flowers
                           </Link>
                         </li>
                       </ul>
@@ -1225,7 +1175,11 @@ export default function Header({
                 className={styles.searchIconLabel}
                 onClick={(e) => {
                   e.stopPropagation();
-                  searchInputRef.current?.focus();
+                  if (searchQuery.trim()) {
+                    handleSearchSubmit(searchQuery.trim());
+                  } else {
+                    searchInputRef.current?.focus();
+                  }
                 }}
                 title="Search"
               >
@@ -1239,6 +1193,14 @@ export default function Header({
                 placeholder={animatedPlaceholder}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    e.preventDefault();
+                    if (searchQuery.trim()) {
+                      handleSearchSubmit(searchQuery.trim());
+                    }
+                  }
+                }}
                 aria-label="Search for flowers, cakes and gifts"
                 autoComplete="off"
                 autoCorrect="off"
@@ -1566,7 +1528,7 @@ export default function Header({
                         style={{
                           fontWeight: 700,
                           fontSize: "0.92rem",
-                          color: "#be185d",
+                          color: "#0284c7",
                         }}
                       >
                         ₹{(item.bouquet.price * item.quantity).toLocaleString("en-IN")}
@@ -1588,7 +1550,7 @@ export default function Header({
                   <span style={{ fontWeight: 600, color: "#334155", fontSize: "0.95rem" }}>
                     Subtotal
                   </span>
-                  <span style={{ fontWeight: 800, color: "#be185d", fontSize: "1.1rem" }}>
+                  <span style={{ fontWeight: 800, color: "#0284c7", fontSize: "1.1rem" }}>
                     ₹{cartSubtotal.toLocaleString("en-IN")}
                   </span>
                 </div>
@@ -1604,9 +1566,9 @@ export default function Header({
                       flex: 1,
                       padding: "10px",
                       borderRadius: "10px",
-                      border: "1px solid #fda4af",
+                      border: "1px solid #bae6fd",
                       background: "#fff",
-                      color: "#be185d",
+                      color: "#0284c7",
                       fontWeight: 600,
                       cursor: "pointer",
                       fontSize: "0.85rem",
@@ -1643,7 +1605,7 @@ export default function Header({
           >
             <div className={styles.modalHeader}>
               <h3 id="signin-modal-title" className={styles.modalTitle}>
-                {authTab === "signin" ? "Sign In to Occassions" : "Create Your Account"}
+                {authTab === "signin" ? "Sign In to AVELISSE" : "Create Your Account"}
               </h3>
               <button
                 className={styles.modalCloseBtn}
@@ -1887,10 +1849,10 @@ export default function Header({
             </button>
 
             <div style={{ marginTop: 18, fontSize: "0.75rem", color: "#64748b", textAlign: "center", lineHeight: 1.5 }}>
-              By continuing, you agree to Occassions{" "}
-              <span style={{ color: "#db2777", fontWeight: 600 }}>Terms of Service</span>
+              By continuing, you agree to AVELISSE{" "}
+              <span style={{ color: "#0284c7", fontWeight: 600 }}>Terms of Service</span>
               {" "}&amp;{" "}
-              <span style={{ color: "#db2777", fontWeight: 600 }}>Privacy Policy</span>.
+              <span style={{ color: "#0284c7", fontWeight: 600 }}>Privacy Policy</span>.
               Fast checkout for all floral arrangements.
             </div>
           </div>
@@ -1919,7 +1881,7 @@ export default function Header({
             <div style={{ marginBottom: 12 }}>
               <img
                 src="/images/occasions-logo.png"
-                alt="Occassions - Do it with flowers"
+                alt="AVELISSE - Do it with flowers"
                 style={{
                   height: 72,
                   width: "auto",
@@ -2083,6 +2045,13 @@ export default function Header({
               ▶ Wreaths
             </Link>
             <Link
+              href="/about"
+              onClick={() => setDrawerOpen(false)}
+              style={{ color: "inherit", textDecoration: "none" }}
+            >
+              ▶ About Us
+            </Link>
+            <Link
               href="/contact"
               onClick={() => setDrawerOpen(false)}
               style={{ color: "inherit", textDecoration: "none" }}
@@ -2123,7 +2092,7 @@ export default function Header({
             <p style={{ marginTop: 10 }}>
               <strong>Email:</strong>
               <br />
-              ✉️ occassions.flowers@gmail.com
+              ✉️ avelisse.flowers@gmail.com
             </p>
           </div>
 

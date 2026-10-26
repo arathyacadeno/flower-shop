@@ -27,7 +27,7 @@ const TESTIMONIALS_DATA: TestimonialItem[] = [
     id: 2,
     headline: "“Best flower shop in Kozhikode!”",
     quote:
-      "Best flower shop in Kozhikode! The decoration for our event was breathtaking. Very professional, creative, and attentive team at Occasions. Will definitely choose them again.",
+      "Best flower shop in Kozhikode! The decoration for our event was breathtaking. Very professional, creative, and attentive team at AVELISSE. Will definitely choose them again.",
     name: "SNEHA MENON",
     rating: 5,
     quotePosition: "right",
@@ -54,7 +54,7 @@ const TESTIMONIALS_DATA: TestimonialItem[] = [
     id: 5,
     headline: "“Breathtaking wedding decor”",
     quote:
-      "Exceptional floral arrangements for our wedding reception. Everyone praised the stage decor and fresh bloom bouquets. Thank you Occasions - Do It With Flowers!",
+      "Exceptional floral arrangements for our wedding reception. Everyone praised the stage decor and fresh bloom bouquets. Thank you AVELISSE - Do It With Flowers!",
     name: "FATHIMA ZAHRA",
     rating: 5,
     quotePosition: "right",
@@ -72,7 +72,7 @@ const TESTIMONIALS_DATA: TestimonialItem[] = [
     id: 7,
     headline: "“Polite service & stunning flowers”",
     quote:
-      "Wonderful experience with Occasions! Sreejesh was extremely polite and accommodating. The flower arrangement was fresh, beautifully styled, and delivered right on time in Calicut.",
+      "Wonderful experience with AVELISSE! Sreejesh was extremely polite and accommodating. The flower arrangement was fresh, beautifully styled, and delivered right on time in Calicut.",
     name: "ANANTHU KRISHNAN",
     rating: 5,
     quotePosition: "left",
@@ -108,7 +108,7 @@ const TESTIMONIALS_DATA: TestimonialItem[] = [
     id: 11,
     headline: "“Lush engagement stage backdrop”",
     quote:
-      "Occasions designed our engagement stage floral backdrop and bridal bouquets. The blooms were lush, fragrant, and stayed fresh throughout the event. Best event florists in town!",
+      "AVELISSE designed our engagement stage floral backdrop and bridal bouquets. The blooms were lush, fragrant, and stayed fresh throughout the event. Best event florists in town!",
     name: "MIDHUN GEORGE",
     rating: 5,
     quotePosition: "left",
@@ -357,9 +357,7 @@ export default function Testimonials() {
                 );
               })}
             </div>
-            <div className={styles.counterText}>
-              Review {(((active % total) + total) % total) + 1} of {total} • Real Google Reviews
-            </div>
+            
           </div>
         </div>
       </div>

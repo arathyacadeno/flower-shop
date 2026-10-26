@@ -44,7 +44,7 @@ export const FESTIVE_BANNERS: BannerSlide[] = [
     subtitle: "Celebrate Mom with Heartfelt Blooms & Gifts",
     image: "/images/banners/mothers day.jpg.jpeg",
     href: "/occasions",
-    accent: "#ec4899"
+    accent: "#0284c7"
   }
 ];
 

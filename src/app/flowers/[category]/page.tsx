@@ -13,22 +13,22 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { category } = await params;
   if (category === "bouquets") {
     return {
-      title: "Flower Bouquets | Occassions Florist Calicut",
+      title: "Flower Bouquets | AVELISSE Florist Calicut",
       description: "Handcrafted fresh floral bouquets featuring premium Dutch roses, lilies, tulips & seasonal blooms.",
     };
   }
   if (category === "baskets" || category === "flower-baskets") {
     return {
-      title: "Flower Baskets | Occassions Florist Calicut",
+      title: "Flower Baskets | AVELISSE Florist Calicut",
       description: "Artisanal hand-woven baskets brimming with fresh roses, peonies, baby's breath & fragrant greenery.",
     };
   }
   const info = getCategoryInfo(category);
   return {
-    title: `${info.name} Collection | Occasions Flower Shop Calicut`,
+    title: `${info.name} Collection | AVELISSE Flower Shop Calicut`,
     description: info.description,
     openGraph: {
-      title: `${info.title} - Occasions Flowers`,
+      title: `${info.title} - AVELISSE Flowers`,
       description: info.headline,
       images: info.heroImage ? [{ url: info.heroImage }] : undefined,
     },

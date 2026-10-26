@@ -77,15 +77,15 @@
 .emptyContainer {
   text-align: center;
   padding: 64px 24px;
-  background-color: #fdf2f8;
+  background-color: #f0f7ff;
   border-radius: 24px;
-  border: 1px dashed #fbcfe8;
+  border: 1px dashed #bae6fd;
   max-width: 600px;
   margin: 32px auto;
 }
 
 .emptyIcon {
-  color: #db2777;
+  color: #0284c7;
   margin-bottom: 16px;
 }
 

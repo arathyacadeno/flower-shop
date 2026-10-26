@@ -3,7 +3,7 @@ import CategoryPage from "@/components/CategoryPage";
 import { getFlowerBaskets } from "@/data/catalog";
 
 export const metadata: Metadata = {
-  title: "Flower Baskets | Occassions Florist Calicut",
+  title: "Flower Baskets | AVELISSE Florist Calicut",
   description:
     "Artisanal hand-woven baskets brimming with fresh roses, peonies, baby's breath & fragrant greenery.",
 };

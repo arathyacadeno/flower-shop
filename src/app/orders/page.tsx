@@ -262,7 +262,7 @@ export default function OrdersPage() {
                 : orders.length > 0
                 ? `Welcome back, ${user?.name || "Customer"}. You have placed ${orders.length} ${
                     orders.length === 1 ? "order" : "orders"
-                  } with Occassions Florist.`
+                  } with AVELISSE Florist.`
                 : "You haven't placed any orders with this account yet."}
             </p>
           </div>

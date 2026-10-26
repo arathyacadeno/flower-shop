@@ -2,7 +2,7 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background-color: #FAD9E3;
+  background-color: #f0f7ff;
 }
 
 .mainContainer {
@@ -286,7 +286,7 @@
   width: 90px;
   height: 90px;
   border-radius: 12px;
-  object-fit: cover;
+  object-fit: contain;
   border: 1px solid #e2e8f0;
   flex-shrink: 0;
 }
@@ -485,7 +485,8 @@
   width: 58px;
   height: 58px;
   border-radius: 10px;
-  object-fit: cover;
+  object-fit: contain;
+  background-color: #FAF4F6;
   border: 1px solid #e2e8f0;
 }
 

@@ -17,7 +17,7 @@ export default function VideoModal({
   onClose,
   videoSrc = "/videos/hero-florist.mp4",
   title = "The Atelier Floristry Film",
-  subtitle = "Behind the scenes at Occassions Luxury Floral Boutique, Calicut",
+  subtitle = "Behind the scenes at AVELISSE Luxury Floral Boutique, Calicut",
 }: VideoModalProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(true);

@@ -43,13 +43,13 @@
   color: #4B5563;
 }
 
-/* ================= PINK PANEL ================= */
+/* ================= LIGHT BLUE PANEL ================= */
 .categoryPanel {
   width: calc(100% - 72px);
   max-width: 1654px;
   margin: 0 auto;
   padding: 40px 72px 56px 72px;
-  background-color: #FAD9E3;
+  background-color: #f0f7ff;
   border-radius: 56px;
   box-sizing: border-box;
 }
@@ -64,13 +64,13 @@
   width: 100%;
   margin: 0 0 32px 0;
   padding: 0 0 22px 0;
-  border-bottom: 1px solid rgba(60, 15, 30, 0.08);
+  border-bottom: 1px solid rgba(2, 132, 199, 0.12);
   box-sizing: border-box;
 }
 
 .filterPill {
-  background-color: #F1EEF0;
-  color: #4A2535;
+  background-color: #e0f2fe;
+  color: #0369a1;
   border: none;
   font-family: 'Plus Jakarta Sans', 'Manrope', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   font-weight: 500;
@@ -89,12 +89,12 @@
 }
 
 .filterPill:hover {
-  background-color: #E6DDE1;
-  color: #4A2535;
+  background-color: #bae6fd;
+  color: #0284c7;
 }
 
 .filterPillActive {
-  background-color: #C8235E !important;
+  background-color: #0284c7 !important;
   color: #FFFFFF !important;
   font-weight: 600;
   box-shadow: none !important;
@@ -124,7 +124,7 @@
   text-align: center;
   font-family: 'Plus Jakarta Sans', var(--font-sans), -apple-system, sans-serif;
   font-size: 15px;
-  color: #7B5A65;
+  color: #64748b;
 }
 
 /* ================= BUTTONS ================= */
@@ -190,7 +190,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background-color: #db2777;
+  background-color: #0284c7;
   color: #ffffff;
   border: none;
   border-radius: 14px;
@@ -199,13 +199,13 @@
   font-weight: 600;
   cursor: pointer;
   transition: all 0.22s ease;
-  box-shadow: 0 4px 14px rgba(219, 39, 119, 0.25);
+  box-shadow: 0 4px 14px rgba(2, 132, 199, 0.25);
 }
 
 .buyNowBtn:hover {
-  background-color: #be185d;
+  background-color: #0369a1;
   transform: translateY(-1px);
-  box-shadow: 0 6px 18px rgba(219, 39, 119, 0.35);
+  box-shadow: 0 6px 18px rgba(2, 132, 199, 0.35);
 }
 
 /* ================= RESPONSIVE ================= */

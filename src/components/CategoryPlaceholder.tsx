@@ -92,7 +92,7 @@ export default function CategoryPlaceholder({
                       <span className={styles.photoPrice}>{item.price}</span>
                       <a
                         href={`https://wa.me/918606464700?text=${encodeURIComponent(
-                          `Hello Occassions Florist Calicut, I would like to order/inquire about "${item.title}" (${item.price}) from the ${title} collection.`
+                          `Hello AVELISSE Florist Calicut, I would like to order/inquire about "${item.title}" (${item.price}) from the ${title} collection.`
                         )}`}
                         target="_blank"
                         rel="noopener noreferrer"

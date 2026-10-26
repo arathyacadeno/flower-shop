@@ -195,10 +195,10 @@ export default function ProfilePage() {
         <Navbar />
         <main className={styles.mainContainer}>
           <div style={{ textAlign: "center", padding: "80px 20px" }}>
-            <UserIcon size={48} color="#db2777" style={{ margin: "0 auto 16px" }} />
+            <UserIcon size={48} color="#0284c7" style={{ margin: "0 auto 16px" }} />
             <h1 className={styles.pageTitle}>Account Access Required</h1>
             <p className={styles.pageSubtitle} style={{ marginBottom: 24 }}>
-              Please sign in to manage your Occassions floral profile, saved delivery addresses, and order history.
+              Please sign in to manage your AVELISSE floral profile, saved delivery addresses, and order history.
             </p>
             <Link href="/" className={styles.saveBtn} style={{ textDecoration: "none" }}>
               Go to Home & Sign In
@@ -466,7 +466,7 @@ export default function ProfilePage() {
                     <p style={{ color: "#64748b" }}>Loading saved addresses...</p>
                   ) : addresses.length === 0 && !showAddAddress ? (
                     <div style={{ textAlign: "center", padding: "40px 0", color: "#64748b" }}>
-                      <MapPin size={36} color="#db2777" style={{ margin: "0 auto 12px" }} />
+                      <MapPin size={36} color="#0284c7" style={{ margin: "0 auto 12px" }} />
                       <p>You haven&apos;t saved any delivery addresses yet.</p>
                       <button
                         type="button"

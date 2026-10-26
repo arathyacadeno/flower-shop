@@ -3,7 +3,7 @@ import CategoryPage from "@/components/CategoryPage";
 import { getProductsByCategory } from "@/data/catalog";
 
 export const metadata: Metadata = {
-  title: "Wreaths | Occassions Florist Calicut",
+  title: "Wreaths | AVELISSE Florist Calicut",
   description:
     "Handcrafted tribute wreaths, standing easels & sacred cross floral tributes crafted with utmost grace & devotion.",
 };

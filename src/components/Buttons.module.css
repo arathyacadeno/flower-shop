@@ -17,38 +17,37 @@
 }
 
 .addToCartBtn:hover {
-  background-color: #C8235E;
+  background-color: #0284c7;
   color: #ffffff;
-  border-color: #C8235E;
+  border-color: #0284c7;
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(200, 35, 94, 0.25);
+  box-shadow: 0 4px 12px rgba(2, 132, 199, 0.25);
 }
 
 .addToCartBtn.addedState {
-  background-color: #1F7A4B;
+  background-color: #059669;
   color: #ffffff;
-  border-color: #1F7A4B;
+  border-color: #059669;
 }
 
 .pillBtn {
-  background-color: #C8235E;
+  background-color: #0284c7;
   color: #ffffff;
   border: none;
   border-radius: 9999px;
   padding: 10px 20px;
   font-size: 0.92rem;
   font-weight: 600;
-  box-shadow: 0 3px 12px rgba(200, 35, 94, 0.22);
+  box-shadow: 0 3px 12px rgba(2, 132, 199, 0.22);
 }
 
 .pillBtn:hover {
-  background-color: #A01849;
+  background-color: #0369a1;
   color: #ffffff;
   border-color: transparent;
   transform: translateY(-1px);
-  box-shadow: 0 6px 16px rgba(200, 35, 94, 0.32);
+  box-shadow: 0 6px 16px rgba(2, 132, 199, 0.32);
 }
-
 
 .largeBtn {
   padding: 14px 28px;
@@ -61,7 +60,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background-color: #db2777;
+  background-color: #0284c7;
   color: #ffffff;
   border: none;
   border-radius: 14px;
@@ -70,13 +69,13 @@
   font-weight: 600;
   cursor: pointer;
   transition: all 0.22s ease;
-  box-shadow: 0 4px 14px rgba(219, 39, 119, 0.25);
+  box-shadow: 0 4px 14px rgba(2, 132, 199, 0.25);
 }
 
 .buyNowBtn:hover {
-  background-color: #be185d;
+  background-color: #0369a1;
   transform: translateY(-1px);
-  box-shadow: 0 6px 18px rgba(219, 39, 119, 0.35);
+  box-shadow: 0 6px 18px rgba(2, 132, 199, 0.35);
 }
 
 .qtySelector {
@@ -85,15 +84,15 @@
   align-items: stretch;
   justify-content: space-between;
   border-radius: 12px;
-  background-color: #F0E1E5; /* soft pink */
-  border: 1px solid #F0C4D3; /* pink border */
+  background-color: #f0f7ff;
+  border: 1px solid #bae6fd;
   overflow: hidden;
   height: 42px;
 }
 
 .qtyPill {
   border-radius: 9999px;
-  background-color: #F0E1E5;
+  background-color: #f0f7ff;
 }
 
 .qtyLarge {
@@ -107,13 +106,13 @@
   justify-content: center;
   background-color: transparent;
   border: none;
-  color: #C8235E;
+  color: #0284c7;
   cursor: pointer;
   transition: all 0.2s;
 }
 
 .qtyBtn:hover {
-  background-color: rgba(200, 35, 94, 0.1);
+  background-color: rgba(2, 132, 199, 0.1);
 }
 
 .qtyText {

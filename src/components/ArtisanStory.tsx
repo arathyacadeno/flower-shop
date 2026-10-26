@@ -37,7 +37,7 @@ export default function ArtisanStory() {
             </p>
 
             <p className={styles.bodyParagraph}>
-              Founded on the reverence of ephemeral natural beauty, Occasions Florist honors the heritage of European botanical artistry. Every morning before dawn, our floral curators select rare, peak-bloom cultivars from family-owned organic fields in Holland, France, and Ecuador.
+              Founded on the reverence of ephemeral natural beauty, AVELISSE Florist honors the heritage of European botanical artistry. Every morning before dawn, our floral curators select rare, peak-bloom cultivars from family-owned organic fields in Holland, France, and Ecuador.
             </p>
 
             <div className={styles.featuresGrid}>

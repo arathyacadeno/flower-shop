@@ -119,7 +119,7 @@ export default function SplitHero({
       className={styles.heroSection}
       id="hero-slider"
       onClick={handleHeroClick}
-      aria-label="Occasions Floral Hero Video"
+      aria-label="AVELISSE Floral Hero Video"
     >
       <div className={styles.videoContainer}>
         <video

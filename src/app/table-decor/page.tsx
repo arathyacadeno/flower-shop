@@ -3,7 +3,7 @@ import CategoryPage from "@/components/CategoryPage";
 import { getProductsByCategory } from "@/data/catalog";
 
 export const metadata: Metadata = {
-  title: "Table Decor | Occassions Florist Calicut",
+  title: "Table Decor | AVELISSE Florist Calicut",
   description:
     "Stunning floral centerpieces, banquet runners & bespoke table arrangements handcrafted for memorable celebrations.",
 };

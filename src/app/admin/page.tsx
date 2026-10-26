@@ -193,9 +193,9 @@ export default function AdminPage() {
         <Navbar />
         <main className={styles.mainContainer}>
           <div className={styles.loginCard}>
-            <ShieldCheck size={44} color="#be185d" style={{ margin: "0 auto 12px" }} />
-            <h1 style={{ fontFamily: "var(--font-serif)", color: "#831843", fontSize: "1.6rem", margin: "0 0 8px" }}>
-              Occassions Admin Portal
+            <ShieldCheck size={44} color="#0284c7" style={{ margin: "0 auto 12px" }} />
+            <h1 style={{ fontFamily: "var(--font-serif)", color: "#0369a1", fontSize: "1.6rem", margin: "0 0 8px" }}>
+              AVELISSE Admin Portal
             </h1>
             <p style={{ color: "#64748b", fontSize: "0.86rem", margin: "0 0 20px" }}>
               Sign in with administrative credentials to manage flower products, stock, orders, and delivery settings.
@@ -265,7 +265,7 @@ export default function AdminPage() {
         <div className={styles.adminHeader}>
           <div className={styles.titleArea}>
             <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-              <h1>Occassions Management Console</h1>
+              <h1>AVELISSE Management Console</h1>
               <span className={styles.badgeAdmin}>
                 <ShieldCheck size={14} /> Admin
               </span>
@@ -523,12 +523,12 @@ export default function AdminPage() {
         {/* TAB 3: Coupons */}
         {activeTab === "coupons" && (
           <div className={styles.panelCard}>
-            <h2 style={{ fontFamily: "var(--font-serif)", color: "#831843", fontSize: "1.3rem", margin: "0 0 16px" }}>
+            <h2 style={{ fontFamily: "var(--font-serif)", color: "#0369a1", fontSize: "1.3rem", margin: "0 0 16px" }}>
               Create New Promo Coupon
             </h2>
 
             {couponMsg && (
-              <div style={{ padding: 12, borderRadius: 10, background: "#fdf2f8", color: "#be185d", fontWeight: 600, marginBottom: 16 }}>
+              <div style={{ padding: 12, borderRadius: 10, background: "#f0f7ff", color: "#0284c7", fontWeight: 600, marginBottom: 16 }}>
                 {couponMsg}
               </div>
             )}
@@ -741,8 +741,8 @@ export default function AdminPage() {
                         <span
                           className={styles.statusBadge}
                           style={{
-                            background: u.role === "admin" ? "#fce7f3" : "#f1f5f9",
-                            color: u.role === "admin" ? "#be185d" : "#475569",
+                            background: u.role === "admin" ? "#e0f2fe" : "#f1f5f9",
+                            color: u.role === "admin" ? "#0284c7" : "#475569",
                           }}
                         >
                           {u.role}

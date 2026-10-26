@@ -6,6 +6,7 @@ import { Minus, Plus, X } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 import AddonModal from "@/components/AddonModal";
 import styles from "./RecommendedAddons.module.css";
+import ProductImage from "@/components/ProductImage";
 
 import { AddonProduct, ADDON_PRODUCTS } from "@/data/addons";
 export type { AddonProduct };

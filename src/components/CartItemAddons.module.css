@@ -1,0 +1,312 @@
+/* CartItemAddons.module.css - Full-width bleed grey bar & add-ons carousel */
+
+.addonsWrapper {
+  margin-top: 16px;
+  margin-left: calc(-1 * var(--card-pad-x, var(--card-pad, 24px)));
+  margin-right: calc(-1 * var(--card-pad-x, var(--card-pad, 24px)));
+  margin-bottom: calc(-1 * var(--card-pad-y, var(--card-pad, 20px)));
+  background-color: #f6f6f4;
+  border-top: 1px solid #ececec;
+  border-bottom-left-radius: 14px;
+  border-bottom-right-radius: 14px;
+  display: flex;
+  flex-direction: column;
+  width: calc(100% + var(--card-pad-x, var(--card-pad, 24px)) * 2);
+  max-width: calc(100% + var(--card-pad-x, var(--card-pad, 24px)) * 2);
+  min-width: 0;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+/* 1) Entire Bar Button (Collapsed & Header Bar) */
+.headerBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 14px var(--card-pad-x, var(--card-pad, 24px));
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  user-select: none;
+  text-align: left;
+  transition: background-color 0.15s ease;
+  box-sizing: border-box;
+}
+
+.headerBar:hover {
+  background-color: #efefec;
+}
+
+.titleArea {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.giftIconWrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #111827;
+}
+
+.sectionTitle {
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: #111827;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.itemCountBadge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #E40345;
+  background-color: #fff1f2;
+  border: 1px solid #fecdd3;
+  padding: 2px 8px;
+  border-radius: 9999px;
+  letter-spacing: 0.01em;
+}
+
+.chevronWrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #111827;
+}
+
+/* 2) Expanded Content */
+.expandedContent {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  padding: 0 var(--card-pad-x, var(--card-pad, 24px)) 16px var(--card-pad-x, var(--card-pad, 24px));
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  box-sizing: border-box;
+}
+
+/* Category Filter Tabs (Pills) */
+.categoryPillsTrack {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 2px 0;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.categoryPillsTrack::-webkit-scrollbar {
+  display: none;
+}
+
+.pillBtn {
+  white-space: nowrap;
+  font-size: 0.84rem;
+  font-weight: 500;
+  padding: 6px 16px;
+  border-radius: 9999px;
+  border: 1px solid #d4d4d0;
+  background-color: #ffffff;
+  color: #374151;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  flex-shrink: 0;
+}
+
+.pillBtn:hover {
+  border-color: #E40345;
+  color: #E40345;
+}
+
+.pillBtnActive,
+.pillBtnActive:hover {
+  background-color: #fff1f2;
+  border-color: #E40345;
+  color: #E40345;
+  font-weight: 600;
+}
+
+/* Carousel Outer Viewport */
+.carouselViewport {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+/* Floating Side Navigation Arrows */
+.floatingArrowBtn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  color: #374151;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  padding: 0;
+  transition: all 0.18s ease;
+}
+
+.floatingArrowBtn:hover {
+  background-color: #E40345;
+  border-color: #E40345;
+  color: #ffffff;
+}
+
+.floatingArrowLeft {
+  left: 4px;
+}
+
+.floatingArrowRight {
+  right: 4px;
+}
+
+/* Horizontal Cards Track */
+.cardsTrack {
+  display: flex;
+  align-items: stretch;
+  gap: 12px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding: 2px 0 6px 0;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.cardsTrack::-webkit-scrollbar {
+  display: none;
+}
+
+/* Add-on Card (96px wide, no outer box) */
+.addonCard {
+  flex: 0 0 96px;
+  width: 96px;
+  background: transparent;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  user-select: none;
+}
+
+/* 96x96 White Image Tile with 8px radius and thin grey border */
+.addonImageWrap {
+  position: relative;
+  width: 96px;
+  height: 96px;
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.addonCardAdded .addonImageWrap {
+  border-color: #E40345;
+  box-shadow: 0 0 0 1px #E40345;
+}
+
+.addonImg {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+/* Square (6px radius) Outlined "+" Button in brand red at bottom-right */
+.quickAddBtn {
+  position: absolute;
+  bottom: 6px;
+  right: 6px;
+  width: 26px;
+  height: 26px;
+  border-radius: 6px;
+  border: 1.5px solid #E40345;
+  background-color: #ffffff;
+  color: #E40345;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.18s ease;
+}
+
+.quickAddBtn:hover {
+  background-color: #fff1f2;
+}
+
+.quickAddBtnAdded {
+  background-color: #E40345;
+  border-color: #E40345;
+  color: #ffffff;
+}
+
+.quickAddBtnAdded:hover {
+  background-color: #c7023c;
+  border-color: #c7023c;
+}
+
+/* Text Content below tile */
+.cardContent {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.addonTitle {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #111827;
+  line-height: 1.3;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.priceContainer {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.priceCurrent {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #111827;
+}
+
+.priceOriginal {
+  font-size: 0.78rem;
+  color: #9ca3af;
+  text-decoration: line-through;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 640px) {
+  .floatingArrowBtn {
+    display: none;
+  }
+}

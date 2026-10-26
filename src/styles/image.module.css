@@ -1,0 +1,50 @@
+/* =========================================================
+   SHARED PRODUCT IMAGE SYSTEM (src/styles/image.module.css)
+   =========================================================
+   Prevents image cropping site-wide by guaranteeing:
+   - Consistent aspect ratios (4 / 5 for cards/gallery, 1 / 1 for thumbnails/add-ons, 283 / 327 for categories)
+   - width: 100%; height: 100%; object-fit: contain; object-position: center;
+   - Soft background (#FAF4F6 / #FFFFFF) matching card tone so empty letterbox space looks intentional
+   - Unbroken support for hover-zoom, curved wave dividers, and wishlist overlays
+   ========================================================= */
+
+.wrapper {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  background-color: var(--img-bg, #FAF4F6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+/* Aspect-ratio variants */
+.ratioCard {
+  aspect-ratio: 4 / 5;
+}
+
+.ratioGallery {
+  aspect-ratio: 4 / 5;
+}
+
+.ratioThumbnail {
+  aspect-ratio: 1 / 1;
+}
+
+.ratioSquare {
+  aspect-ratio: 1 / 1;
+}
+
+.ratioCategory {
+  aspect-ratio: 283 / 327;
+}
+
+/* Shared image rule - guarantees 100% full view of any image without cropping */
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain !important;
+  object-position: center !important;
+  display: block;
+}

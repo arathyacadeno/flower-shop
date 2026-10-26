@@ -180,7 +180,8 @@
 .giftCardThumbImg {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
+  background-color: #FAF4F6;
   display: block;
 }
 
@@ -933,7 +934,7 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: #db2777;
+  color: #0284c7;
 }
 
 .customHeading {
@@ -945,8 +946,8 @@
 
 .customToggleGroup {
   display: inline-flex;
-  background: #fdf2f8;
-  border: 1px solid #fbcfe8;
+  background: #f0f7ff;
+  border: 1px solid #bae6fd;
   border-radius: 999px;
   padding: 3px;
   gap: 4px;
@@ -1016,19 +1017,19 @@
   display: inline-flex;
   align-items: center;
   background: #ffffff;
-  border: 1.5px solid #f472b6;
+  border: 1.5px solid #0284c7;
   border-radius: 999px;
   padding: 4px 6px;
   gap: 6px;
 }
 
 .stepperBtn {
-  background: #fdf2f8;
+  background: #f0f7ff;
   border: none;
   width: 28px;
   height: 28px;
   border-radius: 50%;
-  color: #ff3d7a;
+  color: #0284c7;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1037,7 +1038,7 @@
 }
 
 .stepperBtn:hover:not(:disabled) {
-  background: #ff3d7a;
+  background: #0284c7;
   color: #ffffff;
 }
 
@@ -1076,20 +1077,20 @@
 }
 
 .stemChip:hover {
-  border-color: #f472b6;
-  color: #db2777;
+  border-color: #38bdf8;
+  color: #0284c7;
 }
 
 .stemChipActive {
-  background: #ff3d7a;
-  border-color: #ff3d7a;
+  background: #0284c7;
+  border-color: #0284c7;
   color: #ffffff;
-  box-shadow: 0 2px 8px rgba(255, 61, 122, 0.25);
+  box-shadow: 0 2px 8px rgba(2, 132, 199, 0.25);
 }
 
 .formulaBanner {
   background: #ffffff;
-  border: 1px solid #fce7f3;
+  border: 1px solid #dbeafe;
   border-radius: 12px;
   padding: 12px 14px;
 }
@@ -1104,7 +1105,7 @@
 }
 
 .formulaOperator {
-  color: #ff3d7a;
+  color: #0284c7;
   font-weight: 700;
   font-size: 15px;
 }
@@ -1112,8 +1113,9 @@
 .formulaTotal {
   font-size: 17px;
   font-weight: 800;
-  color: #ff3d7a;
-  background: #fdf2f8;
+  color: #0284c7;
+  background: #f0f7ff;
+  border: 1px solid #bae6fd;
   padding: 2px 8px;
   border-radius: 6px;
 }

@@ -2,7 +2,7 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background-color: #FAD9E3;
+  background-color: #f0f7ff;
 }
 
 .mainContainer {
@@ -279,14 +279,14 @@
   width: 36px;
   height: 36px;
   border-radius: 10px;
-  background-color: #fdf2f8;
-  color: #c21460;
+  background-color: #f0f7ff;
+  color: #0284c7;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  box-shadow: 0 2px 6px rgba(194, 20, 96, 0.12);
-  border: 1px solid rgba(194, 20, 96, 0.08);
+  box-shadow: 0 2px 6px rgba(2, 132, 199, 0.12);
+  border: 1px solid rgba(2, 132, 199, 0.15);
 }
 
 .metaLabel {

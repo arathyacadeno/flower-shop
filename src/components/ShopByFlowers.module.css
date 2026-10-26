@@ -10,14 +10,8 @@
   width: 100%;
   max-width: 1320px;
   margin-inline: auto;
-  padding-inline: 40px;
+  padding-inline: 48px;
   box-sizing: border-box;
-}
-
-@media (max-width: 768px) {
-  .container {
-    padding-inline: 20px;
-  }
 }
 
 /* ================= SECTION HEADER ================= */
@@ -34,6 +28,8 @@
   font-size: 13px;
   font-weight: 600;
   letter-spacing: 0.12em;
+  color: #db2777;
+  text-transform: uppercase;
 }
 
 .mainTitle {
@@ -60,15 +56,19 @@
 .dividerLine {
   flex: 1;
   height: 1px;
-  background: linear-gradient(90deg,
-      rgba(255, 90, 154, 0.05),
-      rgba(255, 90, 154, 0.4));
+  background: linear-gradient(
+    90deg,
+    rgba(255, 90, 154, 0.05),
+    rgba(255, 90, 154, 0.4)
+  );
 }
 
 .dividerLine:last-child {
-  background: linear-gradient(90deg,
-      rgba(255, 90, 154, 0.4),
-      rgba(255, 90, 154, 0.05));
+  background: linear-gradient(
+    90deg,
+    rgba(255, 90, 154, 0.4),
+    rgba(255, 90, 154, 0.05)
+  );
 }
 
 .dividerIcon {
@@ -84,9 +84,10 @@
   width: 100%;
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
-/* Circular Navigation Arrows: White background with pink chevron icon */
+/* Circular Navigation Arrows */
 .navBtn {
   position: absolute;
   top: 42%;
@@ -107,11 +108,11 @@
 }
 
 .prevBtn {
-  left: 6px;
+  left: -24px;
 }
 
 .nextBtn {
-  right: 6px;
+  right: -24px;
 }
 
 .navBtn:hover {
@@ -126,48 +127,34 @@
   transform: translateY(-50%) scale(0.96);
 }
 
-/* Slider Viewport */
+/* Slider Viewport: Zero side-cuts, fits exactly visibleCount whole cards */
 .sliderViewport {
   position: relative;
   width: 100%;
   overflow: hidden;
   padding: 16px 0 28px 0;
+  touch-action: pan-y;
 }
 
-/* Continuous Auto-Slide Track to the RIGHT */
+/* Discrete Step-by-Step Slide Track */
 .sliderTrack {
   display: flex;
-  width: max-content;
-  animation: slideToRight 36s linear infinite;
+  align-items: stretch;
+  gap: var(--gap, 28px);
+  width: 100%;
   will-change: transform;
-}
-
-/* Pause sliding on hover so user can easily examine and click any category */
-.sliderViewport:hover .sliderTrack {
-  animation-play-state: paused;
-}
-
-/* Motion to the RIGHT: starts from negative 50% offset and translates rightwards to 0 */
-@keyframes slideToRight {
-  0% {
-    transform: translate3d(-50%, 0, 0);
-  }
-
-  100% {
-    transform: translate3d(0%, 0, 0);
-  }
 }
 
 /* ================= FLOWER CATEGORY ITEM ================= */
 .flowerItem {
   position: relative;
-  flex: 0 0 270px;
-  width: 270px;
+  flex: 0 0 calc((100% - (var(--visible-count, 4) - 1) * var(--gap, 28px)) / var(--visible-count, 4));
+  width: calc((100% - (var(--visible-count, 4) - 1) * var(--gap, 28px)) / var(--visible-count, 4));
   display: flex;
   flex-direction: column;
   align-items: center;
   box-sizing: border-box;
-  padding: 0 16px;
+  padding: 0 6px;
   background: transparent;
 }
 
@@ -180,11 +167,13 @@
   color: inherit;
 }
 
-/* ================= PERFECTLY ROUND PASTEL-PINK CONTAINER ================= */
+/* ================= PERFECTLY ROUND WHITE CONTAINER ================= */
 .circleContainer {
   position: relative;
   width: 216px;
   height: 216px;
+  max-width: 100%;
+  aspect-ratio: 1 / 1;
   border-radius: 50%;
   background-color: #FFFFFF;
   border: 1.5px solid #ffffff;
@@ -222,7 +211,7 @@
   filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.12));
 }
 
-/* ================= FLOWER LABELS (BOLD DARK CHARCOAL) ================= */
+/* ================= FLOWER LABELS ================= */
 .infoArea {
   display: flex;
   flex-direction: column;
@@ -250,40 +239,47 @@
   color: #FF5A9A;
 }
 
-/* ================= ACCESSIBILITY & PREFERS-REDUCED-MOTION ================= */
-@media (prefers-reduced-motion: reduce) {
-  .sliderTrack {
-    animation: none !important;
-  }
-}
-
-/* ================= RESPONSIVE BEHAVIOR ================= */
-@media (max-width: 768px) {
-  .sectionWrapper {
-    padding: 50px 0 62px 0;
-  }
-
+/* ================= RESPONSIVE ================= */
+@media (max-width: 1200px) {
   .container {
-    padding-inline: 20px;
+    padding-inline: 40px;
   }
 
-  .sectionHeader {
-    margin-bottom: 32px;
+  .prevBtn {
+    left: -16px;
   }
 
-  .mainTitle {
-    font-size: 30px;
-  }
-
-  .flowerItem {
-    flex: 0 0 210px;
-    width: 210px;
-    padding: 0 12px;
+  .nextBtn {
+    right: -16px;
   }
 
   .circleContainer {
-    width: 172px;
-    height: 172px;
+    width: 196px;
+    height: 196px;
+    padding: 16px;
+  }
+}
+
+@media (max-width: 860px) {
+  .sectionWrapper {
+    padding: 54px 0 68px 0;
+  }
+
+  .container {
+    padding-inline: 32px;
+  }
+
+  .prevBtn {
+    left: -12px;
+  }
+
+  .nextBtn {
+    right: -12px;
+  }
+
+  .circleContainer {
+    width: 176px;
+    height: 176px;
     padding: 14px;
   }
 
@@ -292,7 +288,55 @@
   }
 
   .navBtn {
-    width: 38px;
-    height: 38px;
+    width: 40px;
+    height: 40px;
+  }
+}
+
+@media (max-width: 560px) {
+  .sectionWrapper {
+    padding: 44px 0 56px 0;
+  }
+
+  .container {
+    padding-inline: 20px;
+  }
+
+  .mainTitle {
+    font-size: 28px;
+  }
+
+  .prevBtn {
+    left: -8px;
+  }
+
+  .nextBtn {
+    right: -8px;
+  }
+
+  .circleContainer {
+    width: 160px;
+    height: 160px;
+    padding: 12px;
+  }
+
+  .flowerTitle {
+    font-size: 1.05rem;
+  }
+
+  .navBtn {
+    width: 36px;
+    height: 36px;
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .sliderTrack,
+  .circleContainer,
+  .bouquetImg,
+  .flowerTitle,
+  .navBtn {
+    transition-duration: 0.01s !important;
   }
 }

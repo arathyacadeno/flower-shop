@@ -76,15 +76,15 @@
 }
 
 .navBtn:hover {
-  background: #db2777;
+  background: #0284c7;
   color: #ffffff;
-  border-color: #db2777;
-  box-shadow: 0 8px 22px rgba(219, 39, 119, 0.28);
+  border-color: #0284c7;
+  box-shadow: 0 8px 22px rgba(2, 132, 199, 0.28);
   transform: translateY(-50%) scale(1.08);
 }
 
 .navBtn:focus-visible {
-  outline: 2px solid #db2777;
+  outline: 2px solid #0284c7;
   outline-offset: 3px;
 }
 
@@ -126,11 +126,11 @@
 .activeCard {
   flex: 0 0 380px;
   max-width: 380px;
-  box-shadow: 0 16px 38px -6px rgba(219, 39, 119, 0.16),
+  box-shadow: 0 16px 38px -6px rgba(2, 132, 199, 0.16),
               0 4px 14px rgba(15, 23, 42, 0.04);
   transform: scale(1.03);
   z-index: 5;
-  border: 1px solid rgba(251, 207, 232, 0.6);
+  border: 1px solid rgba(186, 230, 253, 0.8);
 }
 
 /* Left and Right Background Cards */
@@ -149,7 +149,7 @@
 .sideCard:hover {
   opacity: 0.88;
   transform: scale(0.94);
-  box-shadow: 0 10px 26px rgba(219, 39, 119, 0.12);
+  box-shadow: 0 10px 26px rgba(2, 132, 199, 0.12);
 }
 
 /* Star Rating Row */
@@ -162,13 +162,13 @@
 }
 
 .starFilled {
-  color: #db2777;
-  fill: #db2777;
+  color: #0284c7;
+  fill: #0284c7;
 }
 
 .starEmpty {
-  color: #fbcfe8;
-  fill: #fbcfe8;
+  color: #bae6fd;
+  fill: #bae6fd;
 }
 
 /* Quote Title / Heading */
@@ -214,10 +214,10 @@
   font-size: 64px;
   font-weight: 900;
   line-height: 1;
-  color: #db2777;
+  color: #0284c7;
   opacity: 0.85;
   pointer-events: none;
-  text-shadow: 0 4px 12px rgba(219, 39, 119, 0.2);
+  text-shadow: 0 4px 12px rgba(2, 132, 199, 0.2);
 }
 
 .quoteMarkBottomLeft {
@@ -228,7 +228,7 @@
   font-size: 64px;
   font-weight: 900;
   line-height: 1;
-  color: #f472b6;
+  color: #38bdf8;
   opacity: 0.6;
   pointer-events: none;
 }

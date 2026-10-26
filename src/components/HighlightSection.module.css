@@ -5,10 +5,10 @@
    Right: 2x2 grid of rounded photography cards
    ========================================================== */
 
-/* ── Section Shell (pink frame) ── */
+/* ── Section Shell ── */
 .sectionWrapper {
   width: 100%;
-  background: #FAD9E3;
+  background: #ffffff;
   margin-top: 28px;
   padding: 64px 0 84px;
   position: relative;
@@ -42,7 +42,7 @@
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: capitalize;
-  color: #db2777;
+  color: #0284c7;
   margin-bottom: 8px;
 }
 
@@ -72,16 +72,16 @@
   height: 1px;
   background: linear-gradient(
     90deg,
-    rgba(219, 39, 119, 0.05),
-    rgba(219, 39, 119, 0.35)
+    rgba(2, 132, 199, 0.05),
+    rgba(2, 132, 199, 0.35)
   );
 }
 
 .dividerLine:last-child {
   background: linear-gradient(
     270deg,
-    rgba(219, 39, 119, 0.05),
-    rgba(219, 39, 119, 0.35)
+    rgba(2, 132, 199, 0.05),
+    rgba(2, 132, 199, 0.35)
   );
 }
 
@@ -89,7 +89,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #db2777;
+  color: #0284c7;
 }
 
 /* ================= WHITE CONTAINER CARD (1654 x 1002) ================= */
@@ -206,10 +206,10 @@
   border-radius: 24px;
   overflow: hidden;
   cursor: pointer;
-  background: #fdf2f8;
-  box-shadow: 0 10px 24px -4px rgba(219, 39, 119, 0.08);
+  background: #f0f7ff;
+  box-shadow: 0 10px 24px -4px rgba(2, 132, 199, 0.08);
   aspect-ratio: 314 / 296;
-  border: none;
+  border: 1px solid #e0f2fe;
   outline: none;
   transform: translateY(0);
   transition:
@@ -219,7 +219,7 @@
 
 .card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 18px 36px -6px rgba(219, 39, 119, 0.16);
+  box-shadow: 0 18px 36px -6px rgba(2, 132, 199, 0.16);
 }
 
 .cardImgWrap {
@@ -232,7 +232,7 @@
 .cardImg {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   display: block;
   transform: scale(1);
   transition: transform 0.6s cubic-bezier(0.2, 1, 0.3, 1);
@@ -279,7 +279,7 @@
   height: 36px;
   border-radius: 50%;
   background: #ffffff;
-  color: #db2777;
+  color: #0284c7;
   text-decoration: none;
   border: none;
   cursor: pointer;
@@ -288,7 +288,7 @@
 }
 
 .cardArrowBtn:hover {
-  background: #db2777;
+  background: #0284c7;
   color: #ffffff;
   transform: scale(1.08);
 }
@@ -321,7 +321,7 @@
   display: grid;
   grid-template-columns: 1.05fr 1fr;
   box-shadow: 0 28px 64px rgba(0, 0, 0, 0.24);
-  border: 1px solid #fce7f3;
+  border: 1px solid #dbeafe;
   animation: modalPop 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   overflow: hidden;
 }
@@ -333,8 +333,8 @@
   width: 34px;
   height: 34px;
   border-radius: 50%;
-  background: #fff0f5;
-  border: 1px solid #fce7f3;
+  background: #f0f7ff;
+  border: 1px solid #dbeafe;
   color: #111;
   display: flex;
   align-items: center;
@@ -345,13 +345,13 @@
 }
 
 .modalCloseBtn:hover {
-  background: #ec4899;
+  background: #0284c7;
   color: #fff;
   transform: rotate(90deg);
 }
 
 .modalImageCol {
-  background: #fff5f8;
+  background: #f0f9ff;
   height: 100%;
   width: 100%;
   min-height: 100%;
@@ -366,7 +366,7 @@
 .modalBigImg {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   object-position: center;
   display: block;
 }
@@ -388,7 +388,7 @@
   font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: #ec4899;
+  color: #0284c7;
   margin-bottom: 6px;
 }
 
@@ -432,7 +432,7 @@
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: #ec4899;
+  background: #0284c7;
   flex-shrink: 0;
 }
 
@@ -469,7 +469,7 @@
   align-items: center;
   justify-content: center;
   gap: 8px;
-  background: #fff0f5;
+  background: #f0f7ff;
   color: #111;
   padding: 11px 22px;
   border-radius: 8px;
@@ -477,13 +477,13 @@
   font-size: 13px;
   font-weight: 600;
   text-decoration: none;
-  border: 1px solid #fce7f3;
+  border: 1px solid #dbeafe;
   transition: all 0.22s ease;
 }
 
 .modalCallBtn:hover {
-  background: #fce7f3;
-  color: #ec4899;
+  background: #e0f2fe;
+  color: #0284c7;
 }
 
 /* ── Keyframes ── */

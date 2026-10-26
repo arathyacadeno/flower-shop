@@ -242,7 +242,7 @@ function seedInitialData(db: any) {
       VALUES (?, ?, ?, ?, ?, 'admin', ?, ?)
     `).run(
       "admin-user-01",
-      "Occasions Admin",
+      "AVELISSE Admin",
       "admin@occasions.com",
       "+91 8606464700",
       adminPasswordHash,

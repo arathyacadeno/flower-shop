@@ -74,7 +74,7 @@ interface StatusStep {
 
 const STATUS_STEPS: StatusStep[] = [
   { key: "placed",            label: "Order Placed",      icon: Package,    desc: "We received your order" },
-  { key: "confirmed",         label: "Confirmed",         icon: CheckCircle, desc: "Occasions confirmed your order" },
+  { key: "confirmed",         label: "Confirmed",         icon: CheckCircle, desc: "AVELISSE confirmed your order" },
   { key: "preparing",         label: "Preparing",         icon: RefreshCw,  desc: "Your arrangement is being prepared" },
   { key: "out_for_delivery",  label: "Out for Delivery",  icon: Truck,      desc: "Your order is on the way" },
   { key: "delivered",         label: "Delivered",         icon: CheckCircle, desc: "Delivered successfully" },
@@ -157,7 +157,7 @@ export default function TrackOrderPage() {
             address: addrStr,
             price: Number(o.final_amount) || Number(o.subtotal) || 0,
             deliveryCharge: Number(o.delivery_charge) || 0,
-            rider: "Occasions Floral Dispatch",
+            rider: "AVELISSE Floral Dispatch",
             riderPhone: "+91 8606 464 700",
           });
           return;
@@ -200,7 +200,7 @@ export default function TrackOrderPage() {
             address: "Calicut, Kerala",
             price: matchedLocal.price,
             deliveryCharge: 0,
-            rider: "Occasions Floral Dispatch",
+            rider: "AVELISSE Floral Dispatch",
             riderPhone: "+91 8606 464 700",
           });
           return;

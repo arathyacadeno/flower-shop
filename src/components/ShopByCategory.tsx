@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import ProductImage from "@/components/ProductImage";
 import styles from "./ShopByCategory.module.css";
 
 interface CategoryCardItem {
@@ -119,29 +120,29 @@ export default function ShopByCategory() {
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
                 <path
                   d="M12 12 C9 8.2 9 4.2 12 1.2 C15 4.2 15 8.2 12 12 Z"
-                  fill="#fdf2f7"
-                  stroke="#db2777"
+                  fill="#f0f9ff"
+                  stroke="#0284c7"
                   strokeWidth="1.3"
                   strokeLinejoin="round"
                 />
                 <path
                   d="M12 12 C9 15.8 9 19.8 12 22.8 C15 19.8 15 15.8 12 12 Z"
-                  fill="#fdf2f7"
-                  stroke="#db2777"
+                  fill="#f0f9ff"
+                  stroke="#0284c7"
                   strokeWidth="1.3"
                   strokeLinejoin="round"
                 />
                 <path
                   d="M12 12 C8.2 9 4.2 9 1.2 12 C4.2 15 8.2 15 12 12 Z"
-                  fill="#fdf2f7"
-                  stroke="#db2777"
+                  fill="#f0f9ff"
+                  stroke="#0284c7"
                   strokeWidth="1.3"
                   strokeLinejoin="round"
                 />
                 <path
                   d="M12 12 C15.8 9 19.8 9 22.8 12 C19.8 15 15.8 15 12 12 Z"
-                  fill="#fdf2f7"
-                  stroke="#db2777"
+                  fill="#f0f9ff"
+                  stroke="#0284c7"
                   strokeWidth="1.3"
                   strokeLinejoin="round"
                 />
@@ -178,12 +179,10 @@ function CategoryItem({
         className={styles.imageFrame}
         style={isBouquet ? { backgroundColor: "#B5DCF7" } : undefined}
       >
-        <Image
+        <ProductImage
           src={item.image}
           alt={item.name}
-          fill
-          unoptimized
-          sizes="(max-width: 640px) 45vw, (max-width: 960px) 30vw, 220px"
+          aspectRatio="none"
           className={styles.categoryImage}
         />
       </div>

@@ -1,5 +1,7 @@
 "use client";
 
+import ProductImage from "@/components/ProductImage";
+
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { ChevronLeft, ChevronRight, Heart, X } from "lucide-react";
@@ -23,11 +25,29 @@ export default function ProductGallery({
   product,
   selectedImageOverride,
 }: ProductGalleryProps) {
-  // Always show exactly 4 thumbnails (repeat images if fewer are supplied)
+  // Always show exactly 4 thumbnails, ensuring back view is always included as the 4th thumbnail
   const thumbnails = useMemo(() => {
     let list = images && images.length > 0 ? [...images] : [FALLBACK_IMAGE];
-    while (list.length < 4) list = [...list, ...list];
-    return list.slice(0, 4);
+    if (list.length > 4) {
+      // Find back view if present
+      const backIdx = list.findIndex((img) =>
+        img.toLowerCase().includes("back_view") ||
+        img.toLowerCase().includes("back-view") ||
+        img.toLowerCase().includes("backside") ||
+        img.toLowerCase().includes("back")
+      );
+      if (backIdx !== -1) {
+        const backImg = list[backIdx];
+        const withoutBack = list.filter((_, i) => i !== backIdx);
+        list = [...withoutBack.slice(0, 3), backImg];
+      } else {
+        list = list.slice(0, 4);
+      }
+    } else {
+      while (list.length < 4) list = [...list, ...list];
+      list = list.slice(0, 4);
+    }
+    return list;
   }, [images]);
 
   const total = thumbnails.length;
@@ -154,11 +174,12 @@ export default function ProductGallery({
                 selectedIndex === idx ? styles.thumbnailActive : ""
               }`}
             >
-              <img
-                src={img}
-                alt={`${productName} thumbnail ${idx + 1}`}
-                className={styles.thumbnailImg}
-              />
+              <ProductImage
+                  src={img}
+                  alt={`${productName} thumbnail ${idx + 1}`}
+                  aspectRatio="none"
+                  className={styles.thumbnailImg}
+                />
             </button>
           ))}
         </div>
@@ -172,9 +193,10 @@ export default function ProductGallery({
           onTouchEnd={handleTouchEnd}
           onClick={() => setIsZoomOpen(true)}
         >
-          <img
+          <ProductImage
             src={currentImage}
             alt={productName}
+            aspectRatio="none"
             className={styles.mainImage}
             draggable={false}
             style={{
@@ -291,9 +313,10 @@ export default function ProductGallery({
                 <ChevronLeft size={26} />
               </button>
 
-              <img
+              <ProductImage
                 src={currentImage}
                 alt={productName}
+                aspectRatio="none"
                 className={styles.modalImage}
               />
 
@@ -317,7 +340,7 @@ export default function ProductGallery({
                       selectedIndex === idx ? styles.modalThumbActive : ""
                     }`}
                   >
-                    <img src={img} alt="" className={styles.thumbnailImg} />
+                    <ProductImage src={img} alt="" aspectRatio="none" className={styles.thumbnailImg} />
                   </button>
                 ))}
               </div>

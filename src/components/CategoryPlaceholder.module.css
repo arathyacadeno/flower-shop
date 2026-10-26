@@ -32,20 +32,20 @@
 }
 
 .breadcrumbLink:hover {
-  color: #db2777;
+  color: #0284c7;
 }
 
 .breadcrumbCurrent {
-  color: #db2777;
+  color: #0284c7;
   font-weight: 600;
 }
 
 .heroCard {
   background: #ffffff;
-  border: 1px solid #fce7f3;
+  border: 1px solid #dbeafe;
   border-radius: 24px;
   padding: 44px 36px;
-  box-shadow: 0 10px 30px rgba(219, 39, 119, 0.04);
+  box-shadow: 0 10px 30px rgba(2, 132, 199, 0.04);
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -83,20 +83,20 @@
   align-items: center;
   gap: 8px;
   padding: 10px 22px;
-  background-color: #db2777;
+  background-color: #0284c7;
   color: #ffffff;
   border-radius: 9999px;
   font-size: 0.9rem;
   font-weight: 600;
   text-decoration: none;
   transition: all 0.25s ease;
-  box-shadow: 0 4px 14px rgba(219, 39, 119, 0.22);
+  box-shadow: 0 4px 14px rgba(2, 132, 199, 0.22);
 }
 
 .primaryBtn:hover {
-  background-color: #be185d;
+  background-color: #0369a1;
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(219, 39, 119, 0.32);
+  box-shadow: 0 6px 20px rgba(2, 132, 199, 0.32);
 }
 
 .secondaryBtn {
@@ -153,10 +153,10 @@
 
 .photoCard {
   background: #ffffff;
-  border: 1px solid #fce7f3;
+  border: 1px solid #dbeafe;
   border-radius: 18px;
   overflow: hidden;
-  box-shadow: 0 4px 18px rgba(219, 39, 119, 0.05), 0 2px 8px rgba(15, 23, 42, 0.03);
+  box-shadow: 0 4px 18px rgba(2, 132, 199, 0.05), 0 2px 8px rgba(15, 23, 42, 0.03);
   display: flex;
   flex-direction: column;
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
@@ -166,8 +166,8 @@
 
 .photoCard:hover {
   transform: translateY(-5px);
-  border-color: #f472b6;
-  box-shadow: 0 14px 30px -6px rgba(219, 39, 119, 0.15), 0 6px 14px rgba(15, 23, 42, 0.05);
+  border-color: #38bdf8;
+  box-shadow: 0 14px 30px -6px rgba(2, 132, 199, 0.15), 0 6px 14px rgba(15, 23, 42, 0.05);
 }
 
 .imageWrapper {
@@ -175,13 +175,14 @@
   height: 260px;
   position: relative;
   overflow: hidden;
-  background-color: #fdf2f8;
+  background-color: #f0f7ff;
 }
 
 .photoImg {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
+  background-color: #FAF4F6;
   display: block;
   transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -195,7 +196,7 @@
   top: 12px;
   left: 12px;
   background: rgba(255, 255, 255, 0.92);
-  color: #db2777;
+  color: #0284c7;
   font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.04em;
@@ -234,7 +235,7 @@
   justify-content: space-between;
   margin-top: auto;
   padding-top: 12px;
-  border-top: 1px solid #fdf2f8;
+  border-top: 1px solid #f0f7ff;
 }
 
 .photoPrice {
@@ -248,7 +249,7 @@
   align-items: center;
   gap: 6px;
   padding: 7px 14px;
-  background-color: #db2777;
+  background-color: #0284c7;
   color: #ffffff;
   border-radius: 9999px;
   font-size: 0.82rem;
@@ -258,7 +259,7 @@
 }
 
 .inquireBtn:hover {
-  background-color: #be185d;
+  background-color: #0369a1;
   transform: translateY(-1px);
 }
 

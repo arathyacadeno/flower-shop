@@ -33,7 +33,7 @@ export default function BouquetCatalog({ onAddToCart, onQuickView }: BouquetCata
         {/* Header Title */}
         <div className={styles.headerArea}>
           <div className={styles.sectionTagline}>Do it with flowers</div>
-          <h2 className={styles.sectionTitle}>Occassions Signature Collection</h2>
+          <h2 className={styles.sectionTitle}>AVELISSE Signature Collection</h2>
           <p className={styles.sectionDesc}>
             From fairy-tale bridal bouquets to grand stage floral backdrops and online cake delivery across Calicut — curated with fresh daily blooms by Sreejesh K.V.
           </p>
@@ -110,16 +110,11 @@ export default function BouquetCatalog({ onAddToCart, onQuickView }: BouquetCata
                 <div className={styles.cardFooter}>
                   <div className={styles.priceWrapper}>
                     <span className={styles.price}>₹{bouquet.price.toLocaleString("en-IN")}</span>
-                    {bouquet.originalPrice && (
-                      <span className={styles.originalPrice}>
-                        ₹{bouquet.originalPrice.toLocaleString("en-IN")}
-                      </span>
-                    )}
                   </div>
 
                   <div style={{ display: "flex", gap: 8 }}>
                     <a
-                      href={`https://wa.me/918606464700?text=Hello%20Occassions%2C%20I%20would%20like%20to%20order%20${encodeURIComponent(bouquet.name)}%20(Rs%20${bouquet.price})`}
+                      href={`https://wa.me/918606464700?text=Hello%20AVELISSE%2C%20I%20would%20like%20to%20order%20${encodeURIComponent(bouquet.name)}%20(Rs%20${bouquet.price})`}
                       target="_blank"
                       rel="noopener noreferrer"
                       style={{

@@ -1,4 +1,6 @@
 "use client";
+
+import ProductImage from "@/components/ProductImage";
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { MessageCircle, Phone, X, ArrowUpRight } from "lucide-react";
@@ -31,7 +33,7 @@ const highlightCards: HighlightCard[] = [
       "Door Posies and Satin Ribbons",
       "On-Site Venue Setup in Calicut",
     ],
-    whatsAppText: "Hello Occassions Florist Calicut, I would like to inquire about wedding Car Decoration.",
+    whatsAppText: "Hello AVELISSE Florist Calicut, I would like to inquire about wedding Car Decoration.",
     href: "/#highlights",
   },
   {
@@ -47,7 +49,7 @@ const highlightCards: HighlightCard[] = [
       "Floating Candle & Glass Ambiance",
       "VIP Head Table Styling",
     ],
-    whatsAppText: "Hello Occassions Florist Calicut, I would like to inquire about wedding Table & Stage Arrangements.",
+    whatsAppText: "Hello AVELISSE Florist Calicut, I would like to inquire about wedding Table & Stage Arrangements.",
     href: "/#highlights",
   },
   {
@@ -63,7 +65,7 @@ const highlightCards: HighlightCard[] = [
       "Casablanca Lilies and Hydrangeas",
       "Parish Protocol Coordination",
     ],
-    whatsAppText: "Hello Occassions Florist Calicut, I would like to inquire about Church Arrangements and wedding altar florals.",
+    whatsAppText: "Hello AVELISSE Florist Calicut, I would like to inquire about Church Arrangements and wedding altar florals.",
     href: "/#highlights",
   },
   {
@@ -79,7 +81,7 @@ const highlightCards: HighlightCard[] = [
       "Grade-A Dutch Rose Petals",
       "Traditional Uruli and Gift Baskets",
     ],
-    whatsAppText: "Hello Occassions Florist Calicut, I would like to inquire about fresh floral Garlands and wedding varmalas.",
+    whatsAppText: "Hello AVELISSE Florist Calicut, I would like to inquire about fresh floral Garlands and wedding varmalas.",
     href: "/#highlights",
   },
 ];
@@ -126,29 +128,29 @@ export default function HighlightSection() {
             <span className={styles.dividerLine} />
             <span className={styles.dividerIcon}>
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-                <circle cx="12" cy="12" r="2.2" fill="#db2777" />
+                <circle cx="12" cy="12" r="2.2" fill="#0284c7" />
                 <path
                   d="M12 4.5C12 4.5 10 7.5 10 9.5C10 10.6 10.9 11.5 12 11.5C13.1 11.5 14 10.6 14 9.5C14 7.5 12 4.5 12 4.5Z"
-                  fill="#fbcfe8"
-                  stroke="#db2777"
+                  fill="#bae6fd"
+                  stroke="#0284c7"
                   strokeWidth="0.8"
                 />
                 <path
                   d="M12 19.5C12 19.5 10 16.5 10 14.5C10 13.4 10.9 12.5 12 12.5C13.1 12.5 14 13.4 14 14.5C14 16.5 12 19.5 12 19.5Z"
-                  fill="#fbcfe8"
-                  stroke="#db2777"
+                  fill="#bae6fd"
+                  stroke="#0284c7"
                   strokeWidth="0.8"
                 />
                 <path
                   d="M4.5 12C4.5 12 7.5 10 9.5 10C10.6 10 11.5 10.9 11.5 12C11.5 13.1 10.6 14 9.5 14C7.5 14 4.5 12 4.5 12Z"
-                  fill="#fbcfe8"
-                  stroke="#db2777"
+                  fill="#bae6fd"
+                  stroke="#0284c7"
                   strokeWidth="0.8"
                 />
                 <path
                   d="M19.5 12C19.5 12 16.5 10 14.5 10C13.4 10 12.5 10.9 12.5 12C12.5 13.1 13.4 14 14.5 14C16.5 14 19.5 12 19.5 12Z"
-                  fill="#fbcfe8"
-                  stroke="#db2777"
+                  fill="#bae6fd"
+                  stroke="#0284c7"
                   strokeWidth="0.8"
                 />
               </svg>
@@ -244,9 +246,10 @@ export default function HighlightSection() {
               <X size={18} />
             </button>
             <div className={styles.modalImageCol}>
-              <img
+              <ProductImage
                 src={modalItem.image}
                 alt={modalItem.title}
+                aspectRatio="none"
                 className={styles.modalBigImg}
               />
             </div>
@@ -275,7 +278,7 @@ export default function HighlightSection() {
                   <span>Inquire on WhatsApp</span>
                 </a>
                 <a href="tel:+918606464700" className={styles.modalCallBtn}>
-                  <Phone size={14} color="#ec4899" />
+                  <Phone size={14} color="#0284c7" />
                   <span>Call Atelier Directly</span>
                 </a>
               </div>

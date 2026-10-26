@@ -30,8 +30,8 @@ export default function Home() {
   };
 
   return (
-    <main style={{ minHeight: "100vh", position: "relative", overflowX: "clip", backgroundColor: "#FAD9E3" }}>
-      {/* Navigation Header with dynamic split contrast & official Occassions logo */}
+    <main style={{ minHeight: "100vh", position: "relative", overflowX: "clip", backgroundColor: "#ffffff" }}>
+      {/* Navigation Header with dynamic split contrast & official AVELISSE logo */}
       <Header
         isDrawerOpen={isDrawerOpen}
         onToggleDrawer={setIsDrawerOpen}

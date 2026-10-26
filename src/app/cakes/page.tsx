@@ -3,7 +3,7 @@ import CategoryPage from "@/components/CategoryPage";
 import { getProductsByCategory } from "@/data/catalog";
 
 export const metadata: Metadata = {
-  title: "Cakes | Occassions Florist Calicut",
+  title: "Cakes | AVELISSE Florist Calicut",
   description: "Deliciously crafted cakes made to make every celebration sweeter.",
 };
 

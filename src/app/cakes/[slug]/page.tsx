@@ -12,11 +12,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const product = getProductBySlug("cakes", resolvedParams.slug);
 
   if (!product) {
-    return { title: "Product Not Found | Occassions" };
+    return { title: "Product Not Found | AVELISSE" };
   }
 
   return {
-    title: `${product.name} | Occassions Florist Calicut`,
+    title: `${product.name} | AVELISSE Florist Calicut`,
     description: product.description,
   };
 }

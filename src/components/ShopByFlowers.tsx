@@ -1,7 +1,8 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import Link from "next/link";
+import ProductImage from "@/components/ProductImage";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import styles from "./ShopByFlowers.module.css";
 
@@ -72,18 +73,110 @@ const FLOWER_CATEGORIES: FlowerCategory[] = [
   },
 ];
 
-// Duplicate items twice so the infinite loop flows seamlessly to the right
-const ALL_CARDS = [...FLOWER_CATEGORIES, ...FLOWER_CATEGORIES];
+const ORIGINAL_COUNT = FLOWER_CATEGORIES.length;
+const START_INDEX = ORIGINAL_COUNT;
+
+// Create 3 sets (pre-clones, original, post-clones) for seamless infinite loop
+const EXTENDED_ITEMS = [
+  ...FLOWER_CATEGORIES.map((item, idx) => ({ ...item, uniqueKey: `pre-${idx}` })),
+  ...FLOWER_CATEGORIES.map((item, idx) => ({ ...item, uniqueKey: `orig-${idx}` })),
+  ...FLOWER_CATEGORIES.map((item, idx) => ({ ...item, uniqueKey: `post-${idx}` })),
+];
 
 export default function ShopByFlowers() {
+  const [index, setIndex] = useState(START_INDEX);
+  const [withTransition, setWithTransition] = useState(true);
+  const [visibleCount, setVisibleCount] = useState(4);
   const [isPaused, setIsPaused] = useState(false);
-  const trackRef = useRef<HTMLDivElement>(null);
-  const viewportRef = useRef<HTMLDivElement>(null);
 
-  const handleNudge = (direction: "left" | "right") => {
-    if (!viewportRef.current) return;
-    const scrollAmount = direction === "right" ? 300 : -300;
-    viewportRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
+  const isTransitioningRef = useRef(false);
+  const pointerStartX = useRef<number | null>(null);
+  const isPointerDown = useRef(false);
+
+  // Responsive visible count so exactly whole cards fit (no side cut)
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 560) {
+        setVisibleCount(1);
+      } else if (window.innerWidth < 860) {
+        setVisibleCount(2);
+      } else if (window.innerWidth < 1180) {
+        setVisibleCount(3);
+      } else {
+        setVisibleCount(4);
+      }
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  // Navigation handlers
+  const handleNext = () => {
+    if (isTransitioningRef.current) return;
+    isTransitioningRef.current = true;
+    setWithTransition(true);
+    setIndex((prev) => prev + 1);
+  };
+
+  const handlePrev = () => {
+    if (isTransitioningRef.current) return;
+    isTransitioningRef.current = true;
+    setWithTransition(true);
+    setIndex((prev) => prev - 1);
+  };
+
+  // Infinite loop wrap when transition ends
+  const handleTransitionEnd = () => {
+    isTransitioningRef.current = false;
+    if (index >= START_INDEX + ORIGINAL_COUNT) {
+      setWithTransition(false);
+      setIndex((prev) => prev - ORIGINAL_COUNT);
+    } else if (index < START_INDEX) {
+      setWithTransition(false);
+      setIndex((prev) => prev + ORIGINAL_COUNT);
+    }
+  };
+
+  // Re-enable transition after teleport
+  useEffect(() => {
+    if (!withTransition) {
+      const id = requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          setWithTransition(true);
+        });
+      });
+      return () => cancelAnimationFrame(id);
+    }
+  }, [withTransition]);
+
+  // Gentle auto-slide (advances by 1 complete card every 3.8s)
+  useEffect(() => {
+    if (isPaused) return;
+    const timer = setInterval(() => {
+      handleNext();
+    }, 3800);
+    return () => clearInterval(timer);
+  }, [isPaused]);
+
+  // Touch / pointer swipe
+  const handlePointerDown = (e: React.PointerEvent) => {
+    pointerStartX.current = e.clientX;
+    isPointerDown.current = true;
+  };
+
+  const handlePointerUp = (e: React.PointerEvent) => {
+    if (!isPointerDown.current || pointerStartX.current === null) return;
+    const diff = pointerStartX.current - e.clientX;
+    isPointerDown.current = false;
+    pointerStartX.current = null;
+
+    if (diff > 45) {
+      handleNext();
+    } else if (diff < -45) {
+      handlePrev();
+    }
   };
 
   return (
@@ -136,32 +229,45 @@ export default function ShopByFlowers() {
         </div>
 
         {/* ================= CAROUSEL WRAPPER WITH CONTROLS ================= */}
-        <div className={styles.carouselOuter}>
+        <div
+          className={styles.carouselOuter}
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+        >
           {/* Circular Left Arrow */}
           <button
             type="button"
             className={`${styles.navBtn} ${styles.prevBtn}`}
-            onClick={() => handleNudge("left")}
+            onClick={handlePrev}
             aria-label="Previous flower categories"
           >
             <ChevronLeft size={22} strokeWidth={2.2} />
           </button>
 
-          {/* Slider Viewport with Edge Fade Mask & Continuous Auto-Slide to Right */}
+          {/* Slider Viewport: Exactly visibleCount whole cards, zero side cut */}
           <div
-            ref={viewportRef}
             className={styles.sliderViewport}
-            onMouseEnter={() => setIsPaused(true)}
-            onMouseLeave={() => setIsPaused(false)}
+            onPointerDown={handlePointerDown}
+            onPointerUp={handlePointerUp}
           >
             <div
-              ref={trackRef}
               className={styles.sliderTrack}
-              style={{ animationPlayState: isPaused ? "paused" : "running" }}
+              onTransitionEnd={handleTransitionEnd}
+              style={
+                {
+                  "--index": index,
+                  "--visible-count": visibleCount,
+                  "--gap": "28px",
+                  transform: `translateX(calc(-1 * ${index} * ((100% + var(--gap, 28px)) / var(--visible-count, 4))))`,
+                  transition: withTransition
+                    ? "transform 0.5s cubic-bezier(0.25, 1, 0.5, 1)"
+                    : "none",
+                } as React.CSSProperties
+              }
             >
-              {ALL_CARDS.map((cat, idx) => (
+              {EXTENDED_ITEMS.map((cat, idx) => (
                 <div
-                  key={`${cat.id}-${idx}`}
+                  key={`${cat.uniqueKey}-${idx}`}
                   className={styles.flowerItem}
                 >
                   <Link
@@ -175,7 +281,7 @@ export default function ShopByFlowers() {
                         src={cat.image}
                         alt={`${cat.title} bouquet`}
                         className={styles.bouquetImg}
-                        loading={idx < 6 ? "eager" : "lazy"}
+                        loading={idx < 12 ? "eager" : "lazy"}
                       />
                     </div>
 
@@ -193,7 +299,7 @@ export default function ShopByFlowers() {
           <button
             type="button"
             className={`${styles.navBtn} ${styles.nextBtn}`}
-            onClick={() => handleNudge("right")}
+            onClick={handleNext}
             aria-label="Next flower categories"
           >
             <ChevronRight size={22} strokeWidth={2.2} />

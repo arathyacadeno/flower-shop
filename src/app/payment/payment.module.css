@@ -308,9 +308,9 @@
   gap: 8px;
   padding: 8px 14px;
   border-radius: 12px;
-  border: 1px solid #fce7f3;
-  background: #fdf2f8;
-  color: #db2777;
+  border: 1px solid #dbeafe;
+  background: #f0f7ff;
+  color: #0284c7;
   font-size: 0.84rem;
   font-weight: 600;
   cursor: pointer;
@@ -318,9 +318,9 @@
 }
 
 .viewMoreDropdownBtn:hover {
-  background: #fce7f3;
-  border-color: #f472b6;
-  color: #be185d;
+  background: #e0f2fe;
+  border-color: #bae6fd;
+  color: #0369a1;
 }
 
 .viewMoreChevron {
@@ -354,7 +354,7 @@
   width: 60px;
   height: 60px;
   border-radius: 12px;
-  object-fit: cover;
+  object-fit: contain;
   background-color: #f8fafc;
   flex-shrink: 0;
 }

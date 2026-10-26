@@ -6,7 +6,7 @@
 .sectionWrapper {
   --font-sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   width: 100%;
-  background-color: #FAD9E3;
+  background-color: #ffffff;
   margin-top: 28px;
   padding: 64px 0 84px 0;
   position: relative;
@@ -52,7 +52,7 @@
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: capitalize;
-  color: #db2777;
+  color: #0284c7;
   margin-bottom: 8px;
 }
 
@@ -82,16 +82,16 @@
   height: 1px;
   background: linear-gradient(
     90deg,
-    rgba(219, 39, 119, 0.05),
-    rgba(219, 39, 119, 0.35)
+    rgba(2, 132, 199, 0.05),
+    rgba(2, 132, 199, 0.35)
   );
 }
 
 .dividerLine:last-child {
   background: linear-gradient(
     90deg,
-    rgba(219, 39, 119, 0.35),
-    rgba(219, 39, 119, 0.05)
+    rgba(2, 132, 199, 0.35),
+    rgba(2, 132, 199, 0.05)
   );
 }
 
@@ -99,13 +99,14 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  color: #db2777;
+  color: #0284c7;
 }
 
-/* ================= WHITE CONTAINER CARD (1653 x 689) ================= */
+/* ================= CONTAINER CARD ================= */
 .whiteCardWrapper {
   position: relative;
-  background-color: #ffffff;
+  background-color: #f0f7ff;
+  border: 1px solid #e0f2fe;
   border-radius: 28px;
   padding: 40px 69px;
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.025);
@@ -251,7 +252,8 @@
 .cardImage {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
+  background-color: #FAF4F6;
   display: block;
   transform: scale(1);
   transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
@@ -286,17 +288,17 @@
   justify-content: center;
   padding: 3.5px;
   border-radius: 9999px;
-  border: 1.5px dotted #ec4899;
+  border: 1.5px dotted #0284c7;
   background: #ffffff;
-  box-shadow: 0 4px 18px rgba(236, 72, 153, 0.15), 0 2px 6px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 18px rgba(2, 132, 199, 0.15), 0 2px 6px rgba(0, 0, 0, 0.05);
   transition: all 0.4s ease;
 }
 
-/* Visible Soft Pink Inner Pill */
+/* Visible Soft Blue Inner Pill */
 .pillSolidInner {
   display: inline-block;
-  background: #fce7f3;
-  color: #831843;
+  background: #e0f2fe;
+  color: #0369a1;
   font-family: var(--font-sans);
   font-size: clamp(0.95rem, 1.1vw, 1.05rem);
   font-weight: 600;
@@ -305,7 +307,7 @@
   border-radius: 9999px;
   line-height: 1.25;
   text-align: center;
-  border: 1px solid rgba(236, 72, 153, 0.35);
+  border: 1px solid rgba(2, 132, 199, 0.35);
   transition: all 0.3s ease;
 }
 
@@ -315,14 +317,14 @@
 }
 
 .cardLink:hover .pillDottedOuter {
-  border-color: #db2777;
-  box-shadow: 0 8px 26px rgba(236, 72, 153, 0.3);
+  border-color: #0284c7;
+  box-shadow: 0 8px 26px rgba(2, 132, 199, 0.3);
 }
 
 .cardLink:hover .pillSolidInner {
-  background-color: #ec4899;
+  background-color: #0284c7;
   color: #ffffff;
-  border-color: #ec4899;
+  border-color: #0284c7;
 }
 
 /* ================= PAGINATION DOTS ================= */
@@ -352,7 +354,7 @@
 
 .activeDot {
   width: 32px;
-  background: #db2777;
+  background: #0284c7;
 }
 
 /* ================= RESPONSIVE BREAKPOINTS ================= */
